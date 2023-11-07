@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1007358729153",
+    "project_id": "my-mobile-project-d96e2",
+    "storage_bucket": "my-mobile-project-d96e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007358729153:android:43607c63e7ed916ed9ed40",
+        "android_client_info": {
+          "package_name": "kg.roman.Mobile_Torgovla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007358729153-02340udb1vq83q1pckd2gq53nkumv5rf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqrSraL1F2KCrJPWGU46wvZ4wKc4BNWfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007358729153-02340udb1vq83q1pckd2gq53nkumv5rf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

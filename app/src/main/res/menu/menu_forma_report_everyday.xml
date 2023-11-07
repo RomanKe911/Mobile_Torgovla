@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/menu_sync_up"
+        android:icon="@drawable/button_refresh"
+        android:title="обновление" />
+
+
+
+    <!--
+    <item android:id="@+id/search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"
+        android:title="search"
+        android:icon="@drawable/selector_button"/>
+ !-->
+
+</menu>

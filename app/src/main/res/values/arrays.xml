@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="print_services">
+        <item>ESC POS Bluetooth Print Service</item>
+        <item>ESC POS Network/WIFI Print Service</item>
+        <!--        <item>ESC POS USB Print Service</item>-->
+    </string-array>
+    <string-array name="print_type">
+        <item>PNG Image URL</item>
+        <item>JPG Image URL</item>
+        <item>PDF URL</item>
+        <item>HTML URL</item>
+    </string-array>
+    <string-array name="print_file_type">
+        <item>PNG Image File</item>
+        <item>JPG Image File</item>
+        <item>PDF File</item>
+        <item>HTML File</item>
+    </string-array>
+
+
+    <string-array name="scan_title_name">
+        <item>Цена:</item>
+        <item>Остаток:</item>
+        <item>Кол-во в кор:</item>
+        <item>Штрих-код:</item>
+        <item>Бренд:</item>
+        <item>Группа:</item>
+        <item>Код Univ:</item>
+        <item>Код UID:</item>
+    </string-array>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+</resources>

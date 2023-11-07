@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
+    style="@style/MT_Layout_Background_Work">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/btn_up_server"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/wj_office_selector_button_excel_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_catigory" />
+
+        <EditText
+            android:id="@+id/edit_text_contragent"
+            style="@style/style_new_contragent_edit_text"
+            android:layout_marginTop="4dp"
+            android:ems="15"
+            android:hint="контрагент"
+            android:inputType="textCapSentences"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView49"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_type_name" />
+
+        <EditText
+            android:id="@+id/edit_text_adress"
+            style="@style/style_new_contragent_edit_text"
+            android:ems="10"
+            android:gravity="center_horizontal|left"
+            android:hint="улица"
+            android:inputType="textCapSentences"
+            app:layout_constraintBottom_toBottomOf="@+id/textView52"
+            app:layout_constraintStart_toEndOf="@+id/textView52"
+            app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+        <EditText
+            android:id="@+id/edit_text_adress_number"
+            style="@style/style_new_contragent_edit_text"
+            android:ems="3"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="номер"
+            android:inputType="number"
+            android:maxLength="4"
+            app:layout_constraintBottom_toBottomOf="@+id/textView53"
+            app:layout_constraintStart_toEndOf="@+id/textView53"
+            app:layout_constraintTop_toTopOf="@+id/textView53" />
+
+
+
+
+        <EditText
+            android:id="@+id/edit_text_phone"
+            style="@style/style_new_contragent_edit_text"
+            android:ems="3"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="номер"
+            android:inputType="number"
+            android:maxLength="4"
+            app:layout_constraintStart_toStartOf="@+id/textView51"
+            app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+
+
+
+        <Spinner
+            android:id="@+id/spinner_type_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/back_image"
+            android:gravity="center_horizontal|left"
+            app:layout_constraintTop_toBottomOf="@+id/textView49"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_town"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/back_image"
+            android:gravity="center_horizontal|left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView50"
+            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+        <Spinner
+            android:id="@+id/spinner_catigory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/back_image"
+            android:gravity="center_horizontal|left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textView54"
+            app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+        <TextView
+            android:id="@+id/textView53"
+            style="@style/style_new_contragent_title"
+            android:text="№"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_text_adress"
+            app:layout_constraintStart_toEndOf="@+id/edit_text_adress"
+            app:layout_constraintTop_toTopOf="@+id/edit_text_adress"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView52"
+            style="@style/style_new_contragent_title"
+            android:layout_marginTop="16dp"
+            android:text="ул."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_town" />
+
+        <TextView
+            android:id="@+id/textView50"
+            style="@style/style_new_contragent_title"
+            android:text="Город:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_contragent" />
+
+        <TextView
+            android:id="@+id/textView49"
+            style="@style/style_new_contragent_title"
+            android:text="Наименование контрагента"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView51"
+            style="@style/style_new_contragent_title"
+            android:text="Телефон:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_adress" />
+
+        <TextView
+            android:id="@+id/textView54"
+            style="@style/style_new_contragent_title"
+            android:text="Категория ТТ:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_phone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

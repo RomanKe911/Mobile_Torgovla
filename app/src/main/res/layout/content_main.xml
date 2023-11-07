@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@drawable/logo_back_all_5"
+    tools:context="kg.roman.Mobile_Torgovla.Work_Table_Activity"
+
+    tools:layout_editor_absoluteY="25dp">
+    tools:showIn="@layout/app_bar_main"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/ListView_Data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside">
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Интервал с"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_this_Date_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="DATA2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="по"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_this_Date_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="DATA2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/ListView_Data"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_image"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"></ListView>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ListView_Data">
+
+        <TextView
+            style="@style/style_back_panel_rn"
+            android:textStyle="bold"
+            android:id="@+id/textView_Title_TT"
+            android:text="Заказов:" />
+
+        <TextView
+            style="@style/style_back_panel_rn"
+            android:layout_toRightOf="@+id/textView_dr_Kons_Kol"
+            android:id="@+id/textView_Title_Kons"
+            android:text="Сумма:" />
+
+        <TextView
+            style="@style/style_back_panel_rn"
+            android:layout_toRightOf="@+id/textView_dr_Summa_Kons"
+            android:id="@+id/textView_Title_Itogo"
+            android:layout_width="wrap_content"
+            android:text="Итого:" />
+
+        <TextView
+            style="@style/style_back_panel_rn_text"
+            android:id="@+id/textView_dr_Kons_Kol"
+            android:layout_toRightOf="@+id/textView_Title_TT"
+            android:text="5" />
+
+        <TextView
+            style="@style/style_back_panel_rn_text"
+            android:id="@+id/textView_dr_Summa_Kons"
+            android:layout_alignBottom="@+id/textView_Title_Kons"
+            android:layout_toRightOf="@+id/textView_Title_Kons"
+            android:text="5250" />
+
+        <TextView
+            style="@style/style_back_panel_rn_text"
+            android:id="@+id/textView_Param_Itogo"
+            android:layout_alignBottom="@+id/textView_Title_Itogo"
+            android:layout_toRightOf="@+id/textView_Title_Itogo"
+            android:text="5000" />
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Категория клиентов">
+        <menu android:id="@+id/bella_group">
+            <group android:checkableBehavior="single">
+                <item
+                    android:orderInCategory="0"
+                    android:id="@+id/nav_klients1"
+                    android:icon="@android:drawable/ic_menu_more"
+                    android:title="Аптеки" />
+                <item
+                    android:orderInCategory="0"
+                    android:id="@+id/nav_klients2"
+                    android:icon="@android:drawable/ic_menu_more"
+                    android:title="Магазины" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Сортировка">
+        <menu>
+            <item
+                android:orderInCategory="1"
+                android:id="@+id/nav_sort_1"
+                android:icon="@android:drawable/ic_menu_sort_alphabetically"
+                android:title="по наименованию" />
+            <item
+                android:orderInCategory="1"
+                android:id="@+id/nav_sort_2"
+                android:icon="@android:drawable/ic_menu_sort_alphabetically"
+                android:title="по адресу" />
+        </menu>
+    </item>
+
+
+    <group android:id="@+id/my_ostatok" android:checkableBehavior="single" android:title="Категория клиентов">
+        <item
+            android:orderInCategory="2"
+            android:id="@+id/game1"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Game #1" />
+        <item
+            android:orderInCategory="2"
+            android:id="@+id/game2"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Game #2" />
+    </group>
+    <group android:id="@+id/his_move" android:checkableBehavior="single" android:title="Сортировка">
+        <item
+            android:orderInCategory="2"
+            android:id="@+id/game5"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Game #5" />
+        <item
+            android:orderInCategory="3"
+            android:id="@+id/game6"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Game #6" />
+        <item
+            android:orderInCategory="3"
+            android:id="@+id/game7"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Game #7" />
+    </group>
+</menu>

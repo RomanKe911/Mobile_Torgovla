@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="horizontal"
+    android:padding="3dp">
+
+
+    <ImageView
+        android:id="@+id/img_select"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Relative_layout_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bella_perfecta_10_rose" />
+
+    <RelativeLayout
+        android:id="@+id/Relative_layout_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="1"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_delete_id"
+        app:layout_constraintStart_toEndOf="@+id/img_select"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cont_edit_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID"
+            android:textColor="@color/colorKatalog"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/wj_cont_name"
+            style="@style/style_work_list_1"
+            android:gravity="left|center_vertical"
+            android:text="Bella, Cussons, PCC"
+            android:textColor="@color/work_colors_1" />
+
+        <TextView
+            android:id="@+id/wj_cont_kod"
+            style="@style/style_work_list_1"
+            android:layout_below="@+id/wj_cont_name"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="0000/0000/0000"
+            android:textColor="@color/work_colors_2" />
+
+        <TextView
+            android:id="@+id/cont_edit_kol"
+            style="@style/style_work_list_1"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="144 шт"
+            android:textColor="@color/work_colors_3" />
+
+        <TextView
+            android:id="@+id/wj_cont_cena"
+            style="@style/style_work_list_1"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/textView_z1"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="65.00"
+            android:textColor="@color/work_colors_3" />
+
+        <TextView
+            android:id="@+id/cont_edit_summa"
+            style="@style/style_work_list_1"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/textViewz2"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="9360.00"
+            android:textColor="@color/work_colors_3" />
+
+        <TextView
+            android:id="@+id/textView_z1"
+            style="@style/style_arf_znak"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/cont_edit_kol"
+            android:text="x" />
+
+        <TextView
+            android:id="@+id/textViewz2"
+            style="@style/style_arf_znak"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/wj_cont_cena"
+            android:text="=" />
+
+        <TextView
+            android:id="@+id/cont_edit_skidka"
+            style="@style/style_arf_znak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/tvw_skidka_1"
+            android:text="SK" />
+
+        <TextView
+            android:id="@+id/tvw_skidka_1"
+            style="@style/style_arf_znak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/cont_edit_summa"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/tvw_skidka_2"
+            style="@style/style_arf_znak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/cont_edit_skidka"
+            android:text="% =" />
+
+        <TextView
+            android:id="@+id/cont_edit_itogo"
+            style="@style/style_arf_znak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_cont_kod"
+            android:layout_toRightOf="@+id/tvw_skidka_2"
+            android:text="5000" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_delete_id"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/selector_button_delete_id"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Relative_layout_edit"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

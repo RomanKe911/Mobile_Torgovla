@@ -1,0 +1,915 @@
+<resources>
+    <!-- Данные для строк String -->
+    <!--context.getString(R.string.up_ftp_data_load) или getString(R.string.up_ftp_data_load)  -->
+    <string name="up_ftp_data_load">Заказы удачно выгруженны на сервер!</string>
+    <string name="up_ftp_data_status">Успешное обновление</string>
+    <string name="up_ftp_data_error">Ошибка загрузки данных с FTP</string>
+
+    <string name="Name_PO_1">Kerkin_MT</string>
+    <string name="Name_PO_2">Форма заказа 4.0</string>
+
+
+    <!-- Данные для массивов StringArray -->
+    <!--getResources().getStringArray(R.array.mass_for_update_data)  -->
+
+    <string name="firma_name">ОсОО \"Sunbell\"</string>
+
+    <string name="firma_title">Наша компания предлагает большой ассортимент товара, в разном ценовом сегменте и  от производителей разных стран.</string>
+
+    <string name="header_bella_title_1">В гармонии с природой.\nВ гармонии с собой.</string>
+    <string name="header_bella_title_2">Линейка гигиенических изделий для женщин, которая занимает лидирующие позиции на рынках Центральной, Восточной и Западной Европы, а также Азии.</string>
+
+    <string name="header_viero_title_1">Гигиеническая продукция из высококачественной бумаги</string>
+    <string name="header_viero_title_2">Бренд ассоциируется со свежестью, здоровьем, чистотой и заботой и ассоциируется мягким, пушистым и дружелюбным кроликом.</string>
+
+    <string name="header_yokosun_title_1">Японское качество по доступной цене</string>
+    <string name="header_yokosun_title_2">Современное оборудование, высококачественные материалы, применяемые при производстве, делают качество нашей продукции очень высоким!</string>
+
+    <string name="header_president_title_1">«Мы создаем продукты, которые используем сами»</string>
+    <string name="header_president_title_2">Каждый завод, участвующий в производстве продуктов PRESIDENT,
+        работает по стандартам фармацевтического производства, что гарантирует контроль качества на каждой стадии создания.</string>
+
+
+    <string name="header_cussons_title_1">Мы думаем о каждом клиенте.</string>
+    <string name="header_cussons_title_2">Линейка суперконцетрированых средств для посуды и стирки, а также косметика для тела. </string>
+
+    <string name="header_pcc_title_1">Нашим источником вдохновения является весь мир.</string>
+    <string name="header_pcc_title_2">Один из крупнейших польских производителей товаров бытовой химии, профессиональной химии и косметики. </string>
+
+    <string name="header_samarela_title_1"> Качество. Прочность. \nМногофункциональность. </string>
+    <string name="header_samarela_title_2">
+        Губки – все, что потребуется для превращения утомительных домашних забот в праздник чистоты и порядка.
+        Изделия помогут сделать рутинные занятия более комфортными и быстрыми, поэтому популярны среди покупателей всех категорий.
+    </string>
+
+    <string name="header_sofidel_title_1"> Качество, Безопасность, Инновация, Благополучие </string>
+
+    <string name="header_sofidel_title_2">
+        Каждый продукт Sofidel выражает стратегию группы, которая создает инновации,
+        безопасность и внимание к здоровью, личному благополучию
+        и защите окружающей среды.
+    </string>
+
+    <!-- Название фирм и брендов -->
+    <string name="header_splat_title_1"> Мы создаём продукты, у которых нет аналогов в мире </string>
+    <string name="header_splat_title_2">
+        SPLAT — ведущий разработчик и производитель профессиональных решений
+        в категориях ухода за полостью рта, бытовой не химии и детской косметики.
+    </string>
+    <string name="header_pkf_title_1"> Больше, \nчем просто чистота </string>
+    <string name="header_pkf_title_2">
+        СОНЦА — это современное, динамично развивающееся предприятие,
+        выпускающее средства для стирки, продукты бытовой химии и личной гигиены.
+    </string>
+    <string name="header_rens_title_1"> Широкий ассортимент,\nИндивидуальный подход </string>
+    <string name="header_rens_title_2">
+        Ренессанс-Косметик — является одной из крупнейших компаний по производству
+        бытовой химии и косметики за Уралом и выпускает более 700 SKU продукции.
+    </string>
+    <string name="header_dramers_title_1"> Качество и \n экологическая политика </string>
+    <string name="header_dramers_title_2">
+        Dramers — поставка высококачественных парфюмерно-косметических продуктов,
+        косметики для укладки волос, а также бытовой химии на базе современных,
+        эффективных и безопасных формул, отвечающих требованиям потребителей.
+    </string>
+    <string name="header_zonin_title_1"> Открой для себя уникальность вина</string>
+    <string name="header_zonin_title_2">
+        Borgo SanLeo - это бренд, позволяющий попробовать уникальность итальянских вин,
+        предлагающий широкий выбор из лучших винодельческих регионов Италии, от Фриули до Сицилии.
+    </string>
+    <string name="header_sea_title_1"> Рыбные консервы со 100% качеством</string>
+    <string name="header_sea_title_2">
+        ТД "Морское Содружество" - производитель и поставщик рыбной консервации
+        под собственными торговыми марками - "Ультрамарин" и "ТД "Морское Содружество".
+    </string>
+    <string name="header_sarantis_title_1">Наша сила-\nв наших брендах.</string>
+    <string name="header_sarantis_title_2">Sarantis Group насчитывает более 100 признанных брендов высокого
+        качества в секторе товаров для дома, элитной косметики , бытовой химии , товаров  личной гигиены, а также профессиональных товаров.
+
+    </string>
+    <string name="header_balt_et_title_1"> Мы \nЛюбим Когда Вкусно...</string>
+    <string name="header_balt_et_title_2">
+        Мясоконсервный комбинат "Балтийский" - наше предприятие производит качественную
+        продукцию, отвечающую всем государственным нормативам и проходит обязательную сертификацию ЕАС.\n
+         Продукции выпускается в качестве ПРЕМИУМ и СУПЕР-ПРЕМИУМ.
+    </string>
+
+
+    <string name="header_cottonclub_title_1">Cotton Club</string>
+    <string name="header_cottonclub_title_2">ведущий производитель ватной продукции и средств гигиены с собственными производственными мощностями на территории РФ.</string>
+
+    <string name="header_ufapack_title_1">Ufapack</string>
+    <string name="header_ufapack_title_2">Выпускаем и реализуем по низким ценам пакеты для продуктов и мусорные, губки, салфетки и многие другие товары.</string>
+
+    <string name="header_ontex_title_1">Canped&amp;Canbebe</string>
+    <string name="header_ontex_title_2">является самой популярной маркой подгузников в Турции, предлагает самый большой ассортимент продукции.</string>
+
+    <string name="header_halk_title_1">«Халк Хиджйеник»</string>
+    <string name="header_halk_title_2">сильная турецкая компания, которая добилась и продолжает добиваться значительных успехов, конкурируя с мировыми гигантами за рубежом.</string>
+
+    <string name="header_big_title_1">КАЧЕСТВО ПРОДУКЦИИ ГАРАНТИРОВАННО</string>
+    <string name="header_big_title_2">Компания выпускает весь спектр косметических средств и является экспертом в области красителей для волос, оттеночных средств, кремовой группы.</string>
+
+    <string name="header_nauka_title_1"> "Наука Техника Медицина"</string>
+    <string name="header_nauka_title_2">Эксперты в категории продукции Oral Care c 1990 г.</string>
+
+
+    <string name="header_balt_et_title_3">
+        Мясоконсервный комбинат "Балтийский" - наше предприятие производит качественную
+        продукцию, отвечающую всем государственным нормативам и проходит обязательную сертификацию ЕАС.
+        Ассортимент богат разными видами тушенки - СВИНИНОЙ, ГОВЯДИНОЙ, мясом КУР, ВЕТЧИНОЙ,
+        мяса ГУСЯ, УТКИ, ОЛЕНИНЫ, БАРАНИНЫ, КОНИНЫ и прочих.\nПродукции выпускается в качестве ПРЕМИУМ и СУПЕР-ПРЕМИУМ.
+    </string>
+    <string name="header_scan_title_1"> «Опытный завод «НИВА»</string>
+
+    <string name="header_scan_title_2">
+        Водка производится по скандинавской технологии. Ее отличают нестандартная рецептура, а также специальный экофильтр,
+        содержащий наносорбент в колпачке. Благодаря этому водка Скандинавия получается такая чистая и мягкая.
+    </string>
+    <string name="header_ba_title_1">Мы заботимся о наших покупателях и предлагаем им максимально
+        полезную, натуральную и безопасную косметику по доступным ценам.</string>
+
+    <string name="header_ba_title_2">«Рецепты бабушки Агафьи» - это натуральные косметические средства на основе
+        экстрактов и масел сибирских трав, созданные по уникальным рецептам травницы Агафьи Тихоновны Ермаковой.</string>
+    <string name="header_siberica_title_1">Natura Siberica - первый российский бренд качественной органической косметики</string>
+
+    <string name="header_siberica_title_2"> В каждую баночку крема или любого другого средства Natura Siberica мы добавляем уникальные ингредиенты,
+        которые помогают сохранить Вашу молодость и красоту</string>
+    <string name="header_vostok_title_1">Компания "РЕГИОН" - Производство и поставка подсолнечного масла и жмыха.</string>
+
+    <string name="header_vostok_title_2">Основана в 2000 году, как предприятие,
+        ведущее производственную и торговую деятельность.
+        Заслужила безупречную репутацию производителя только высококачественной продукции,
+        завоевала доверие потребителей и партнеров по бизнесу.</string>
+    <string name="header_villa_krim_title_1">Villa Krim - Особенное для особенных.</string>
+
+    <string name="header_villa_krim_title_2">
+        Это эксклюзивные купажные («Шато Барон», «Шевалье Руж») и яркие сортовые вина.
+        Их рецептуры разработаны при участии европейских виноделов, которым удалось найти
+        особый подход и стиль при создании вин. Использование всемирных сортов винограда
+        («саперави», «мерло», «каберне», «шардоне»),которые отличаются высоким качеством и
+        неповторимостью вкусовых свойств.
+    </string>
+    <string name="header_one_work">Производство косметики на основе натуральных трав и растений</string>
+
+    <string name="header_one_work_2">Мы заботимся о наших покупателях и предлагаем им максимально
+        полезную, натуральную и безопасную косметику по доступным ценам.</string>
+    <string name="header_svoboda_title_1"> Гармония\nкрасоты и здоровья</string>
+
+    <string name="header_svoboda_title_2">
+        «СВОБОДА» - Выпуск продукции высочайшего качества за счет использования современного оборудования.
+    </string>
+    <string name="header_lacalute_title_1"> Эксперт в области \nпрофилактики проблем полости рта.</string>
+
+    <string name="header_lacalute_title_2">
+        «Lacalute» - эксперт по уходу за полостью рта. Всё для красивой и здоровой улыбки.
+    </string>
+    <string name="header_kyban_1">Стоит попробовать!</string>
+
+    <string name="header_kyban_2"> Мы стараемся, чтобы Ваш бизнес рос вместе с нами!  </string>
+    <string name="header_plushe_1">Идеальная мягкость. Качество Plushe.</string>
+
+    <string name="header_plushe_2"> Мы стараемся, чтобы Ваш бизнес рос вместе с нами!  </string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="name_pref_params_title_1">ТУ для всех брендов</string>
+
+    <string name="name_pref_params_title_2">ТУ для \"SPLAT\"</string>
+    <string name="name_pref_params_title_3">ТУ для \"Ренессанс-Косметик\"</string>
+    <string name="name_pref_params_pros_1">ТУ (нал.)</string>
+    <string name="name_pref_params_pros_2">ТУ (конс.)</string>
+
+    <string name="name_pref_params_update">Обновление номенклатуры</string>
+    <string name="name_pref_params_update_ftp">Загрузка остатков с сервера</string>
+    <string name="tab_host_bonus_1">Bella</string>
+    <string name="tab_host_bonus_2">Мыломойка</string>
+    <string name="tab_host_bonus_3">Ренессанс-\nКосметик</string>
+
+
+    <string name="tab_host_bonus_4">Splat</string>
+    <string name="tab_host_bonus_5">Продукты</string>
+    <string name="tab_host_bonus_6">Прочее</string>
+    <string name="text_tab_header">Свой заголовок</string>
+    <string name="flipper_textview_cussons"><b>Мы думаем о каждом клиенте.</b>\nЛинейка суперконцетрированых средств для посуды и стирки, а также косметика для тела.</string>
+    <string name="flipper_textview_svoboda"><b>Гармония красоты и здоровья</b>\n«СВОБОДА» - Выпускает продукции высочайшего качества за счет использования современного оборудования.</string>
+    <string name="flipper_textview_lacalute"><b>«Lacalute»</b>\nэксперт по уходу за полостью рта. Всё для красивой и здоровой улыбки.</string>
+    <string name="flipper_textview_dramers"><b>"Dramers"</b> \nпоставка высококачественных парфюмерно-косметических продуктов,
+        косметики для укладки волос, а также бытовой химии на базе современных,
+        эффективных и безопасных формул,
+        отвечающих требованиям потребителей.</string>
+    <string name="flipper_textview_pkf_sonca"><b>ПКФ Сонца - Больше, чем просто чистота</b>\nсовременное, динамично развивающееся предприятие, выпускающее средства для стирки, продукты бытовой химии и личной гигиены.</string>
+    <string name="flipper_textview_pcc"><b>PCC(FLO)</b>\n Один из крупнейших польских производителей товаров бытовой химии, профессиональной химии и косметики.</string>
+
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <string name="signature_title">Your signature</string>
+
+
+    <string name="reply_title">Default reply action</string>
+    <string name="sync_title">Sync email periodically</string>
+
+    <string name="attachment_title">Download incoming attachments</string>
+
+    <!-- <item>Касса</item>>
+        <item>1C</item>>
+        <item>Розница</item>>
+        <item>Акции</item>>
+        <item>XML</item>> !-->
+
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <!--        <item>Наличный рассчет</item>>
+        <item>Возврат консигнаций</item>> !-->
+
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string-array name="mass_all_sync_everyday">
+        <item>\"  \"</item>>                         <!--     !-->
+        <item>\" Обработка остатков \"</item>>            <!--      !-->
+        <item>\" Обработка цен \"</item>>             <!--      !-->
+        <item>\" Обработка долгов \"</item>>            <!--       !-->
+    </string-array>
+
+    <string-array name="mass_all_tovar">
+        <item>\"  \"</item>>                         <!--   MTW_In_Customers    !-->
+        <item>\" Структура номенклатуры \"</item>>            <!--   MTW_In_Brends    !-->
+        <item>\" Обработка номенклатуры \"</item>>             <!--   MTW_In_Nomenclatures    !-->
+        <item>\" Цифровое изображение товара \"</item>>            <!--   База картинок    !-->
+        <item>\" Обработка цен \"</item>>            <!--   MTW_In_ResidueGoodsPR   !-->
+        <item>\" Обработка остатков \"</item>>                 <!--   MTW_In_Price    !-->
+    </string-array>
+
+    <string-array name="mass_all_all">
+        <item>\"  \"</item>>                         <!--   MTW_In_Customers    !-->
+        <item>\" Структура номенклатуры \"</item>>            <!--   MTW_In_Brends    !-->
+        <item>\" Обработка номенклатуры \"</item>>             <!--   MTW_In_Nomenclatures    !-->
+        <item>\" Цифровое изображение товара \"</item>>            <!--   База картинок    !-->
+        <item>\" Обработка остатков \"</item>>            <!--   MTW_In_ResidueGoodsPR   !-->
+        <item>\" Обработка цен \"</item>>                 <!--   MTW_In_Price    !-->
+        <item>\" Обработка контрагентов \"</item>>        <!--   MTW_In_Customers    !-->
+        <item>\" Обработка складов \"</item>>             <!--  MTW_In_Warehouse     !-->
+        <item>\" Обработка долгов \"</item>>             <!--  MTW_In_Warehouse     !-->
+    </string-array>
+
+    <string-array name="mass_all_sync_Bishkek">
+        <item>\"  \"</item>>                         <!--   MTW_In_Customers    !-->
+        <item>\" Структура базы\"</item>>            <!--   MTW_In_Brends    !-->
+        <item>\" База товаров \"</item>>             <!--   MTW_In_Nomenclatures    !-->
+        <item>\" База картинок \"</item>>            <!--   База картинок    !-->
+        <item>\" База остатков \"</item>>            <!--   MTW_In_ResidueGoodsPR   !-->
+        <item>\" База цен \"</item>>                 <!--   MTW_In_Price    !-->
+        <item>\" Обработка складов \"</item>>        <!--   MTW_In_Warehouse    !-->
+        <item>\" Создание общей базы \"</item>>      <!--   MTW_In_Customers    !-->
+    </string-array>
+
+    <string-array name="mass_all_sync2">
+        <item>Синхронизировать структуру</item>>
+        <item>Синхронизировать базу</item>>
+        <item>Синхронизировать картинки</item>>
+        <item>Синхронизировать контрагентов</item>>
+        <item>Синхронизировать склады</item>>
+
+        <item>Обработка данных: \" Структура базы\"</item>>            <!--   MTW_In_Brends    !-->
+        <item>Обработка данных: \" База товаров \"</item>
+        >             <!--   MTW_In_Nomenclatures    !-->
+        <item>Обработка данных: \" База картинок \"</item>>            <!--   База картинок    !-->
+        <item>Обработка данных: \" База остатов \"</item>
+        >             <!--   MTW_In_ResidueGoodsPR   !-->
+        <item>Обработка данных: \" База цен \"</item>>                 <!--   MTW_In_Price    !-->
+        <item>Обработка данных: \" База контрагентов \"</item>
+        >        <!--   MTW_In_Customers    !-->
+        <item>Обработка данных: \" База складов \"</item>
+        >             <!--  MTW_In_Warehouse     !-->
+    </string-array>
+    <string-array name="mass_for_otchet">
+        <item>Продажи по брендам</item>>
+        <item>Отчет за день</item>>
+        <item>Печать тест</item>>
+        <item>XML тест</item>>
+        <item>Fragment тест</item>>
+        <item>Акции тест</item>>
+        <item>Администрирование</item>>
+        <item>Обработка с эттн</item>>
+        <item>Обновление картинок</item>>
+        <item>Создание PDF</item>>
+    </string-array>
+
+
+    <string-array name="mass_smart_func">
+        <item>стандартный</item>>
+        <item>по бренду</item>>
+        <item>по названию</item>>
+        <item>по цене: больше</item>>
+        <item>по цене: меньше</item>>
+        <item>по цене: равно</item>>
+    </string-array>
+
+    <string-array name="mass_for_kassa">
+        <item>Консигнации</item>>
+        <item>Неоплаченные консигнации</item>>
+    </string-array>
+
+    <string-array name="mass_for_ostatok">
+        <item>Остатки по складу</item>>
+        <item>Остатки по фирме</item>>
+        <item>Инвентаризация</item>>
+    </string-array>
+
+
+    <string-array name="mass_mail_where">
+        <item>bishkek@sunbell.webhost.kg</item>>
+        <item>osh@sunbell.webhost.kg</item>>
+        <item>djala-abad@sunbell.webhost.kg</item>>
+        <item>karakol@sunbell.webhost.kg</item>>
+        <item>cholpon-ata@sunbell.webhost.kg</item>>
+    </string-array>
+
+    <string-array name="mass_catigory_tt">
+        <item>Автомагазины</item>>
+        <item>Cash &amp; Carry</item>>
+        <item>Корпоративные клиенты</item>>
+        <item>Дискаунтер</item>>
+        <item>Магазин "Сделай сам"</item>>
+        <item>HoReCa</item>>
+        <item>Хозяйственный магазин</item>>
+        <item>Гипермаркет</item>>
+        <item>Газетный киоск</item>>
+        <item>Минимаркет</item>>
+        <item>Магазин одной цены</item>>
+        <item>Интернет-магазин</item>>
+        <item>Рынки</item>>
+        <item>Парфюмерия</item>>
+        <item>Аптеки</item>>
+        <item>Мыломоющий магазин</item>>
+        <item>Супермаркет большой</item>>
+        <item>Супермаркет</item>>
+        <item>Супермаркет маленький</item>>
+        <item>Оптовик</item>>
+    </string-array>
+
+    <string-array name="mass_type_tt">
+        <item>Магазин</item>>
+        <item>Маркет</item>>
+        <item>Аптека</item>>
+        <item>Контейнер</item>>
+        <item>Павильон</item>>
+        <item>Рынок</item>>
+        <item>Прочие</item>>
+    </string-array>
+
+
+    <string-array name="mass_Region_Put_Name">
+        <item>Бишкек</item>>
+        <item>Ош</item>>
+        <item>Джалал-Абад</item>>
+        <item>Каракол</item>>
+        <item>Чолпон-Ата</item>>
+    </string-array>
+    <string-array name="mass_Region_Put_Value">
+        <item>/MT_Sunbell_Bishkek/</item>>
+        <item>/MT_Sunbell_Osh/</item>>
+        <item>/MT_Sunbell_Djala_abad/</item>>
+        <item>/MT_Sunbell_Karakol/</item>>
+        <item>/MT_Sunbell_Cholpon-Ata/</item>>
+    </string-array>
+
+    <string-array name="mass_type_ty_title">
+        <item>Стандартные</item>>
+        <item>Расширенные</item>>
+    </string-array>
+    <string-array name="mass_type_ty_value">
+        <item>standart</item>>
+        <item>random_ty</item>>
+    </string-array>
+
+    <string-array name="mass_ftp_server_con">
+        <item>Универсальный</item>>
+        <item>Статический</item>>
+    </string-array>
+    <string-array name="mass_ftp_server_con_value">
+        <item>ftp.sunbell.webhost.kg</item>>
+        <item>77.235.17.166</item>>
+    </string-array>
+
+    <string-array name="mass_ver_android">
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>TT</item>>
+        <item>Версия Android 5.0 Lollipop(SDK 21)</item>>
+        <item>Версия Android 5.1 Lollipop(SDK 22)</item>>
+        <item>Версия Android 6.0 Marshmallow(SDK 23)</item>>
+        <item>Версия Android 7.0 Nougat(SDK 24)</item>>
+        <item>Версия Android 7.1 Nougat(SDK 25)</item>>
+        <item>Android 8.0 Oreo (SDK 26)</item>>
+        <item>Android 8.1 Oreo (SDK 27)</item>>
+        <item>Версия Android 9 Pie(SDK 28)</item>>
+        <item>Версия Android 10 (SDK 29)</item>>
+        <item>Версия Android 11 (SDK 30)</item>>
+    </string-array>
+    <string-array name="mass_distr_files">
+        <item>01_WDay</item>>
+        <item>02_WDay</item>>
+        <item>03_WDay</item>>
+        <item>04_WDay</item>>
+        <item>05_WDay</item>>
+        <item>06_WDay</item>>
+        <item>07_WDay</item>>
+        <item>Image</item>>
+        <item>XLS</item>>
+        <item>XML</item>>
+        <item>SOS</item>>
+        <item>SQLDB</item>>
+    </string-array>
+
+    <string-array name="mass_xml">
+        <item>RnNov21_0001</item>>
+        <item>RnNov21_0002</item>>
+        <item>RnNov21_0003</item>>
+        <item>RnNov21_0004</item>>
+        <item>RnNov21_0005</item>>
+        <item>RnNov21_0006</item>>
+        <item>RnNov21_0007</item>>
+        <item>RnNov21_0008</item>>
+        <item>RnNov21_0009</item>>
+        <item>RnNov21_0010</item>>
+        <item>RnNov21_0012</item>>
+        <item>RnNov21_0013</item>>
+        <item>RnNov21_0014</item>>
+    </string-array>
+    <string-array name="mass_breds_group">
+        <item>Ц0002756</item>>  <!-- VILLA KRIM  -->
+        <item>Ц0002533</item>>  <!-- Ц0002533  -->
+        <item>Ц0002253</item>>  <!-- Ц0002253  -->
+        <item>Ц0002928</item>>  <!-- КУБАНСКИЕ ПРОДУКТЫ  -->
+        <item>Ц0002259</item>>  <!-- СКАНДИНАВИЯ " НИВА" -->
+    </string-array>
+
+    <string-array name="mass_select_credit">
+        <item>Наличными</item>>      <!-- оплата наличными  -->
+        <item>Консигнация</item>>    <!-- оплата в консигнацию  -->
+        <item>Взаимозачет</item>>    <!-- оплата взаиморасчет  -->
+        <item>Перечислением</item>>  <!-- оплата перечислением  -->
+    </string-array>
+    <string-array name="mass_for_dialof_forma">
+        <item>Просмотр</item>>
+        <item>Редактировать</item>>
+        <item>Удалить</item>>
+    </string-array>
+    <string-array name="mass_all_priority">
+        <item>Bella</item>>
+        <item>PZ_Cussons</item>>
+        <item>Pcc_Kosmet</item>>
+        <item>Plushe</item>>
+        <item>Samarela</item>>
+        <item>Splat</item>>
+        <item>Dramers</item>>
+        <item>PKF_Sontsa</item>>
+        <item>Первое решение</item>>
+    </string-array>
+    <string-array name="mass_all_product">
+        <item>Kybans</item>>
+        <item>Villa_Krim</item>>
+        <item>Zonin</item>>
+        <item>Регион</item>>
+        <item>Скандинавия</item>>
+    </string-array>
+
+    <string-array name="mass_bella">
+        <item>БУМАЖНЫЕ ИЗДЕЛИЯ</item>>
+        <item>БЫТОВАЯ ХИМИЯ DR. MAX</item>>
+    </string-array>
+    <string-array name="mass_table_db">
+        <item>Bella</item>>
+        <item>PZ_Cussons</item>>
+        <item>Pcc_Kosmet</item>>
+        <item>Plushe</item>>
+        <item>Samarela</item>>
+        <item>Splat</item>>
+        <item>Dramers</item>>
+        <item>PKF_Sontsa</item>>
+        <item>Villa_Krim</item>>
+        <item>Kybans</item>>
+        <item>Zonin</item>>
+        <item>TD_Sea_friends</item>>
+        <item>One_Solution</item>>
+    </string-array>
+    <string-array name="simvol_kod_image_DB">
+        <item>bl</item>> //Bella
+        <item>cs</item>> //Cussons
+        <item>pcc</item>> //PCC
+        <item>pls</item>> //Plushe
+        <item>sm</item>> //Samarela
+        <item>spl</item>> //Splat
+        <item>dr</item>> //Dramers
+        <item>pkf</item>> //ПКФ Сонца
+        <item>vk</item>> //Villa_krim
+        <item>kb</item>> //Кубанские продукты
+        <item>zn</item>> //Zonin
+        <item>sf</item>> //Морское содружество
+        <item>ns</item>> //Первое решение
+        <item>ag</item>> //Агафья
+        <item>os</item>> //Organic Shop
+        <item>sf</item>> //Sofidel
+        <item>rk</item>> //Ренессанс
+    </string-array>
+
+    <string-array name="mass_regions">
+        <item>1-Базар</item>>
+        <item>2-Центр</item>>
+        <item>3-Пригород</item>>
+    </string-array>
+
+
+    <string-array name="mass_agents">
+        <item>C1999965-EF8B-4F68-BE74-E1667C87F4BA</item>>
+        <item>86BAB4E0-EF26-4D00-B64B-1BD9C63E21B6</item>>
+        <item>4C97D097-81F7-43AA-9707-AE1FA92A9F7E</item>>
+        <item>8033F15D-88DB-40D7-A5F1-6C4B2389C2AE</item>>
+        <item>FC29F24F-24AE-488D-88B0-7B9BFD7A75A3</item>>
+        <item>A8BA1F48-C7E1-497B-B74A-D86426684712</item>>
+        <item>C611B483-547F-41B2-9DF0-050C34682012</item>>
+    </string-array>
+
+    <string-array name="params_region">
+        <item>region_1.db3</item>
+        <item>region_2.db3</item>
+        <item>region_3.db3</item>
+    </string-array>
+
+    <string-array name="mass_image">
+        <item>user_man</item>>
+        <item>user_woman</item>>
+        <item>3-Пригород</item>>
+    </string-array>
+
+    ABD5FCEC-0DF6-4992-97C6-F53FB5BC8969 //склад Каракол (Основной)
+
+    <string-array name="mass_month">
+        <item>Jun</item>>
+        <item>Feb</item>>
+        <item>Mrt</item>>
+        <item>Apr</item>>
+        <item>May</item>>
+        <item>Jun</item>>
+        <item>Jul</item>>
+        <item>Avg</item>>
+        <item>Sep</item>>
+        <item>Oct</item>>
+        <item>Nov</item>>
+        <item>Dec</item>>
+    </string-array>
+
+
+    <string-array name="menu_klients_text">
+        <item>Добавить</item>
+        <item>Редактировать</item>
+        <item>Удалить</item>
+    </string-array>
+
+
+    // EA661E8F-90D1-48BF-A530-5998FB65BFDD склад Каракол (Регион)
+    // E39993BA-5A19-4B71-A3FE-8DC6384821DF склад Каракол (Реклама)
+    // 63F85378-43D1-4419-9163-4F53E1DCBFE8 склад Каракол (Корзина)
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="menu_klients_image">
+        <item>user_shop_05</item>
+        <item>user_shop_04</item>
+        <item>user_shop_03</item>
+        <item>user_shop_02</item>
+    </string-array>
+
+    <string-array name="list_ty_entries">
+        <item>Без скидки</item>
+        <item>Скидка 2%</item>
+        <item>Скидка 3%</item>
+        <item>Скидка 4%</item>
+        <item>Скидка 5%</item>
+        <item>Скидка 6%</item>
+        <item>Скидка 7%</item>
+        <item>Скидка 8%</item>
+    </string-array>
+    <string-array name="list_ty_entryValues">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="ty_name2">
+        <item>Без скидки</item>
+        <item>Скидка 2%</item>
+        <item>Скидка 3%</item>
+        <item>Скидка 5%</item>
+        <item>Скидка 6%</item>
+    </string-array>
+    <string-array name="ty_params2">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+
+    <string-array name="ty_name3">
+        <item>Без скидки</item>
+        <item>Скидка 2%</item>
+        <item>Скидка 3%</item>
+        <item>Скидка 4%</item>
+        <item>Скидка 5%</item>
+        <item>Скидка 6%</item>
+        <item>Скидка 7%</item>
+        <item>Скидка 8%</item>
+    </string-array>
+    <string-array name="ty_params3">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="no_ty1">
+        <item>Скидка 0%</item>
+    </string-array>
+    <string-array name="no_ty2">
+        <item>0</item>
+    </string-array>
+    <string-array name="mouth_array_text">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </string-array>
+    <string-array name="mouth_array_text_db">
+        <item>jan</item>
+        <item>feb</item>
+        <item>mart</item>
+        <item>april</item>
+        <item>may</item>
+        <item>june</item>
+        <item>jule</item>
+        <item>aug</item>
+        <item>sept</item>
+        <item>okt</item>
+        <item>nov</item>
+        <item>dec</item>
+    </string-array>
+
+
+    <string-array name="mouth_array_image">
+        <item>month_01</item>
+        <item>month_02</item>
+        <item>month_03</item>
+        <item>month_04</item>
+        <item>month_05</item>
+        <item>month_06</item>
+        <item>month_07</item>
+        <item>month_08</item>
+        <item>month_09</item>
+        <item>month_10</item>
+        <item>month_11</item>
+        <item>month_12</item>
+    </string-array>
+
+    <string-array name="mass_base_month">
+        <item>base_january</item>
+        <item>base_february</item>
+        <item>base_mart</item>
+        <item>base_april</item>
+        <item>base_may</item>
+        <item>base_june</item>
+        <item>base_july</item>
+        <item>base_august</item>
+        <item>base_september</item>
+        <item>base_october</item>
+        <item>base_november</item>
+        <item>base_december</item>
+    </string-array>
+    <string-array name="mass_iden_month">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Okt</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+
+    <string-array name="mass_brends">
+        <item>Bella</item>>
+        <item>Cussons</item>>
+        <item>Pcc</item>>
+        <item>Samarela</item>>
+        <item>Sofidel</item>>
+    </string-array>
+
+    <string-array name="mass_nameSK">
+        <item>9028DC90-0B5E-4A27-8BEC-725054134D13</item>> //склад Каракол (Оптовый)
+        <item>54B85B19-444C-44EB-B737-54846EE868A2</item>> //склад Каракол (SPLAT)
+        <item>9107FD60-C949-4672-9FA5-7B179164DFF3</item>> //склад Каракол (КОСМЕТИКА)
+        <item>CC176571-7485-4A0E-B817-BA9BD633C1C6</item>> //склад Каракол (Продукты)
+    </string-array>
+    <string-array name="mass_brens_price">
+        <item>table_Bella</item>>
+        <item>table_PZ_Cussons</item>>
+        <item>table_Pcc_Kosmet</item>>
+        <item>table_Samarela</item>>
+        <item>table_Dramers</item>>
+        <item>table_Plushe</item>>
+        <item>table_Splat</item>>
+        <item>table_PKF_Sontsa</item>>
+        <item>table_Villa_Krim</item>>
+        <item>table_Zonin</item>>
+        <item>table_Kybans</item>>
+        <item>table_TD_Sea_friends</item>>
+    </string-array>
+
+    <!-- Preference Titles -->
+    <string-array name="mass_for_otchet_ostatki_brends">
+        <item>Все</item>>
+        <item>BELLA</item>>
+        <item>CUSSONS</item>>
+        <item>PCC</item>>
+        <item>LACALUT</item>>
+        <item>PLUSHE</item>>
+        <item>SAMARELA</item>>
+        <item>SOFIDEL</item>>
+        <item>SPLAT</item>>
+        <item>ДРАМЕРС</item>>
+        <item>ПКФ СОНЦА</item>>
+        <item>СВОБОДА</item>>
+        <item>ПЕРВОЕ РЕШЕНИЕ</item>>
+        <item>КУБАНСКИЕ ПРОДУКТЫ</item>>
+        <item>VILLA KRIM</item>>
+        <item>ZONIN</item>>
+        <item>РЕГИОН</item>>
+        <item>ТД МОРСКОЕ СОДРУЖЕСТВО</item>>
+    </string-array>
+    <string-array name="mass_for_otchet_ostatki_sklad_name">
+        <item>Все</item>>
+        <item>Основной</item>> //склад Каракол (Основной)
+        <item>Оптовый</item>> //склад Каракол (Оптовый)
+        <item>SPLAT</item>> //склад Каракол (SPLAT)
+        <item>Продукты</item>> //склад Каракол (Продукты)
+        <item>КОСМЕТИКА</item>> //склад Каракол (КОСМЕТИКА)
+        <item>Регион</item>> //склад Каракол (Регион)
+    </string-array>
+
+    <!-- Messages Preferences -->
+    <string-array name="mass_for_otchet_ostatki_sklad_kod">
+        <item>Все</item>>
+        <item>ABD5FCEC-0DF6-4992-97C6-F53FB5BC8969</item>> //склад Каракол (Основной)
+        <item>9028DC90-0B5E-4A27-8BEC-725054134D13</item>> //склад Каракол (Оптовый)
+        <item>54B85B19-444C-44EB-B737-54846EE868A2</item>> //склад Каракол (SPLAT)
+        <item>CC176571-7485-4A0E-B817-BA9BD633C1C6</item>> //склад Каракол (Продукты)
+        <item>9107FD60-C949-4672-9FA5-7B179164DFF3</item>> //склад Каракол (КОСМЕТИКА)
+        <item>EA661E8F-90D1-48BF-A530-5998FB65BFDD</item>> //склад Каракол (Регион)
+    </string-array>
+    <string-array name="mass_files_MTW">
+        <item>MTW_In_Brends.xml</item>>
+        <item>MTW_In_Customers.xml</item>>
+        <item>MTW_In_CustomersDebet.xml</item>>
+        <item>MTW_In_Nomenclatures.xml</item>>
+        <item>MTW_In_Orders.xml</item>>
+        <item>MTW_In_PaymentOrders.xml</item>>
+        <item>MTW_In_Price.xml</item>>
+        <item>MTW_In_ResidueGoods.xml</item>>
+        <item>MTW_In_ResidueGoodsPR.xml</item>>
+        <item>MTW_In_Users.xml</item>>
+        <item>MTW_In_Warehouse.xml</item>>
+    </string-array>
+
+    <!-- Sync Preferences -->
+    <string-array name="mass_files_SQLITE_DB">
+        <item>sunbell_const_db.db3</item>>
+        <item>sunbell_base_db.db3</item>>
+        <item>sunbell_rn_db.db3</item>>
+    </string-array>
+    <string-array name="mass_files_SQLITE_DB_2">
+        <item>sunbell_const_db.db3</item>>
+        <item>sunbell_base_db.db3</item>>
+    </string-array>
+    <string-array name="mass_for_update_data">
+        <item>Ежедневное обновление</item>
+        >          <!-- файлы: MTW_In_Price.xml, MTW_In_ResidueGoodsPR.xml, MTW_In_CustomersDebet.xml, MTW_In_PaymentOrders.xml!-->
+        <item>Обновление базы товаров</item>
+        >        <!-- файлы: MTW_In_Price.xml, MTW_In_ResidueGoodsPR.xml, MTW_In_Nomenclatures.xml, MTW_In_Brends.xml!-->
+        <item>Полное обновление файлов</item>>       <!-- все файлы xml !-->
+        <item>Обновление базы данных</item>
+        >         <!-- sunbell_base_db.db3, sunbell_const_db.db3 !-->
+        <item>Остатки Бишкек(для филиалов)</item>>   <!-- Обновление остатков для фильалов  !-->
+    </string-array>
+    <string-array name="mass_for_sync_data">
+        <item>Ежедневная синхронизация</item>>           <!-- Ежедневная синхронизация  !-->
+        <item>Синхронизация базы товаров</item>>         <!-- Синхронизация базы товаров  !-->
+        <item>Полная синхронизация баз</item>>           <!-- Полная сихронизация всех баз  !-->
+        <item>Резервное копирование баз</item>>          <!-- Резервное копирование данных  !-->
+        <item>Синхр. остатков(для филиалов)</item>>      <!-- Резервное копирование данных  !-->
+    </string-array>
+    <string name="title_activity_s_p_r__ostatok__inventoriz__n_e_w">MainActivity</string>
+    <string name="title_activity_s_p_r__nomeclature__new__brends">SPR_Nomeclature_New_Brends</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_s_p_r__nomenclature__new__brends">SPR_Nomenclature_New_Brends
+    </string>
+
+
+    <!-- Тексты для textView рабочего стола-->
+    <!-- Рабочий стол -->
+    <string name="wt_text_line_2">Справочники</string>
+    <string name="wt_text_line_1">Общий журнал</string>
+    <string name="wt_text_line_3">Прочее</string>
+    <string name="wt_text_line_4">Обработки</string>
+    <string name="wt_text_line1_forma">Форма заказа</string>
+    <string name="wt_text_line1_kassa">Касса</string>
+    <string name="wt_text_line1_otchet">Отчеты</string>
+    <string name="wt_text_line1_ostatki">Остатки</string>
+    <string name="wt_text_line2_agents">Агенты</string>
+    <string name="wt_text_line2_nomenkl">Номенклатура</string>
+    <string name="wt_text_line2_kontragent">Контрагенты</string>
+    <string name="wt_text_line3_kupurnic">Купюрник</string>
+    <string name="wt_text_line3_shtrih">Штрих-код</string>
+    <string name="wt_text_line4_otput">Отправить</string>
+    <string name="wt_text_line4_update">Обновить</string>
+    <string name="wt_text_line4_sync">Синхронизировать</string>
+
+    <!-- Тексты для специальных возможностей, установить приложение специальные возможности из Play Market -->
+    <!-- Рабочий стол -->
+    <string name="wt_bt_forma">форма заказа</string>
+    <string name="wt_bt_kassa">касса, консигнации</string>
+    <string name="wt_bt_otchet">отчеты по продажам</string>
+    <string name="wt_bt_ostatki">остатки по фирме</string>
+    <string name="wt_bt_kontragent">контрагенты</string>
+    <string name="wt_bt_nomenkl">номенклатура товара</string>
+    <string name="wt_bt_agent">агенты</string>
+    <string name="wt_bt_list">купюрник</string>
+    <string name="wt_bt_shtrih">поиск по штрих-коду</string>
+    <string name="wt_bt_update">обновление данных</string>
+    <string name="wt_bt_sync">синхронизация данных</string>
+    <string name="wt_bt_load">Для отправки</string>
+
+    <string name="title_activity_wj_forma_zakaza2023">WJ_FormaZakaza_2023</string>
+    <string name="title_button_navigator_01">Контрагенты</string>
+    <string name="title_button_navigator_02">Заказ</string>
+    <string name="title_button_navigator_03">Шапка</string>
+
+
+
+
+    <!-- Список префиксов для картинки торговых точек Бишкека -->
+    <string-array name="mass_pref_ListBishkek">
+        <item>Маг.</item>>
+        <item>ОсОО</item>>
+        <item>Пав.</item>>
+        <item>+С.</item>>
+        <item>Аламедин</item>>
+    </string-array>
+
+
+</resources>

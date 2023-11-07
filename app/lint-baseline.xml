@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.3.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.3.0)" variant="fatal" version="7.3.0">
+
+    <issue
+        id="UnknownId"
+        message="The id &quot;`btn_ok`&quot; is not defined anywhere."
+        errorLine1="            app:layout_constraintStart_toEndOf=&quot;@+id/btn_ok&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/wj_forma_akcia.xml"
+            line="337"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/textView_Strih` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="        app:layout_constraintTop_toBottomOf=&quot;@+id/textView_Strih&quot;>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/list_item_nomenclature_forma.xml"
+            line="153"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/text_nom_title_name_sklad` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="            app:layout_constraintTop_toBottomOf=&quot;@+id/text_nom_title_name_sklad&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/list_item_nomenclature_forma.xml"
+            line="185"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/relativeLayout_params` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="        android:layout_alignBottom=&quot;@+id/relativeLayout_params&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/mt_list_klients_content_const.xml"
+            line="13"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/imageView5` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="            android:layout_toRightOf=&quot;@+id/imageView5&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/rrr.xml"
+            line="56"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/TextInput` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="            android:layout_toRightOf=&quot;@+id/TextInput&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/rrr.xml"
+            line="76"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/textView24` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="            app:layout_constraintTop_toBottomOf=&quot;@+id/textView24&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/wj_forma_akcia.xml"
+            line="314"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        message="`@+id/tvw_d_region` is not a sibling in the same `ConstraintLayout`"
+        errorLine1="            android:layout_below=&quot;@+id/tvw_d_region&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/wj_list_debet.xml"
+            line="44"
+            column="13"/>
+    </issue>
+
+</issues>

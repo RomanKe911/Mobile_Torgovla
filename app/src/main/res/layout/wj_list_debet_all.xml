@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    android:background="@drawable/back_group"
+    android:padding="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/tvw_G_ost_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="аптека, магазин, чп"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Сумма долга"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_d_summa_debet"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_6" />
+
+        <TextView
+            android:id="@+id/tvw_d_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="маршрут 555"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_name" />
+
+        <TextView
+            android:id="@+id/tvw_d_region_uid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="//-//-//-//"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_region" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:text="дата отгрузки"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_d_title_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            android:text="дата оплаты"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvw_d_title_2"
+            app:layout_constraintTop_toTopOf="@+id/tvw_d_title_1" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:text="дней консигнации"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_d_title_"
+            app:layout_constraintStart_toEndOf="@+id/tvw_d_title_1"
+            app:layout_constraintTop_toTopOf="@+id/tvw_d_title_1" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Сумма задолжности"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvw_d_title_4"
+            app:layout_constraintTop_toTopOf="@+id/tvw_d_title_4" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Сумма оплаты"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_d_title_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_5" />
+
+        <TextView
+            android:id="@+id/tvw_d_title_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvw_d_region"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="№ документа 1С:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_region_uid" />
+
+        <TextView
+            android:id="@+id/tvw_d_summa_debet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="25000"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_d_title_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvw_d_title_5"
+            app:layout_constraintTop_toTopOf="@+id/tvw_d_title_5" />
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="5000"
+            app:layout_constraintEnd_toEndOf="@+id/tvw_d_title_4"
+            app:layout_constraintStart_toStartOf="@+id/tvw_d_title_4"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_4" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="20000"
+            app:layout_constraintEnd_toEndOf="@+id/tvw_d_title_3"
+            app:layout_constraintStart_toStartOf="@+id/tvw_d_title_3"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_3" />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="20.01.2022"
+            app:layout_constraintEnd_toEndOf="@+id/tvw_d_title_1"
+            app:layout_constraintStart_toStartOf="@+id/tvw_d_title_1"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_1" />
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="28.01.2022"
+            app:layout_constraintEnd_toEndOf="@+id/tvw_d_title_"
+            app:layout_constraintStart_toStartOf="@+id/tvw_d_title_"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_" />
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="8"
+            app:layout_constraintEnd_toEndOf="@+id/tvw_d_title_2"
+            app:layout_constraintStart_toStartOf="@+id/tvw_d_title_2"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_d_title_2" />
+
+        <TextView
+            android:id="@+id/textView61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_d_title_6"
+            app:layout_constraintStart_toEndOf="@+id/tvw_d_title_6"
+            app:layout_constraintTop_toTopOf="@+id/tvw_d_title_6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

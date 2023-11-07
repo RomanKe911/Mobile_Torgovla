@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/menu_logo_notebook_96"
+        android:title="Пар"
+        app:showAsAction="always">
+        <menu android:id="@+id/menu_preferenc_1">
+            <item
+                android:id="@+id/menu_new_agent"
+                android:icon="@drawable/menu_logo_engineer"
+                android:title="Новый агент" />
+
+            <item
+                android:id="@+id/menu_preferenc"
+                android:icon="@drawable/menu_logo_tool_box"
+                android:title="Настройки" />
+        </menu>
+    </item>
+
+
+</menu>

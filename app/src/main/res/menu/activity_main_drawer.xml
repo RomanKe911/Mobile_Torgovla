@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Рабочий журнал">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu1_1"
+                    android:icon="@android:drawable/ic_menu_edit"
+                    android:title="Форма заказа" />
+                <item
+                    android:id="@+id/menu1_2"
+                    android:icon="@android:drawable/ic_menu_today"
+                    android:title="Расходные накладные" />
+                <item
+                    android:id="@+id/menu1_3"
+                    android:icon="@android:drawable/ic_menu_month"
+                    android:title="Активности" />
+                <item
+                    android:id="@+id/menu1_4"
+                    android:icon="@android:drawable/ic_menu_agenda"
+                    android:title="Акции" />
+                <item
+                    android:id="@+id/menu1_5"
+                    android:icon="@android:drawable/ic_menu_upload"
+                    android:title="Выгрузка" />
+                <item
+                    android:id="@+id/menu1_6"
+                    android:icon="@android:drawable/ic_menu_more"
+                    android:title="Калькулятор" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Справочник">
+        <menu>
+            <item
+                android:id="@+id/menu2_table1"
+                android:icon="@android:drawable/ic_menu_save"
+                android:title="Номенклатура" />
+            <item
+                android:id="@+id/menu2_table2"
+                android:icon="@android:drawable/ic_menu_my_calendar"
+                android:title="Клиенты" />
+            <item
+                android:id="@+id/menu2_table3"
+                android:icon="@android:drawable/ic_menu_gallery"
+                android:title="Высталенность" />
+        </menu>
+    </item>
+</menu>

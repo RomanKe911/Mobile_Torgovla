@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_rt"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/back_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bella_perfecta_10_rose" />
+
+    <TextView
+        android:id="@+id/tvw_rt_strih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="штрих-код"
+        android:textSize="5pt"
+        app:layout_constraintStart_toEndOf="@+id/img_rt"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_name" />
+
+    <TextView
+        android:id="@+id/tvw_rt_kol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="количество"
+        android:textColor="@color/colors_ostatok_large"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/img_rt"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_kod_univ" />
+
+    <TextView
+        android:id="@+id/tvw_rt_ostatok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/orange"
+        android:textStyle="bold"
+        android:text="ostatok"
+        app:layout_constraintStart_toEndOf="@+id/img_rt"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_kol" />
+
+    <TextView
+        android:id="@+id/tvw_rt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:text="BL ВЛАЖН САЛФ 20 ШТ. GoodBye Make-Up (алоэ и гибискус) 0796"
+        android:textColor="@color/black"
+        android:textSize="7pt"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/img_rt"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvw_rt_kod_univ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:text="kod_univ"
+        android:textSize="5pt"
+        app:layout_constraintStart_toEndOf="@+id/img_rt"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_strih" />
+
+    <TextView
+        android:id="@+id/tvw_rt_cena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        android:text="cena"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_kod_univ" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        android:text="x"
+        app:layout_constraintStart_toEndOf="@+id/tvw_rt_kol"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_kod_univ" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/orange"
+        android:text="шт"
+        app:layout_constraintStart_toEndOf="@+id/tvw_rt_ostatok"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_kol" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/colorPrimary"
+        android:text="с"
+        app:layout_constraintStart_toEndOf="@+id/tvw_rt_cena"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_rt_kod_univ" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/selector_button_delete_id"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

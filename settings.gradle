@@ -1,0 +1,3 @@
+include ':printerthermal_escpos_bluetooth'
+include ':app'
+rootProject.name = "Mobile_Torgovla"

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvw_invent_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="BL Ватные диски (спонжики) 80шт+30% 0033,"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_invent_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_invent_name"
+        app:srcCompat="@drawable/bella_perfecta_10_rose" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/img_invent_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_invent_name">
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="уп/кор:"
+            app:layout_constraintStart_toStartOf="@+id/textView90"
+            app:layout_constraintTop_toBottomOf="@+id/textView90" />
+
+        <TextView
+            android:id="@+id/textView90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="4dp"
+            android:text="цена:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView92"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="остаток:"
+            app:layout_constraintStart_toStartOf="@+id/textView91"
+            app:layout_constraintTop_toBottomOf="@+id/textView91" />
+
+        <TextView
+            android:id="@+id/textView95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="разница:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView94"
+            app:layout_constraintTop_toBottomOf="@+id/textView94" />
+
+        <TextView
+            android:id="@+id/textView94"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="остаток ф:"
+            app:layout_constraintStart_toStartOf="@+id/textView92"
+            app:layout_constraintTop_toBottomOf="@+id/textView92" />
+
+        <TextView
+            android:id="@+id/tvw_invent_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="90,00"
+            app:layout_constraintBottom_toBottomOf="@+id/textView90"
+            app:layout_constraintStart_toEndOf="@+id/textView90"
+            app:layout_constraintTop_toTopOf="@+id/textView90" />
+
+        <TextView
+            android:id="@+id/tvw_invent_kolbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="12шт"
+            app:layout_constraintBottom_toBottomOf="@+id/textView91"
+            app:layout_constraintStart_toEndOf="@+id/textView91"
+            app:layout_constraintTop_toTopOf="@+id/textView91" />
+
+        <TextView
+            android:id="@+id/tvw_invent_ostatok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="12шт"
+            app:layout_constraintBottom_toBottomOf="@+id/textView92"
+            app:layout_constraintStart_toEndOf="@+id/textView92"
+            app:layout_constraintTop_toTopOf="@+id/textView92" />
+
+        <TextView
+            android:id="@+id/tvw_invent_ostatok_f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="12шт"
+            app:layout_constraintBottom_toBottomOf="@+id/textView94"
+            app:layout_constraintStart_toEndOf="@+id/textView94"
+            app:layout_constraintTop_toTopOf="@+id/textView94" />
+
+        <TextView
+            android:id="@+id/tvw_invent_ostatok_invent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="-100шт"
+            app:layout_constraintBottom_toBottomOf="@+id/textView95"
+            app:layout_constraintStart_toEndOf="@+id/textView95"
+            app:layout_constraintTop_toTopOf="@+id/textView95" />
+
+        <TextView
+            android:id="@+id/tvw_invent_ostatok_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="1кор. + 2шт"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_invent_ostatok"
+            app:layout_constraintStart_toEndOf="@+id/tvw_invent_ostatok"
+            app:layout_constraintTop_toTopOf="@+id/tvw_invent_ostatok" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView93"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
+        android:text="штрих-код:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_invent_image"
+        app:layout_constraintTop_toBottomOf="@+id/img_invent_image" />
+
+    <TextView
+        android:id="@+id/tvw_invent_shtrih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="1234567890"
+        app:layout_constraintBottom_toBottomOf="@+id/textView93"
+        app:layout_constraintStart_toEndOf="@+id/textView93"
+        app:layout_constraintTop_toTopOf="@+id/textView93" />
+
+    <TextView
+        android:id="@+id/tvw_invent_koduid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:hint="kod_uid"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_invent_shtrih" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

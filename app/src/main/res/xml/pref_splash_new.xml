@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity">
+
+    <PreferenceCategory
+        android:id="@+id/preference_list_1"
+        android:key="preferenc_menu_ftp"
+        android:summary="Description of cat_1"
+        android:title="Обработка данных с сервера">
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_ftp_server_con"
+            android:entryValues="@array/mass_ftp_server_con_value"
+            android:key="ftp_ipConn_list"
+            android:summary=""
+            android:title="FTP: ip-адрес" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_Region_Put_Name"
+            android:entryValues="@array/mass_Region_Put_Value"
+            android:key="ftp_put_list"
+            android:summary=""
+            android:title="FTP: путь к данным" />
+        <Preference
+            android:id="@+id/preference_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_load_start"
+            android:summary=""
+            android:title="Загрузить файлы для старта"></Preference>
+
+    </PreferenceCategory>
+</PreferenceScreen>
+

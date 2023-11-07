@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MT_Layout_Background_Work">
+
+    <TextView
+        android:id="@+id/tvw_title_1"
+        style="@style/wg_global_textTitle_size"
+        android:text="@string/wt_text_line_1"
+        app:layout_constraintBottom_toTopOf="@+id/tvw_title_group_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvw_title_2"
+        style="@style/wg_global_textTitle_size"
+        android:text="@string/wt_text_line_2"
+        app:layout_constraintBottom_toTopOf="@+id/tvw_title_group_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_group_1" />
+
+    <TextView
+        android:id="@+id/tvw_title_3"
+        style="@style/wg_global_textTitle_size"
+        android:text="@string/wt_text_line_3"
+        app:layout_constraintBottom_toTopOf="@+id/tvw_title_group_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_group_2" />
+
+    <TextView
+        android:id="@+id/tvw_title_4"
+        style="@style/wg_global_textTitle_size"
+        android:text="@string/wt_text_line_4"
+        app:layout_constraintBottom_toTopOf="@+id/tvw_title_group_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_group_3" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tvw_title_group_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_1">
+
+        <Button
+            android:id="@+id/forma_title_2_forma"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/wj_office_title_forma"
+            android:contentDescription="@string/wt_bt_forma"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_2_kassa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/forma_title_2_kassa"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/wt_bt_kassa"
+            android:background="@drawable/wj_office_title_money"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_2_otchet"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_2_forma"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/forma_title_2_otchet"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/wj_office_title_otchet"
+            android:contentDescription="@string/wt_bt_otchet"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_2_ostatki"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_2_kassa"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/forma_title_2_ostatki"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/wt_bt_ostatki"
+            android:background="@drawable/wj_office_title_forma_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_2_otchet"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line1_otchet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_otchet"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_otchet"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_otchet"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line1_ostatki"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_ostatki"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_ostatki"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_ostatki"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line1_forma"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_forma"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_forma"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_forma"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line1_kassa"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_kassa"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_kassa"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_kassa"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tvw_title_group_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_4">
+
+        <Button
+            android:id="@+id/forma_title_4_up"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/wt_bt_load"
+            android:background="@drawable/wj_office_title_up_ftp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_4_update"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/forma_title_4_load"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/wt_bt_sync"
+            android:background="@drawable/wj_office_title_update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_4_update"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/forma_title_4_update"
+            style="@style/wg_global_button_size"
+            android:contentDescription="@string/wt_bt_update"
+            android:background="@drawable/wj_office_title_updata_db"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_4_load"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_4_up"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line4_sync"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_4_load"
+            app:layout_constraintHorizontal_bias="0.409"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_4_load"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_load"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line4_otput"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_4_up"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_4_up"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_up"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line4_update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_4_update"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_4_update"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_update"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tvw_title_group_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_3">
+
+        <Button
+            android:id="@+id/forma_title_3_kalkul"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="24dp"
+            android:contentDescription="@string/wt_bt_list"
+            android:background="@drawable/wj_office_title_kalkul"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_3_shtrih"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/forma_title_3_shtrih"
+            style="@style/wg_global_button_size"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/wt_bt_shtrih"
+            android:background="@drawable/wj_office_title_shtrih"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_3_kalkul"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line3_kupurnic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_3_kalkul"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_3_kalkul"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_3_kalkul" />
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line3_shtrih"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_3_shtrih"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_3_shtrih"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_3_shtrih" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tvw_title_group_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_title_2">
+
+        <Button
+            android:id="@+id/forma_title_2_tovar2"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/wt_bt_nomenkl"
+            android:background="@drawable/wj_office_title_forma_2"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_2_agent2"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_2_k_agent2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/forma_title_2_agent2"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/wt_bt_agent"
+            android:background="@drawable/wj_office_title_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/forma_title_2_tovar2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/forma_title_2_k_agent2"
+            style="@style/wg_global_button_size"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/wj_office_title_group"
+            app:layout_constraintEnd_toStartOf="@+id/forma_title_2_tovar2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/wt_bt_kontragent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/forma_title_2_tovar_tvw2"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line2_nomenkl"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_tovar2"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_tovar2"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_tovar2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/forma_title_2_agent_tvw2"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line2_agents"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_agent2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_agent2"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_agent2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/forma_title_2_k_agent_tvw2"
+            style="@style/wg_global_text_size"
+            android:text="@string/wt_text_line2_kontragent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/forma_title_2_k_agent2"
+            app:layout_constraintStart_toStartOf="@+id/forma_title_2_k_agent2"
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_2_k_agent2"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

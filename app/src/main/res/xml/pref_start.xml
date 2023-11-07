@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity"  >
+
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="Обработка данных с сервера">
+        <Preference
+            android:id="@+id/preference_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_logins"
+            android:summary=""
+            android:title="Обновить список агентов"></Preference>
+        <Preference
+            android:id="@+id/preference_kagents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_kagents"
+            android:summary=""
+            android:title="Обновить контрагентов"></Preference>
+
+        <Preference
+            android:id="@+id/preference_db"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_suncape"
+            android:summary=""
+            android:title="Обновить номеклатуру"></Preference>
+
+        <Preference
+            android:id="@+id/preference_db2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_load_RN"
+            android:summary=""
+            android:title="Скачать рт"></Preference>
+
+
+
+
+
+        <Preference
+            android:id="@+id/preference_ost_replace2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_Update"
+            android:title="Синхронизация с базой"></Preference>
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="Обработка остатков">
+        <Preference
+            android:id="@+id/preference_ostatok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_ostatok_update"
+            android:summary=""
+            android:title="Обновить остатки"></Preference>
+        <Preference
+            android:id="@+id/preference_ost_replace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_ostatok_sync"
+            android:summary=""
+            android:title="Синхронизация остатков"></Preference>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="Ценообразование">
+        <Preference
+            android:id="@+id/preference_price_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_price_update"
+            android:title="Обновить цены"></Preference>
+        <Preference
+            android:id="@+id/preference_price_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_price_sync"
+            android:title="Синхронизация цен"></Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="Параметры приложения">
+        <PreferenceScreen
+            android:key="screen"
+            android:summary="О программе"
+            android:title="Сведения о программе">
+
+            <PreferenceCategory
+                android:key="categ3"
+                android:summary="Description of screen"
+                android:title="Сведения о программе">
+                <ListPreference
+                    android:defaultValue="1"
+                    android:entries="@array/ty_params3"
+                    android:entryValues="@array/mass_month"
+                    android:key="list_preference_ftp"
+                    android:title="List preference" />
+                <Preference
+                    android:key="version"
+                    android:summary=""
+                    android:title="Верcия приложения"></Preference>
+                <Preference
+                    android:key="min_version"
+                    android:summary="API 21: Android 5.0 (Lollipop)"
+                    android:title="Минимальная версия Android"></Preference>
+                <Preference
+                    android:key="you_version"
+                    android:summary=""
+                    android:title="Ваша версия Android"></Preference>
+                <Preference
+                    android:key="programmer"
+                    android:summary=""
+                    android:title="Разработчик"></Preference>
+                <Preference
+                    android:key="phone"
+                    android:summary="0(556) 788-669"
+                    android:title="Справки по телефону"></Preference>
+            </PreferenceCategory>
+        </PreferenceScreen>>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
+

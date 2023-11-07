@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Категория клиентов">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_klients1"
+                    android:icon="@android:drawable/ic_menu_more"
+                    android:title="Аптеки" />
+                <item
+                    android:id="@+id/nav_klients2"
+                    android:icon="@android:drawable/ic_menu_more"
+                    android:title="Магазины" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Сортировка">
+        <menu>
+            <item
+                android:id="@+id/nav_sort_1"
+                android:icon="@android:drawable/ic_menu_sort_alphabetically"
+                android:title="по наименованию" />
+            <item
+                android:id="@+id/nav_sort_2"
+                android:icon="@android:drawable/ic_menu_sort_alphabetically"
+                android:title="по адресу" />
+        </menu>
+    </item>
+</menu>

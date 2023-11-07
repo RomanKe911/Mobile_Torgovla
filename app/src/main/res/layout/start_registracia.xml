@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/logo_back_sunbell_start"
+    tools:context=".Start_Registracia_New">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/back_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/office_selector_button_aut_next"
+            android:text="Отправить"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_text_04" />
+
+
+        <EditText
+            android:id="@+id/tvw_reg_text_01"
+            style="@style/EditText_Name"
+            android:hint="Иванов Иван"
+            android:inputType="textCapSentences"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvw_reg_title_01"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_title_01" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            style="@style/EditText_Name"
+            android:background="@drawable/back_image"
+            android:gravity="center_horizontal|left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvw_reg_title_02"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_title_02" />
+
+        <TextView
+            android:id="@+id/tvw_reg_title_01"
+            style="@style/EditText_Title"
+            android:text="Фамилия и Имя"
+            app:layout_constraintBottom_toTopOf="@+id/tvw_reg_text_01"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tvw_reg_title_02"
+            style="@style/EditText_Title"
+            android:text="Филиал"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_text_01" />
+
+        <TextView
+            android:id="@+id/tvw_reg_title_03"
+            style="@style/EditText_Title"
+            android:text="Бренд и марка"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+        <TextView
+            android:id="@+id/tvw_reg_title_04"
+            style="@style/EditText_Title"
+            android:text="Версия Android"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_text_02" />
+
+        <TextView
+            android:id="@+id/tvw_reg_title_05"
+            style="@style/EditText_Title"
+            android:text="Код регистрации"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_text_03" />
+
+
+
+        <TextView
+            android:id="@+id/tvw_reg_text_02"
+            style="@style/EditText_Name"
+            android:hint="бренд и марка"
+            app:layout_constraintStart_toStartOf="@+id/tvw_reg_title_03"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_title_03" />
+
+        <TextView
+            android:id="@+id/tvw_reg_text_03"
+            style="@style/EditText_Name"
+            android:hint="Версия Android"
+            app:layout_constraintStart_toStartOf="@+id/tvw_reg_title_04"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_title_04" />
+
+        <TextView
+            android:id="@+id/tvw_reg_text_04"
+            style="@style/EditText_Name"
+            android:hint="Код регистрации"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvw_reg_title_05"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_reg_title_05" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Рабочий журнал">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_gr1_table1"
+                    android:icon="@android:drawable/ic_menu_agenda"
+                    android:title="Форма заказа" />
+                <item
+                    android:id="@+id/nav_gr1_table2"
+                    android:icon="@android:drawable/ic_menu_agenda"
+                    android:title="Расходные накладные" />
+                <item
+                android:id="@+id/nav_gr1_table3"
+                android:icon="@android:drawable/ic_menu_agenda"
+                android:title="Взаиморасчеты" />
+                <item
+                    android:id="@+id/nav_gr1_table3_1"
+                    android:icon="@android:drawable/ic_menu_agenda"
+                    android:title="Приходный ордер" />
+                <item
+                    android:id="@+id/nav_gr1_table4"
+                    android:icon="@android:drawable/ic_menu_agenda"
+                    android:title="Активности" />
+
+            </group>
+        </menu>
+    </item>
+    <item android:title="Справочники">
+        <menu>
+            <item
+                android:id="@+id/nav_gr2_table1"
+                android:icon="@android:drawable/ic_menu_my_calendar"
+                android:title="Номенклатура" />
+            <item
+                android:id="@+id/nav_gr2_table6"
+                android:icon="@android:drawable/ic_menu_my_calendar"
+                android:title="Остатки" />
+            <item
+                android:id="@+id/nav_gr2_table5"
+                android:icon="@android:drawable/ic_menu_my_calendar"
+                android:title="Штрих-код" />
+            <item
+                android:id="@+id/nav_gr2_table2"
+                android:icon="@android:drawable/ic_menu_my_calendar"
+                android:title="Клиенты" />
+            <item
+                android:id="@+id/nav_gr2_table3"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Выставленность" />
+            <item
+                android:id="@+id/nav_gr2_table4"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Калькулятор" />
+            <item
+                android:id="@+id/nav_gr2_table7"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Принтер" />
+        </menu>
+    </item>
+    <item android:title="Обработки">
+        <menu>
+            <item
+                android:id="@+id/nav_gr3_table1"
+                android:icon="@android:drawable/ic_menu_upload_you_tube"
+                android:title="Выгрузка" />
+            <item
+                android:id="@+id/nav_gr3_table2"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="Загрузка" />
+        </menu>
+    </item>
+
+
+</menu>

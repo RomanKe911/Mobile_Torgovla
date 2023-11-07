@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout17"
+        android:layout_width="381dp"
+        android:layout_height="371dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="19dp">
+
+        <Button
+            android:id="@+id/btn_obmen"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            android:text="Заполнение таблицы"
+            app:layout_constraintEnd_toEndOf="@+id/btn_down_file"
+            app:layout_constraintStart_toStartOf="@+id/btn_down_file"
+            app:layout_constraintTop_toBottomOf="@+id/btn_down_file" />
+
+        <Button
+            android:id="@+id/btn_new_xml"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Создание файла \nXML-загрузка"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_obmen" />
+
+        <Button
+            android:id="@+id/btn_up_file"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginBottom="16dp"
+            android:text="Отправить \nготовый файл на ftp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/btn_new_xml"
+            app:layout_constraintTop_toBottomOf="@+id/btn_new_xml" />
+
+        <Button
+            android:id="@+id/btn_down_file"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Скачать базу данных с ftp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_up_file_ostatok"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:text="Создание файла \nXML-остаток"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_new_xml"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_new_xml" />
+
+        <Button
+            android:id="@+id/btn_new_ecf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Создать \nсчет-фактуру "
+            app:layout_constraintBottom_toBottomOf="@+id/btn_up_file"
+            app:layout_constraintEnd_toEndOf="@+id/btn_up_file_ostatok"
+            app:layout_constraintStart_toEndOf="@+id/btn_up_file"
+            app:layout_constraintTop_toTopOf="@+id/btn_up_file" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/ittn_button_summa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/ittn_button_text_1"
+        app:layout_constraintStart_toEndOf="@+id/ittn_button_text_1"
+        app:layout_constraintTop_toTopOf="@+id/ittn_button_text_1" />
+
+    <TextView
+        android:id="@+id/ittn_button_text_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Итого:"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout18"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/ittn_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout19"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout18"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout18" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout19"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/ittn_button_text_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/ittn_text_clients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Список клиентов без складов" />
+
+            <ListView
+                android:id="@+id/ittn_listview_clients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/ittn_text_tovar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Список товара без кода"
+                tools:visibility="visible" />
+
+            <ListView
+                android:id="@+id/ittn_listview_tovar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                tools:visibility="visible">
+
+            </ListView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout18"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/ittn_button_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="2dp"
+            android:text="Скачать"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ittn_button_create_ittn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/ittn_button_create_ittn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="ЭТТН"
+            app:layout_constraintBottom_toBottomOf="@+id/ittn_button_download"
+            app:layout_constraintEnd_toStartOf="@+id/ittn_button_create_icf"
+            app:layout_constraintStart_toEndOf="@+id/ittn_button_download"
+            app:layout_constraintTop_toTopOf="@+id/ittn_button_download" />
+
+        <Button
+            android:id="@+id/ittn_button_create_icf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="ЭСФ"
+            app:layout_constraintBottom_toBottomOf="@+id/ittn_button_create_ittn"
+            app:layout_constraintEnd_toStartOf="@+id/ittn_button_upload"
+            app:layout_constraintStart_toEndOf="@+id/ittn_button_create_ittn"
+            app:layout_constraintTop_toTopOf="@+id/ittn_button_create_ittn"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/ittn_button_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="Выгрузить"
+            app:layout_constraintBottom_toBottomOf="@+id/ittn_button_create_icf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ittn_button_create_icf"
+            app:layout_constraintTop_toTopOf="@+id/ittn_button_create_icf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="horizontal"
+    android:padding="3dp">
+
+
+    <TextView
+        android:id="@+id/tvw_rn_RN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="RnMay00021" />
+    <TextView
+        android:id="@+id/tvw_rn_Vrema"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvw_rn_Data"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:text="23:29:59" />
+
+    <TextView
+        android:id="@+id/tvw_rn_Data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tvw_rn_RN"
+        android:textColor="@color/black"
+        android:text="2020-05-04" />
+
+
+    <TextView
+        android:id="@+id/tvw_rn_K_Agent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvw_rn_RN"
+        android:textColor="@color/colors_ostatok_small"
+        android:text="апт №948/5 (Гуля)" />
+
+    <TextView
+        android:id="@+id/tvw_rn_Adress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvw_rn_K_Agent"
+        android:textColor="@color/black"
+        android:text="Каракол улица" />
+
+    <TextView
+        android:id="@+id/tvw_rn_K_UID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvw_rn_Adress"
+        android:textColor="@color/black"
+        android:text="D7C12E35-0E59-41B1-8967-4CD5C9128B1E" />
+
+
+    <TextView
+        android:id="@+id/tvw_rn_Summa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvw_rn_K_UID"
+        android:layout_toLeftOf="@+id/tvw_rn_Itogo"
+        android:textColor="@color/colors_ostatok_small"
+        android:text="10000.00" />
+
+    <TextView
+        android:id="@+id/tvw_rn_Itogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@+id/tvw_rn_Summa"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/colors_ostatok_large"
+        android:text="9500.00" />
+</RelativeLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="2dp"
+    android:layout_margin="2dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_alignBottom="@+id/imageView_P_Klients"
+        android:visibility="invisible"
+        android:id="@+id/text_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="id=2" />
+
+    <ImageView
+        android:layout_alignBottom="@+id/relativeLayout_params"
+        android:id="@+id/imageView_P_Klients"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/user_shop_03" />
+
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imageView_P_Klients"
+        android:id="@+id/relativeLayout_params"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:padding="2dp">
+        <TextView
+            android:id="@+id/select_client_name"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="ЧП Эльмира" />
+        <TextView
+            android:id="@+id/select_client_adress"
+            android:layout_below="@+id/select_client_name"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="г.Каракол; ул. Жапарова; дом №42" />
+        <TextView
+            android:layout_below="@+id/select_client_adress"
+            android:id="@+id/select_client_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="67407486-4CE0-4ED0-9CBA-DEE949DCD3AC" />
+
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

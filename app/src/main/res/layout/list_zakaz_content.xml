@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:padding="3dp">
+
+    <TextView
+        style="@style/style_arf_znak"
+        android:id="@+id/textView_zn1"
+        android:layout_alignBottom="@+id/cont_summa"
+        android:layout_toRightOf="@id/cont_summa"
+        android:text="-" />
+
+    <TextView
+        style="@style/style_arf_znak"
+        android:id="@+id/textView_zn2"
+        android:layout_alignBottom="@+id/cont_summa"
+        android:layout_toRightOf="@id/cont_skidka"
+        android:text="=" />
+
+    <TextView
+        android:id="@+id/cont_kod"
+        style="@style/style_work_list_1"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="AvPN0001"
+        android:textColor="@color/work_colors_2" />
+
+    <TextView
+        android:id="@+id/cont_nameT"
+        style="@style/style_work_list_1"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/cont_kod"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="магазин Лимпопо"
+        android:textColor="@color/work_colors_1" />
+
+    <TextView
+        android:id="@+id/cont_summa"
+        style="@style/style_work_list_1"
+        android:layout_below="@+id/cont_nameT"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="5250"
+        android:textColor="@color/work_colors_4" />
+
+    <TextView
+        android:id="@+id/cont_skidka"
+        style="@style/style_work_list_1"
+        android:layout_alignBottom="@+id/cont_summa"
+        android:layout_toRightOf="@+id/textView_zn1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="5%"
+        android:textColor="@color/work_colors_3" />
+
+    <TextView
+        android:id="@+id/cont_itog"
+        style="@style/style_work_list_1"
+      android:layout_alignBottom="@+id/cont_summa"
+        android:layout_toRightOf="@+id/textView_zn2"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="5000"
+        android:textColor="@color/work_colors_3" />
+</RelativeLayout>

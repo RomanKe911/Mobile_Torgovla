@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/logo_back_all_5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/linearLayout14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:padding="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_scan1">
+
+        <Button
+            android:id="@+id/wj_btn_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сканировать" />
+
+        <Button
+            android:id="@+id/wj_btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_edt_skidka"
+            android:text="Добавить" />
+
+        <EditText
+            android:id="@+id/wj_edt_skidka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_edt_kol"
+            android:ems="8"
+            android:gravity="center_vertical"
+            android:hint="Скидка"
+            android:inputType="number"
+            android:maxLength="2" />
+
+        <EditText
+            android:id="@+id/wj_edt_kol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wj_btn_scan"
+            android:ems="8"
+            android:gravity="center_vertical"
+            android:hint="Кол-во"
+            android:inputType="number"
+            android:maxLength="4" />
+
+        <TextView
+            android:id="@+id/wj_tvw_summa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/wj_edt_kol"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/wj_edt_kol"
+            android:hint="Сумма" />
+
+        <TextView
+            android:id="@+id/wj_tvw_itogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/wj_edt_skidka"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/wj_edt_skidka"
+            android:hint="Итого" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_scan1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ListView>
+
+    <ListView
+        android:id="@+id/list_scan2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout14"></ListView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

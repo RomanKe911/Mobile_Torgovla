@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <TextView
+        android:id="@+id/tvw_G_ost_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:gravity="center_horizontal|top|center_vertical"
+        android:padding="4dp"
+        android:text="РБА/Таежные истории/ Маска д/лица, детокс угольная  100 мл 6491"
+        android:textColor="@color/colorblack"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_ost"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="2dp"
+        android:layout_weight="1"
+        android:background="@drawable/back_image"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout6"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout6"
+        app:srcCompat="@drawable/bella_perfecta_10_rose" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView_ost"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_name">
+
+        <TextView
+            android:id="@+id/tvw_G_ost_brends"
+            style="@style/ListView_Ostatok_Golovnoy_Title"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Бренд:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_group"
+            style="@style/ListView_Ostatok_Golovnoy_Title"
+            android:layout_marginTop="4dp"
+            android:text="Группа:"
+            app:layout_constraintStart_toStartOf="@+id/tvw_G_ost_brends"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_brends" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_sklad"
+            style="@style/ListView_Ostatok_Golovnoy_Title"
+            android:layout_marginTop="4dp"
+            android:text="Склад:"
+            app:layout_constraintStart_toStartOf="@+id/tvw_G_ost_group"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_group" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_cena"
+            style="@style/ListView_Ostatok_Golovnoy_Title"
+            android:layout_marginTop="4dp"
+            android:text="Цена:"
+            app:layout_constraintStart_toStartOf="@+id/tvw_G_ost_sklad"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_sklad" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_ostatok"
+            style="@style/ListView_Ostatok_Golovnoy_Title"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="Остаток:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvw_G_ost_kolbox"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_kolbox"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_brends_count"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="4dp"
+            android:text="Bella"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_brends"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_brends"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_brends" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_group_count"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="4dp"
+            android:text="Традиция"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_group"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_group"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_group" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_sklad_count"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="4dp"
+            android:text="Основной"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_sklad"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_sklad"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_sklad" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_cena_count"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="4dp"
+            android:text="12с"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_cena"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_cena"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_cena"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_ostatok_count"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="4dp"
+            android:text="12шт"
+            android:textColor="@color/colors_ostatok_large"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_ostatok"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_ostatok"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_ostatok" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_kolbox"
+            style="@style/ListView_Ostatok_Golovnoy_Title"
+            android:layout_marginTop="4dp"
+            android:text="Кол-во в кор:"
+            app:layout_constraintStart_toStartOf="@+id/tvw_G_ost_cena"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_G_ost_cena" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_kolbox_count"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="4dp"
+            android:text="12шт"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_kolbox"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_kolbox"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_kolbox"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvw_G_ost_kolbox_box"
+            style="@style/ListView_Ostatok_Golovnoy_Count"
+            android:layout_marginStart="8dp"
+            android:text="коробки"
+            android:textColor="#0730FF"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_ostatok_count"
+            app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_ostatok_count"
+            app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_ostatok_count" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

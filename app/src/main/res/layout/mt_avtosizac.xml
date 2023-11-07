@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MT_Layout_Background_Work">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/back_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView47"
+            style="@style/textview_aut_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Регион:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+        <Button
+            android:id="@+id/btn_aut_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/office_selector_button_aut_next"
+            android:text="ВОЙТИ"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView47"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView5"
+            android:background="@drawable/back_image"
+            android:ems="7"
+            android:gravity="center_vertical"
+            android:hint="ПИН-код"
+            android:inputType="numberPassword"
+            android:maxLength="4"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+        <ImageView
+            android:id="@+id/imageViewVISIBLE_AUT"
+            android:layout_width="50dp"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@+id/TextInput"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_toRightOf="@+id/TextInput"
+            app:layout_constraintBottom_toBottomOf="@+id/editText"
+            app:layout_constraintEnd_toEndOf="@+id/editText"
+            app:layout_constraintTop_toTopOf="@+id/editText"
+            app:srcCompat="@drawable/user_preview_down" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/back_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+        <TextView
+            android:id="@+id/tvw_aut_title_1"
+            style="@style/textview_aut_title"
+            android:text="ID:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
+        <TextView
+            android:id="@+id/tvw_aut_title_3"
+            style="@style/textview_aut_title"
+            android:text="Маршрут:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_aut_title_1" />
+        <TextView
+            android:id="@+id/tvw_aut_title_2"
+            style="@style/textview_aut_title"
+            android:text="Должность:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_aut_title_3" />
+
+        <TextView
+            android:id="@+id/textView33"
+            style="@style/textview_aut_title"
+            android:text="Цены:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_aut_title_2" />
+        <TextView
+            android:id="@+id/textView38"
+            style="@style/textview_aut_title"
+            android:text="Склад:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+        <TextView
+            android:id="@+id/tvw_aut_uid"
+            style="@style/textview_aut_text"
+            android:text="A8BA1F48-C7E1-497B-B74A-D86426684712"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_aut_title_1"
+            app:layout_constraintStart_toEndOf="@+id/tvw_aut_title_1" />
+
+        <TextView
+            android:id="@+id/tvw_aut_marshrut"
+            style="@style/textview_aut_text"
+            android:text="маршрут"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_aut_title_3"
+            app:layout_constraintStart_toEndOf="@+id/tvw_aut_title_3" />
+
+        <TextView
+            android:id="@+id/tvw_aut_user"
+            style="@style/textview_aut_text"
+            android:text="Агент"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_aut_title_2"
+            app:layout_constraintStart_toEndOf="@+id/tvw_aut_title_2" />
+
+        <TextView
+            android:id="@+id/tvw_aut_cena"
+            style="@style/textview_aut_text"
+            android:text="Для агентов"
+            app:layout_constraintBottom_toBottomOf="@+id/textView33"
+            app:layout_constraintStart_toEndOf="@+id/textView33" />
+
+
+        <TextView
+            android:id="@+id/tvw_aut_sklad"
+            style="@style/textview_aut_text"
+            android:hint="склад"
+            app:layout_constraintBottom_toBottomOf="@+id/textView38"
+            app:layout_constraintStart_toEndOf="@+id/textView38" />
+
+        <ImageView
+            android:id="@+id/imageView_aut_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/back_image_logo"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_sunbell" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Добро пожаловать"
+            android:textColor="@color/black"
+            android:textSize="12pt"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_aut_logo" />
+
+        <TextView
+            android:id="@+id/tvw_aut_put_region"
+            style="@style/textview_aut_text"
+            android:hint="регион"
+            app:layout_constraintBottom_toBottomOf="@+id/textView47"
+            app:layout_constraintStart_toEndOf="@+id/textView47" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

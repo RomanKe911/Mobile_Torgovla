@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.telephony" />
+    <uses-feature android:name="android.hardware.telephony.gsm" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.req" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:exported="true"
+        android:icon="@mipmap/logo_mt"
+        android:label="@string/Name_PO_1"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:requestRawExternalStorageAccess="true"
+        android:roundIcon="@mipmap/ic_logo1_suncape"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme2"
+        android:usesCleartextTraffic="true">
+        <!--
+          android:name=".Start_SplashActivity"
+        android:theme="@style/SplashTheme">!
+        -->
+        <!-- android:name=".Work_Journal.WJ_Global_Activity" ! -->
+        <!--
+  <activity
+             android:name=".Work_Journal.WJ_Global_Activity"
+             android:label=""
+             android:screenOrientation="portrait"
+             android:theme="@style/AppTheme"></activity> !
+        -->
+        <activity
+            android:name=".Start_SplashActivity"
+            android:exported="true"
+            android:label="@string/Name_PO_2"
+            android:screenOrientation="portrait"
+            android:theme="@style/Work_Theme">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Work_Journal.WJ_Global_Activity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_Fragment"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Ostatok_Single"
+            android:label="Остатки по складам"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_New_Contragent"
+            android:label="Остатки по складам"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Start_AutorithActivity"
+            android:label="Авторизация"
+            android:screenOrientation="portrait"
+            android:theme="@style/Work_Theme" />
+        <activity
+            android:name=".Work_Table_Activity"
+            android:label="Рабочий стол"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2.NoActionBar" />
+        <activity
+            android:name=".Spravochnik.SPR_Kalkulator"
+            android:label="Калькулятор"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".Report.Otchet_EveryDay"
+            android:label="Ежедневый отчет"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Printer"
+            android:label="Принтер"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Nomenclature_Brends"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+        <activity
+            android:name=".Spravochnik.SPR_Nomenclature_Brends_SubBrends"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+        <activity
+            android:name=".Spravochnik.SPR_Nomenclature_Brends_New"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+        <activity
+            android:name=".Permission.PrefActivity"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Permission.PrefActivity_Splash"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Permission.PrefActivity_Splash_New"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Permission.PrefActivity_Start"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Permission.PrefActivity_Nomeclatura"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Work_Journal.WJ_Dialog_RN_Screen"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Strih_Kod"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Srtih_Activity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Debet"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Strih_Kod_Search"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Agents"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Cnt_Agent"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Otchet_Kassa"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Strih_Kod_Add"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Favorites"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_1C"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_Ros_Torg"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_Ros_Torg_2"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_Ros_Print"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_Forma_Zakaza_Akcia"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_XML"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Forma_Zakaza_Dop_Data"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Start_Registracia_New"
+            android:label="Регистрация нового устройства"
+            android:roundIcon="@drawable/icon_image"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Dialog_RN_Edit"
+            android:label="Редакторование"
+            android:roundIcon="@drawable/icon_image"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Report.Otchet_Debet"
+            android:label="Консигнации по клиентам"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Dialog_RN_Rewrite"
+            android:label="Консигнации по клиентам"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Report.Otchet_Debet_All"
+            android:label="Консигнации по клиентам"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Report.Otchet_Brends_Trade"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Smart_Voice"
+            android:label="Умный поиск товара"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TEST.WJ_Karakil_newRN"
+            android:label="Умный поиск товара"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Work_Journal.WJ_Forma_Zakaza"
+            android:label="Расходные накладные"
+            android:screenOrientation="portrait"
+            android:theme="@style/Work_Theme" />
+        <activity
+            android:name=".Work_Journal.WJ_Forma_Zakaza_L1"
+            android:label="Контрагенты"
+            android:screenOrientation="portrait"
+            android:theme="@style/Work_Theme" />
+        <activity
+            android:name=".Work_Journal.WJ_Forma_Zakaza_L2"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2.NoActionBar" />
+        <activity
+            android:name=".Work_Journal.WJ_Forma_Zakaza_L2_Sub"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+        <activity
+            android:name=".TEST.WJ_TEST_ADMIN"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+        <activity
+            android:name=".TEST.ListViewWithCheckboxActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+        <activity
+            android:name=".Spravochnik.SPR_Ostatok_Old"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Ostatok_Golovnoy"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Ostatok_Inventoriz"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Spravochnik.SPR_Ostatok_Inventoriz_NEW"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FTP.ITTN_Obmen"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FTP.PDF_Create"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FTP.UpdateImage"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".FormaZakaza.WJ_FormaZakaza_2023"
+            android:exported="false"
+            android:label="@string/title_activity_wj_forma_zakaza2023" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3597659104543643~1877726673" />
+    </application>
+
+</manifest>

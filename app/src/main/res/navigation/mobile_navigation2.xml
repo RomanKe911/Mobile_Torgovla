@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="kg.roman.Mobile_Torgovla.FormaZakaza.ui.home.HomeFragment"
+        android:label="@string/title_button_navigator_01"
+        tools:layout="@layout/fragment_home" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="kg.roman.Mobile_Torgovla.FormaZakaza.ui.dashboard.DashboardFragment"
+        android:label="@string/title_button_navigator_02"
+        tools:layout="@layout/fragment_dashboard" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="kg.roman.Mobile_Torgovla.FormaZakaza.ui.notifications.NotificationsFragment"
+        android:label="@string/title_button_navigator_03"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>

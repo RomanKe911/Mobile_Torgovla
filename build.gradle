@@ -1,0 +1,31 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        agp_version = '7.2.0'
+        agp_version1 = '7.2.0'
+        agp_version2 = '8.1.1'
+    }
+    repositories {
+        google()
+        mavenCentral()  // Maven Central repository
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$agp_version2"
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()  // Maven Central repository
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

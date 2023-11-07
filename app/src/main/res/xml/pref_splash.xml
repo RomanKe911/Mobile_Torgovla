@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity">
+
+    <PreferenceCategory
+        android:id="@+id/preference_list_1"
+        android:key="preferenc_menu_ftp"
+        android:summary="Description of cat_1"
+        android:title="Обработка данных с сервера">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_ftp_server_con"
+            android:entryValues="@array/mass_ftp_server_con_value"
+            android:key="ftp_ipConn_list"
+            android:summary=""
+            android:title="FTP: ip-адрес" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_Region_Put_Name"
+            android:entryValues="@array/mass_Region_Put_Value"
+            android:key="ftp_put_list"
+            android:summary=""
+            android:title="FTP: путь к данным" />
+        <Preference
+            android:id="@+id/preference_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_const"
+            android:summary=""
+            android:title="Загрузить файлы для старта"></Preference>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="preferenc_menu_ty"
+        android:summary="Description of category 1"
+        android:title="Торговые условия">
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_type_ty_title"
+            android:entryValues="@array/mass_type_ty_value"
+            android:key="preference_type_ty"
+            android:summary=""
+            android:title="Тип торговых условий" />
+        <ListPreference
+            android:dependency="preference_type_ty"
+            android:entries="@array/list_ty_entries"
+            android:entryValues="@array/list_ty_entryValues"
+            android:key="list_all_nal"
+            android:summary="%s"
+            android:title="Скидка за наличный расчет"></ListPreference>
+        <ListPreference
+            android:dependency="preference_type_ty"
+            android:entries="@array/list_ty_entries"
+            android:entryValues="@array/list_ty_entryValues"
+            android:key="list_all_kons"
+            android:summary="%1$s"
+            android:title="Скидка под консигнацию"></ListPreference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="preferenc_menu_nomenclatura"
+        android:summary="Description of category 1"
+        android:title="Настройки номенклатуры">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:key="switch_preference_sunbell_all_brends"
+            android:summary="(всё для всех)"
+            android:title="Отображение всех брендов" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="switch_preference_sunbell_catg"
+            android:summary="категории для агентов"
+            android:title="Ограниченное отображение " />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="switch_preference_firma"
+            android:summary="деление списка брендов по фирмам"
+            android:title="Отображения по фирмам" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="check_box_brends"
+            android:summary="собственный список брендов"
+            android:title="Ручной отбор" />
+        <MultiSelectListPreference
+            android:key="multi_select_list_preference_brends"
+            android:summary="список брендов"
+            android:title="Мульти-список" />
+
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="switch_preference_group_sql"
+            android:summary="отсортированный список товара"
+            android:textIsSelectable="false"
+            android:title="Сортировка товара" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="preferenc_menu_all"
+        android:summary="Description of category 1"
+        android:title="Настройки пользователя">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="switch_preference_data"
+            android:summary="Разрешение не предоставлено"
+            android:title="Разрешение на доступ к данным" />
+        <Preference
+            android:id="@+id/preference_up_id_catigory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_id_catigory"
+            android:summary=""
+            android:title="Занести данные по категориям"></Preference>
+        <Preference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_write_new_group"
+            android:summary=""
+            android:title="Занести данные по категориям"></Preference>
+        <Preference
+            android:id="@+id/preference_up_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_up_db"
+            android:summary=""
+            android:title="Обновить структуру баз"></Preference>
+        <Preference
+            android:id="@+id/preference_up_users"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="button_users"
+            android:summary=""
+            android:title="Обновить базу пользователей"></Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="preferenc_menu_about"
+        android:summary="Description of category 1"
+        android:title="Параметры приложения">
+        <PreferenceScreen
+            android:key="screen"
+            android:summary="О программе"
+            android:title="Сведения о программе">
+
+            <PreferenceCategory
+                android:key="categ3"
+                android:summary="Description of screen"
+                android:title="Сведения о программе">
+                <Preference
+                    android:key="version"
+                    android:summary=""
+                    android:title="Верcия приложения"></Preference>
+                <Preference
+                    android:key="v_kod"
+                    android:summary=""
+                    android:title="Верcия кода"></Preference>
+                <Preference
+                    android:key="min_version"
+                    android:summary=""
+                    android:title="Минимальная версия Android"></Preference>
+                <Preference
+                    android:key="you_version"
+                    android:summary=""
+                    android:title="Ваша версия Android"></Preference>
+                <Preference
+                    android:key="kodirovka"
+                    android:summary=""
+                    android:title="Кодировка"></Preference>
+                <Preference
+                    android:key="kod_act"
+                    android:summary=""
+                    android:title="Код активации"></Preference>
+                <Preference
+                    android:key="programmer"
+                    android:summary=""
+                    android:title="Разработчик"></Preference>
+                <Preference
+                    android:key="phone"
+                    android:summary="0(556) 788-669"
+                    android:title="Справки по телефону"></Preference>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        >
+    </PreferenceCategory>
+</PreferenceScreen>
+

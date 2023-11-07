@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity"  >
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ2"
+        android:summary="Description of category 1"
+        android:title="Настройка интерфейса">
+        <PreferenceScreen
+            android:key="screen"
+            android:summary="Скидки %"
+            android:title="Торговые условия">
+            <PreferenceCategory
+                android:key="categ1"
+                android:summary="Description of category 1"
+                android:title="Торговые условия">
+
+                <CheckBoxPreference
+                    android:key="chb1"
+                    android:summaryOff="Включить ТУ"
+                    android:summaryOn="Выключить ТУ"
+                    android:title="@string/name_pref_params_title_1"></CheckBoxPreference>
+                <ListPreference
+                    android:dependency="chb1"
+                    android:key="list_all_kons"
+                    android:summary="%1$s"
+                    android:title="@string/name_pref_params_pros_2">
+                </ListPreference>
+                <ListPreference
+                    android:dependency="chb1"
+                    android:key="list_all_nal"
+                    android:summary="%s"
+                    android:title="@string/name_pref_params_pros_1">
+                </ListPreference>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <SwitchPreference
+            android:key="switch_preference_full_tovar"
+            android:summary="полная номенклатура"
+            android:textIsSelectable="false"
+            android:title="Отображение товара" />
+        <SwitchPreference
+            android:key="switch_preference_group_sql"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:summary="cтандартное отображение"
+            android:textIsSelectable="false"
+            android:title="Сортировка товара по категориям" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="О приложение">
+        <PreferenceScreen
+            android:key="screen"
+            android:summary="О программе"
+            android:title="Сведения о программе">
+
+            <PreferenceCategory
+                android:key="categ3"
+                android:summary="Description of screen"
+                android:title="Сведения о программе">
+                <Preference
+                    android:key="version"
+                    android:summary=""
+                    android:title="Верcия приложения"></Preference>
+                <Preference
+                    android:key="v_kod"
+                    android:summary=""
+                    android:title="Верcия кода"></Preference>
+                <Preference
+                    android:key="min_version"
+                    android:summary=""
+                    android:title="Минимальная версия Android"></Preference>
+                <Preference
+                    android:key="you_version"
+                    android:summary=""
+                    android:title="Ваша версия Android"></Preference>
+                <Preference
+                    android:key="kod_act"
+                    android:summary=""
+                    android:title="Кодировка"></Preference>
+                <Preference
+                    android:key="programmer"
+                    android:summary=""
+                    android:title="Разработчик"></Preference>
+                <Preference
+                    android:key="phone"
+                    android:summary="0(556) 788-669"
+                    android:title="Справки по телефону"></Preference>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        >
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
+

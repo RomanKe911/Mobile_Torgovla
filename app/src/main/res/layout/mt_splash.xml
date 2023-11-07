@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MT_Layout_Background"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView_b2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Базы данных:"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <TextView
+        android:id="@+id/textView_bl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Доступ к интернету:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <TextView
+        android:id="@+id/textView_b3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Файлы XML: "
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteY="96dp" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/img_data_xml"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar_xml"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar_xml"
+            app:layout_constraintStart_toStartOf="@+id/progressBar_xml"
+            app:layout_constraintTop_toTopOf="@+id/progressBar_xml"
+            app:srcCompat="@drawable/image_start_xml" />
+
+        <ImageView
+            android:id="@+id/img_data_sql"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar_sql"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar_sql"
+            app:layout_constraintStart_toStartOf="@+id/progressBar_sql"
+            app:layout_constraintTop_toTopOf="@+id/progressBar_sql"
+            app:srcCompat="@drawable/image_start_sql" />
+
+        <ImageView
+            android:id="@+id/img_data_internet"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar_internet"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar_internet"
+            app:layout_constraintStart_toStartOf="@+id/progressBar_internet"
+            app:layout_constraintTop_toTopOf="@+id/progressBar_internet"
+            app:srcCompat="@drawable/image_start_internet" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_sql"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar_xml"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/progressBar_xml"
+            app:layout_constraintTop_toTopOf="@+id/progressBar_xml"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_internet"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvw_start_title"
+            app:layout_constraintEnd_toStartOf="@+id/progressBar_xml"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_xml"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar_internet"
+            app:layout_constraintEnd_toStartOf="@+id/progressBar_sql"
+            app:layout_constraintStart_toEndOf="@+id/progressBar_internet"
+            app:layout_constraintTop_toTopOf="@+id/progressBar_internet"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tvw_start_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Загрузка данных:"
+            android:textStyle="bold|italic"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvw_start_log"
+            app:layout_constraintStart_toStartOf="@+id/tvw_start_log"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar_internet" />
+
+        <TextView
+            android:id="@+id/tvw_start_log"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="Ошибки"
+            android:textStyle="bold|italic"
+            android:textColor="#E53935"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="4dp"
+        android:autoStart="true"
+        android:flipInterval="1500"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView_cussons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_logo_1" />
+
+        <ImageView
+            android:id="@+id/imageView_pcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_logo_2" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_logo_3" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_logo_4" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_logo_5" />
+
+    </ViewFlipper>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
