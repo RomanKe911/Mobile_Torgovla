@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,11 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
-import kg.roman.Mobile_Torgovla.FTP.FTPWebhost;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Ftp_Image;
-import kg.roman.Mobile_Torgovla.ListSimple.State;
 import kg.roman.Mobile_Torgovla.R;
 
 
@@ -96,21 +92,19 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView image;
-        final TextView brends, filesCount, filesSize, dataUpdate, textProgress, statusUpdate;
+        final TextView brends, filesCount, filesSize, dataUpdate, statusUpdate;
         final Button btn_update;
-        final ProgressBar progressBar_Circle, progressBar_Horiszont;
+        final ProgressBar  progressBar_Horiszont;
         ViewHolder(View view){
             super(view);
             brends = view.findViewById(R.id.list_ftpImage_textBrends);
             filesCount = view.findViewById(R.id.list_ftpImage_textFilesCount);
             filesSize = view.findViewById(R.id.list_ftpImage_text_FilesSize);
-            dataUpdate = view.findViewById(R.id.list_ftpImage_textDateUpdate);
-            textProgress = view.findViewById(R.id.list_ftpImage_textProgress);
+            dataUpdate = view.findViewById(R.id.list_ftpImage_textDateUpdate_Title);
             statusUpdate =  view.findViewById(R.id.list_ftpImage_textStatus);
 
             image = view.findViewById(R.id.list_ftpImage_image);
             btn_update = (Button) view.findViewById(R.id.list_ftpImage_button);
-            progressBar_Circle = (ProgressBar) view.findViewById(R.id.list_ftpImage_ProgressBarCircle);
             progressBar_Horiszont = (ProgressBar) view.findViewById(R.id.list_ftpImage_ProgressBarHorisont);
         }
     }

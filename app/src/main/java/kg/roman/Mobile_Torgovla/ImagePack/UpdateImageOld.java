@@ -1,50 +1,42 @@
-package kg.roman.Mobile_Torgovla.FTP;
+package kg.roman.Mobile_Torgovla.ImagePack;
 
 import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Ftp_Image;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Ftp_Image;
-import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Suncape;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Suncape;
-
-import kg.roman.Mobile_Torgovla.ListAdapter.StateAdapter;
+import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
 import kg.roman.Mobile_Torgovla.ListSimple.State;
 import kg.roman.Mobile_Torgovla.R;
 
-public class UpdateImage extends AppCompatActivity {
+public class UpdateImageOld extends AppCompatActivity {
 
-    public ArrayList<ListAdapterSimple_Ftp_Image> ftp_image = new ArrayList<ListAdapterSimple_Ftp_Image>();
-    public ListAdapterAde_Ftp_Image adapterFTP_Image;
+  /* public ArrayList<ListAdapterSimple_Ftp_Image> ftp_image = new ArrayList<ListAdapterSimple_Ftp_Image>();
+    public ListAdapterAde_Ftp_Image adapterFTP_Image;*/
+
+
+    public ArrayList<ImagePack_R_Simple> ftp_image_new = new ArrayList<ImagePack_R_Simple>();
+    public ImagePack_R_Adapter adapterListFTP;
 
     public ListView listView;
     public RecyclerView recyclerView;
@@ -57,7 +49,7 @@ public class UpdateImage extends AppCompatActivity {
     public List<String> listFilesNoPhone;
     public SharedPreferences sp;
     public String PEREM_K_AG_KodRN, PEREM_SD, PEREM_PHONE, PEREM_DB3_RN;
-    public SwipeRefreshLayout mSwipeRefreshLayout;
+  //  public SwipeRefreshLayout mSwipeRefreshLayout;
     Context context;
     ArrayList<State> states = new ArrayList<State>();
 
@@ -65,18 +57,19 @@ public class UpdateImage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.perm_update_image);
-        listView = findViewById(R.id.UpdateImage_list);
-        textView = findViewById(R.id.UpdateImage_text);
+       // listView = findViewById(R.id.UpdateImage_list);
+        recyclerView = findViewById(R.id.UpdateImage_recyclear);
+       /* textView = findViewById(R.id.UpdateImage_text);
         button = findViewById(R.id.UpdateImage_btn_List);
         button_load = findViewById(R.id.UpdateImage_btn_upload);
         progressBar = findViewById(R.id.Update_progressBar);
         imageView = findViewById(R.id.Update_ImageView);
-        imageView2 = findViewById(R.id.Update_ImageView2);
-        context = UpdateImage.this;
+        imageView2 = findViewById(R.id.Update_ImageView2);*/
+        context = UpdateImageOld.this;
 
         progressBar.setVisibility(View.INVISIBLE);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.UpdateImage_SwipeRefresh);
+      //  mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.UpdateImage_SwipeRefresh);
       /*  mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorScheme(R.color.colors_ostatok_large, R.color.colors_ostatok_medium, R.color.colors_ostatok_small, R.color.colorsilver);*/
 
@@ -92,9 +85,15 @@ public class UpdateImage extends AppCompatActivity {
                 web.put_toFiles = "/MT_Sunbell_Karakol/Image/Firm_Tradegof";
                 // web.getListCatalogy();
 
-                adapterFTP_Image = new ListAdapterAde_Ftp_Image(context, web.getListCatalogy());
+
+                // 11/11/2023
+                /*adapterFTP_Image = new ListAdapterAde_Ftp_Image(context, web.getListCatalogy());
                 adapterFTP_Image.notifyDataSetChanged();
-                listView.setAdapter(adapterFTP_Image);
+                listView.setAdapter(adapterFTP_Image);*/
+
+                adapterListFTP = new ImagePack_R_Adapter(context, web.getListCatalogyImage(), null);
+                adapterListFTP.notifyDataSetChanged();
+                recyclerView.setAdapter(adapterListFTP);
 
                /* ftp_image.clear();
                 for (int i = 0; i < 5; i++) {
@@ -114,17 +113,22 @@ public class UpdateImage extends AppCompatActivity {
                 */
             }
         });
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+       /* mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                adapterFTP_Image.notifyDataSetChanged();
+                // 11/11/2023
+                *//*adapterFTP_Image.notifyDataSetChanged();
                 listView.setAdapter(adapterFTP_Image);
+                Log.e("TAG", "_ обновлен");
+                mSwipeRefreshLayout.setRefreshing(false);*//*
+                adapterListFTP.notifyDataSetChanged();
+                recyclerView.setAdapter(adapterListFTP);
                 Log.e("TAG", "_ обновлен");
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
         mSwipeRefreshLayout.setColorSchemeColors(
-                  Color.RED, Color.GREEN, Color.BLUE, Color.CYAN);
+                  Color.RED, Color.GREEN, Color.BLUE, Color.CYAN);*/
 
         button_load.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +162,7 @@ public class UpdateImage extends AppCompatActivity {
             @Override
             public void run() {
                 // Отменяем анимацию обновления
-                mSwipeRefreshLayout.setRefreshing(false);
+               // mSwipeRefreshLayout.setRefreshing(false);
                 Log.e("TAG", "_ Отменяем");
             }
         }, 1000);
@@ -191,7 +195,7 @@ public class UpdateImage extends AppCompatActivity {
                         web.ftp_user_name = "sunbell_siberica";
                         web.ftp_password = "Roman911NFS";
                         web.put_toFiles = "/MT_Sunbell_Karakol/Image";
-                        web.FTP_CONNECT();
+                        web.getFTP_TestConnect();
                         listFilesNoPhone.clear();
                         // listFilesNoPhone.addAll(web.getFileNotImageFTP());
 

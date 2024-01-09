@@ -1,18 +1,13 @@
 package kg.roman.Mobile_Torgovla.Permission;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -46,15 +41,10 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-import java.util.prefs.Preferences;
 
-import kg.roman.Mobile_Torgovla.FTP.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAction;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask_Users;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpConnection;

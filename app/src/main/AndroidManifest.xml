@@ -58,17 +58,25 @@
             android:theme="@style/Work_Theme">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".MT_BackUp.BackUp"
+            android:exported="false"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
         <activity
             android:name=".Work_Journal.WJ_Global_Activity"
             android:label=""
@@ -342,11 +350,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".FTP.UpdateImage"
+            android:name=".ImagePack.UpdateImage"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".FormaZakaza.WJ_FormaZakaza_2023"
             android:exported="false"

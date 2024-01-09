@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity"  >
 
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="Доступ к базе картинок">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:title="Путь к старой версии:"
+            app:summary="mt_image" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:title="Путь к директории Files:"
+            app:summary="files/Image" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:title="Путь к директории SD-Card:"
+            app:summary="SD-Card/Picture" />
+    </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +77,6 @@
             android:key="button_Update"
             android:title="Синхронизация с базой"></Preference>
     </PreferenceCategory>
-
 
 
     <PreferenceCategory

@@ -21,8 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,9 +36,7 @@ import java.util.Calendar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Klients;
-import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Suncape_Forma;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Klients;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Suncape_Forma;
 import kg.roman.Mobile_Torgovla.R;
 
 public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
@@ -49,26 +45,19 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
     public ListAdapterAde_Klients adapterPriceClients;
     public Button button;
     public Context context_Activity;
-    public RadioGroup radioGroup;
-    public RadioButton radioButton_1, radioButton_2, radioButton_3;
-    // public TextView textView_data;
     public Integer thisdata, thismonth, thisyear, thisminyte, thishour, thissecond;
     public String thisdata_st;
     public Calendar localCalendar = Calendar.getInstance();
-    public Integer selectedCount;
-    public String base_name, myTABLE, table_name, mass, thismonth_rn, new_per;
-    public String[] mass_RN;
+
+    public String myTABLE, table_name, mass, thismonth_rn;
     public String[] mass_month;
-    public String PEREM_debet;
-    public String index_rn_1, index_rn_2, index_rn_3, name_rn, name_klients_rn, data_base;
-    public String DATABASE_NAME_MONTH, DATABASE_NAME_DATA, DATABASE_REGIONS, DATABASE_KLIENTS;
-    public Boolean parm_1, parm_2, parm_3, parm_4;
-    public String ftp_put, ftp_server, login, password, type_metod;
+    public String PEREM_debet, data_base;
+    public String DATABASE_REGIONS;
+    public String ftp_put, ftp_server, login, password;
 
     private EditText queryEditText;
     private Handler mHandler = new Handler();
-    public String name_apteka, name_magazin, image_var, sort_base,
-            name_adress, Ident_Mon, Ident_Year, PEREM_Dist_Agent;
+    public String image_var, name_adress, Ident_Mon, Ident_Year;
 
     public String agent, name_klients, name_uid, Log_Text_Error;
     public String this_rn_data, this_rn_vrema, this_rn_year, this_rn_month, this_rn_day, this_data_now;
@@ -87,7 +76,14 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
     public String PEREM_KLIENT_UID, PEREM_DIALOG_UID, PEREM_DIALOG_DATA_START, PEREM_DIALOG_DATA_END, PEREM_DISPLAY_START, PEREM_DISPLAY_END;
     public FloatingActionButton floatingActionButton;
     public ProgressBar progressBar;
+    private String LOGEName = "Thread";
 
+
+    /*07/11/2023
+     *  Загрузка картинки для точки: нужно создать новый вариант для загрузки данных
+     *  Переопределить префикся для созадниея накладной
+     *
+     * */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,20 +100,54 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
         // getSupportActionBar().setTitle("Заказы покупателей");
         getSupportActionBar().setSubtitle("Рабочая дата: " + this_data_now);
 
-        button = (Button) findViewById(R.id.list_add);
-        queryEditText = (EditText) findViewById(R.id.editText_search);
-        listView = (ListView) findViewById(R.id.ListView_List_Klients_Debet);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarLoadingClient);
+        button = findViewById(R.id.list_add);
+        queryEditText = findViewById(R.id.editText_search);
+        listView = findViewById(R.id.ListView_List_Klients_Debet);
+        progressBar = findViewById(R.id.progressBarLoadingClient);
+        floatingActionButton = findViewById(R.id.floatingActionButton_next_2);
 
-        queryEditText.setText("");
-        queryEditText.clearFocus();
-        queryEditText.setText("");
-        queryEditText.clearFocus();
-        Search_Loading();  // Поиск данных по базе
+
+        if (!klients.isEmpty()) {
+            queryEditText.setText("");
+            queryEditText.clearFocus();
+          /*  queryEditText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                    //Когда пользователь вводит какой-нибудь текст:
+                    // Activity_Sort.this.adapterPriceClients_Search.getFilter().filter(cs);
+                    if (!adapterPriceClients.isEmpty())
+                        adapterPriceClients.getFilter().filter(cs);
+                    //MainActivity.this.adapterPriceClients.getFilter().filter(cs);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                              int arg3) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                }
+            });*/
+        }
+
+
+        try {
+            WJ_Forma_Zakaza_L1.MyAsyncTask_SyncLoadingListView asyncTask = new WJ_Forma_Zakaza_L1.MyAsyncTask_SyncLoadingListView();
+            asyncTask.execute();
+
+
+        } catch (Exception e) {
+            Toast.makeText(context_Activity, "Ошибка поиска данных", Toast.LENGTH_SHORT).show();
+            Log.e(Log_Text_Error, "Ошибка поиска данных");
+        }
+
+
         Loading_Kod_RN(PEREM_K_AG_Data);  // Создание идентификатора накладной
         Log.e("Форма заказа:", "Последий код:" + PEREM_FORMA_KOD_RN);
 
-        floatingActionButton = findViewById(R.id.floatingActionButton_next_2);
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,43 +241,72 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
     }
 
 
-    // Загрузка даты и время
-    protected void Calendate_New() {
-        /*
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-         String currentDateandTime = sdf.format(new Date());
-
-         Time today = new Time(Time.getCurrentTimezone());
-         today.setToNow();
-         DateFormat data_this = new SimpleDateFormat("dd.MM.yyyy");
-           DateFormat vrema_this = new SimpleDateFormat("HH:mm:ss");
-         */
-        DateFormat df_data = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat df_vrema = new SimpleDateFormat("HH:mm:ss");
-        DateFormat df_year = new SimpleDateFormat("yyyy");
-        DateFormat df_month = new SimpleDateFormat("MM");
-        DateFormat df_day = new SimpleDateFormat("dd");
-
-        this_rn_data = df_data.format(Calendar.getInstance().getTime());
-        this_rn_vrema = df_vrema.format(Calendar.getInstance().getTime());
-        this_rn_year = df_year.format(Calendar.getInstance().getTime());
-        this_rn_month = df_month.format(Calendar.getInstance().getTime());
-        this_rn_day = df_day.format(Calendar.getInstance().getTime());
-
-        this_data_now = this_rn_day + "." + this_rn_month + "." + this_rn_year;
-        Ident_Year = this_rn_year;
-        //textView_data.setText(this_data_now);
+    // Вызов метода при выходе назад
+    public void onBackPressed() {
+        Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza.class);
+        startActivity(intent);
+        finish();
     }
 
-    // Загрузка базы данных в ListView
-    protected void Loading_Base_Klients() {
-        try {
+    // Создание потока для загрузки списка контрагентов
+    private class MyAsyncTask_SyncLoadingListView extends AsyncTask<Void, Integer, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Вызывается в начале потока
+            Log.e(LOGEName, "Начало потока");
+
+            progressBar.setVisibility(View.VISIBLE);
+            klients.clear();
+            adapterPriceClients = new ListAdapterAde_Klients(WJ_Forma_Zakaza_L1.this, klients);
+            adapterPriceClients.notifyDataSetChanged();
+            listView.setAdapter(adapterPriceClients);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) { // Вызывается для обновления данных после загрузки
+            super.onProgressUpdate(values);
+            //pDialog.setMessage("Синхронизация цен. Подождите...");
+            // pDialog.setProgress(values[0]);
+            Log.e(LOGEName, "поток работает" + values);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            // Для создания сложных потоков
+            publishProgress(1);
+
+            try {
+                getFloor();  // функция для работы с потоками
+            } catch (InterruptedException e) {
+                Log.e(LOGEName, "Ошибка в потоке данных!");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            // Вызывается в конце потока
+            Log.e(LOGEName, "Конец потока");
+
+
+            progressBar.setVisibility(View.INVISIBLE);
+            Log.e("TEST", "Loading_Client ListView");
+            adapterPriceClients = new ListAdapterAde_Klients(WJ_Forma_Zakaza_L1.this, klients);
+            adapterPriceClients.notifyDataSetChanged();
+            listView.setAdapter(adapterPriceClients);
+
+        }
+
+        private void getFloor() throws InterruptedException {
+            Log.e(LOGEName, "Загрузка потока данными");
+            //  pDialog.setMessage("Загрузка продуктов. Подождите...");
             SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_CONST, MODE_PRIVATE, null);
             String query = "SELECT * FROM const_contragents WHERE uid_agent = '" + PEREM_AG_UID + "' AND roaduid = '" + PEREM_AG_UID_REGION + "'";
             final Cursor cursor = db.rawQuery(query, null);
             cursor.moveToFirst();
-
-
             while (cursor.isAfterLast() == false) {
                 String uid = cursor.getString(cursor.getColumnIndexOrThrow("uid_k_agent")); // код клиента
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("k_agent"));
@@ -299,16 +358,56 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
                 SQL_Debet_List(uid);
                 klients.add(new ListAdapterSimple_Klients(name, uid, adress, resID, PEREM_debet));
                 cursor.moveToNext();
-
             }
             cursor.close();
             db.close();
+            Log.e(LOGEName, "Загрузка потока данными, конец");
+        }
+
+    }
+
+    // Загрузка базы данных в ListView из DB3
+    protected void Loading_Base_Klients() {
+        try {
+
+
 
         } catch (Exception e) {
             Toast.makeText(context_Activity, "Ошибка загрузки базы в Listview", Toast.LENGTH_SHORT).show();
             Log.e(Log_Text_Error, "Ошибка загрузки базы в Listview");
         }
 
+    }
+
+    /* */
+
+
+    // Загрузка даты и время
+    protected void Calendate_New() {
+        /*
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+         String currentDateandTime = sdf.format(new Date());
+
+         Time today = new Time(Time.getCurrentTimezone());
+         today.setToNow();
+         DateFormat data_this = new SimpleDateFormat("dd.MM.yyyy");
+           DateFormat vrema_this = new SimpleDateFormat("HH:mm:ss");
+         */
+        DateFormat df_data = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat df_vrema = new SimpleDateFormat("HH:mm:ss");
+        DateFormat df_year = new SimpleDateFormat("yyyy");
+        DateFormat df_month = new SimpleDateFormat("MM");
+        DateFormat df_day = new SimpleDateFormat("dd");
+
+        this_rn_data = df_data.format(Calendar.getInstance().getTime());
+        this_rn_vrema = df_vrema.format(Calendar.getInstance().getTime());
+        this_rn_year = df_year.format(Calendar.getInstance().getTime());
+        this_rn_month = df_month.format(Calendar.getInstance().getTime());
+        this_rn_day = df_day.format(Calendar.getInstance().getTime());
+
+        this_data_now = this_rn_day + "." + this_rn_month + "." + this_rn_year;
+        Ident_Year = this_rn_year;
+        //textView_data.setText(this_data_now);
     }
 
     protected void SQL_Debet_List(String l_uid) {
@@ -331,54 +430,9 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
 
     }
 
-    // Поиск клиента по базе
-    private void Search_Loading() {
-        try {
-
-          /*  WJ_Forma_Zakaza_L1.MyAsyncTask_SyncLoadingListView asyncTask = new WJ_Forma_Zakaza_L1.MyAsyncTask_SyncLoadingListView();
-            asyncTask.execute();*/
-            klients.clear();
-            Loading_Base_Klients();
-            adapterPriceClients = new ListAdapterAde_Klients(WJ_Forma_Zakaza_L1.this, klients);
-            adapterPriceClients.notifyDataSetChanged();
-            listView.setAdapter(adapterPriceClients);
-            queryEditText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                    //Когда пользователь вводит какой-нибудь текст:
-                    // Activity_Sort.this.adapterPriceClients_Search.getFilter().filter(cs);
-                    adapterPriceClients.getFilter().filter(cs);
-                    //MainActivity.this.adapterPriceClients.getFilter().filter(cs);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                              int arg3) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                }
-            });
-
-
-
-        } catch (Exception e) {
-            Toast.makeText(context_Activity, "Ошибка поиска данных", Toast.LENGTH_SHORT).show();
-            Log.e(Log_Text_Error, "Ошибка поиска данных");
-        }
-
-    }
-
-    // Вызов метода при выходе назад
-    public void onBackPressed() {
-        Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza.class);
-        startActivity(intent);
-        finish();
-    }
 
     // Создание переменной кода накладной
+    // 07/11/2023 переопределить префиксы (Январь, Июль)
     protected void Loading_Kod_RN(String this_data) {
         Log.e(Log_Text_Error, "рабочая дата" + this_data);
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_RN, MODE_PRIVATE, null);
@@ -566,7 +620,7 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
         myTABLE = DATABASE_REGIONS + "_" + thismonth_rn + "_" + thisyear;
     }
 
-    // меню менеджер
+    // меню менеджер ????
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -580,11 +634,14 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 
-        klients.clear();
+
+        // 07/11/2023 временно закрыто
+        /*klients.clear();
         Loading_Base_Klients();
         adapterPriceClients = new ListAdapterAde_Klients(WJ_Forma_Zakaza_L1.this, klients);
         adapterPriceClients.notifyDataSetChanged();
-        listView.setAdapter(adapterPriceClients);
+        listView.setAdapter(adapterPriceClients);*/
+
 
         final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             @Override
@@ -651,81 +708,6 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
     }
 
 
-
-    private class MyAsyncTask_SyncLoadingListView extends AsyncTask<Void, Integer, Void> {
-        @Override
-        protected void onPreExecute() { // Вызывается в начале потока
-            super.onPreExecute();
-            Log.e("ПОТОК=", "Начало потока");
-            progressBar.setVisibility(View.VISIBLE);
-
-
-            klients.clear();
-            adapterPriceClients = new ListAdapterAde_Klients(WJ_Forma_Zakaza_L1.this, klients);
-            adapterPriceClients.notifyDataSetChanged();
-            listView.setAdapter(adapterPriceClients);
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) { // Вызывается для обновления данных после загрузки
-            super.onProgressUpdate(values);
-            //pDialog.setMessage("Синхронизация цен. Подождите...");
-            // pDialog.setProgress(values[0]);
-            Log.e("ПОТОК=", "поток работает"+ values);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) { // Для создания сложных потоков
-            try {
-                publishProgress(1);
-                getFloor();  // Синхронизация файлов для всех складов
-            } catch (InterruptedException e) {
-                Log.e("ПОТОК=", "Ошибка в потоке данных!");
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) { // Вызывается в конце потока
-            super.onPostExecute(aVoid);
-            Log.e("ПОТОК=", "Конец потока");
-            progressBar.setVisibility(View.INVISIBLE);
-
-            Log.e("TEST", "Loading_Client ListView");
-            adapterPriceClients = new ListAdapterAde_Klients(WJ_Forma_Zakaza_L1.this, klients);
-            adapterPriceClients.notifyDataSetChanged();
-            listView.setAdapter(adapterPriceClients);
-
-            //  pDialog.dismiss();
-        }
-
-        private void getFloor() throws InterruptedException {
-            //  pDialog.setMessage("Загрузка продуктов. Подождите...");
-            Loading_Base_Klients();
-
-            queryEditText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                    //Когда пользователь вводит какой-нибудь текст:
-                    // Activity_Sort.this.adapterPriceClients_Search.getFilter().filter(cs);
-                    adapterPriceClients.getFilter().filter(cs);
-                    //MainActivity.this.adapterPriceClients.getFilter().filter(cs);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                              int arg3) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                }
-            });
-        }  // Синхронизация файлов для всех складов
-
-    }
 }
 
 

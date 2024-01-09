@@ -1,158 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="20dp"
+    app:contentPadding="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/list_ftpImage_ConstraintLayoutProgress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView104"
-        app:layout_constraintVertical_bias="0.0">
 
-        <ProgressBar
-            android:id="@+id/list_ftpImage_ProgressBarHorisont"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/list_ftpImage_imageUpdate"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_button"
+            app:layout_constraintEnd_toEndOf="@+id/list_ftpImage_button"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/list_ftpImage_button"
+            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_button"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/icon_newupdate" />
+
+        <ImageView
+            android:id="@+id/list_ftpImage_image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_menu_bella" />
+
+        <Button
+            android:id="@+id/list_ftpImage_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/selector_button_ftp_download"
+            android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/list_ftpImage_ProgressBarCircle"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="90dp"
-            app:layout_constraintBottom_toTopOf="@+id/list_ftpImage_ProgressBarHorisont"
-            app:layout_constraintEnd_toEndOf="@+id/list_ftpImage_ProgressBarHorisont"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/list_ftpImage_textProgress"
-            android:layout_width="wrap_content"
+            android:id="@+id/list_ftpImage_textBrends"
+            style="@style/Style_ImageCard_TextBrend"
+            android:text="@string/String_ImageCard_TextBrend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_image"
+            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_image" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_textFilesCount_Title"
+            style="@style/Style_ImageCard_TextInfo"
+            android:text="@string/String_ImageCard_TextInfo_01"
+            app:layout_constraintBottom_toTopOf="@+id/list_ftpImage_text_FilesSize_Title"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_image"
+            app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_textBrends" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_textFilesCount"
+            style="@style/Style_ImageCard_TextCount"
+            android:text="@string/String_ImageCard_TextCount"
+            app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_textFilesCount_Title"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_textFilesCount_Title"
+            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_textFilesCount_Title" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_text_FilesSize_Title"
+            style="@style/Style_ImageCard_TextInfo"
+            android:text="@string/String_ImageCard_TextInfo_02"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_image"
+            app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_textFilesCount_Title" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_text_FilesSize"
+            style="@style/Style_ImageCard_TextCount"
+            android:text="@string/String_ImageCard_TextCount"
+            app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_text_FilesSize_Title"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_text_FilesSize_Title"
+            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_text_FilesSize_Title" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_textDateUpdate_Title"
+            style="@style/Style_ImageCard_TextInfo"
+            android:text="@string/String_ImageCard_TextInfo_03"
+            app:layout_constraintStart_toStartOf="@+id/list_ftpImage_image"
+            app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_text_FilesSize_Title" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_textDateUpdate"
+            style="@style/Style_ImageCard_TextCount"
+            android:text="@string/String_ImageCard_TextCount"
+            app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_textDateUpdate_Title"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_textDateUpdate_Title"
+            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_textDateUpdate_Title" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_textStatus_Title"
+            style="@style/Style_ImageCard_TextInfo"
+            android:text="@string/String_ImageCard_TextInfo_04"
+            app:layout_constraintStart_toStartOf="@+id/list_ftpImage_image"
+            app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_textDateUpdate_Title" />
+
+        <TextView
+            android:id="@+id/list_ftpImage_textStatus"
+            style="@style/Style_ImageCard_TextCount"
+            android:text="@string/String_ImageCard_TextCount"
+            app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_textStatus_Title"
+            app:layout_constraintStart_toEndOf="@+id/list_ftpImage_textStatus_Title"
+            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_textStatus_Title" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/list_ftpImage_ProgressBarHorisont"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="1/100"
-            app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_ProgressBarCircle"
-            app:layout_constraintEnd_toEndOf="@+id/list_ftpImage_ProgressBarCircle"
-            app:layout_constraintStart_toStartOf="@+id/list_ftpImage_ProgressBarCircle"
-            app:layout_constraintTop_toTopOf="@+id/list_ftpImage_ProgressBarCircle" />
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_textStatus_Title"
+            app:trackCornerRadius="5dp"
+            app:trackThickness="10dp"
+            tools:visibility="invisible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/list_ftpImage_button"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/selector_button_ftp_download"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/list_ftpImage_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_menu_bella" />
-
-    <TextView
-        android:id="@+id/list_ftpImage_textBrends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Наименование бренда"
-        app:layout_constraintEnd_toStartOf="@+id/list_ftpImage_button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/list_ftpImage_image"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/list_ftpImage_text_FilesSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="общий размер"
-        app:layout_constraintBottom_toBottomOf="@+id/textView106"
-        app:layout_constraintStart_toEndOf="@+id/textView106"
-        app:layout_constraintTop_toTopOf="@+id/textView106" />
-
-    <TextView
-        android:id="@+id/list_ftpImage_textFilesCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="ск фал"
-        app:layout_constraintBottom_toBottomOf="@+id/textView105"
-        app:layout_constraintStart_toEndOf="@+id/textView105"
-        app:layout_constraintTop_toTopOf="@+id/textView105" />
-
-    <TextView
-        android:id="@+id/list_ftpImage_textDateUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="дата посл обнов"
-        app:layout_constraintBottom_toBottomOf="@+id/list_ftpImage_image"
-        app:layout_constraintStart_toEndOf="@+id/list_ftpImage_image"
-        app:layout_constraintTop_toBottomOf="@+id/textView106" />
-
-    <TextView
-        android:id="@+id/list_ftpImage_textStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView104"
-        app:layout_constraintStart_toEndOf="@+id/textView104"
-        app:layout_constraintTop_toTopOf="@+id/textView104" />
-
-    <TextView
-        android:id="@+id/textView104"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="Статус обновление:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_image" />
-
-    <TextView
-        android:id="@+id/textView105"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="9dp"
-        android:text="кол-во файлов:"
-        app:layout_constraintBottom_toTopOf="@+id/textView106"
-        app:layout_constraintStart_toEndOf="@+id/list_ftpImage_image"
-        app:layout_constraintTop_toBottomOf="@+id/list_ftpImage_textBrends" />
-
-    <TextView
-        android:id="@+id/textView106"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="общий размер:"
-        app:layout_constraintStart_toStartOf="@+id/textView105"
-        app:layout_constraintTop_toBottomOf="@+id/textView105" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,4 +1,4 @@
-package kg.roman.Mobile_Torgovla.ListAdapter;
+package kg.roman.Mobile_Torgovla.ImagePack;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Ftp_Image;
 import kg.roman.Mobile_Torgovla.R;
 
 /**
@@ -90,8 +89,7 @@ public class ListAdapterAde_Ftp_Image extends BaseAdapter implements Filterable 
         viewHolder.filesCount.setText(objects.get(pos).getFiles_Count());
         viewHolder.filesSize.setText(objects.get(pos).getFiles_Size());
         viewHolder.dataUpdate.setText(objects.get(pos).getData_Update());
-      //  viewHolder.textProgress.setText("");
-        viewHolder.statusUpdate.setText("");
+              viewHolder.statusUpdate.setText("");
 
         if (objects.get(pos).getStatus_Update()) {
             viewHolder.statusUpdate.setText("есть новые данные");
@@ -133,8 +131,6 @@ public class ListAdapterAde_Ftp_Image extends BaseAdapter implements Filterable 
                     if (!listFilesNoPhone.isEmpty())  Log.e("Go", "Файлы заполнены");
                     Log.e("Go", "Файлы конец");
 
-                    //viewHolder.textProgress.setText("Hello");
-                //    viewHolder.textProgress.setText(objects.get(pos).Brends_Image);
 
 
                     web.getLoadingFileImage("/MT_Sunbell_Karakol/Image/Firm_Tradegof/" +

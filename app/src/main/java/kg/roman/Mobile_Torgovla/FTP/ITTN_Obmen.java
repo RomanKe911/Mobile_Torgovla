@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.util.Xml;
@@ -25,8 +24,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
@@ -44,7 +41,7 @@ import java.util.Random;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Ftp_Image;
+import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
 import kg.roman.Mobile_Torgovla.R;
 
 public class ITTN_Obmen extends AppCompatActivity {
@@ -1492,7 +1489,7 @@ public class ITTN_Obmen extends AppCompatActivity {
                 web.ftp_password = "Roman911NFS";
                 web.put_toFiles = "/MT_Sunbell_Karakol/Image";
 
-                web.FTP_CONNECT();
+               // web.getFTP_TestConnect();
 
                 List<String> listFilesNoPhone = new ArrayList<>();
                 listFilesNoPhone.clear();

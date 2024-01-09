@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/button_backup_rndb"
+        style="@style/Style_BackUp_Button"
+        android:contentDescription="@string/backup_button_down_01"
+        app:layout_constraintEnd_toStartOf="@+id/button_backup_basedb"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/button_backup_basedb"
+        style="@style/Style_BackUp_Button"
+        android:contentDescription="@string/backup_button_down_02"
+        app:layout_constraintEnd_toStartOf="@+id/button_backup_constdb"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_backup_rndb"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/button_backup_constdb"
+        style="@style/Style_BackUp_Button"
+        android:contentDescription="@string/backup_button_down_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_backup_basedb"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+
+    <ImageView
+        android:id="@+id/imageView__backup_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="@string/backup_text_image_icon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_actionbar_base_backup" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="57dp" />
+
+    <TextView
+        android:id="@+id/textView_backup_title_agent"
+        style="@style/Style_BackUp_TextView_Title"
+        android:text="@string/backup_text_agent"
+        app:layout_constraintEnd_toStartOf="@+id/textView_backup_text_agent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView__backup_icon"
+        app:layout_constraintTop_toTopOf="@+id/imageView__backup_icon" />
+
+    <TextView
+        android:id="@+id/textView_backup_title_region"
+        style="@style/Style_BackUp_TextView_Title"
+        android:text="@string/backup_text_region"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView__backup_icon"
+        app:layout_constraintEnd_toStartOf="@+id/textView_backup_text_region"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView__backup_icon" />
+
+    <TextView
+        android:id="@+id/textView_backup_textdown_01"
+        style="@style/Style_BackUp_TextView_Button"
+        android:text="@string/backup_text_down_01"
+        app:layout_constraintEnd_toEndOf="@+id/button_backup_rndb"
+        app:layout_constraintStart_toStartOf="@+id/button_backup_rndb"
+        app:layout_constraintTop_toBottomOf="@+id/button_backup_rndb" />
+
+    <TextView
+        android:id="@+id/textView_backup_textdown_02"
+        style="@style/Style_BackUp_TextView_Button"
+        android:text="@string/backup_text_down_02"
+        app:layout_constraintEnd_toEndOf="@+id/button_backup_basedb"
+        app:layout_constraintStart_toStartOf="@+id/button_backup_basedb"
+        app:layout_constraintTop_toBottomOf="@+id/button_backup_basedb" />
+
+    <TextView
+        android:id="@+id/textView_backup_textdown_03"
+        style="@style/Style_BackUp_TextView_Button"
+        android:text="@string/backup_text_down_03"
+        app:layout_constraintEnd_toEndOf="@+id/button_backup_constdb"
+        app:layout_constraintStart_toStartOf="@+id/button_backup_constdb"
+        app:layout_constraintTop_toBottomOf="@+id/button_backup_constdb" />
+
+
+    <TextView
+        android:id="@+id/textView_backup_textsize_01"
+        style="@style/Style_BackUp_TextView_Button"
+        android:text="@string/backup_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/textView_backup_textdown_01"
+        app:layout_constraintStart_toStartOf="@+id/textView_backup_textdown_01"
+        app:layout_constraintTop_toBottomOf="@+id/textView_backup_textdown_01" />
+
+    <TextView
+        android:id="@+id/textView_backup_textsize_02"
+        style="@style/Style_BackUp_TextView_Button"
+        android:text="@string/backup_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/textView_backup_textdown_02"
+        app:layout_constraintStart_toStartOf="@+id/textView_backup_textdown_02"
+        app:layout_constraintTop_toBottomOf="@+id/textView_backup_textdown_02" />
+
+    <TextView
+        android:id="@+id/textView_backup_textsize_03"
+        style="@style/Style_BackUp_TextView_Button"
+        android:text="@string/backup_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/textView_backup_textdown_03"
+        app:layout_constraintStart_toStartOf="@+id/textView_backup_textdown_03"
+        app:layout_constraintTop_toBottomOf="@+id/textView_backup_textdown_03" />
+
+
+    <TextView
+        android:id="@+id/textView_backup_text_agent"
+        style="@style/Style_BackUp_TextView_Text"
+        android:text="@string/backup_text_null"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_backup_title_agent"
+        app:layout_constraintStart_toEndOf="@+id/textView_backup_title_agent"
+        app:layout_constraintTop_toTopOf="@+id/textView_backup_title_agent" />
+
+    <TextView
+        android:id="@+id/textView_backup_text_region"
+        style="@style/Style_BackUp_TextView_Text"
+        android:text="@string/backup_text_null"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_backup_title_region"
+        app:layout_constraintStart_toEndOf="@+id/textView_backup_title_region"
+        app:layout_constraintTop_toTopOf="@+id/textView_backup_title_region" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_backup"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_backup_textsize_02" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

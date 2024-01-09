@@ -162,7 +162,9 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         id_st = topChannelMenu.getItem(0).toString();
         Log.e("TEST", "PEREM_SELECT_BRENDS=" + id_st + ".");
 
-        Adapter_Price();
+
+
+
 
         //Navigation_Group_Name();
 
@@ -746,12 +748,11 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
     protected void Loading_Db_Nomencalture() throws InterruptedException {
         Log.e("TEST", "Loading_Db_Nomencalture START");
 
-        Thread myThread = new Thread(new MyThread(),"MyThread");
-        myThread.start();
+       /* Thread myThread = new Thread(new MyThread(), "MyThread");
+        myThread.start();*/
 
         WJ_Forma_Zakaza_L2_Sub.MyAsyncTask_Sync asyncTask = new WJ_Forma_Zakaza_L2_Sub.MyAsyncTask_Sync();
         asyncTask.execute();
-
 
 
         Log.e("TEST", "Loading_Db_Nomencalture END");
@@ -776,7 +777,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             super.onProgressUpdate(values);
             //pDialog.setMessage("Синхронизация цен. Подождите...");
             // pDialog.setProgress(values[0]);
-            Log.e("ПОТОК=", "поток работает"+ values);
+            Log.e("ПОТОК=", "поток работает" + values);
         }
 
         @Override
@@ -797,15 +798,20 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             Log.e("ПОТОК=", "Конец потока");
             progressBarOR.setVisibility(View.INVISIBLE);
             Log.e("TEST", "Loading_Db_Nomencalture ListView");
-            adapterPriceClients = new ListAdapterAde_Suncape_Forma(context_Activity, product_str);
-            adapterPriceClients.notifyDataSetChanged();
-            listView.setAdapter(adapterPriceClients);
+            if (!product_str.isEmpty()) {
+                adapterPriceClients = new ListAdapterAde_Suncape_Forma(context_Activity, product_str);
+                adapterPriceClients.notifyDataSetChanged();
+                listView.setAdapter(adapterPriceClients);
+
+            } else
+                Toast.makeText(context_Activity, "В данной категории нет товара", Toast.LENGTH_SHORT).show();
+
 
             //  pDialog.dismiss();
         }
 
         private void getFloor() throws InterruptedException {
-          //  pDialog.setMessage("Загрузка продуктов. Подождите...");
+            //  pDialog.setMessage("Загрузка продуктов. Подождите...");
             SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
             String query;
             if (perem_switch_group_sql) {
@@ -888,40 +894,15 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     class MyThread implements Runnable {
         public void run() {
             Log.e("TEST", "%s started... \n" + Thread.currentThread().getName());
             try {
                 Thread.sleep(500);
-            }
-
-
-
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 Log.e("TEST", "Thread has been interrupted");
             }
-            Log.e("TEST", "%s finished... \n"+ Thread.currentThread().getName());
+            Log.e("TEST", "%s finished... \n" + Thread.currentThread().getName());
 
             Log.e("TEST", "Loading_Db_Nomencalture ListView");
         }

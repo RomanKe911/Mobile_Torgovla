@@ -34,6 +34,8 @@
 
     </PreferenceCategory>
     <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:key="preferenc_menu_ty"
         android:summary="Description of category 1"
         android:title="Торговые условия">
@@ -60,6 +62,35 @@
             android:title="Скидка под консигнацию"></ListPreference>
     </PreferenceCategory>
     <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="categ1"
+        android:summary="Description of category 1"
+        android:title="Доступ к базе картинок">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:key="key_putToOld"
+            android:summary="mt_image"
+            android:title="Путь к старой версии:" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:title="Путь к директории Files:"
+            android:key="key_putToFiles"
+            android:summary="files/Image" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:title="Путь к директории SD-Card:"
+            android:key="key_putToSDCard"
+            android:summary="SD-Card/Picture" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:id="@+id/preference_nomenclatura"
         android:key="preferenc_menu_nomenclatura"
         android:summary="Description of category 1"
         android:title="Настройки номенклатуры">
@@ -92,6 +123,8 @@
             android:summary="собственный список брендов"
             android:title="Ручной отбор" />
         <MultiSelectListPreference
+            android:entries="@array/mass_ftp_server_con"
+            android:entryValues="@array/mass_ftp_server_con_value"
             android:key="multi_select_list_preference_brends"
             android:summary="список брендов"
             android:title="Мульти-список" />
@@ -106,6 +139,7 @@
 
     </PreferenceCategory>
     <PreferenceCategory
+        android:id="@+id/preference_menu"
         android:key="preferenc_menu_all"
         android:summary="Description of category 1"
         android:title="Настройки пользователя">
@@ -145,6 +179,7 @@
             android:title="Обновить базу пользователей"></Preference>
     </PreferenceCategory>
     <PreferenceCategory
+        android:id="@+id/preference_aboutmobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:key="preferenc_menu_about"

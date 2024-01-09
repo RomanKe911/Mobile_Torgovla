@@ -41,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import kg.roman.Mobile_Torgovla.MT_BackUp.BackUp;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_GroupID;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_Image;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_Nomeclature;
@@ -55,8 +56,7 @@ import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask_Filial;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask_SOS_FILES;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpConnection;
-import kg.roman.Mobile_Torgovla.FTP.UpdateImage;
-import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_FormaZakaza_2023;
+import kg.roman.Mobile_Torgovla.ImagePack.UpdateImage;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_DB_Data;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Data;
 import kg.roman.Mobile_Torgovla.MailSenderClass;
@@ -70,7 +70,6 @@ import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Cnt_Agent;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Kalkulator;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Nomenclature_Brends;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Ostatok_Golovnoy;
-import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Ostatok_Inventoriz_NEW;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Ostatok_Single;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Strih_Kod_Search;
 import kg.roman.Mobile_Torgovla.TEST.WJ_Forma_Zakaza_Akcia;
@@ -260,7 +259,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
         ed.commit();
         if (syns_end == true) {
             switch (v.getId()) {
-                ///////////////////////////////////////////////////////////////// Рабочий стол, 1 ряд /////////////////
+                ///////////////////f////////////////////////////////////////////// Рабочий стол, 1 ряд /////////////////
                 // Форма заказа
                 case R.id.forma_title_2_forma: {
                     intent_start_act = null;
@@ -428,6 +427,10 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         Toast.makeText(context_Activity, "Ошибка выгузки данных на сервер!", Toast.LENGTH_SHORT).show();
                         Log.e("Error_Up ", "Ошибка выгузки данных на сервер!");
                     }*/
+
+                    intent_start_act = null;
+                    intent_start_act = new Intent(context_Activity, BackUp.class);
+                    startActivity(intent_start_act);
                     break;
 
                 // Обновление данных с сервера FTP, файлы XML и DB3
@@ -1819,8 +1822,6 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
     protected void Mail() {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-
-
     }
 
     protected void ListAdapet_Internet_Load_SOS() {

@@ -1,17 +1,17 @@
-package kg.roman.Mobile_Torgovla.FTP;
+package kg.roman.Mobile_Torgovla.MT_FTP;
 
 
+import android.net.ConnectivityManager;
 import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -23,28 +23,34 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
+import java.util.TimeZone;
 import java.util.TreeMap;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Ftp_Image;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Ftp_Image;
-import kg.roman.Mobile_Torgovla.R;
+import kg.roman.Mobile_Torgovla.ImagePack.ImagePack_R_Simple;
+import kg.roman.Mobile_Torgovla.ImagePack.ListAdapterSimple_Ftp_Image;
+import kg.roman.Mobile_Torgovla.MT_BackUp.RecyclerView_Simple_BackUp;
+
 
 //public class FTPWebhost extends FtpConnection {
 public class FTPWebhost {
+    //// https://commons.apache.org/proper/commons-net/apidocs/org/apache/commons/net/SocketClient.html
     // Общие параметры подключения FTP
     public String ftp_server, ftp_user_name, ftp_password;
     public int ftp_port;
@@ -57,15 +63,15 @@ public class FTPWebhost {
     SimpleDateFormat sdf1;
     FTPFile dataFile;
     long[] dirInfo_db3;
-    String str_return;
 
 
     // Получение списка фалов из папки сервера
     public void getListFiles() {
         try {
             FTPClient ftpClient = new FTPClient();
-            ftpClient.connect(ftp_server, ftp_port);
-            ftpClient.login(ftp_user_name, ftp_password);
+            FtpConnectData connectData = new FtpConnectData();
+            ftpClient.connect(connectData.server_name, connectData.port);
+            ftpClient.login(connectData.server_username, connectData.server_password);
             ftpClient.enterLocalPassiveMode();
 
             ftpClient.logout();
@@ -77,7 +83,7 @@ public class FTPWebhost {
 
 
     // получение даты файла
-    public String getDataFile() {
+    public String getDataFile(String put_toFiles, String toNameFile) {
         try {
             FTPClient ftpClient = new FTPClient();
             ftpClient.connect(ftp_server, ftp_port);
@@ -87,9 +93,9 @@ public class FTPWebhost {
             sdf1 = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
             Log.e("Method and Description", "listDirectories()=" + ftpClient.listDirectories().toString());
 
-            FTPFile[] ftpFiles_list_XML = ftpClient.listFiles("/MT_Sunbell_Karakol/MTW_SOS/");
+            FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(put_toFiles); // "/MT_Sunbell_Karakol/MTW_SOS/"
             for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
-                String file_server_xml = "/MT_Sunbell_Karakol/MTW_SOS/" + ftpFile_XML.getName(); // путь на сервере
+                String file_server_xml = put_toFiles + ftpFile_XML.getName(); // путь на сервере
                 if (ftpFile_XML.getName().length() > 3) {
                     String nameAgent = "bezmenova_natalija_petrovna.db3";
                     String name2 = ftpFile_XML.getName().substring(36);
@@ -128,37 +134,52 @@ public class FTPWebhost {
         return sdf1.format(dataFile.getTimestamp().getTime());
     }
 
-    // получение размера файла
-    public String getFilesSize() {
-        try {
-            FTPClient ftpClient = new FTPClient();
-            ftpClient.connect(ftp_server, ftp_port);
-            ftpClient.login(ftp_user_name, ftp_password);
-            ftpClient.enterLocalPassiveMode();
-            //  long[] dirInfo_db3 = calculateDirectoryInfo(ftpClient, put_toCatalogFiles, "");
-            long[] dirInfo_db3 = calculateDirectoryInfo(ftpClient, "/MT_Sunbell_Karakol/Image", "");
-            /*Log.e("Дирикторий=", " = " + dirInfo_db3[0]);
+
+    public String getFilesSize(String put_toFilesFTP) {
+        /*
+         *  FTP-функция: для получение размера файлов из директории 'put_toFiles' (/MT_Sunbell_Karakol/Image)
+         *  Пути и настройки находятся в классе FtpConnectData
+         *  возвращает строку формата: файлов: ---, общий размер: ---
+         * */
+        StringBuilder stringBuilder = new StringBuilder();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FTPClient ftpClient = new FTPClient();
+                    FtpConnectData connectData = new FtpConnectData();
+                    ftpClient.connect(connectData.server_name, connectData.port);
+                    ftpClient.login(connectData.server_username, connectData.server_password);
+                    ftpClient.enterLocalPassiveMode();
+
+                    long[] dirInfo_db3 = calculateDirectoryInfo(ftpClient, put_toFilesFTP, "");
+/*            Log.e("Дирикторий=", " = " + dirInfo_db3[0]);
             Log.e("Файлов=", " = " + dirInfo_db3[1]);
-            Log.e("Размер!5=", " = " + dirInfo_db3[2] + " байт");
-            Log.e("Размер!5=", " = " + dirInfo_db3[2] / 1024 + " кбайт");
-            Log.e("Размер!5=", " = " + dirInfo_db3[2] / 1048576 + " мбайт");*/
-            String Format;
-            Double ss = Double.parseDouble(String.valueOf(dirInfo_db3[2])) / 1048576.00;
-            Log.e("SIZE", "s1=" + ss);
-            if (dirInfo_db3[2] / 1048576 < 10) {
-                Format = new DecimalFormat("#0.00").format(ss).replace(",", ".");
-            } else Format = new DecimalFormat("#00.00").format(ss).replace(",", ".");
-            Log.e("SIZE", "s1=" + Format);
-            //  str_return = dirInfo_db3[0] + "_" + dirInfo_db3[1] + "_" + dirInfo_db3[2] + " байт" + "_" + dirInfo_db3[2] / 1024 + " кбайт" + "_" + dirInfo_db3[2] / 1048576 + " мбайт";
-            str_return = dirInfo_db3[0] + "_" + dirInfo_db3[1] + "файлов _" + dirInfo_db3[2] + " байт" + "_" + dirInfo_db3[2] / 1024 + " кбайт" + "_" + Format + " мбайт";
-            Log.e("SIZE", "s3=" + str_return);
-            ftpClient.logout();
-            ftpClient.disconnect();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.e("Размер!=", " = " + dirInfo_db3[2] + " байт");*/
+                    //    Log.e("Файлов=", " = " + dirInfo_db3[1]);
+                    if (dirInfo_db3[1] >= 1)
+                        stringBuilder.append(getLongToDoubleFileSize(dirInfo_db3[2]));
+                    else
+                        stringBuilder.append("файлов: ").append(dirInfo_db3[1]).append(", обший размер: ").append(getLongToDoubleFileSize(dirInfo_db3[2]));
+
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        try {
+            Thread thread = new Thread(runnable);
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        return str_return;
+        return stringBuilder.toString();
+
     }
+
 
     // получение расширение файлов
     public String getFileExtension(boolean b_locationFileServer) {
@@ -253,8 +274,9 @@ public class FTPWebhost {
     public void getFileToFTP(String put_toFilesSTART, String put_toFilesEND, Boolean first_file) {
         try {
             FTPClient ftpClient = new FTPClient();
-            ftpClient.connect(ftp_server, ftp_port);
-            ftpClient.login(ftp_user_name, ftp_password);
+            FtpConnectData connectData = new FtpConnectData();
+            ftpClient.connect(connectData.server_name, connectData.port);
+            ftpClient.login(connectData.server_username, connectData.server_password);
             ftpClient.enterLocalPassiveMode();
 
             Log.e("FTP", "Путь старта: " + put_toFilesSTART);
@@ -349,7 +371,7 @@ public class FTPWebhost {
                 FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(put_toFiles);
                 for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
 
-                    String putFILES = android.os.Environment.MEDIA_MOUNTED;                             // путь: к файлам    (/data/user/0/kg.roman.Mobile_Torgovla/files)
+                    String putFILES = Environment.MEDIA_MOUNTED;                             // путь: к файлам    (/data/user/0/kg.roman.Mobile_Torgovla/files)
                     String putDB = context.getDatabasePath(ftpFile_XML.getName()).getAbsolutePath();    // путь: к databases (/data/user/0/kg.roman.Mobile_Torgovla/databases/)
 
                     String file_sFTP_xml = put_toFiles + ftpFile_XML.getName();                                                         // путь на сервере
@@ -380,10 +402,6 @@ public class FTPWebhost {
     }
 
 
-
-
-
-
     // Скачать файл(ы) с FTP
     public void getFile_FTPToPhone(String put_toFilesSTART, String put_toFilesEND, Context context, Boolean first_file) {
         try {
@@ -408,7 +426,7 @@ public class FTPWebhost {
                 FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(put_toFiles);
                 for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
 
-                    String putFILES = android.os.Environment.MEDIA_MOUNTED;                             // путь: к файлам    (/data/user/0/kg.roman.Mobile_Torgovla/files)
+                    String putFILES = Environment.MEDIA_MOUNTED;                             // путь: к файлам    (/data/user/0/kg.roman.Mobile_Torgovla/files)
                     File files = new File(context.getFilesDir().getAbsolutePath());                       // путь: к файлам    (/data/user/0/kg.roman.Mobile_Torgovla/files)
                     String putDB = context.getDatabasePath(ftpFile_XML.getName()).getAbsolutePath();    // путь: к databases (/data/user/0/kg.roman.Mobile_Torgovla/databases/)
 
@@ -441,49 +459,54 @@ public class FTPWebhost {
 
     ///// Получение списка файлов рез. копирования по агенту и филиалу
     // public HashSet<String> getListFile_SOSDB(String nameAgent, String putFile) {
-    public TreeMap getListFile_SOSDB(String nameAgent, String putFile) {
-        // nameAgent = bezmenova_natalija_petrovna
-        // putFile = /MT_Sunbell_Karakol/MTW_SOS/
-
-        // Создание пустого списка Hash и TreeMap
+    public HashSet<String> getListFile_BackUp(String nameAgent, String putFile) {
         HashSet<String> countryHashSet = new HashSet<>();
-        TreeMap<String, String> treeMap = new TreeMap<>();
-        try {
-            // Подключение к FTP
-            FTPClient ftpClient = new FTPClient();
-            ftpClient.connect(ftp_server, ftp_port);
-            ftpClient.login(ftp_user_name, ftp_password);
-            ftpClient.enterLocalPassiveMode();
 
-            // Подключение к списку файлов на FTP
-            FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(putFile);
-            for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
-                if (ftpFile_XML.getName().length() > 3) {
-                    String data = ftpFile_XML.getName().substring(0, 10);
-                    String vrema = ftpFile_XML.getName().substring(11, 19);
-                    String strBASEDB = ftpFile_XML.getName().substring(36);   // sunbell_base_db
-                    String strCONSTDB = ftpFile_XML.getName().substring(37);  // sunbell_const_db
-                    String strRNDB = ftpFile_XML.getName().substring(34);     // sunbell_rn_db
-                    if (nameAgent.equals(strRNDB)) {
-                        countryHashSet.add(ftpFile_XML.getName());
-                        Log.e("Список файлов:", "Файлы: " + ftpFile_XML.getName());
-                        Log.e("Список файлов:", "Дата: " + data);
-                        Log.e("Список файлов:", "Время: " + vrema);
-                        treeMap.put(getData_Vrema(data, vrema), ftpFile_XML.getName());
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Подключение к FTP
+                    FTPClient ftpClient = new FTPClient();
+                    FtpConnectData ftpConnectData = new FtpConnectData();
+                    ftpClient.connect(ftpConnectData.server_name, ftpConnectData.port);
+                    ftpClient.login(ftpConnectData.server_username, ftpConnectData.server_password);
+                    ftpClient.enterLocalPassiveMode();
+                    // Подключение к списку файлов на FTP
+                    FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(putFile);
+                    for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
+                        if (ftpFile_XML.getName().length() > 3) {
+                            String data = ftpFile_XML.getName().substring(0, 10);
+                            String vrema = ftpFile_XML.getName().substring(11, 19);
+                            String strBASEDB = ftpFile_XML.getName().substring(36);   // sunbell_base_db
+                            String strCONSTDB = ftpFile_XML.getName().substring(37);  // sunbell_const_db
+                            String strRNDB = ftpFile_XML.getName().substring(34);     // sunbell_rn_db
+
+                            if (ftpFile_XML.getName().contains(nameAgent)) {
+                                // Log.e("File: ", "File... "+ftpFile_XML.getName());
+                                countryHashSet.add(ftpFile_XML.getName());
+                            }
+
+                        }
+                        // 01:11:2022 09:46:50_sunbell_base_db_sagitova_anna.db3
+                        // 01:11:2022 09:46:50_sunbell_const_db_sagitova_anna.db3
+                        // 01:11:2022 09:46:50_sunbell_rn_db_sagitova_anna.db3
                     }
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                // 01:11:2022 09:46:50_sunbell_base_db_sagitova_anna.db3
-                // 01:11:2022 09:46:50_sunbell_const_db_sagitova_anna.db3
-                // 01:11:2022 09:46:50_sunbell_rn_db_sagitova_anna.db3
             }
-            ftpClient.logout();
-            ftpClient.disconnect();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
-        // Возврат упорядочного списка (дата и время)(имя файла на ftp)
-        return treeMap;
+        return countryHashSet;
     }
 
 
@@ -515,10 +538,10 @@ public class FTPWebhost {
 
         String dirToList = parentDir;
         if (!currentDir.equals("")) {
-            dirToList += "/" + currentDir;
+            //   dirToList += "/" + currentDir;
+            dirToList += currentDir;
             // Новинка
             FTPFile dataFile = ftpClient.mdtmFile(dirToList);
-            Log.e("ДАТА файла...", "ДАТА" + dataFile);
         }
 
         try {
@@ -555,37 +578,48 @@ public class FTPWebhost {
         }
     }
 
-    public Boolean FTP_CONNECT() {
-        final Boolean isConnectFtp = false;
-        new Thread(new Runnable() {
+    ////// Проверка соединения с FTP сервером, с возвращаемым типом <Строка состояния, логическое true или false>
+    public Pair<String, Boolean> getFTP_TestConnect() {
+        final boolean[] isConnectFtp = {false};
+        final String logeTag = "FTP_TestConnect";
+        final String[] isConnectFtpText = {""};
+        Runnable ftpRun = new Runnable() {
             @Override
             public void run() {
-                Log.e("FTPCONNECT", "/////////////////////////");
-                Log.e("FTPCONNECT", "Проверка соединения с сервером");
+                Log.e(logeTag, "Проверка соединения с сервером.......");
                 FTPClient ftpClient = new FTPClient();
-
+                FtpConnectData ftpConnectData = new FtpConnectData();
                 try {
-                    ftpClient.connect(ftp_server, ftp_port);
-                    ftpClient.login(ftp_user_name, ftp_password);
-
+                    ftpClient.connect(ftpConnectData.server_name, ftpConnectData.port);
+                    ftpClient.login(ftpConnectData.server_username, ftpConnectData.server_password);
                     int replyCode = ftpClient.getReplyCode();
-                    if (!FTPReply.isPositiveCompletion(replyCode)) {
-                        // oops! The operation was not successful
-                        // for some reasons, the server refuses or
-                        // rejects requested operation
-                        Log.e("LIST", "OOPS, No Connect");
-
-                    } else {
-                        Log.e("LIST", "Соедиенние удачное");
-                    }
+                    boolean isConnect = false;
+                    String isConnectText = "";
+                    if (FTPReply.isPositiveCompletion(replyCode))
+                        isConnect = true;
+                    else
+                        isConnect = false;
 
                     String[] replies = ftpClient.getReplyStrings();
                     if (replies != null && replies.length > 0) {
                         for (String aReply : replies) {
-                            // System.out.println("SERVER: " + aReply);
-                            Log.e("LIST", "SERVER: " + aReply);
+                            // Log.e("LIST", "SERVER: " + aReply);
+                            isConnectText = "SERVER: " + aReply;
                         }
                     }
+                    if (isConnect) {
+                        isConnectFtp[0] = true;
+                        isConnectFtpText[0] = "Удачное содиенение с FTP-сервером \n" + isConnectText;
+                        Log.e(logeTag, "Удачное содиенение с FTP-сервером " + isConnectText);
+                    } else {
+                        isConnectFtp[0] = false;
+                        isConnectFtpText[0] = "OOPS, ошибка подключения к FTP-серверу \n" + isConnectText;
+                        Log.e(logeTag, "OOPS, ошибка подключения к FTP-серверу " + isConnectText);
+                    }
+
+                    // SERVER: 230 User sunbell_siberica logged in
+                    // SERVER: 530 Login incorrect.
+
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 } finally {
@@ -597,13 +631,29 @@ public class FTPWebhost {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-
                 }
-
             }
-        }).start();
-        return isConnectFtp;
+        };
+        Thread tr = new Thread(ftpRun);
+        tr.start();
+        try {
+            tr.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        return new Pair(isConnectFtpText[0], isConnectFtp[0]);
     }
+
+    public boolean getInternetConnect(Context context) {
+        String cs = Context.CONNECTIVITY_SERVICE;
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(cs);
+        if (cm.getActiveNetworkInfo() == null)
+            return false;
+        else
+            return true;
+    }
+
 
     /// Получение данных о не существующих фалов
     public List<String> getFileNotImageFTP() {
@@ -743,30 +793,29 @@ public class FTPWebhost {
 
 
     //// Скачивание файлов которых нет в дириктории
-    public void getLoadingFileImage(String put_toFilesSTART, String put_toFilesEND, List<String> w_list, ProgressBar progressBar, TextView textView, ProgressBar progressBarHoriz) {
-        /*
-         * put_toFilesSTART - путь откуда скачивать файл
-         * put_toFilesEND - путь конечной директории
-         * w_list - список файлов для скачивания
-         * progressBar - активированный progressBar для отображения процесса
-         * */
+    public boolean getLoadingFileImage(String put_toFilesSTART, String put_toFilesEND, List<String> w_list, ProgressBar horiz) {
+        //put_toFilesSTART - путь откуда скачивать файл
+        // put_toFilesEND - путь конечной директории
+        // w_list - список файлов для скачивания
+        // progressBar - активированный progressBar для отображения процесса
+
         final int[] k = {0};
         final double[] prmin = {0};
         final double prmax = w_list.size();
         final double pr = 100 / prmax;
+        final boolean encRunnable[] = {false};
+        // final Handler handler;
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 FTPClient ftpClient = new FTPClient();
-
+                FtpConnectData ftpConnectData = new FtpConnectData();
                 try {
-                    ftpClient.connect(ftp_server, ftp_port);
-                    ftpClient.login(ftp_user_name, ftp_password);
+                    ftpClient.connect(ftpConnectData.server_name, ftpConnectData.port);
+                    ftpClient.login(ftpConnectData.server_username, ftpConnectData.server_password);
                     ftpClient.enterLocalPassiveMode();
                     Log.e("FTP", "Пакетное скачивание");
-                    String file_Phone;
-                    file_Phone = Environment.getExternalStorageDirectory().toString() + "/Price/XML/";
-
                     Log.e("LIST: ", "Start: " + put_toFilesSTART);
                     Log.e("LIST: ", "END: " + put_toFilesEND);
                     k[0] = 0;
@@ -782,24 +831,13 @@ public class FTPWebhost {
                         ftpClient.retrieveFile(put_toFilesSTART + "/" + w_list.get(k[0]), outputStream);
                         outputStream.close();
                         k[0]++;
-
-                        myHandler.sendMessage(myHandler.obtainMessage());
-                        Log.e("Progress: ", "progress" + prmin[0]);
-                        // progressBarHoriz.setProgress(Double.valueOf(prmin).intValue());
-                        //  progressBarHoriz.incrementProgressBy(Double.valueOf(pr).intValue());
-
-
-                        try {
-                            // textView.setText("Hello2");
-                            //   textView.setText(k + "/" + w_list.size());
-                        } catch (Exception e) {
-                            Log.e("ERROR: ", "Потока данных");
-                        }
                     }
+                    Log.e("FTP", "Пакетное скачивание закончилось");
+
+                    Log.e("BOOLEAN: ", "TRUE");
+                    encRunnable[0] = true;
 
 
-                    // progressBarHoriz.setMax(100);
-                    progressBar.setVisibility(View.INVISIBLE);
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("ERROR: ", "Ошибка");
@@ -813,27 +851,45 @@ public class FTPWebhost {
                         ex.printStackTrace();
                     }
                 }
+
             }
 
-
-            Handler myHandler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    Log.e("Handlers: ", "Данные из потока: " + Double.valueOf(pr).intValue());
-                    progressBarHoriz.incrementProgressBy(Double.valueOf(pr).intValue());
-                    if (progressBarHoriz.getProgress() <= 100) {
-                        progressBar.setVisibility(View.VISIBLE);
-                    } else progressBar.setVisibility(View.INVISIBLE);
-                   // textView.setText(progressBarHoriz.getProgress()+"/100");
-                }
-            };
         };
-
-
         Thread tr = new Thread(runnable);
         tr.start();
 
+      /* try {
+            tr.join();
 
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+             horiz.post(new Runnable() {
+                                public void run() {
+                                    Log.e("Progress: ", "progress: GONE" + prmin[0]);
+                                    horiz.setVisibility(View.GONE);
+                                }
+                            });
+        }*/
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (encRunnable[0]) {
+                    horiz.setVisibility(View.VISIBLE);
+                    Log.e("Hanler", "VISIBLE");
+                    encRunnable[0] = true;
+                } else {
+                    horiz.setVisibility(View.INVISIBLE);
+                    Log.e("Hanler", "INVISIBLE");
+                    encRunnable[0] = false;
+                }
+            }
+        }, 1000);
+
+
+        return encRunnable[0];
     }
 
     public ArrayList<ListAdapterSimple_Ftp_Image> getListCatalogy() {
@@ -910,6 +966,212 @@ public class FTPWebhost {
         }
 
         return ftp_image;
+    }
+
+    public ArrayList<ImagePack_R_Simple> getListCatalogyImage() {
+        ArrayList<ImagePack_R_Simple> ftp_image_new = new ArrayList<ImagePack_R_Simple>();
+        Runnable ftpRun = new Runnable() {
+            @Override
+            public void run() {
+
+                String w_brends = "", w_fileImage, w_dataUpdate = "";
+                Long w_fileSize = 0L;
+                int w_fileCount = 0;
+                FTPClient ftpClient = new FTPClient();
+                try {
+                    ftpClient.connect(ftp_server, ftp_port);
+                    ftpClient.login(ftp_user_name, ftp_password);
+                    ftpClient.enterLocalPassiveMode();
+                    FTPFile[] fileList = ftpClient.listFiles(put_toFiles);
+
+                    for (FTPFile file : fileList) {
+                        if (file.isDirectory()) {
+                            if (file.getName().length() > 3) {
+                                w_brends = file.getName();
+                               /* w_dataUpdate = file.getTimestamp().getTime().toString();
+                                Log.e("TIME DATE","1"+file.getTimestamp().getTime() );
+                                Log.e("TIME DATE", "2"+file.getTimestamp().getTimeInMillis() );
+                                Log.e("TIME DATE", "3"+getFullTime(file.getTimestamp().getTimeInMillis()));*/
+                                w_dataUpdate = getFullTime(file.getTimestamp().getTimeInMillis());
+
+                                w_fileCount = 0;
+                                w_fileSize = 0L;
+                                FTPFile[] fileListBrends = ftpClient.listFiles(put_toFiles + "/" + w_brends);
+                                for (FTPFile filesCount : fileListBrends) {
+                                    if (filesCount.isFile()) {
+                                        w_fileCount++;
+                                        w_fileSize = w_fileSize + filesCount.getSize();
+
+                                    }
+                                }
+                                Log.e("Files: ", "Бренд> " + w_brends);
+                                Log.e("Files: ", "Дата обновления> " + w_dataUpdate);
+                                Log.e("Files: ", "Кол-во> " + w_fileCount);
+                                Log.e("Files: ", "Размер> " + getLongToDoubleFileSize(w_fileSize));
+                                Log.e("Files: ", "Картинка> " + "logo_" + w_brends.toLowerCase() + ".png");
+                                if (w_brends.equals("Icons")) {
+                                    w_brends = "Icons";
+                                }
+                                Random rd = new Random(); // creating Random object
+                                Random click = new Random(); // creating Random object
+                                ftp_image_new.add(new ImagePack_R_Simple(
+                                        w_brends,
+                                        "logo_" + w_brends.toLowerCase() + ".png",
+                                        getLongToDoubleFileSize(w_fileSize),
+                                        w_fileCount,
+                                        0L,
+                                        file.getTimestamp().getTimeInMillis(),
+                                        click.nextBoolean()));
+                            }
+
+                        }
+                    }
+                } catch (UnknownHostException es) {
+                    es.printStackTrace();
+                    Log.e("ERROR: ", es + "// Нет подключения к интернету");
+                    ftp_image_new.clear();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Log.e("ERROR: ", "Ошибка" + ex);
+                } finally {
+                    try {
+                        if (ftpClient.isConnected()) {
+                            ftpClient.logout();
+                            ftpClient.disconnect();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Log.e("ERROR: ", "Ошибка закрытия FTP" + ex);
+                    }
+                }
+            }
+        };
+        Thread tr = new Thread(ftpRun);
+        tr.start();
+        try {
+            tr.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+
+        return ftp_image_new;
+    }
+
+
+    ///////////////------  Получение списка префикос с FTP для сравнения
+    public HashSet<String> getListBrendImage(String brend) {
+        HashSet<String> brends = new HashSet<String>();
+        Runnable ftpRun = new Runnable() {
+            @Override
+            public void run() {
+
+                String w_brends = "", w_fileImage, w_dataUpdate = "";
+                Long w_fileSize = 0L;
+                int w_fileCount = 0;
+                FTPClient ftpClient = new FTPClient();
+                FtpConnectData connectData = new FtpConnectData();
+
+                try {
+                    ftpClient.connect(connectData.server_name, connectData.port);
+                    ftpClient.login(connectData.server_username, connectData.server_password);
+                    ftpClient.enterLocalPassiveMode();
+                    FTPFile[] fileList = ftpClient.listFiles(connectData.put_toFtpImageSunbell + "/" + brend + "/");
+                    for (FTPFile file : fileList) {
+                        if (file.getName().length() > 3)
+                            brends.add(file.getName());
+                    }
+                } catch (UnknownHostException es) {
+                    es.printStackTrace();
+                    Log.e("ERROR: ", es + "// Нет подключения к интернету");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Log.e("ERROR: ", "Ошибка" + ex);
+                } finally {
+                    try {
+                        if (ftpClient.isConnected()) {
+                            ftpClient.logout();
+                            ftpClient.disconnect();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Log.e("ERROR: ", "Ошибка закрытия FTP" + ex);
+                    }
+                }
+            }
+        };
+        Thread tr = new Thread(ftpRun);
+        tr.start();
+        try {
+            tr.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        return brends;
+    }
+
+
+    public HashMap<String, Long> getListBrendImage_Size(String brend, Context context) {
+        HashMap<String, Long> brends = new HashMap<String, Long>();
+        Runnable ftpRun = new Runnable() {
+            @Override
+            public void run() {
+
+                String w_brends = "", w_fileImage, w_dataUpdate = "";
+                Long w_fileSize = 0L;
+                int w_fileCount = 0;
+                FTPClient ftpClient = new FTPClient();
+                FtpConnectData connectData = new FtpConnectData();
+
+                try {
+                    ftpClient.connect(connectData.server_name, connectData.port);
+                    ftpClient.login(connectData.server_username, connectData.server_password);
+                    ftpClient.enterLocalPassiveMode();
+                    FTPFile[] fileList = ftpClient.listFiles(connectData.put_toFTPforRegions(context) + "/" + brend + "/");
+                    for (FTPFile file : fileList) {
+                        if (file.getName().length() > 3)
+                            brends.put(file.getName(), file.getTimestamp().getTimeInMillis() + connectData.ftp_timezone);
+                    }
+                } catch (UnknownHostException es) {
+                    es.printStackTrace();
+                    Log.e("ERROR: ", es + "// Нет подключения к интернету");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Log.e("ERROR: ", "Ошибка" + ex);
+                } finally {
+                    try {
+                        if (ftpClient.isConnected()) {
+                            ftpClient.logout();
+                            ftpClient.disconnect();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Log.e("ERROR: ", "Ошибка закрытия FTP" + ex);
+                    }
+                }
+            }
+        };
+        Thread tr = new Thread(ftpRun);
+        tr.start();
+        try {
+            tr.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+        return brends;
+    }
+
+
+    private String getFullTime(long timeInMillis) {
+        final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        // final Calendar c = Calendar.getInstance();
+        final Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timeInMillis);
+        c.setTimeZone(TimeZone.getDefault());
+        //Log.e("TimeZone: ", format.format(c.getTime()));
+        return format.format(c.getTime());
     }
 
 
@@ -1096,7 +1358,6 @@ public class FTPWebhost {
 
     }
 
-
 }
 
 
@@ -1163,3 +1424,139 @@ public class FTPWebhost {
                     Log.e("LISTPHONE__", "_"+ListSetPhone.get(i));
                 }// else Log.e("LISTPHONENo__", "_"+ListSetPhone.get(i));
             }*/
+
+
+
+/*
+    public void getLoadingFileImage(String put_toFilesSTART, String put_toFilesEND, List<String> w_list, ProgressBar horiz) {
+
+        final Handler h;
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    // устанавливаем подключение
+                    h.sendEmptyMessage(STATUS_CONNECTING);
+                    TimeUnit.SECONDS.sleep(2);
+
+                    // установлено
+                    h.sendEmptyMessage(STATUS_CONNECTED);
+
+                    // выполняется какая-то работа
+                    TimeUnit.SECONDS.sleep(3);
+
+                    // разрываем подключение
+                    h.sendEmptyMessage(STATUS_NONE);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+
+        */
+/*
+ * put_toFilesSTART - путь откуда скачивать файл
+ * put_toFilesEND - путь конечной директории
+ * w_list - список файлов для скачивания
+ * progressBar - активированный progressBar для отображения процесса
+ * *//*
+
+        final int[] k = {0};
+        final double[] prmin = {0};
+        final double prmax = w_list.size();
+        final double pr = 100 / prmax;
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                h.sendEmptyMessage(STATUS_CONNECTING);
+                FTPClient ftpClient = new FTPClient();
+                FtpConnectData ftpConnectData = new FtpConnectData();
+                try {
+                    ftpClient.connect(ftpConnectData.server_name, ftpConnectData.port);
+                    ftpClient.login(ftpConnectData.server_username, ftpConnectData.server_password);
+                    ftpClient.enterLocalPassiveMode();
+                    Log.e("FTP", "Пакетное скачивание");
+                    Log.e("LIST: ", "Start: " + put_toFilesSTART);
+                    Log.e("LIST: ", "END: " + put_toFilesEND);
+                    k[0] = 0;
+                    while (k[0] < w_list.size()) {
+                        prmin[0] = +prmin[0] + pr;
+                        Log.e("LIST_Yes: ", "Files: " + w_list.get(k[0]));
+                        Log.e("FTP", "Скачивание одного файла ");
+                        // OutputStream outputStream = new FileOutputStream(new File(put_toFilesEND + "/Image/" + w_list.get(k)));  // путь к папке files приложения
+                        OutputStream outputStream = new FileOutputStream(new File(put_toFilesEND + w_list.get(k[0])));  // путь к папке files приложения
+                        // OutputStream outputStream = new FileOutputStream(new File(put_toFilesEND + w_list.get(k)));  // путь к папке files приложения
+                        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+                        ftpClient.enterLocalPassiveMode();
+                        ftpClient.retrieveFile(put_toFilesSTART + "/" + w_list.get(k[0]), outputStream);
+                        outputStream.close();
+                        k[0]++;
+                        // myHandler.sendMessage(myHandler.obtainMessage());
+
+                        //  progressBarHoriz.setProgress(Double.valueOf(prmin[0]).intValue());
+                        //  progressBarHoriz.incrementProgressBy(Double.valueOf(pr).intValue());
+*/
+/*                        horiz.post(new Runnable() {
+                            public void run() {
+                                Log.e("Progress: ", "progress: " + prmin[0]);
+                                if (prmin[0] < 100) horiz.setVisibility(View.VISIBLE);
+                                else horiz.setVisibility(View.GONE);
+                            }
+                        });*//*
+
+                    }
+
+                    // progressBarHoriz.setMax(100);
+                    //  progressBar.setVisibility(View.INVISIBLE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("ERROR: ", "Ошибка");
+                } finally {
+                    try {
+                        if (ftpClient.isConnected()) {
+                            ftpClient.logout();
+                            ftpClient.disconnect();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        };
+
+
+        Thread tr = new Thread(runnable);
+        tr.start();
+
+        final int STATUS_NONE = 0; // нет подключения
+        final int STATUS_CONNECTED = 1; // подключено
+        h = new Handler() {
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case STATUS_NONE:
+                        Log.e("Go", "Not connected");
+                        horiz.setVisibility(View.INVISIBLE);
+                        break;
+                    case STATUS_CONNECTED:
+                        Log.e("Go", "Connected");
+                        horiz.setVisibility(View.VISIBLE);
+                        break;
+                }
+            };
+        };
+        h.sendEmptyMessage(STATUS_NONE);
+
+
+
+*/
+/*        try {
+            tr.join();
+            horiz.setVisibility(View.GONE);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }*//*
+
+
+
+    }*/

@@ -30,6 +30,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -97,6 +99,7 @@ public class PrefActivity_Splash extends PreferenceActivity {
     public PreferenceCategory preferenceCategory_FTP, preferenceCategory_TY, preferenceCategory_Nomenclatura, preferenceCategory_All, preferenceCategory_About;
 
     public SwitchPreference switch_all_brends, switch_for_agent, switch_HandSelected;
+    public SwitchPreference switch_OldVersion, switch_Files, switch_SDCard;
 
     /*public EditTextPreference edit_ip, edit_login, edit_pass;
     edit_ip = (EditTextPreference) findPreference("edit_ip");
@@ -121,6 +124,7 @@ public class PrefActivity_Splash extends PreferenceActivity {
         Permission_Nomeclatura();
         ListPreference_Brends_Adapter();
         Permission_TY();
+        Permission_putImgeToPhone();
 
 
         preference_up_db = findPreference("button_up_db");
@@ -156,7 +160,6 @@ public class PrefActivity_Splash extends PreferenceActivity {
         Android_id = Settings.Secure.getString(context_Activity.getContentResolver(), Settings.Secure.ANDROID_ID);
         mass_MTW = getResources().getStringArray(R.array.mass_files_MTW);
         mass_SQL = getResources().getStringArray(R.array.mass_files_SQLITE_DB);
-
 
 
         button_write_new_group.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -326,7 +329,6 @@ public class PrefActivity_Splash extends PreferenceActivity {
     }
 
     protected void Calendate_New() {
-
 
 
         DateFormat df_data = new SimpleDateFormat("yyyy-MM-dd");
@@ -1664,14 +1666,18 @@ ftpClient.enterLocalPassiveMode();
 
     protected void Permission_TY() {
         //<string name="preference_type_ty">standart</string>
+
         listPreference_ty = (ListPreference) findPreference("preference_type_ty");
         listPreference_ty.setSummary(listPreference_ty.getEntry());
         listPreference_ty.setEntries(R.array.mass_type_ty_title);
         listPreference_ty.setEntryValues(R.array.mass_type_ty_value);
+
         Log.e(TAG, "PER2:" + listPreference_ty.getEntry());
         Log.e(TAG, "PER2:" + listPreference_ty.getEntries().toString());
         Log.e(TAG, "PER2:" + listPreference_ty.getValue());
         Log.e(TAG, "PER2:" + listPreference_ty.getSummary());
+
+
         listPreference_ty.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -1685,6 +1691,49 @@ ftpClient.enterLocalPassiveMode();
                                     : "По умолчанию");
                 }
                 return true;
+            }
+        });
+    }
+
+    /////////////////  НАСТРОЙКИ ДЛЯ ВЫБОРА ПУТИ К БАЗЕ КАРТИНОК
+    protected void Permission_putImgeToPhone() {
+        switch_OldVersion = (SwitchPreference) findPreference("key_putToOld");
+        switch_Files = (SwitchPreference) findPreference("key_putToFiles");
+        switch_SDCard = (SwitchPreference) findPreference("key_putToSDCard");
+
+        switch_OldVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (switch_OldVersion.isChecked()) {
+                    switch_OldVersion.setChecked(true);
+                    switch_Files.setChecked(false);
+                    switch_SDCard.setChecked(false);
+                }
+                return false;
+            }
+        });
+
+        switch_Files.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (switch_Files.isChecked()) {
+                    switch_OldVersion.setChecked(false);
+                    switch_Files.setChecked(true);
+                    switch_SDCard.setChecked(false);
+                }
+                return false;
+            }
+        });
+
+        switch_SDCard.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (switch_SDCard.isChecked()) {
+                    switch_OldVersion.setChecked(false);
+                    switch_Files.setChecked(false);
+                    switch_SDCard.setChecked(true);
+                }
+                return false;
             }
         });
     }
