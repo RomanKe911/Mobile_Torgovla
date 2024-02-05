@@ -408,7 +408,7 @@ public class UpdateImage extends AppCompatActivity {
 
                 adapterListFTP.notifyItemChanged(0, 0);
                 // Log.e("ViewHolder", ftp_image_newRun.toString());
-                SnackbarOverride("Статус: список обновлен");
+               // SnackbarOverride("Статус: список обновлен");
             });
             model.execute2();
 

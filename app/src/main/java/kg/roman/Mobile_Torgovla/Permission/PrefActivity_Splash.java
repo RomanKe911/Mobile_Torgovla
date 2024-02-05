@@ -1,7 +1,5 @@
 package kg.roman.Mobile_Torgovla.Permission;
 
-import static java.lang.Boolean.FALSE;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -29,8 +27,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -101,6 +97,8 @@ public class PrefActivity_Splash extends PreferenceActivity {
     public SwitchPreference switch_all_brends, switch_for_agent, switch_HandSelected;
     public SwitchPreference switch_OldVersion, switch_Files, switch_SDCard;
 
+
+
     /*public EditTextPreference edit_ip, edit_login, edit_pass;
     edit_ip = (EditTextPreference) findPreference("edit_ip");
     edit_login = (EditTextPreference) findPreference("edit_login");
@@ -109,6 +107,8 @@ public class PrefActivity_Splash extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_splash);
+
+
         context_Activity = PrefActivity_Splash.this;
         TAG = this.getLocalClassName();
         Constanta_Read();
@@ -122,13 +122,13 @@ public class PrefActivity_Splash extends PreferenceActivity {
         Permission_Server();
         Permission_Data_RW();
         Permission_Nomeclatura();
-        ListPreference_Brends_Adapter();
+     //   ListPreference_Brends_Adapter();   /////21/01/2024
         Permission_TY();
         Permission_putImgeToPhone();
 
 
         preference_up_db = findPreference("button_up_db");
-        this.activity_view = this.findViewById(R.id.preference_list_1);
+        this.activity_view = this.findViewById(R.id.setting_connect_ftp);
 
 
         button_id_catigory = (Preference) findPreference("button_id_catigory");

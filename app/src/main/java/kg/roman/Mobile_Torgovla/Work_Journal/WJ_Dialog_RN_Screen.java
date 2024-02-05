@@ -38,6 +38,8 @@ import org.jsoup.nodes.Document;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_RN_END;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_RN_END;
 import kg.roman.Mobile_Torgovla.R;

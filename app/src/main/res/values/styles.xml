@@ -16,6 +16,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <!-- Base application theme. -->
@@ -635,11 +636,28 @@
     </style>
 
     <style name="Style_BackUp_Button">
-        <item name="android:layout_width">75dp</item>
-        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:background">@drawable/selector_button_ftp_download</item>
     </style>
 
+
+    <style name="AppTheme.Setting">
+        <!-- Кастомная тема для настроек -->
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+        <item name="colorAccent">#00897B</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#000000</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#00796B</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#E64A19</item>        //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>        //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>        //  Цвет текста заголовка пунктов
+       <item name="android:windowBackground">#FFFFFF</item>        //  Цвет фона
+
+        <item name="windowActionBar">true</item>
+    </style>
 
 
 

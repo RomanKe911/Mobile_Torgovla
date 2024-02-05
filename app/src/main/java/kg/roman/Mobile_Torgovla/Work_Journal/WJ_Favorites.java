@@ -29,6 +29,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L2;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_WJ_Favorite;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_WJ_Favorite;
 import kg.roman.Mobile_Torgovla.R;

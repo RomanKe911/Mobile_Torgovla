@@ -1,29 +1,16 @@
 package kg.roman.Mobile_Torgovla.Spravochnik;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,16 +24,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
-import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Ostatok_Invert;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Otchet_Ostatok;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Ostatok_Invert;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Otchet_Ostatok;
 import kg.roman.Mobile_Torgovla.R;
-import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Forma_Zakaza_L2;
 
 public class SPR_Ostatok_Inventoriz_NEW extends AppCompatActivity {
 

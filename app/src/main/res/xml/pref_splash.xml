@@ -5,7 +5,7 @@
     tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity">
 
     <PreferenceCategory
-        android:id="@+id/preference_list_1"
+        android:id="@+id/setting_connect_ftp"
         android:key="preferenc_menu_ftp"
         android:summary="Description of cat_1"
         android:title="Обработка данных с сервера">

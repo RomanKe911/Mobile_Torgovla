@@ -43,7 +43,7 @@ public class MailSenderClass extends javax.mail.Authenticator {
         this.mailhost_new = mailhost_new;
 
         _multipart = new MimeMultipart();
-        Log.e("MAAIL_Per ", user + " ,/ " + password + " ,/ " + port + " ,/ " + mailhost_new);
+        Log.e("Mail_Per", user + ", /" + password + ", /" + port + ", /"+ mailhost_new);
 
 
         Properties props = new Properties();

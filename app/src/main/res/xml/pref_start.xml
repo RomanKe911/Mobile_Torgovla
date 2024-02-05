@@ -5,6 +5,39 @@
     tools:context="kg.price_list.roman_kerkin.sunbell_price.MainActivity"  >
 
     <PreferenceCategory
+        android:id="@+id/setting_connect_ftp"
+        android:key="preferenc_menu_ftp"
+        android:summary="настройки для подключения к серверу"
+        android:title="Обработка данных с сервера"
+        app:icon="@drawable/icons_ftp_up">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_ftp_server_con"
+            android:entryValues="@array/mass_ftp_server_con_value"
+            android:icon="@drawable/ic_menu_send"
+            android:key="ftp_ipConn_list"
+            android:summary=""
+            android:title="FTP: ip-адрес" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/mass_Region_Put_Name"
+            android:entryValues="@array/mass_Region_Put_Value"
+            android:icon="@drawable/ic_menu_send"
+            android:key="ftp_put_list"
+            android:summary=""
+            android:title="FTP: путь к данным" />
+        <Preference
+            android:id="@+id/preference_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_menu_send"
+            android:key="button_const"
+            android:summary=""
+            android:title="Загрузить файлы для старта"></Preference>
+
+    </PreferenceCategory>
+    <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:key="categ1"

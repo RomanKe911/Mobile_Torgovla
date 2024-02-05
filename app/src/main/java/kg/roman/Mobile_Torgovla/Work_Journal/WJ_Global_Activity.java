@@ -41,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.MT_BackUp.BackUp;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_GroupID;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_Image;
@@ -59,6 +60,7 @@ import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpConnection;
 import kg.roman.Mobile_Torgovla.ImagePack.UpdateImage;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_DB_Data;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Data;
+import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
 import kg.roman.Mobile_Torgovla.MailSenderClass;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity;
 import kg.roman.Mobile_Torgovla.R;
@@ -415,7 +417,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
 
                 case R.id.forma_title_4_up: //Выгрузить данные на сервер
-                    Toast.makeText(context_Activity, "Временно не работает, выгрузка данных производится из \"формы заказа\"", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(context_Activity, "Временно не работает, выгрузка данных производится из \"формы заказа\"", Toast.LENGTH_SHORT).show();
                   /*  try {
                         ListAdapet_Internet_Load();
                         Mail();
@@ -1109,20 +1111,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
                         }
                     } break;
-                    case "Обновление картинок": //Розница
-                    {
-                        try {
-                            Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
-                            intent_start_act = null;
-                            intent_start_act = new Intent(context_Activity, UpdateImage.class);
-                            startActivity(intent_start_act);
-
-                        } catch (Exception e) {
-                            Log.e("Pref", "Ошибка журнала");
-                            Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
-                    } break;
 
                     case "Создание PDF": //Розница
                     {
@@ -1417,7 +1406,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             //Log.e("NewName", new_name); // Код и ревизия
                             FTP_Connect_Filial_SOS(mass_files_SOS[q], PEREM_FTP_DISTR_sos + "/" + this_data_now + "_" + new_name + "_" + res + ".db3");  // /MT_Sunbell_Karakol
                         }
-
+                        // 03:12:2023 02:58:30_sunbell_const_db_sunbell_(marshrut-400).db3
                         ListAdapet_Internet_Load_SOS();
                         Mail();
                         WJ_Global_Activity.sender_mail_async_SOS async_sending = new WJ_Global_Activity.sender_mail_async_SOS();
@@ -1516,6 +1505,20 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         asyncTask.execute();
                     }
                     break;
+                    case "Обновление картинок": //Розница
+                    {
+                        try {
+                            // Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
+
+                            intent_start_act = null;
+                            intent_start_act = new Intent(context_Activity, UpdateImage.class);
+                            startActivity(intent_start_act);
+
+                        } catch (Exception e) {
+                            Log.e("Pref", "Ошибка журнала");
+                            Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
+                        }
+                    } break;
 
                 }
             }
@@ -1941,10 +1944,11 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
             try {
 
                 FTPClient ftpClient = new FTPClient();
-                String server = PEREM_FTP_SERV;
+                FtpConnectData ftpConnectData=new FtpConnectData();
+                String server = ftpConnectData.server_name;
                 int port = 21;
-                String user = PEREM_FTP_LOGIN;
-                String pass = PEREM_FTP_PASS;
+                String user = ftpConnectData.server_username;
+                String pass = ftpConnectData.server_password;
 
                 try {
                     ftpClient.connect(server, port);

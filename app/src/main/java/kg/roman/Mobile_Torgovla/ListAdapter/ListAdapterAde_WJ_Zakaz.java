@@ -25,6 +25,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_WJ_Zakaz;
+import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
 import kg.roman.Mobile_Torgovla.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -109,7 +110,9 @@ public class ListAdapterAde_WJ_Zakaz extends BaseAdapter implements Filterable {
            /* File imagePath_SD = new File("/sdcard/Price/Image/" + objects.get(pos).getImage() + ".png");//путь к изображению
             Uri imagePath_phone_base_1 = Uri.parse("android.resource://kg.price_list.roman_kerkin.sunbell_price/drawable/" + objects.get(pos).getImage());*/
 
-            File imagePath_SD = new File(PEREM_SD + objects.get(pos).getImage() + ".png");//путь к изображению
+
+            // 21/01/2024 изменено
+/*            File imagePath_SD = new File(PEREM_SD + objects.get(pos).getImage() + ".png");//путь к изображению
             Uri imagePath_phone_base_1 = Uri.parse(PEREM_PHONE + objects.get(pos).getImage());
             if(imagePath_SD.exists())
             {
@@ -127,6 +130,30 @@ public class ListAdapterAde_WJ_Zakaz extends BaseAdapter implements Filterable {
                         .error(R.drawable.no_image) //заглушку для ошибки
                         //   .fit()
                         .into(image);
+            }*/
+
+
+
+            try {
+                FtpConnectData ftpConnectData = new FtpConnectData();
+                File newImage_png = new File(ftpConnectData.put_toPhoneImage(context) + objects.get(pos).getImage() + ".png");
+                File newImage_jpg = new File(ftpConnectData.put_toPhoneImage(context) + objects.get(pos).getImage() + ".jpg");
+                if (newImage_png.isFile())
+                    Picasso.get() //передаем контекст приложения
+                            .load(newImage_png)
+                            .error(R.drawable.no_image)
+                            .into(image); //ссылка на ImageView*/
+                else
+                    Picasso.get() //передаем контекст приложения
+                            .load(newImage_jpg)
+                            .error(R.drawable.no_image)
+                            .into(image); //ссылка на ImageView*/
+
+                Log.e("Image_PUT_PNG", newImage_png + "__" + newImage_png.isFile());
+                Log.e("Image_PUT_JPG", newImage_jpg + "__" + newImage_jpg.isFile());
+
+            } catch (Exception e) {
+                Log.e("Image_Error", "Нет картинов в ресурсах");
             }
 
         } catch (Exception e) {

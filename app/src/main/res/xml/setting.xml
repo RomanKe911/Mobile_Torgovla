@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <PreferenceCategory
+        android:id="@+id/setting_connect_ftp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="preferenc_menu_ftp"
+        android:summary="настройки для подключения к серверу"
+        android:title="Обработка данных с сервера"
+        app:icon="@drawable/icons_ftp_up">
+
+        <ListPreference
+            android:defaultValue="null"
+            android:entries="@array/mass_ftp_server_con"
+            android:entryValues="@array/mass_ftp_server_con_value"
+            android:icon="@drawable/ic_menu_send"
+            android:key="setting_ftpIP"
+            android:summary=""
+            android:title="FTP: ip-адрес"
+            app:persistent="true" />
+        <ListPreference
+            android:defaultValue="null"
+            android:entries="@array/mass_Region_Put_Name"
+            android:entryValues="@array/mass_Region_Put_Value"
+            android:icon="@drawable/ic_menu_send"
+            android:key="setting_ftpPathData"
+            android:summary=""
+            android:title="FTP: путь к данным"
+            app:persistent="true" />
+        <Preference
+            android:id="@+id/preference_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:key="setting_LoadDataFile"
+            android:summary=""
+            android:title="Скачать файлы для старта"
+            app:persistent="true"></Preference>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:id="@+id/setting_tradepreference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="preferenc_menu_tradepreference"
+        android:summary="торговые условия для контрагентов"
+        android:title="Торговые условия"
+        app:icon="@mipmap/icon_percent">
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:entries="@array/mass_type_ty_title"
+            android:entryValues="@array/mass_type_ty_value"
+            android:icon="@drawable/ic_menu_send"
+            android:key="preference_TradeStatus"
+            android:summary=""
+            android:title="Тип торговых условий"
+            app:persistent="true" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:entries="@array/list_ty_entries"
+            android:entryValues="@array/list_ty_entryValues"
+            android:icon="@drawable/ic_menu_send"
+            android:key="preference_ListTradeNal"
+            android:summary="%1$s"
+            android:title="Скидка за наличный расчет"
+            app:persistent="true"></ListPreference>
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:entries="@array/list_ty_entries"
+            android:entryValues="@array/list_ty_entryValues"
+            android:icon="@drawable/ic_menu_send"
+            android:key="preference_ListTradeKons"
+            android:summary="%1$s"
+            android:title="Скидка под консигнацию"
+            app:persistent="true"></ListPreference>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:id="@+id/setting_imge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="setting_imge"
+        android:summary="директории для базы картинок"
+        android:title="База картинок"
+        app:icon="@android:drawable/ic_menu_my_calendar">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_settingImageOld"
+            android:summary="mt_image"
+            android:title="Путь к старой версии:"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_settingImagePhone"
+            android:summary="files/Image"
+            android:title="Путь к директории Files:"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_settingImageSDCard"
+            android:summary="SD-Card/Picture"
+            android:title="Путь к директории SD-Card:"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_SwitchPreferencePermission"
+            android:summary="Разрешение не предоставлено"
+            android:title="Разрешение на доступ к данным"
+            app:persistent="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:id="@+id/setting_nomenclatura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="preferenc_menu_nomenclatura"
+        android:summary="настройка отображения списка брендов"
+        android:title="Номенклатура"
+        app:icon="@drawable/wj_office_title_otchet">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_SwitchPreference_BrendsAll"
+            android:summary="(всё для всех)"
+            android:title="Список номенклатуры"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_SwitchPreference_BrendsAgents"
+            android:summary="отображение брендов для агентов"
+            android:title="Список номенклатуры"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_SwitchPreference_BrendsManual"
+            android:summary="собственный список брендов"
+            android:title="Ручной отбор"
+            app:persistent="true" />
+        <MultiSelectListPreference
+            android:dependency="key_SwitchPreference_BrendsManual"
+            android:entries="@array/mass_table_db"
+            android:entryValues="@array/simvol_kod_image_DB"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_MultiSelectPreference_BrendsManual"
+            android:summary="список брендов"
+            android:title="Мульти-список"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_SwitchPreference_SortedBySQL"
+            android:summary="программная сортировка товара"
+            android:title="Сортировка номенклатуры"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_SwitchPreference_BrendsFirms"
+            android:summary="деление списка брендов по фирмам"
+            android:title="Отображение по фирмам"
+            app:persistent="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

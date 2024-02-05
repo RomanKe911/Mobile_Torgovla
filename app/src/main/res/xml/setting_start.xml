@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:id="@+id/setting_connect_ftp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="preferenc_menu_ftp"
+        app:icon="@drawable/icons_ftp_up"
+        android:summary="настройки для подключения к серверу"
+        android:title="Обработка данных с сервера">
+
+        <ListPreference
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:entries="@array/mass_ftp_server_con"
+            android:entryValues="@array/mass_ftp_server_con_value"
+            android:key="setting_ftpIP"
+            android:summary=""
+            android:title="FTP: ip-адрес" />
+        <ListPreference
+            android:icon="@drawable/ic_menu_send"
+            android:defaultValue="null"
+            android:entries="@array/mass_Region_Put_Name"
+            android:entryValues="@array/mass_Region_Put_Value"
+            android:key="setting_ftpPathData"
+            android:summary=""
+            android:title="FTP: путь к данным" />
+        <Preference
+            android:icon="@drawable/ic_menu_send"
+            android:id="@+id/preference_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="setting_LoadDataFile"
+            android:summary=""
+            android:defaultValue="null"
+            android:title="Скачать файлы для старта"></Preference>
+
+    </PreferenceCategory>
+</PreferenceScreen>

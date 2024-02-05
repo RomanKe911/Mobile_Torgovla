@@ -36,7 +36,7 @@
         android:requestRawExternalStorageAccess="true"
         android:roundIcon="@mipmap/ic_logo1_suncape"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme2"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <!--
           android:name=".Start_SplashActivity"
@@ -141,22 +141,36 @@
             android:name=".Permission.PrefActivity"
             android:label="Настройки приложения"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Permission.PrefActivity_Splash"
             android:label="Настройки приложения"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Permission.PrefActivity_Splash_New"
             android:label="Настройки приложения"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Setting.Setting_Start"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+
+        <activity
+            android:name=".Setting.Setting"
+            android:label="Настройки приложения"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+
+
         <activity
             android:name=".Permission.PrefActivity_Start"
             android:label="Настройки приложения"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Permission.PrefActivity_Nomeclatura"
             android:label="Настройки приложения"
@@ -243,7 +257,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Work_Journal.WJ_Forma_Zakaza_Dop_Data"
+            android:name=".FormaZakaza.WJ_Forma_Zakaza_Dop_Data"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -290,22 +304,22 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Work_Journal.WJ_Forma_Zakaza"
+            android:name=".FormaZakaza.WJ_Forma_Zakaza"
             android:label="Расходные накладные"
             android:screenOrientation="portrait"
             android:theme="@style/Work_Theme" />
         <activity
-            android:name=".Work_Journal.WJ_Forma_Zakaza_L1"
+            android:name=".FormaZakaza.WJ_Forma_Zakaza_L1"
             android:label="Контрагенты"
             android:screenOrientation="portrait"
             android:theme="@style/Work_Theme" />
         <activity
-            android:name=".Work_Journal.WJ_Forma_Zakaza_L2"
+            android:name=".FormaZakaza.WJ_Forma_Zakaza_L2"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2.NoActionBar" />
+            android:theme="@style/AppTheme.Samarela" />
         <activity
-            android:name=".Work_Journal.WJ_Forma_Zakaza_L2_Sub"
+            android:name=".FormaZakaza.WJ_Forma_Zakaza_L2_Sub"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Samarela" />
@@ -355,7 +369,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".FormaZakaza.WJ_FormaZakaza_2023"
+            android:name=".FormaZakazaNew.WJ_FormaZakaza_2023"
             android:exported="false"
             android:label="@string/title_activity_wj_forma_zakaza2023" />
 

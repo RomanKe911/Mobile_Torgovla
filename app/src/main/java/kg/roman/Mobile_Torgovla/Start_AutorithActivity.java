@@ -46,6 +46,8 @@ import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash_New;
+import kg.roman.Mobile_Torgovla.Setting.Setting;
+import kg.roman.Mobile_Torgovla.Setting.Setting_Start;
 import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Global_Activity;
 import kg.roman.Mobile_Torgovla.TEST.WJ_Ros_Torg;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_File_Const;
@@ -283,8 +285,14 @@ public class Start_AutorithActivity extends AppCompatActivity {
 
                 }
                 break;
-                case R.id.menu_preferenc_new: {
+                case R.id.menu_setting_new: {
                     Intent intent_prefActivity = new Intent(context_Activity, PrefActivity_Splash_New.class);
+                    startActivity(intent_prefActivity);
+                }
+                break;
+
+                case R.id.menu_setting_start: {
+                    Intent intent_prefActivity = new Intent(context_Activity, Setting.class);
                     startActivity(intent_prefActivity);
                 }
                 break;

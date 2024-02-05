@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Klients;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Klients;
+import kg.roman.Mobile_Torgovla.FormaZakaza.ListAdapterSimple_Klients;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.Work_Journal.WJ_New_Contragent;
 

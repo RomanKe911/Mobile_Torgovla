@@ -145,4 +145,9 @@
    <color name="orange">#ff6c00</color>
     <color name="white">#ffffff</color>
     <color name="white_chalk">#d0dbcc</color>
+
+
+    <color name="setting_color_primary">#00796B</color>
+    <color name="setting_color_second">#004D40</color>
+    <color name="setting_color_text">#000000</color>
 </resources>

@@ -16,9 +16,13 @@
                 android:icon="@drawable/menu_logo_tool_box"
                 android:title="Настройки" />
             <item
-                android:id="@+id/menu_preferenc_new"
+                android:id="@+id/menu_setting_new"
                 android:icon="@drawable/menu_logo_tool_box"
                 android:title="Настройки_New" />
+            <item
+                android:id="@+id/menu_setting_start"
+                android:icon="@drawable/menu_logo_tool_box"
+                android:title="Настройки 2024" />
         </menu>
     </item>
 

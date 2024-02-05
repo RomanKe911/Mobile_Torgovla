@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/MT_Layout_Background_Work">
@@ -156,7 +157,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/wt_bt_load"
-            android:background="@drawable/wj_office_title_up_ftp"
+            android:background="@drawable/wj_office_dowldb"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/forma_title_4_update"
             app:layout_constraintStart_toStartOf="parent"
@@ -195,19 +196,17 @@
             app:layout_constraintEnd_toEndOf="@+id/forma_title_4_load"
             app:layout_constraintHorizontal_bias="0.409"
             app:layout_constraintStart_toStartOf="@+id/forma_title_4_load"
-            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_load"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_load"             />
 
         <TextView
             android:id="@+id/textView5"
             style="@style/wg_global_text_size"
-            android:text="@string/wt_text_line4_otput"
+            android:text="@string/wt_bt_load"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/forma_title_4_up"
-            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/forma_title_4_up"
-            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_up"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/forma_title_4_up" />
 
         <TextView
             android:id="@+id/textView8"

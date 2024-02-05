@@ -10,13 +10,13 @@
         <menu android:id="@+id/menu_preferenc_1">
         <item
             android:id="@+id/menu_item_base_backup"
-            android:icon="@drawable/office_title_updata_db"
-            android:title="резервное копирование" />
+            android:icon="@drawable/ic_menu_send"
+            android:title="резервное копирование данных" />
 
         <item
             android:id="@+id/menu_item_base_null"
             android:icon="@drawable/ic_menu_send"
-            android:title="настройки" />
+            android:title="загрузить данные" />
         </menu>
     </item>
 

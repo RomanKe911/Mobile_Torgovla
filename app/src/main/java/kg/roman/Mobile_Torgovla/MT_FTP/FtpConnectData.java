@@ -9,9 +9,18 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
+import kg.roman.Mobile_Torgovla.MailSenderClass;
 import kg.roman.Mobile_Torgovla.R;
 
 public class FtpConnectData {
@@ -23,23 +32,35 @@ public class FtpConnectData {
     public String server_username = "sunbell_siberica";
     public String server_password = "Roman911NFS";
     public long ftp_timezone = 21600000L;  //Часовой пояс: Asia/Bishkek (+6) = 21600000
+    public int ftp_backup_sizeFile = 3;
     private SharedPreferences mSettings;
     private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
-    public String[] mass_file_backup = {"sunbell_rn_db.db3", "sunbell_base_db.db3", "sunbell_const_db.db3"};
+    public String[] mass_file_backup = {"sunbell_rn_db", "sunbell_base_db", "sunbell_const_db"};
+
+
+
+    public String messege_mail_from = "sunbellagents@gmail.com";
+    public String messege_mail_where = "kerkin911@gmail.com";
+    public String messege_mail_sender_user = "sunbellagents@gmail.com";
+    public String messege_mail_sender_password = "fyczcoexpaspsham";
+    public String messege_mail_sender_port = "465";
+    public String messege_mail_sender_mailhost = "smtp.gmail.com";
 
 
     // Пути к Ftp-данным для скачивания
     public String put_toFtpImageTradegof = "/MT_Sunbell_Karakol/Image/Firm_Tradegof"; // для фирмы TradeGof
     public String put_toFtpImageSunbell = "/MT_Sunbell_Karakol/Image/Firm_Sunbell"; // для фирмы Sunbell
 
-    public String put_toFTPBackUp = "/MT_Sunbell_Karakol/MTW_SOS/";
-    public String put_toFtpBackUp(Context context)
-    {
+    protected String loge_TAG = "FtpConnectData";
+
+   // public String put_toFTPBackUp = "/MT_Sunbell_Karakol/MTW_SOS/";
+
+    public String put_toFtpBackUp(Context context) {
         // Путь к файлам резервного копирования /MT_Sunbell_Karakol/MTW_SOS/
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         String nameRegion = mSettings.getString("ftp_put_list", "").replaceAll("/", "");    // получение имени региона
         String putName = "";
-        putName = "/"+nameRegion+"/MTW_SOS/";
+        putName = "/" + nameRegion + "/MTW_SOS/";
         return putName;
     }
 
@@ -66,12 +87,13 @@ public class FtpConnectData {
         File files = new File(context.getFilesDir().getAbsolutePath());
         File file = new File(files.getPath() + "/Image/");
 
-        Log.e("Progress: ", "t1: " + putToOld+"__t2: "+putToFiles+"__t3:"+putToSDCard);
+        Log.e("Progress: ", "t1: " + putToOld + "__t2: " + putToFiles + "__t3:" + putToSDCard);
         if (putToOld) endPutFile = imagePath_OldMT.toString();
         if (putToFiles) endPutFile = file + "/";
         if (putToSDCard) endPutFile = imagePath_SD + "/";
         return endPutFile;
     }
+
     public String put_toPhoneIcons(Context context) {
         File files = new File(context.getFilesDir().getAbsolutePath());
         return files.getPath() + "/Icons/";
@@ -108,5 +130,89 @@ public class FtpConnectData {
     }
 
 
-    // Пути к Ftp-данным для отправки
+    //// Конвертация даты файлы из long в String(дата и время) (WORK)
+    public String getFullTimeLongToString(long timeInMillis) {
+        final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        // final Calendar c = Calendar.getInstance();
+        final Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timeInMillis + ftp_timezone);
+        c.setTimeZone(TimeZone.getDefault());
+        // Log.e("TimeZone: ", "Long: " + timeInMillis + " = " + format.format(c.getTime()));
+        return format.format(c.getTime());
+    }
+
+    //// Конвертация даты файлы из long в String(дата и время) (WORK)
+    public String getFullTimeLongToStringFormatBackup(long timeInMillis) {
+        final SimpleDateFormat format = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss");
+        // final Calendar c = Calendar.getInstance();
+        final Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timeInMillis);
+        c.setTimeZone(TimeZone.getDefault());
+        // Log.e("TimeZone: ", "Long: " + timeInMillis + " = " + format.format(c.getTime()));
+        return format.format(c.getTime());
+    }
+
+
+    //// Конвертация даты файлы из String в Long(дата и время) (WORK)
+    public Long getFullTimeStringToLong(String timeString) {
+        // Формат строки 09:01:2024 09:37:21
+        Calendar calendar = new GregorianCalendar();
+        long returnLong;
+        try {
+            String firstString = timeString.substring(0, timeString.indexOf(" "));
+            String secondString = timeString.substring(timeString.lastIndexOf(" "));
+            int day = Integer.parseInt(firstString.substring(0, firstString.indexOf(":")).trim());
+            int month = Integer.parseInt(firstString.substring(firstString.indexOf(":") + 1, firstString.lastIndexOf(":")).trim()) - 1;
+            int year = Integer.parseInt(firstString.substring(firstString.lastIndexOf(":") + 1).trim());
+            int hour = Integer.parseInt(secondString.substring(0, secondString.indexOf(":")).trim());
+            int minute = Integer.parseInt(secondString.substring(secondString.indexOf(":") + 1, secondString.lastIndexOf(":")).trim());
+            int second = Integer.parseInt(secondString.substring(secondString.lastIndexOf(":") + 1).trim());
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
+            calendar.set(Calendar.SECOND, second);
+            calendar.set(Calendar.MILLISECOND, 0);
+          //  Log.e("TimeZoneData: ", "Long: " + calendar.getTimeInMillis() + " Da " + calendar.getTime());
+            returnLong= calendar.getTimeInMillis();
+        } catch (Exception e) {
+            Log.e(loge_TAG, "Ошибка выполнения конвертации даты в формат long");
+            returnLong = 0L;
+        }
+        return returnLong;
+    }
+
+
+    public String CreateNameFile_BackUp(String stringName) {
+
+        char[] chars_rus = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ч', 'ц', 'ш', 'щ', 'э', 'ю', 'я', 'ы', 'ъ', 'ь'};
+        String[] string_eng = {"a", "b", "v", "g", "d", "e", "io", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "i", "", ""};
+        StringBuilder newName = new StringBuilder();
+        StringBuilder newNameNumber = new StringBuilder();
+
+        if (!stringName.isEmpty() | !stringName.equals(" ")) {
+          //  String string1 = stringName.replaceFirst(" ", "_").replaceAll(" ", "");
+            String string1 = stringName.replaceAll(" ", "_");
+            String stringWork = string1.toLowerCase().replaceAll("[^a-zа-я0-9_]", "");
+            for (Character agent : stringWork.toCharArray()) {
+                for (int i = 0; i < chars_rus.length; i++)
+                    if (chars_rus[i] == agent)
+                        newName.append(string_eng[i]);
+                if (Character.isDigit(agent))
+                    newNameNumber.append(agent);
+                if (agent.toString().matches("[a-z]"))
+                    newName.append(agent);
+                if (agent.toString().matches("_"))
+                    newName.append(agent);
+            }
+            newName.append(newNameNumber);
+        } else
+        {
+            Log.e("CreateNameFile_BackUp", "не возможно создать строку, не верный формат данных");
+           // Snackbar.make(constraintLayout, "не возможно создать строку, не верный формат данных", Snackbar.LENGTH_SHORT).show();
+        }
+        Log.e("CreateNameFile_BackUp", newName.toString());
+        return newName.toString();
+    }
 }

@@ -31,6 +31,9 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +45,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import kg.roman.Mobile_Torgovla.ImagePack.ImagePack_R_Simple;
 import kg.roman.Mobile_Torgovla.ImagePack.ListAdapterSimple_Ftp_Image;
@@ -153,9 +157,10 @@ public class FTPWebhost {
                     ftpClient.enterLocalPassiveMode();
 
                     long[] dirInfo_db3 = calculateDirectoryInfo(ftpClient, put_toFilesFTP, "");
-/*            Log.e("Дирикторий=", " = " + dirInfo_db3[0]);
-            Log.e("Файлов=", " = " + dirInfo_db3[1]);
-            Log.e("Размер!=", " = " + dirInfo_db3[2] + " байт");*/
+/*                    Log.e("Путь=", " = " + put_toFilesFTP);
+                    Log.e("Дирикторий=", " = " + dirInfo_db3[0]);
+                    Log.e("Файлов=", " = " + dirInfo_db3[1]);
+                    Log.e("Размер!=", " = " + dirInfo_db3[2] + " байт");*/
                     //    Log.e("Файлов=", " = " + dirInfo_db3[1]);
                     if (dirInfo_db3[1] >= 1)
                         stringBuilder.append(getLongToDoubleFileSize(dirInfo_db3[2]));
@@ -348,27 +353,29 @@ public class FTPWebhost {
     }
 
     // Скачать файл(ы) с FTP
-    public void getFileToPhone(String put_toFilesSTART, String put_toFilesEND, Context context, Boolean first_file) {
+    public boolean getFileToPhone(String put_toFilesFTP, String put_toFilesPhone, Context context, Boolean first_file) {
+        String logeTAG = "FTPtoPhone";
+        Boolean multiFile = false;
+        FTPClient ftpClient = new FTPClient();
+        FtpConnectData connectData = new FtpConnectData();
         try {
-            FTPClient ftpClient = new FTPClient();
-            ftpClient.connect(ftp_server, ftp_port);
-            ftpClient.login(ftp_user_name, ftp_password);
+            ftpClient.connect(connectData.server_name, connectData.port);
+            ftpClient.login(connectData.server_username, connectData.server_password);
             ftpClient.enterLocalPassiveMode();
-
-            Log.e("FTP", "Путь старта: " + put_toFilesSTART);
-            Log.e("FTP", "Путь конца: " + put_toFilesEND);
+            Log.e(logeTAG, "Путь ftp-сервера: " + put_toFilesFTP);
+            Log.e(logeTAG, "Путь на телефоне: " + put_toFilesPhone);
 
             if (first_file) {
-                Log.e("FTP", "Скачивание одного файла ");
-                OutputStream outputStream = new FileOutputStream(new File(put_toFilesSTART));  // путь куда сохранить данные
+                Log.e(logeTAG, "Скачивание одного файла....");
+                OutputStream outputStream = new FileOutputStream(new File(put_toFilesPhone));  // путь куда сохранить данные
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                 ftpClient.enterLocalPassiveMode();
-                ftpClient.retrieveFile(put_toFilesEND, outputStream);                          // путь откуда скачать данные
+                ftpClient.retrieveFile(put_toFilesFTP, outputStream);                          // путь откуда скачать данные
                 outputStream.close();
 
             } else {
                 Log.e("FTP", "Пакетное скачивание");
-                FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(put_toFiles);
+                FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(put_toFilesFTP);
                 for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
 
                     String putFILES = Environment.MEDIA_MOUNTED;                             // путь: к файлам    (/data/user/0/kg.roman.Mobile_Torgovla/files)
@@ -377,13 +384,22 @@ public class FTPWebhost {
                     String file_sFTP_xml = put_toFiles + ftpFile_XML.getName();                                                         // путь на сервере
                     String file_Phone = Environment.getExternalStorageDirectory().toString() + "/Price/XML/";   // путь к базам данных на телефоне
                     String file_Phone2 = "/sdcard/Price/Image/" + ftpFile_XML.getName();                                                // путь к базам данных на телефоне
-                    String file_server_xml = put_toFiles + ftpFile_XML.getName();
+                    //   String file_server_xml = put_toFiles + ftpFile_XML.getName();
+                    //    File file = new File(Environment.getExternalStorageDirectory().toString() + "/Price/XML/", ftpFile_XML.getName());
+                    //File file = new File(getApplication().getDatabasePath("").getAbsolutePath());
 
-                    File file = new File(Environment.getExternalStorageDirectory().toString() + "/Price/XML/", ftpFile_XML.getName());
+
+                    String file_server_xml = put_toFilesFTP + "/" + ftpFile_XML.getName();
+                    //  File file = new File(put_toFilesPhone, ftpFile_XML.getName());
+
+                    File file = new File(context.getApplicationContext().getDatabasePath(ftpFile_XML.getName()).getAbsolutePath());
+
+                    Log.e(logeTAG, "путь на FTP: " + file_server_xml);
+                    Log.e(logeTAG, "путь на Phone: " + file.getPath());
                     if (ftpFile_XML.isFile()) {
                         // код для скачивания файла с FTP
                         //OutputStream outputStream = new FileOutputStream(new File(file_Phone+ ftpFile_XML.getName()));  // путь куда сохранить данные
-                        OutputStream outputStream = new FileOutputStream(file);  // путь куда сохранить данные
+                        OutputStream outputStream = new FileOutputStream(file.getPath());  // путь куда сохранить данные
                         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                         ftpClient.enterLocalPassiveMode();
                         // ftp: забрать файл из этой директ, в эту директ
@@ -394,16 +410,36 @@ public class FTPWebhost {
             }
 
 
+            Log.e(logeTAG, "Скачивание окончено!");
+            multiFile = true;
             ftpClient.logout();
             ftpClient.disconnect();
         } catch (IOException ex) {
             ex.printStackTrace();
+            Log.e(logeTAG, "ошибка скачивания файла, проверьте данные!");
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
+
+        if (first_file == true) {
+            File file = new File(put_toFilesPhone);
+            return file.isFile() & (file.length() > 0);
+        } else
+            return multiFile;
+
     }
 
 
     // Скачать файл(ы) с FTP
-    public void getFile_FTPToPhone(String put_toFilesSTART, String put_toFilesEND, Context context, Boolean first_file) {
+    public void getFile_FTPToPhone(String put_toFilesSTART, String put_toFilesEND, Context
+            context, Boolean first_file) {
         try {
             FTPClient ftpClient = new FTPClient();
             ftpClient.connect(ftp_server, ftp_port);
@@ -459,9 +495,11 @@ public class FTPWebhost {
 
     ///// Получение списка файлов рез. копирования по агенту и филиалу
     // public HashSet<String> getListFile_SOSDB(String nameAgent, String putFile) {
-    public HashSet<String> getListFile_BackUp(String nameAgent, String putFile) {
-        HashSet<String> countryHashSet = new HashSet<>();
-
+//    public Pair<ArrayList<Long>, ArrayList<String>> getListFile_BackUp(String nameAgent, String putFile) {
+    public ArrayList<String> getListFile_BackUp(String nameAgent, String putFile) {
+        ArrayList<String> arrayList_FileName = new ArrayList<>();
+        ArrayList<Long> arrayList_FileData = new ArrayList<>();
+        TreeMap<Long, String> treeMap = new TreeMap<>();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -473,18 +511,25 @@ public class FTPWebhost {
                     ftpClient.login(ftpConnectData.server_username, ftpConnectData.server_password);
                     ftpClient.enterLocalPassiveMode();
                     // Подключение к списку файлов на FTP
+
+
                     FTPFile[] ftpFiles_list_XML = ftpClient.listFiles(putFile);
                     for (FTPFile ftpFile_XML : ftpFiles_list_XML) {
                         if (ftpFile_XML.getName().length() > 3) {
+
                             String data = ftpFile_XML.getName().substring(0, 10);
                             String vrema = ftpFile_XML.getName().substring(11, 19);
                             String strBASEDB = ftpFile_XML.getName().substring(36);   // sunbell_base_db
                             String strCONSTDB = ftpFile_XML.getName().substring(37);  // sunbell_const_db
                             String strRNDB = ftpFile_XML.getName().substring(34);     // sunbell_rn_db
+                            ftpFile_XML.getTimestamp().getTimeInMillis();
 
                             if (ftpFile_XML.getName().contains(nameAgent)) {
                                 // Log.e("File: ", "File... "+ftpFile_XML.getName());
-                                countryHashSet.add(ftpFile_XML.getName());
+                                arrayList_FileName.add(ftpFile_XML.getName());
+                                Log.e("FTP", ftpFile_XML.getName());
+                               /* arrayList_FileData.add(ftpFile_XML.getTimestamp().getTimeInMillis());
+                                treeMap.put(ftpFile_XML.getTimestamp().getTimeInMillis(), ftpFile_XML.getName());*/
                             }
 
                         }
@@ -506,7 +551,8 @@ public class FTPWebhost {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return countryHashSet;
+        //     return new Pair<>(arrayList_FileData, arrayList_FileName);
+        return arrayList_FileName;
     }
 
 
@@ -530,7 +576,8 @@ public class FTPWebhost {
     }
 
     //// Пример Java FTP - вычисление общего количества подкаталогов, файлов и размера каталога
-    public static long[] calculateDirectoryInfo(FTPClient ftpClient, String parentDir, String currentDir) throws IOException {
+    public static long[] calculateDirectoryInfo(FTPClient ftpClient, String parentDir, String
+            currentDir) throws IOException {
         long[] info = new long[3];
         long totalSize = 0;
         int totalDirs = 0;
@@ -645,6 +692,7 @@ public class FTPWebhost {
         return new Pair(isConnectFtpText[0], isConnectFtp[0]);
     }
 
+    //////////// Тест на подключение к интернету
     public boolean getInternetConnect(Context context) {
         String cs = Context.CONNECTIVITY_SERVICE;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(cs);
@@ -793,7 +841,8 @@ public class FTPWebhost {
 
 
     //// Скачивание файлов которых нет в дириктории
-    public boolean getLoadingFileImage(String put_toFilesSTART, String put_toFilesEND, List<String> w_list, ProgressBar horiz) {
+    public boolean getLoadingFileImage(String put_toFilesSTART, String
+            put_toFilesEND, List<String> w_list, ProgressBar horiz) {
         //put_toFilesSTART - путь откуда скачивать файл
         // put_toFilesEND - путь конечной директории
         // w_list - список файлов для скачивания
@@ -1560,3 +1609,12 @@ public class FTPWebhost {
 
 
     }*/
+
+
+    /*SimpleDateFormat simpleDateFormat_display = new SimpleDateFormat("dd.MM.yyyy HH.mm");
+    SimpleDateFormat simpleDateFormat_db = new SimpleDateFormat("yyyy-MM-dd HH.mm");
+    //simpleDateFormat.format(dataFile.getTimestamp().getTime());
+                        Log.e("Список файлов:", "File: " + ftpFile_XML.getName());
+                        Log.e("Список файлов:", "Размер: "+getFilesSize(ftpConnectData.put_toFTPBackUp+ftpFile_XML.getName()));
+                        Log.e("Список файлов:", "Дату: " + simpleDateFormat_db.format(ftpFile_XML.getTimestamp().getTime()));
+                        Log.e("Список файлов:", "Дату2: " + getFullTime(ftpFile_XML.getTimestamp().getTimeInMillis()));*/

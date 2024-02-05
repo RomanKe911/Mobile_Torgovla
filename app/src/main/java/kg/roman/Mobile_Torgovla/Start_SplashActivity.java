@@ -56,7 +56,10 @@ import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ClassNew.Pair;
 import kg.roman.Mobile_Torgovla.DB_Logins.DbHelper_Logins;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
+import kg.roman.Mobile_Torgovla.Permission.PermissionUtils;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash;
+import kg.roman.Mobile_Torgovla.Setting.Setting_Start;
+import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Global_Activity;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Users;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Users_ResourceParser;
 import com.google.android.gms.ads.MobileAds;
@@ -100,6 +103,7 @@ public class Start_SplashActivity extends AppCompatActivity {
     public ViewFlipper flipper;
     public Integer number_update_table;
     public String TAG = "";
+    private static final int PERMISSION_STORAGE = 101;
 
 
 
@@ -192,8 +196,15 @@ public class Start_SplashActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent_prefActivity = new Intent(context_Activity, PrefActivity_Splash.class);
+            ///////////////////////////2024
+            Intent intent_prefActivity = new Intent(context_Activity, Setting_Start.class);
             startActivity(intent_prefActivity);
+            finish();
+
+/*            Intent intent_prefActivity = new Intent(context_Activity, WJ_Global_Activity.class);
+            startActivity(intent_prefActivity);*/
+
+
 
             try {
 

@@ -9,8 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.StrictMode;
-import android.provider.Settings;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -19,10 +17,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Chart;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
@@ -31,23 +25,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
-import kg.roman.Mobile_Torgovla.FTP.FtpAction;
-import kg.roman.Mobile_Torgovla.FTP.FtpAsyncTask_RN_Up_Excel;
-import kg.roman.Mobile_Torgovla.FTP.FtpConnection;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Excel;
-import kg.roman.Mobile_Torgovla.MailSenderClass;
+
 import kg.roman.Mobile_Torgovla.R;
-import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Forma_Zakaza;
-import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Global_Activity;
 
 public class WJ_Karakil_newRN extends AppCompatActivity {
 

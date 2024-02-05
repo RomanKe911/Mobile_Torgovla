@@ -19,8 +19,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +27,8 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
+import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L1;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
-import kg.roman.Mobile_Torgovla.MailSenderClass;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Cnt_Agent;
 

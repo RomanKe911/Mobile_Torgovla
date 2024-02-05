@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -39,6 +39,9 @@ public class BackUp extends AppCompatActivity {
     SharedPreferences mSettings;
     private Context context;
     public String from, attach, text, title, where;
+    String logeTAG = "BackUp";
+    Async_ViewModel model;
+    Async_ViewModel_BackUp_toFTP model_backup;
 
 
     @Override
@@ -66,29 +69,58 @@ public class BackUp extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_base_backup: {
-                // BackUp();
-                BackUp.AsyncTask_toFTP_BackUp async_sending = new BackUp.AsyncTask_toFTP_BackUp();
-                async_sending.execute();
-            }
-            break;
-            case R.id.menu_item_base_null: {
-                RecyclerView_ViewModel model = new ViewModelProvider(this).get(RecyclerView_ViewModel.class);
-                model.getValues().observe(this, backup_list ->
+                model_backup = new ViewModelProvider(this).get(Async_ViewModel_BackUp_toFTP.class);
+                model_backup.getStatus().observe(this, backup_status_connect ->
                 {
-                    //backup_list.clear();
-                    RecyclerView_Adapter_ViewHolder_BackUp backup_adapter = new RecyclerView_Adapter_ViewHolder_BackUp(context, backup_list, null);
-                    binding.dbBaseRecyclerView.setAdapter(backup_adapter);
-                    backup_adapter.notifyDataSetChanged();
-                    SnackbarOverride("Статус: список обновлен");
+                    Log.e(logeTAG, "STATUS, " + backup_status_connect);
+                    SnackbarOverride(backup_status_connect);
                 });
-
-                model.getLoadingStatus().observe(this, statis ->
+                model_backup.getLoadingStatus().observe(this, status ->
                 {
-                    if (statis == true) {
+                    if (status == true) {
                         binding.dbBaseProgressBar.setVisibility(View.VISIBLE);
                     } else binding.dbBaseProgressBar.setVisibility(View.INVISIBLE);
                 });
-                model.execute();
+                model_backup.execute();
+            }
+            break;
+            case R.id.menu_item_base_null: {
+                try {
+                    model = new ViewModelProvider(this).get(Async_ViewModel.class);
+                    model.getValues().observe(this, backup_list ->
+                    {
+                        RecyclerView_Adapter_ViewHolder_BackUp backup_adapter = new RecyclerView_Adapter_ViewHolder_BackUp(context, backup_list, null);
+                        if (!backup_list.isEmpty()) {
+
+                            binding.dbBaseRecyclerView.setAdapter(backup_adapter);
+                            backup_adapter.notifyDataSetChanged();
+                            // SnackbarOverride("данные готовы к работе");
+                        } else {
+                            SnackbarOverride("на сервере нет резервной копии!!!");
+                            backup_list.clear();
+                            binding.dbBaseRecyclerView.setAdapter(backup_adapter);
+                            model.getMessegeStatus().observe(this, messegeStatus -> {
+                                Log.e(logeTAG, "Ошибка, " + messegeStatus);
+                                SnackbarOverride(messegeStatus);
+                            });
+                        }
+
+                    });
+
+                    model.getLoadingStatus().observe(this, statis ->
+                    {
+                        if (statis == true) {
+                            binding.dbBaseProgressBar.setVisibility(View.VISIBLE);
+                        } else binding.dbBaseProgressBar.setVisibility(View.INVISIBLE);
+                    });
+                    model.execute();
+                } catch (Exception e) {
+                    Log.e(logeTAG, "Ошибка, загрузки данных");
+                    model.getMessegeStatus().observe(this, messegeStatus -> {
+                        Log.e(logeTAG, "Ошибка, " + messegeStatus);
+                        SnackbarOverride(messegeStatus);
+                    });
+                }
             }
             break;
 
@@ -96,30 +128,9 @@ public class BackUp extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /// Создание новой строки для сохранения параметров  *******
-    protected String CreateNameFile_BackUp(String stringName) {
-        char[] chars_rus = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ч', 'ц', 'ш', 'щ', 'э', 'ю', 'я', 'ы', 'ъ', 'ь'};
-        String[] string_eng = {"a", "b", "v", "g", "d", "e", "io", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "i", "", ""};
-        StringBuilder newName = new StringBuilder();
-        StringBuilder newNameNumber = new StringBuilder();
 
-        if (!stringName.isEmpty() | !stringName.equals(" ")) {
-            String string1 = stringName.replaceFirst(" ", "_").replaceAll(" ", "");
-            String stringWork = string1.toLowerCase().replaceAll("[^a-zа-я0-9]", "");
-            for (Character agent : stringWork.toCharArray()) {
-                for (int i = 0; i < chars_rus.length; i++)
-                    if (chars_rus[i] == agent)
-                        newName.append(string_eng[i]);
-                if (Character.isDigit(agent))
-                    newNameNumber.append(agent);
-                if (agent.toString().matches("[a-z]"))
-                    newName.append(agent);
-            }
-            newName.append(newNameNumber);
-        } else SnackbarOverride("не возможно создать строку, не верный формат данных");
-
-        return newName.toString();
-    }
 
     ///// Всплывающая строка состояния
     protected void SnackbarOverride(String text) {
@@ -154,24 +165,44 @@ public class BackUp extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             //  WaitingDialog = ProgressDialog.show(context_Activity, "Резервное копирование", "Выполняется загрузка, подождите...", true);
-            SnackbarOverride("Резервное копирование");
-            Log.e("Async", "onPreExecute: Start");
+            SnackbarOverride("Резервное копирование базы данных");
+            Log.e(logeTAG, "onPreExecute: Start");
             // binding.dbBaseProgressBar.setProgress(View.VISIBLE);
             binding.dbBaseProgressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
         protected Void doInBackground(Object... params) {
             try {
-                BackUp_File_toFTP();
-                title = "Агент: " + CreateInfotoAgent().first;
-                text = CreateMessage_toBackUp();
-                from = "sunbellagents@gmail.com";
-                where = "kerkin911@gmail.com";
-                attach = "";
-                MailSenderClass sender = new MailSenderClass("sunbellagents@gmail.com", "fyczcoexpaspsham", "465", "smtp.gmail.com");   // Null
-                sender.sendMail(title, text, from, where, attach);
+                FTPWebhost ftpWebhost = new FTPWebhost();
+                if (ftpWebhost.getInternetConnect(context)) {
+                    Log.e(logeTAG, "интернет активен");
+                } else Log.e(logeTAG, "интернет не активен");
+
+
+                if (ftpWebhost.getFTP_TestConnect().second) {
+                    Log.e(logeTAG, "ftp активен");
+                } else Log.e(logeTAG, "ftp не активен");
+                // отправка данных на сервер
+                    BackUp_File_toFTP();
+                   FtpConnectData connectData = new FtpConnectData();
+                    title = "Агент: " + CreateInfotoAgent().first;
+                    text = CreateMessage_toBackUp();
+                     from = connectData.messege_mail_from; // отправитель
+                    where = connectData.messege_mail_where; // получатель
+                    attach = "";
+                    //  Настройки хоста
+                    MailSenderClass sender = new MailSenderClass(connectData.messege_mail_sender_user, connectData.server_password, connectData.messege_mail_sender_port, connectData.messege_mail_sender_mailhost);   // Null
+                    sender.sendMail(title, text, from, where, attach);
+                   /* from = "sunbellagents@gmail.com"; // отправитель
+                    where = "kerkin911@gmail.com"; // получатель
+                    attach = "";
+                    //  Настройки хоста
+                    MailSenderClass sender = new MailSenderClass("sunbellagents@gmail.com", "fyczcoexpaspsham", "465", "smtp.gmail.com");   // Null
+                    sender.sendMail(title, text, from, where, attach);*/
             } catch (Exception e) {
+                Log.e(logeTAG, "Данные не выгруженны");
                 Toast.makeText(context, "Данные не выгруженны", Toast.LENGTH_SHORT).show();
             }
             return null;
@@ -183,7 +214,8 @@ public class BackUp extends AppCompatActivity {
             // WaitingDialog.dismiss();
             //Toast.makeText(context_Activity, "Заказ успешно отправлен!!!", Toast.LENGTH_LONG).show();
             //((Activity)mainContext).finish();
-            Log.e("Async", "onPreExecute: END");
+            SnackbarOverride("Данные успешно отправленны");
+            Log.e(logeTAG, "onPreExecute: END");
             binding.dbBaseProgressBar.setVisibility(View.INVISIBLE);
         }
 
@@ -211,25 +243,60 @@ public class BackUp extends AppCompatActivity {
     ///// Создание тела для письма по отчету об резервном копирование
     protected String CreateMessage_toBackUp() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n" + "Резервное копирование базы данных..... \n" + "Торговый агент: ")
-                .append(CreateInfotoAgent().first).append("\n")
-                .append("Маршрут: ")
-                .append(CreateInfotoAgent().second).append("\n")
-                .append("Дата отправки данных: ").append(CreateThisTime()).append("\n");
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 
-        for (int i = 0; i < getResources().getStringArray(R.array.mass_ver_android).length; i++)
-            if (i == Build.VERSION.SDK_INT)
-                stringBuilder.append(String.format(Locale.getDefault(), "Версия Android-> %s, Версия SDK->(%d), %s", Build.VERSION.RELEASE, Build.VERSION.SDK_INT, getResources().getStringArray(R.array.mass_ver_android)[i])).append("\n");
+            stringBuilder.append("\n" + "Резервное копирование базы данных..... \n" + "Торговый агент: ")
+                    .append(CreateInfotoAgent().first).append("\n")
+                    .append("Маршрут: ")
+                    .append(CreateInfotoAgent().second).append("\n");
+            for (int i = 0; i < getResources().getStringArray(R.array.mass_ver_android).length; i++)
+                if (i == Build.VERSION.SDK_INT)
+                    stringBuilder.append(String.format(Locale.getDefault(), "Версия Android-> %s, Версия SDK->(%d), %s", Build.VERSION.RELEASE, Build.VERSION.SDK_INT, getResources().getStringArray(R.array.mass_ver_android)[i])).append("\n");
+            stringBuilder.append("Версия приложения: ").append(pInfo.versionName).append(", ").append("версия кода:").append(pInfo.versionCode).append("\n")
+                    .append("Дата отправки данных: ").append(CreateThisTime()).append("\n");
 
-        for (String nameFiles : getResources().getStringArray(R.array.mass_files_SQLITE_DB))
-            stringBuilder.append("Имя файла: ")
-                    .append(CreateThisTime())
-                    .append("_")
-                    .append(nameFiles.substring(0, nameFiles.length() - 4))
-                    .append(".db3 \n");
-        //  Log.e("Шаблон: ", String.format(Locale.getDefault(), "Версия Android: %s (%d)", Build.VERSION.RELEASE, Build.VERSION.SDK_INT));
+            for (String nameFiles : getResources().getStringArray(R.array.mass_files_SQLITE_DB))
+                stringBuilder.append("файл: ")
+                        .append(CreateThisTime())
+                        .append("_")
+                        .append(nameFiles.substring(0, nameFiles.length() - 4))
+                        .append(".db3 \n");
+            //  Log.e("Шаблон: ", String.format(Locale.getDefault(), "Версия Android: %s (%d)", Build.VERSION.RELEASE, Build.VERSION.SDK_INT));
+        } catch (Exception e) {
+            Log.e(this.getLocalClassName(), "Ошибка личных данных!");
+        }
+
+
         return stringBuilder.toString();
     }
 
+    public String CreateNameFile_BackUp(String stringName) {
+        Log.e("CreateNameFile_BackUp", stringName);
+        char[] chars_rus = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ч', 'ц', 'ш', 'щ', 'э', 'ю', 'я', 'ы', 'ъ', 'ь'};
+        String[] string_eng = {"a", "b", "v", "g", "d", "e", "io", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "i", "", ""};
+        StringBuilder newName = new StringBuilder();
+        StringBuilder newNameNumber = new StringBuilder();
+
+        if (!stringName.isEmpty() | !stringName.equals(" ")) {
+            String string1 = stringName.replaceFirst(" ", "_").replaceAll(" ", "");
+            String stringWork = string1.toLowerCase().replaceAll("[^a-zа-я0-9]", "");
+            for (Character agent : stringWork.toCharArray()) {
+                for (int i = 0; i < chars_rus.length; i++)
+                    if (chars_rus[i] == agent)
+                        newName.append(string_eng[i]);
+                if (Character.isDigit(agent))
+                    newNameNumber.append(agent);
+                if (agent.toString().matches("[a-z]"))
+                    newName.append(agent);
+            }
+            newName.append(newNameNumber);
+        } else {
+            // Log.e("CreateNameFile_BackUp", "не возможно создать строку, не верный формат данных");
+            Snackbar.make(binding.dbBaseRecyclerView, "не возможно создать строку, не верный формат данных", Snackbar.LENGTH_SHORT).show();
+        }
+        return newName.toString();
+    }
 
 }

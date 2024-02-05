@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_Nomeclature;
+import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L2;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_WJ_Scan;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_WJ_Zakaz;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_WJ_Scan;

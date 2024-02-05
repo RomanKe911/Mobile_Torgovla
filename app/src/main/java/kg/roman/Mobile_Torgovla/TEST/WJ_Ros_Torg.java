@@ -442,7 +442,7 @@ public class WJ_Ros_Torg extends AppCompatActivity {
                 from = "kerkin911@mail.ru";
                 where = "kerkin911@gmail.com";
                 attach = "";
-                MailSenderClass sender = new MailSenderClass("kerkin911@mail.ru", "microlab_LG901480", "", "smtp.mail.ru");
+                MailSenderClass sender = new MailSenderClass("kerkin911@mail.ru", "microlab_LG901480", "465", "smtp.mail.ru");
 
                 sender.sendMail(title, text, from, where, attach);
             } catch (Exception e) {
