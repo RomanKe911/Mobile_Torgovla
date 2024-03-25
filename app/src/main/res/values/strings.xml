@@ -5,14 +5,19 @@
     <string name="up_ftp_data_status">Успешное обновление</string>
     <string name="up_ftp_data_error">Ошибка загрузки данных с FTP</string>
 
-    <string name="Name_PO_1">Kerkin_MT</string>
-    <string name="Name_PO_2">Форма заказа 4.0</string>
+    <string name="Name_PO_1">MobiTrade</string>
+    <string name="Name_PO_2">MobiTrade</string>
+
+
+    <string name="Mycolors">#FFA000</string>
+
+
 
 
     <!-- Данные для массивов StringArray -->
     <!--getResources().getStringArray(R.array.mass_for_update_data)  -->
 
-    <string name="firma_name">ОсОО \"Sunbell\"</string>
+    <string name="firma_name">Номенклатура</string>
 
     <string name="firma_title">Наша компания предлагает большой ассортимент товара, в разном ценовом сегменте и  от производителей разных стран.</string>
 
@@ -440,7 +445,7 @@
         <item>Image</item>>
         <item>XLS</item>>
         <item>XML</item>>
-        <item>SOS</item>>
+        <item>BackUp</item>>
         <item>SQLDB</item>>
     </string-array>
 
@@ -622,6 +627,22 @@
         <item>3</item>
         <item>5</item>
         <item>6</item>
+    </string-array>
+
+
+    <string-array name="list_MinSummaTrade">
+        <item>мин. сумма закупа 100с</item>
+        <item>мин. сумма закупа 200с</item>
+        <item>мин. сумма закупа 300с</item>
+        <item>мин. сумма закупа 400с</item>
+        <item>мин. сумма закупа 500с</item>
+    </string-array>
+    <string-array name="list_MinSummaTrade_Count">
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
     </string-array>
 
 
@@ -887,7 +908,7 @@
     <string name="wt_bt_load">База данных</string>
 
     <string name="title_activity_wj_forma_zakaza2023">WJ_FormaZakaza_2023</string>
-    <string name="title_button_navigator_01">Контрагенты</string>
+    <string name="title_button_navigator_01">Клиенты</string>
     <string name="title_button_navigator_02">Заказ</string>
     <string name="title_button_navigator_03">Шапка</string>
 
@@ -974,17 +995,22 @@
     <string name="backup_text_data">дата:</string>
     <string name="backup_text_region">маршрут:</string>
     <string name="backup_text_image_icon">иконка базы данных</string>
+    <string name="internet">Internet</string>
+    <string name="sqldb">SQlDB</string>
+    <string name="excel">Excel</string>
+    <string name="splash_TextTitileLoge">Строка состояния загрузки:</string>
+    <string name="splash_TextValueLoge">Ошибки</string>
 
 
     <!-- массив префиксов для создание накладной-->
     <string-array name="mass_month">
-        <item>Jan</item>>
+        <item>Jun</item>>
         <item>Feb</item>>
         <item>Mrt</item>>
         <item>Apr</item>>
         <item>May</item>>
-        <item>Jun</item>>
-        <item>Jul</item>>
+        <item>Jyn</item>>
+        <item>Jyl</item>>
         <item>Avg</item>>
         <item>Sep</item>>
         <item>Oct</item>>
@@ -992,6 +1018,45 @@
         <item>Dec</item>>
     </string-array>
 
+
+
+
+
+    ///////////  02.2024 новый выпадающий список
+    <item type="id" name="speedDial_Create"/>
+    <item type="id" name="speedDial_Sale"/>
+    <item type="id" name="speedDial_Messege"/>
+    <item type="id" name="speedDial_forXMLOtchet"/>
+    <item type="id" name="speedDial_forAvtoSumma"/>
+
+    <string name="speedDial_Text_Create">Заказ</string>
+    <string name="speedDial_Text_Sale">Акции</string>
+    <string name="speedDial_Text_Messege">Отправить</string>
+    <string name="speedDial_Text_forXMLOtchet">Отчет за день</string>
+    <string name="speedDial_Text_forAvtoSumma">Сумма за день</string>
+
+
+    <item type="id" name="speedDialFormaListId_Favorite"/>
+    <item type="id" name="speedDialFormaListId_VoiceHelp"/>
+    <item type="id" name="speedDialFormaListId_EndZakaz"/>
+
+    <string name="speedDialFormsListFovarite">Избранное</string>
+    <string name="speedDialFormsListVoiceHelp">Голосовой помощник</string>
+    <string name="speedDialFormsListEndZakaz">Закончить заказ</string>
+
+
+    <item type="id" name="speedDial_forma_Save"/>
+    <item type="id" name="speedDial_forma_DopParams"/>
+
+    <string name="speedDial_Forma_Text_Save">Сохранить</string>
+    <string name="speedDial_Forma_Text_DopParams">доп. параметры</string>
+
+
+    ///////////////////  Меню: фильтрация
+    <string name="menu_item_filters_clients">фильтр: по контрагенту</string>
+    <string name="menu_item_filters_date">фильтр: по дате</string>
+    <string name="menu_item_filters_clear">удалить фильтр</string>
+    <string name="menu_item_filters_group">Сгрупировать</string>
 
 
 </resources>

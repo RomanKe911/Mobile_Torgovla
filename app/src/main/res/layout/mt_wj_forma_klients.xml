@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/FormaClients_ConstraintLayout"
+    style="@style/MT_Layout_Background_Work"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/logo_back_all_5"
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -14,7 +14,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/back_group"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,44 +23,26 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/FormaClietns_floatingActionButton"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
         android:clickable="true"
-        app:fabCustomSize="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="40dp"
-        app:srcCompat="@drawable/button_up" />
-
-    <ListView
-        android:id="@+id/ListView_List_Klients_Debet"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/back_image"
-        android:padding="3dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone"></ListView>
+        app:srcCompat="@drawable/icons_menu_next" />
 
     <ProgressBar
-        android:id="@+id/FormaClietns_progressBar"
+        android:id="@+id/FormaClients_progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:indeterminate="true"
         android:indeterminateTint="@color/cotton_colorPrimary"
         android:secondaryProgressTint="@color/balt_et_colorAccent"
-        app:layout_constraintBottom_toBottomOf="@+id/FormaClietns_floatingActionButton"
-        app:layout_constraintEnd_toEndOf="@+id/FormaClietns_floatingActionButton"
-        app:layout_constraintStart_toStartOf="@+id/FormaClietns_floatingActionButton"
-        app:layout_constraintTop_toTopOf="@+id/FormaClietns_floatingActionButton"/>
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButton"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

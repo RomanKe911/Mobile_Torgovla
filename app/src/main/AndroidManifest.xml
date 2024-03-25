@@ -29,12 +29,12 @@
     <application
         android:allowBackup="true"
         android:exported="true"
-        android:icon="@mipmap/logo_mt"
+        android:icon="@mipmap/icon_mobitrade"
         android:label="@string/Name_PO_1"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:requestRawExternalStorageAccess="true"
-        android:roundIcon="@mipmap/ic_logo1_suncape"
+        android:roundIcon="@mipmap/icon_mobitrade"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -51,11 +51,17 @@
              android:theme="@style/AppTheme"></activity> !
         -->
         <activity
-            android:name=".Start_SplashActivity"
             android:exported="true"
             android:label="@string/Name_PO_2"
             android:screenOrientation="portrait"
-            android:theme="@style/Work_Theme">
+            android:name=".FormaZakazaStart.WJ_Forma_Zakaza"
+            android:theme="@style/AppTheme.FormaZakaza">
+            <!--            android:theme="@style/AppTheme.FirstActivity"-->
+            <!--android:theme="@style/AppTheme.FormaZakazaL1"-->
+
+<!--            android:name=".Authorization.Start_First_Activity"
+            android:theme="@style/AppTheme.FormaZakaza">-->
+
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -70,18 +76,74 @@
 
 
         <activity
-            android:name=".MT_BackUp.BackUp"
-            android:exported="false"
-            android:label=""
+            android:name=".Authorization.Start_Second_Activity"
+            android:label="Авторизация"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-
-
+            android:theme="@style/AppTheme.FormaZakaza" />
         <activity
             android:name=".Work_Journal.WJ_Global_Activity"
             android:label=""
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FormaZakaza" />
+
+        <!-- android:name=".Authorization.Start_First_Activity"-->
+
+<!--        <activity
+            android:name=".FormaZakazaStart.WJ_Forma_Zakaza"
+            android:label="Мои заказы"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FormaZakaza" />-->
+
+        <activity
+            android:name=".FormaZakazaSelectClient.WJ_Forma_Zakaza_L1"
+            android:icon="@mipmap/icon_toolbar_forma_zakaz"
+            android:label="Контрагенты"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FormaZakaza" />
+
+        <activity
+            android:name=".FormaZakaza_LIstTovar.WJ_Forma_Zakaza_L2"
+            android:icon="@mipmap/icon_toolbar_forma_zakaz"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FormaZakazaL2" />
+
+        <activity
+            android:name=".FormaZakaza_LIstTovar.WJ_Forma_Zakaza_L2_Sub"
+            android:icon="@mipmap/icon_toolbar_forma_zakaz"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Samarela" />
+
+        <activity
+            android:name=".FormaZakaza_EndZakaz.WJ_Forma_Zakaza_Dop_Data"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeDopzakaz" />
+
+        <activity
+            android:name=".FormaZakazaNew.WJ_FormaZakaza_2023"
+            android:exported="false"
+            android:label="@string/title_activity_wj_forma_zakaza2023"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FormaZakaza_Select" />
+
+
+        <activity
+            android:name=".MT_BackUp.BackUp"
+            android:exported="false"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FormaZakaza" />
+
+
+        <activity
+            android:name=".Work_Journal.PDF_Create"
+            android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+
         <activity
             android:name=".TEST.WJ_Fragment"
             android:label=""
@@ -97,11 +159,7 @@
             android:label="Остатки по складам"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".Start_AutorithActivity"
-            android:label="Авторизация"
-            android:screenOrientation="portrait"
-            android:theme="@style/Work_Theme" />
+
         <activity
             android:name=".Work_Table_Activity"
             android:label="Рабочий стол"
@@ -164,7 +222,6 @@
             android:label="Настройки приложения"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Setting" />
-
 
         <activity
             android:name=".Permission.PrefActivity_Start"
@@ -256,11 +313,7 @@
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".FormaZakaza.WJ_Forma_Zakaza_Dop_Data"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+
         <activity
             android:name=".Start_Registracia_New"
             android:label="Регистрация нового устройства"
@@ -303,26 +356,8 @@
             android:label="Умный поиск товара"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".FormaZakaza.WJ_Forma_Zakaza"
-            android:label="Расходные накладные"
-            android:screenOrientation="portrait"
-            android:theme="@style/Work_Theme" />
-        <activity
-            android:name=".FormaZakaza.WJ_Forma_Zakaza_L1"
-            android:label="Контрагенты"
-            android:screenOrientation="portrait"
-            android:theme="@style/Work_Theme" />
-        <activity
-            android:name=".FormaZakaza.WJ_Forma_Zakaza_L2"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Samarela" />
-        <activity
-            android:name=".FormaZakaza.WJ_Forma_Zakaza_L2_Sub"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Samarela" />
+
+
         <activity
             android:name=".TEST.WJ_TEST_ADMIN"
             android:label=""
@@ -358,20 +393,13 @@
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".FTP.PDF_Create"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+
         <activity
             android:name=".ImagePack.UpdateImage"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".FormaZakazaNew.WJ_FormaZakaza_2023"
-            android:exported="false"
-            android:label="@string/title_activity_wj_forma_zakaza2023" />
+            android:theme="@style/AppTheme.FormaZakaza" />
+
 
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"

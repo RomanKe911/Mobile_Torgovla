@@ -26,7 +26,7 @@
             app:srcCompat="@drawable/bella_perfecta_10_rose" />
 
         <TextView
-            android:id="@+id/wj_cont_name"
+            android:id="@+id/Content_TovarUID"
             style="@style/style_work_list_1"
             android:layout_toRightOf="@+id/wj_cont_image"
             android:layout_marginLeft="10dp"
@@ -37,10 +37,10 @@
         <TextView
             android:id="@+id/wj_cont_kod"
             style="@style/style_work_list_1"
-            android:layout_below="@+id/wj_cont_name"
+            android:layout_below="@+id/Content_TovarUID"
             android:gravity="center_vertical|center_horizontal"
             android:layout_toRightOf="@+id/wj_cont_image"
-            android:layout_alignLeft="@+id/wj_cont_name"
+            android:layout_alignLeft="@+id/Content_TovarUID"
             android:text="0000/0000/0000"
             android:textColor="@color/work_colors_2" />
 
@@ -51,12 +51,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/wj_cont_kod"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_alignLeft="@+id/wj_cont_name"
+            android:layout_alignLeft="@+id/Content_TovarUID"
             android:text="5900000000"
             android:textColor="@color/work_colors_3" />
 
         <TextView
-            android:id="@+id/wj_cont_cena"
+            android:id="@+id/Content_Price"
             style="@style/style_work_list_1"
             android:layout_below="@+id/wj_cont_strih"
             android:gravity="center_vertical|center_horizontal"
@@ -70,7 +70,7 @@
             style="@style/style_work_list_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wj_cont_cena"
+            android:layout_below="@+id/Content_Price"
             android:layout_toRightOf="@+id/textViewOstatok"
             android:gravity="center_vertical|center_horizontal"
             android:layout_marginLeft="5dp"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/wj_cont_strih"
-            android:layout_alignLeft="@+id/wj_cont_name"
+            android:layout_alignLeft="@+id/Content_TovarUID"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text="Цена:" />
@@ -91,7 +91,7 @@
             android:id="@+id/textViewOstatok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/wj_cont_name"
+            android:layout_alignLeft="@+id/Content_TovarUID"
             android:layout_below="@+id/textViewCena"
             android:textStyle="bold"
             android:textColor="@color/black"

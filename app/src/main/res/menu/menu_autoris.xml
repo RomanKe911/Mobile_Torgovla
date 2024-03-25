@@ -2,28 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/menu_logo_notebook_96"
+        android:id="@+id/menu_setting_start"
+        android:icon="@mipmap/icon_menu24"
         android:title="Пар"
         app:showAsAction="always">
-        <menu android:id="@+id/menu_preferenc_1">
-            <item
-                android:id="@+id/menu_new_agent"
-                android:icon="@drawable/menu_logo_engineer"
-                android:title="Новый агент" />
-
-            <item
-                android:id="@+id/menu_preferenc"
-                android:icon="@drawable/menu_logo_tool_box"
-                android:title="Настройки" />
-            <item
-                android:id="@+id/menu_setting_new"
-                android:icon="@drawable/menu_logo_tool_box"
-                android:title="Настройки_New" />
-            <item
-                android:id="@+id/menu_setting_start"
-                android:icon="@drawable/menu_logo_tool_box"
-                android:title="Настройки 2024" />
-        </menu>
     </item>
 
 

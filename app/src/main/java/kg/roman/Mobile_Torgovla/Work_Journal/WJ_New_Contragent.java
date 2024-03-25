@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
-import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L1;
+import kg.roman.Mobile_Torgovla.FormaZakazaSelectClient.WJ_Forma_Zakaza_L1;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Cnt_Agent;

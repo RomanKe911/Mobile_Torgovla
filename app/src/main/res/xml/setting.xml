@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
     <PreferenceCategory
         android:id="@+id/setting_connect_ftp"
         android:layout_width="wrap_content"
@@ -13,22 +11,31 @@
         app:icon="@drawable/icons_ftp_up">
 
         <ListPreference
-            android:defaultValue="null"
+            android:defaultValue="ftp.sunbell.webhost.kg"
             android:entries="@array/mass_ftp_server_con"
             android:entryValues="@array/mass_ftp_server_con_value"
             android:icon="@drawable/ic_menu_send"
             android:key="setting_ftpIP"
-            android:summary=""
+            android:summary="%1$s"
             android:title="FTP: ip-адрес"
             app:persistent="true" />
         <ListPreference
-            android:defaultValue="null"
+            android:defaultValue="/MT_Sunbell_Bishkek/"
             android:entries="@array/mass_Region_Put_Name"
             android:entryValues="@array/mass_Region_Put_Value"
             android:icon="@drawable/ic_menu_send"
             android:key="setting_ftpPathData"
-            android:summary=""
+            android:summary="%1$s"
             android:title="FTP: путь к данным"
+            app:persistent="true" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_menu_send"
+            android:key="key_ftpMailMessege"
+            android:summary="настройки из приложения"
+            android:title="Уведомление оператору"
             app:persistent="true" />
         <Preference
             android:id="@+id/preference_const"
@@ -40,6 +47,17 @@
             android:summary=""
             android:title="Скачать файлы для старта"
             app:persistent="true"></Preference>
+        <Preference
+            android:id="@+id/preference_myCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:key="PEREM_ANDROID_ID"
+            android:summary=""
+            android:title="Ключ активации пользователя"
+            app:enabled="false"></Preference>
+
 
     </PreferenceCategory>
     <PreferenceCategory
@@ -54,35 +72,60 @@
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="null"
+            android:defaultValue="standart"
             android:entries="@array/mass_type_ty_title"
             android:entryValues="@array/mass_type_ty_value"
             android:icon="@drawable/ic_menu_send"
             android:key="preference_TradeStatus"
-            android:summary=""
+            android:summary="%1$s"
             android:title="Тип торговых условий"
             app:persistent="true" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="null"
+            android:defaultValue="500"
+            android:entries="@array/list_MinSummaTrade"
+            android:entryValues="@array/list_MinSummaTrade_Count"
+            android:icon="@drawable/ic_menu_send"
+            android:key="preference_ListMinSumTrade"
+            android:summary="%1$s"
+            android:title="Минимальная сумма закупа"
+            app:persistent="true"></ListPreference>
+
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1500"
+            android:icon="@drawable/ic_menu_send"
+            android:inputType="numberDecimal"
+            android:key="preference_MinSumSale"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="%1$s"
+            android:title="Мин. сумма для получения скидки"
+            app:persistent="true" />
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="0"
             android:entries="@array/list_ty_entries"
             android:entryValues="@array/list_ty_entryValues"
             android:icon="@drawable/ic_menu_send"
-            android:key="preference_ListTradeNal"
+            android:key="preference_ListSaleStandart"
             android:summary="%1$s"
-            android:title="Скидка за наличный расчет"
+            android:title="Стандартная скидка"
             app:persistent="true"></ListPreference>
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="null"
+            android:defaultValue="0"
             android:entries="@array/list_ty_entries"
             android:entryValues="@array/list_ty_entryValues"
             android:icon="@drawable/ic_menu_send"
-            android:key="preference_ListTradeKons"
+            android:key="preference_ListSaleFarm"
             android:summary="%1$s"
-            android:title="Скидка под консигнацию"
+            android:title="Скидка для Фарм/Сети"
             app:persistent="true"></ListPreference>
 
     </PreferenceCategory>
@@ -194,5 +237,44 @@
             android:title="Отображение по фирмам"
             app:persistent="true" />
     </PreferenceCategory>
+    />
+    <PreferenceCategory
+        android:id="@+id/setting_Clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="preferenc_menu_nomenclatura"
+        android:summary=""
+        android:title="Хранилище и кэш"
+        app:icon="@drawable/wj_office_title_otchet">
+        <Preference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:key="setting_ClearPrederence"
+            android:summary="сброс всех настроек приложения"
+            android:title="Сбросить все настройки"
+            app:persistent="true"></Preference>
+        <Preference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:key="setting_ClearImageProduct"
+            android:summary="очистить все картинки товара"
+            android:title="ImageManager"
+            app:persistent="true"></Preference>
+        <Preference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:key="setting_ClearImageIcons"
+            android:summary="сбросить все картинки иконок"
+            android:title="ImageManagerIcons"
+            app:persistent="true"></Preference>
 
+
+    </PreferenceCategory>
+    />
 </PreferenceScreen>

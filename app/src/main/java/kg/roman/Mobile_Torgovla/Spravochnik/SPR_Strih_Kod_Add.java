@@ -57,7 +57,7 @@ public class SPR_Strih_Kod_Add extends AppCompatActivity {
         context_Activity = SPR_Strih_Kod_Add.this;
 
         listView = (ListView) findViewById(R.id.listview);
-        editText = (EditText) findViewById(R.id.editText);
+        editText = (EditText) findViewById(R.id.avtoris_EditPinCode);
 
         adapter.clear();
         ListAdapter();

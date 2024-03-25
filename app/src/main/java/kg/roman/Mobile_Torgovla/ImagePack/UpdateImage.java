@@ -57,27 +57,21 @@ public class UpdateImage extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.icon_image);
         getSupportActionBar().setTitle("Графическая база");
-        getSupportActionBar().setSubtitle("обновление картинок");
+        getSupportActionBar().setSubtitle("обновление картинок v1.1");
         context = UpdateImage.this;
         PermissionFileRead();
 
-        binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ViewModels();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Отменяем анимацию обновления
-                        binding.swiperefresh.setRefreshing(false);
+        binding.swiperefresh.setOnRefreshListener(() -> {
+            ViewModels();
+            new Handler().postDelayed(() -> {
+                // Отменяем анимацию обновления
+                binding.swiperefresh.setRefreshing(false);
 
-                       /* Random random = new Random();
-                        mCatTextView.setText("Котика пора кормить. Его не кормили уже "
-                                + (1 + random.nextInt(10)) + " мин.");*/
-                    }
-                }, 4000);
+               /* Random random = new Random();
+                mCatTextView.setText("Котика пора кормить. Его не кормили уже "
+                        + (1 + random.nextInt(10)) + " мин.");*/
+            }, 4000);
 
-            }
         });
     }
 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView38"
+        style="@style/forma_dop_zakaz"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="мин. сумма для закупа:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView88"
+        style="@style/forma_dop_zakaz"
+        android:layout_marginTop="4dp"
+        android:text="мин. сумма для получения скидки:"
+        app:layout_constraintStart_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/tvw_fragmentSale_MinSum"
+        style="@style/style_back_panel_rn_text"
+        android:layout_marginStart="4dp"
+        android:hint="500c"
+        app:layout_constraintBottom_toBottomOf="@+id/textView38"
+        app:layout_constraintStart_toEndOf="@+id/textView38"
+        app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/tvw_fragmentSale_MinSumSale"
+        style="@style/style_back_panel_rn_text"
+        android:layout_marginLeft="4dp"
+        android:hint="1200с"
+        app:layout_constraintBottom_toBottomOf="@+id/textView88"
+        app:layout_constraintStart_toEndOf="@+id/textView88"
+        app:layout_constraintTop_toTopOf="@+id/textView88" />
+
+    <EditText
+        android:id="@+id/editTextNumber2"
+        style="@style/style_back_panel_rn_text"
+        android:layout_marginStart="16dp"
+        android:ems="3"
+        android:gravity="center_horizontal|center_vertical"
+        android:inputType="number"
+        android:maxLength="2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroupTY"
+        app:layout_constraintStart_toEndOf="@+id/radioGroupTY"
+        app:layout_constraintTop_toTopOf="@+id/radioGroupTY" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.30"
+        app:layout_constraintStart_toStartOf="@+id/textView88"
+        app:layout_constraintTop_toBottomOf="@+id/textView88">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            style="@style/forma_dop_zakaz"
+            android:checked="true"
+            android:text="стандартные" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            style="@style/forma_dop_zakaz"
+            android:text="Фарм/Сети" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            style="@style/forma_dop_zakaz"
+            android:text="Акция" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/textView98"
+        style="@style/forma_dop_zakaz"
+        android:text="%"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumber2"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber2"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumber2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

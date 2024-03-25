@@ -268,7 +268,7 @@ public class WJ_Smart_Voice extends AppCompatActivity {
         int id = item.getItemId();
         try {
             switch (id) {
-                case R.id.menu_filter: {
+                case R.id.menu_filters: {
                     try {
                         //1) Создать таблицу SQL_CREATE();
                         //2) Очистить таблицу SQL_DELETE();

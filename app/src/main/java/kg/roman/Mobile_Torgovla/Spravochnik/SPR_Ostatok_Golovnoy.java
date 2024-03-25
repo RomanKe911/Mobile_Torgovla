@@ -45,6 +45,7 @@ import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Otchet_Ostatok;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Otchet_Ostatok;
+import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Nomenclatures;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Nomenclatures_ResourceParser;
@@ -665,10 +666,11 @@ public class SPR_Ostatok_Golovnoy extends AppCompatActivity {
             try {
 
                 FTPClient ftpClient = new FTPClient();
-                String server = PEREM_FTP_SERV;
-                int port = 21;
-                String user = PEREM_FTP_LOGIN;
-                String pass = PEREM_FTP_PASS;
+                FtpConnectData connectData = new FtpConnectData();
+                String server = connectData.server_name;
+                int port = connectData.port;
+                String user = connectData.server_username;
+                String pass = connectData.server_password;
 
                 try {
                     ftpClient.connect(server, port);

@@ -51,10 +51,10 @@ public class CustomAdapter_ListView extends ArrayAdapter<ListAdapterSimple_WJ_Za
               //  Snackbar.make(v, "Release date " +dataModel.getFeature(), Snackbar.LENGTH_LONG).setAction("No action", null).show();
                 break;*/
 
-            case R.id.button_delete_id:
+/*            case R.id.button_delete_id:
                 //  Snackbar.make(v, "Release date " +dataModel.getFeature(), Snackbar.LENGTH_LONG).setAction("No action", null).show();
-                Log.e("Suncape_B", dataModel.getId());
-                break;
+                Log.e("Suncape_B", dataModel.getUID());
+                break;*/
         }
     }
 
@@ -76,12 +76,12 @@ public class CustomAdapter_ListView extends ArrayAdapter<ListAdapterSimple_WJ_Za
             convertView = inflater.inflate(R.layout.list_edit_content, parent, false);
 
 
-            viewHolder.txtID = (TextView) convertView.findViewById(R.id.cont_edit_id);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.wj_cont_name);
+            viewHolder.txtID = (TextView) convertView.findViewById(R.id.Content_TovarUniv);
+            viewHolder.txtName = (TextView) convertView.findViewById(R.id.Content_TovarUID);
             viewHolder.txtKod = (TextView) convertView.findViewById(R.id.wj_cont_kod);
-            viewHolder.txtKol = (TextView) convertView.findViewById(R.id.cont_edit_kol);
-            viewHolder.txtCena = (TextView) convertView.findViewById(R.id.wj_cont_cena);
-            viewHolder.button = (Button) convertView.findViewById(R.id.button_delete_id);
+            viewHolder.txtKol = (TextView) convertView.findViewById(R.id.Content_Count);
+            viewHolder.txtCena = (TextView) convertView.findViewById(R.id.Content_Price);
+            //viewHolder.button = (Button) convertView.findViewById(R.id.button_delete_id);
 
 
 
@@ -97,10 +97,10 @@ public class CustomAdapter_ListView extends ArrayAdapter<ListAdapterSimple_WJ_Za
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtID.setText(dataModel.getId());
+        viewHolder.txtID.setText(dataModel.getKodUniv());
         viewHolder.txtName.setText(dataModel.getName());
         viewHolder.txtKod.setText(dataModel.getKod());
-        viewHolder.txtKol.setText(dataModel.getKol());
+        viewHolder.txtKol.setText(dataModel.getCount());
         viewHolder.txtCena.setText(dataModel.getCena());
         viewHolder.button.setOnClickListener(this);
         viewHolder.button.setTag(position);

@@ -10,9 +10,15 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
+import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
 import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Otchet_Ostatok;
 import kg.roman.Mobile_Torgovla.R;
@@ -92,6 +98,30 @@ public class ListAdapterAde_Otchet_Ostatok extends BaseAdapter implements Filter
         kolbox.setText(objects.get(pos).getKolbox());
         kolbox_del.setText(objects.get(pos).getKolbox_Delete());
 
+/*
+        try {
+            FtpConnectData ftpConnectData = new FtpConnectData();
+            File newImage_png = new File(ftpConnectData.put_toPhoneImage(context) + objects.get(pos).getImage() + ".png");
+            File newImage_jpg = new File(ftpConnectData.put_toPhoneImage(context) + objects.get(pos).getImage() + ".jpg");
+            if (newImage_png.isFile())
+                Picasso.get() //передаем контекст приложения
+                        .load(newImage_png)
+                        .error(R.drawable.no_image)
+                        .into(image); //ссылка на ImageView
+            else
+                Picasso.get() //передаем контекст приложения
+                        .load(newImage_jpg)
+                        .error(R.drawable.no_image)
+                        .into(image); //ссылка на ImageView
+
+            Log.e("Image_PUT_PNG", newImage_png + "__" + newImage_png.isFile());
+            Log.e("Image_PUT_JPG", newImage_jpg + "__" + newImage_jpg.isFile());
+
+        } catch (Exception e) {
+            Log.e("Image_Error", "Нет картинов в ресурсах");
+        }
+*/
+
         try {
             FtpConnectData ftpConnectData = new FtpConnectData();
             File newImage_png = new File(ftpConnectData.put_toPhoneImage(context) + objects.get(pos).getImage() + ".png");
@@ -113,6 +143,8 @@ public class ListAdapterAde_Otchet_Ostatok extends BaseAdapter implements Filter
         } catch (Exception e) {
             Log.e("Image_Error", "Нет картинов в ресурсах");
         }
+
+
         return convertView;
     }
 

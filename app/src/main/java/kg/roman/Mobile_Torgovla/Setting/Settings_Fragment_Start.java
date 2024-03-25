@@ -24,7 +24,7 @@ import kg.roman.Mobile_Torgovla.R;
 public class Settings_Fragment_Start extends PreferenceFragmentCompat {
 
     ListPreference listPreference_ftpConnect, listPreference_path;
-    Preference preference_LoadDataFile;
+    Preference preference_LoadDataFile, preferenceMyID;
     Async_ViewModel_Setiing model_setting;
     String logeTAG = "SettingStart";
     Context context;
@@ -36,16 +36,16 @@ public class Settings_Fragment_Start extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         addPreferencesFromResource(R.xml.setting_start);
-        context = this.getActivity();
+        context= getActivity().getBaseContext();
         mSettings = getActivity().getApplication().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         listPreference_ftpConnect = findPreference("setting_ftpIP");  // ip-адрес
         listPreference_path = findPreference("setting_ftpPathData");  // путь: /MT_Sunbell_Karakol/
         preference_LoadDataFile = findPreference("setting_LoadDataFile"); // описание
-        FirstData_forDisplay(); // отображения описания под пунктами
-        putFTPgetFiles = mSettings.getString("setting_ftpPathData", "null");
-        Log.e(logeTAG, "onCreatePreferences: " + putFTPgetFiles);
+        preferenceMyID = findPreference("PEREM_ANDROID_ID");
+        preferenceMyID.setSummary("["+mSettings.getString("PEREM_ANDROID_ID", "")+"]");
 
+        FirstData_forDisplay(); // отображения описания под пунктами
         listPreference_ftpConnect.setOnPreferenceChangeListener((preference, newValue) -> {
             for (int i = 0; i < getResources().getStringArray(R.array.mass_ftp_server_con_value).length; i++)
                 if (newValue.equals(getResources().getStringArray(R.array.mass_ftp_server_con_value)[i]))
@@ -53,13 +53,13 @@ public class Settings_Fragment_Start extends PreferenceFragmentCompat {
             return true;
         });
 
-
         listPreference_path.setOnPreferenceChangeListener((preference, newValue) -> {
             for (int i = 0; i < getResources().getStringArray(R.array.mass_Region_Put_Value).length; i++)
                 if (newValue.equals(getResources().getStringArray(R.array.mass_Region_Put_Value)[i]))
                     listPreference_path.setSummary(getResources().getStringArray(R.array.mass_Region_Put_Name)[i]);
             return true;
         });
+
 
         preference_LoadDataFile.setOnPreferenceClickListener(preference -> {
             try {
@@ -69,28 +69,25 @@ public class Settings_Fragment_Start extends PreferenceFragmentCompat {
                     if (ftpWebhost.getFTP_TestConnect().second) {
                         Toast.makeText(context, ftpWebhost.getFTP_TestConnect().first, Toast.LENGTH_SHORT).show(); // Коннект FTP
 
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder
-                                .append("Данные на: ").append(CreateThisTime()).append("\n")
-                                .append("XML: ").append(ftpWebhost.getFilesSize(putFTPgetFiles + "MTW_Data")).append("\n")
-                                .append("БД: ").append(ftpWebhost.getFilesSize(putFTPgetFiles + "SqliteDB"));
-                        preference.setSummary(stringBuilder);
-
-
                         model_setting = new ViewModelProvider(this).get(Async_ViewModel_Setiing.class);
                         model_setting.getMessegeStatus().observe(this, messege ->
                         {
                             if (messege.equals("END")) {
                                 Toast.makeText(context, "Скачивание файлов завершенно, перезагрузите приложение", Toast.LENGTH_SHORT).show();
-                            }
 
+                                putFTPgetFiles = mSettings.getString("setting_ftpPathData", "");
+                                StringBuilder stringBuilder = new StringBuilder();
+                                stringBuilder
+                                        .append("Данные на: ").append(CreateThisTime()).append("\n")
+                                        .append("XML: ").append(ftpWebhost.getFilesSize(putFTPgetFiles + "MTW_Data")).append("\n")
+                                        .append("БД: ").append(ftpWebhost.getFilesSize(putFTPgetFiles + "SqliteDB"));
+                                preference.setSummary(stringBuilder.toString());
+                                editor = mSettings.edit();
+                                editor.putString("setting_LoadDataFile", stringBuilder.toString());    //запись данных даты и времени
+                                editor.commit();
+                            }
                         });
                         model_setting.execute();
-
-                        editor = mSettings.edit();
-                        editor.putString("setting_LoadDataFile", stringBuilder.toString());    //запись данных даты и времени
-                        editor.commit();
-
                     } else
                         Toast.makeText(context, ftpWebhost.getFTP_TestConnect().first, Toast.LENGTH_SHORT).show(); // // Нет Коннект FTP
                 } else

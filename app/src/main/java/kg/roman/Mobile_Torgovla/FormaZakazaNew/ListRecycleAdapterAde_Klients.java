@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import kg.roman.Mobile_Torgovla.FormaZakaza.ListAdapterSimple_Klients;
+import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.ListAdapterSimple_Klients;
 import kg.roman.Mobile_Torgovla.R;
 
 public class ListRecycleAdapterAde_Klients extends RecyclerView.Adapter<ListRecycleAdapterAde_Klients.ViewHolder> {

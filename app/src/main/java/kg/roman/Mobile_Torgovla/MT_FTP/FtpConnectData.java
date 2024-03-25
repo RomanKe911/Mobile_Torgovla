@@ -3,25 +3,14 @@ package kg.roman.Mobile_Torgovla.MT_FTP;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
 import android.util.Log;
-import android.util.Pair;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
-
-import kg.roman.Mobile_Torgovla.MailSenderClass;
-import kg.roman.Mobile_Torgovla.R;
 
 public class FtpConnectData {
     // Класс настроек для подключения к FTP-серверу
@@ -36,6 +25,17 @@ public class FtpConnectData {
     private SharedPreferences mSettings;
     private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
     public String[] mass_file_backup = {"sunbell_rn_db", "sunbell_base_db", "sunbell_const_db"};
+
+    public Map<String, String> getListMailMessege()
+    {
+        Map<String, String> list_mail_where = new HashMap<>();
+        list_mail_where.put("/MT_Sunbell_Bishkek/", "bishkek@sunbell.webhost.kg");
+        list_mail_where.put("/MT_Sunbell_Osh/", "osh@sunbell.webhost.kg");
+        list_mail_where.put("/MT_Sunbell_Djala_abad/", "djala-abad@sunbell.webhost.kg");
+        list_mail_where.put("/MT_Sunbell_Karakol/", "kerkin911@gmail.com");
+        list_mail_where.put("/MT_Sunbell_Cholpon-Ata/", "cholpon-ata@sunbell.webhost.kg");
+        return list_mail_where;
+    }
 
 
 
@@ -53,12 +53,12 @@ public class FtpConnectData {
 
     protected String loge_TAG = "FtpConnectData";
 
-   // public String put_toFTPBackUp = "/MT_Sunbell_Karakol/MTW_SOS/";
+    // public String put_toFTPBackUp = "/MT_Sunbell_Karakol/MTW_SOS/";
 
     public String put_toFtpBackUp(Context context) {
         // Путь к файлам резервного копирования /MT_Sunbell_Karakol/MTW_SOS/
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        String nameRegion = mSettings.getString("ftp_put_list", "").replaceAll("/", "");    // получение имени региона
+        String nameRegion = mSettings.getString("setting_ftpPathData", "").replaceAll("/", "");    // получение имени региона
         String putName = "";
         putName = "/" + nameRegion + "/MTW_SOS/";
         return putName;
@@ -67,14 +67,16 @@ public class FtpConnectData {
 
     // Путь для Picaso Image картинки
     public String put_toPhoneImage(Context context) {
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         Boolean putToOld, putToFiles, putToSDCard;
         String endPutFile = "";
 
-        putToOld = mSettings.getBoolean("key_putToOld", false);  // Переменая номер накладной
-        putToFiles = mSettings.getBoolean("key_putToFiles", false);  // Переменая номер накладной
-        putToSDCard = mSettings.getBoolean("key_putToSDCard", false);  // Переменая номер накладной
+        PreferencesWrite preferencesWrite = new PreferencesWrite(context);
+        putToOld = preferencesWrite.Setting_ImageputToOld;
+        putToFiles = preferencesWrite.Setting_ImageputToFiles;
+        putToSDCard = preferencesWrite.Setting_ImageputToSDCard;
+
+
 
         /*Uri imagePath_OldMT = Uri.parse("android.resource://kg.roman.mobile_torgovla_image/drawable/name_files.png");
         Uri imagePath_OldMTImage = Uri.parse("android.resource://kg.roman.mobile_torgovla_image/drawable/name_files.png");
@@ -103,7 +105,7 @@ public class FtpConnectData {
     // Универсальный путь для доступа к Картинкам на сервере FTP для филиалов
     public String put_toFTPforRegions(Context context) {
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        String nameRegion = mSettings.getString("ftp_put_list", "").replaceAll("/", "");    // получение имени региона
+        String nameRegion = mSettings.getString("setting_ftpPathData", "").replaceAll("/", "");    // получение имени региона
         String nameSklad = mSettings.getString("PEREM_AG_SKLAD", "");    // получение название склада
         String putName = "";
         switch (nameRegion) {
@@ -174,8 +176,8 @@ public class FtpConnectData {
             calendar.set(Calendar.MINUTE, minute);
             calendar.set(Calendar.SECOND, second);
             calendar.set(Calendar.MILLISECOND, 0);
-          //  Log.e("TimeZoneData: ", "Long: " + calendar.getTimeInMillis() + " Da " + calendar.getTime());
-            returnLong= calendar.getTimeInMillis();
+            //  Log.e("TimeZoneData: ", "Long: " + calendar.getTimeInMillis() + " Da " + calendar.getTime());
+            returnLong = calendar.getTimeInMillis();
         } catch (Exception e) {
             Log.e(loge_TAG, "Ошибка выполнения конвертации даты в формат long");
             returnLong = 0L;
@@ -192,7 +194,7 @@ public class FtpConnectData {
         StringBuilder newNameNumber = new StringBuilder();
 
         if (!stringName.isEmpty() | !stringName.equals(" ")) {
-          //  String string1 = stringName.replaceFirst(" ", "_").replaceAll(" ", "");
+            //  String string1 = stringName.replaceFirst(" ", "_").replaceAll(" ", "");
             String string1 = stringName.replaceAll(" ", "_");
             String stringWork = string1.toLowerCase().replaceAll("[^a-zа-я0-9_]", "");
             for (Character agent : stringWork.toCharArray()) {
@@ -207,10 +209,9 @@ public class FtpConnectData {
                     newName.append(agent);
             }
             newName.append(newNameNumber);
-        } else
-        {
+        } else {
             Log.e("CreateNameFile_BackUp", "не возможно создать строку, не верный формат данных");
-           // Snackbar.make(constraintLayout, "не возможно создать строку, не верный формат данных", Snackbar.LENGTH_SHORT).show();
+            // Snackbar.make(constraintLayout, "не возможно создать строку, не верный формат данных", Snackbar.LENGTH_SHORT).show();
         }
         Log.e("CreateNameFile_BackUp", newName.toString());
         return newName.toString();

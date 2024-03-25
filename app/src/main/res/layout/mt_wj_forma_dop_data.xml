@@ -1,285 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/logo_back_sunbell"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/test_mobitrading3_50">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout10"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/back_group"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_EndZakaz"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Spinner
-            android:id="@+id/spinner_ty"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/block_ty_random"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:id="@+id/edit_skidka_new"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:ems="5"
-                android:gravity="center_horizontal|center_vertical"
-                android:hint="скидка"
-                android:inputType="number"
-                android:maxLength="2"
-                android:textColor="#F80404"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/tvw_title_name_skidka"
-                app:layout_constraintStart_toEndOf="@+id/tvw_title_name_skidka"
-                app:layout_constraintTop_toTopOf="@+id/tvw_title_name_skidka" />
-
-            <TextView
-                android:id="@+id/tvw_title_name_skidka"
-                style="@style/forma_dop_zakaz"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:text="Процент скидки:"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView42"
-                style="@style/forma_dop_zakaz"
-                android:text="%"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_skidka_new"
-                app:layout_constraintStart_toEndOf="@+id/edit_skidka_new"
-                app:layout_constraintTop_toTopOf="@+id/edit_skidka_new" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/blok_data"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/back_group"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
-            android:id="@+id/btn_d_data"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/selector_button_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox_d" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/back_image">
 
-        <CheckBox
-            android:id="@+id/checkBox_d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="счет-фактурой"
-            app:layout_constraintStart_toStartOf="@+id/textView39"
-            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+            <LinearLayout
+                android:id="@+id/linearLayout_Client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/back_group"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/edt_credite_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:ems="5"
-            android:gravity="center_horizontal|center_vertical"
-            android:hint="дней конс."
-            android:inputType="number"
-            android:maxLength="3"
-            android:textColor="#F80404"
-            android:textSize="16sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/spinner_select_credit"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    style="@style/forma_dop_zakaz"
+                    android:text="контрагент:" />
 
-        <EditText
-            android:id="@+id/edit_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="12"
-            android:gravity="center_horizontal|center_vertical"
-            android:hint="не более 100 символов"
-            android:inputType="textPersonName"
-            android:maxLength="100"
-            android:textColor="#00897B"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView48"
-            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+                <TextView
+                    android:id="@+id/tvw_EZ_ClientName"
+                    style="@style/style_back_panel_rn_text"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:hint="контрагент: аптека, магазин, контейнер"
+                    android:inputType="textMultiLine"
+                    android:maxLines="4" />
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinner_select_credit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@+id/textView37"
-            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+            <LinearLayout
+                android:id="@+id/linearLayout_Sale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/back_group"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_Client">
 
-        <TextView
-            android:id="@+id/textView37"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginStart="8dp"
-            android:text="Вид оплаты:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    style="@style/forma_dop_zakaz"
+                    android:text="торговые условия:" />
 
-        <TextView
-            android:id="@+id/textView39"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:text="Вариант реализации:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_select_credit" />
+                <include
+                    android:id="@+id/fragment_Sale"
+                    layout="@layout/fragment_sale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp" />
+                <include
+                    android:visibility="gone"
+                    android:id="@+id/fragment_SaleRandom"
+                    layout="@layout/fragment_sale_only"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp" />
 
-        <TextView
-            android:id="@+id/textView40"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginStart="8dp"
-            android:text="Дата доставки:"
-            app:layout_constraintStart_toEndOf="@+id/btn_d_data"
-            app:layout_constraintTop_toTopOf="@+id/btn_d_data" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvw_d_data"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginTop="4dp"
-            android:hint="00.00.0000"
-            android:textSize="8pt"
-            app:layout_constraintEnd_toEndOf="@+id/textView40"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView40"
-            app:layout_constraintTop_toBottomOf="@+id/textView40" />
+            <LinearLayout
+                android:id="@+id/linearLayout_Type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/back_group"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_Sale">
 
-        <TextView
-            android:id="@+id/textView48"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:text="Комментарий:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_d_data" />
+                <TextView
+                    android:id="@+id/textView39"
+                    style="@style/forma_dop_zakaz"
+                    android:text="вариант реализации:" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <CheckBox
+                    android:id="@+id/checkBoxType"
+                    style="@style/forma_dop_zakaz"
+                    android:layout_marginLeft="8dp"
+                    android:text="счет-фактура" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/block_end"
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout_NextDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/back_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_Type">
+
+                <!--        <EditText
+                android:id="@+id/edit_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="12"
+                android:gravity="center_horizontal|center_vertical"
+                android:hint="не более 100 символов"
+                android:inputType="textPersonName"
+                android:maxLength="100"
+                android:textColor="#00897B"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/textView48"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />-->
+
+                <Button
+                    android:id="@+id/btn_d_data"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/icons_next_data"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView40"
+                    app:layout_constraintTop_toBottomOf="@+id/textView40"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    style="@style/forma_dop_zakaz"
+                    android:text="Дата доставки:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvw_d_data"
+                    style="@style/forma_dop_zakaz"
+                    android:layout_marginStart="4dp"
+                    android:hint="00.00.0000"
+                    android:textSize="8pt"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_d_data"
+                    app:layout_constraintEnd_toEndOf="@+id/textView40"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/btn_d_data"
+                    app:layout_constraintTop_toTopOf="@+id/btn_d_data" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout_TypeMoney"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/back_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_NextDate">
+
+                <TextView
+                    android:id="@+id/textView37"
+                    style="@style/forma_dop_zakaz"
+                    android:text="Вид оплаты:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinner_select_credit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView37"
+                    app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+                <EditText
+                    android:id="@+id/edt_credite_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:hint="дней конс."
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:textColor="@color/add_dialog_tovar_1"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/spinner_select_credit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/spinner_select_credit" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_Comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/back_group"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_TypeMoney">
+
+                <TextView
+                    android:id="@+id/textView48"
+                    style="@style/forma_dop_zakaz"
+                    android:text="Комментарий:" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="100"
+                    app:endIconMode="clear_text"
+                    app:helperText="не более 100 символов">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_comment"
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:inputType="textMultiLine"
+                        android:maxEms="5"
+                        android:maxLength="100"
+                        android:singleLine="false"
+                        android:textColor="#00897B"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/fragment_AvtoSumm"
+        layout="@layout/fragment_avtosumma"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/back_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btn_d_save"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/selector_button_save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_EndZakaz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/icons_menu_end" />
 
-        <TextView
-            android:id="@+id/textView43"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="4dp"
-            android:text="Сумма:"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_d_save" />
-
-        <TextView
-            android:id="@+id/tvw_d_summa"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginStart="4dp"
-            android:hint="000000.0"
-            android:textColor="#F80404"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView43"
-            app:layout_constraintStart_toEndOf="@+id/textView43"
-            app:layout_constraintTop_toTopOf="@+id/textView43" />
-
-        <TextView
-            android:id="@+id/tvw_d_itogo"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginBottom="4dp"
-            android:hint="000000.0"
-            android:textColor="#F80404"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/textView44"
-            style="@style/forma_dop_zakaz"
-            android:layout_marginEnd="2dp"
-            android:text="Итого:"
-            app:layout_constraintBottom_toBottomOf="@+id/tvw_d_itogo"
-            app:layout_constraintEnd_toStartOf="@+id/tvw_d_itogo"
-            app:layout_constraintTop_toTopOf="@+id/tvw_d_itogo" />
-
-        <TextView
-            android:id="@+id/tvw_dd_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="нет подходящих условий"
-            android:textColor="#FF0202"
-            android:textSize="10pt"
-            android:textStyle="bold|italic"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.20"
-            app:layout_constraintStart_toEndOf="@+id/btn_d_save"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

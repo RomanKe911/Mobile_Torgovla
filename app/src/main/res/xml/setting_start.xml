@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
@@ -36,6 +37,16 @@
             android:summary=""
             android:defaultValue="null"
             android:title="Скачать файлы для старта"></Preference>
+        <Preference
+            android:id="@+id/preference_myCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="null"
+            android:icon="@drawable/ic_menu_send"
+            android:key="PEREM_ANDROID_ID"
+            android:summary=""
+            android:title="Ключ активации пользователя"
+            app:enabled="false"></Preference>
 
     </PreferenceCategory>
 </PreferenceScreen>

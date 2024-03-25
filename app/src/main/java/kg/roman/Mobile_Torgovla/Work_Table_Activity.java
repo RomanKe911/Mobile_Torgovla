@@ -56,7 +56,7 @@ import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Nomenclature_Brends;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Ostatok_Single;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Printer;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Srtih_Activity;
-import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L1;
+import kg.roman.Mobile_Torgovla.FormaZakazaSelectClient.WJ_Forma_Zakaza_L1;
 import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Global_Activity;
 import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Dialog_RN_Screen;
 

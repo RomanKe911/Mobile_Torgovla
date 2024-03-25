@@ -7,7 +7,7 @@
 
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/avtoris_SpinnerSelectUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -32,7 +32,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvw_aut_uid"
+            android:id="@+id/avtoris_TVWUserID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvw_aut_title_1"
@@ -51,7 +51,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvw_aut_user"
+            android:id="@+id/avtoris_TVWUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvw_aut_title_2"
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/avtoris_EditPinCode"
                 android:layout_toRightOf="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
 
 
         <ImageView
-            android:id="@+id/imageViewVISIBLE_AUT"
+            android:id="@+id/avtoris_ImageVisiblePinCode"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignBottom="@+id/TextInput"
@@ -108,7 +108,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/avtoris_EditPinCode"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal">
 

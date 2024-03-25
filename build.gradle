@@ -8,6 +8,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()  // Maven Central repository
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$agp_version2"
@@ -23,8 +25,11 @@ allprojects {
     repositories {
         google()
         mavenCentral()  // Maven Central repository
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

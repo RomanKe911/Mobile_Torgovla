@@ -1,10 +1,8 @@
 package kg.roman.Mobile_Torgovla.ArrayList;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -33,13 +31,9 @@ public class ListAdapterAde_List_RN_Table extends BaseAdapter implements Filtera
 
     Context context;
     ArrayList<ListAdapterSimple_List_RN_Table> objects;
-    ListAdapterAde_List_RN_Table adapterPriceClients = this;
     CustomFilter filter;
     ArrayList<ListAdapterSimple_List_RN_Table> filterList;
-    public androidx.appcompat.app.AlertDialog.Builder dialog;
-    public SharedPreferences sp;
-    public SharedPreferences.Editor ed;
-    public String PEREM_DB3_RN, PEREM_DB3_CONST, PEREM_DB3_BASE, Log_Text_Error, PEREM_K_AG_Data;
+    String logeTAG = "AdapterRNTable";
 
 
     public ListAdapterAde_List_RN_Table(Context ctx, ArrayList<ListAdapterSimple_List_RN_Table> Edit_Content) {
@@ -71,118 +65,18 @@ public class ListAdapterAde_List_RN_Table extends BaseAdapter implements Filtera
     public View getView(final int pos, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        PreferencesWrite preferencesWrite = new PreferencesWrite(context);
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.wj_content_rn, null);
-        }
-        Log_Text_Error = "ERR_DELETE_RN: ";
-        Constanta_Read();
+            //  convertView = inflater.inflate(R.layout.wj_content_rn, null);
+            if (preferencesWrite.Setting_FiltersSelectGroup) {
 
-        final TextView kodrn = (TextView) convertView.findViewById(R.id.tvw_rn_RN);
-        TextView k_agent = (TextView) convertView.findViewById(R.id.tvw_rn_K_Agent);
-        TextView k_agentUID = (TextView) convertView.findViewById(R.id.tvw_rn_K_UID);
-        TextView vrema = (TextView) convertView.findViewById(R.id.tvw_rn_Vrema);
-        final TextView data = (TextView) convertView.findViewById(R.id.tvw_rn_Data);
-        TextView summa = (TextView) convertView.findViewById(R.id.tvw_rn_Summa);
-        TextView itogo = (TextView) convertView.findViewById(R.id.tvw_rn_Itogo);
-        TextView adress = (TextView) convertView.findViewById(R.id.tvw_rn_Adress);
-        TextView status_rn = (TextView) convertView.findViewById(R.id.text_status);
-        TextView sklad = (TextView) convertView.findViewById(R.id.tvw_rn_sklad);
-        ConstraintLayout constraintLayout = convertView.findViewById(R.id.list_layout_read);
-
-        final TextView debet = (TextView) convertView.findViewById(R.id.tvw_rn_debet);
-        TextView skidka = (TextView) convertView.findViewById(R.id.tvw_rn_skidka);
-
-        ImageView img_status = (ImageView) convertView.findViewById(R.id.image_status_zakaza);
-
-        //   if (PEREM_TYPE_STATUS_WORK.equals(""))
-
-        //SET DATA TO THEM
-        kodrn.setText(objects.get(pos).getKodrn());
-        k_agent.setText(objects.get(pos).getK_agent());
-        k_agentUID.setText(objects.get(pos).getK_agentUID());
-        vrema.setText(objects.get(pos).getVrema());
-        data.setText(objects.get(pos).getData());
-        summa.setText(objects.get(pos).getSumma());
-        itogo.setText(objects.get(pos).getItogo());
-        adress.setText(objects.get(pos).getAdress());
-        skidka.setText(objects.get(pos).getSkidka());
-        sklad.setText(objects.get(pos).getSklad());
-       /* if (objects.get(pos).getDebet() != null) {
-            debet.setText(objects.get(pos).getDebet());
-        } else debet.setText("0");*/
-
-
-        if (objects.get(pos).getStatus() != null) {
-            if (objects.get(pos).getStatus().equals("true")) {
-                status_rn.setText("true");
-                Picasso.get()
-                        .load(R.drawable.icons_image_status_zakaza_up)
-                        // .placeholder(R.drawable.button_up) заглушку (placeholder)
-                        .error(R.drawable.button_close) //заглушку для ошибки
-                        //   .fit()
-                        .into(img_status);
+                convertView = inflater.inflate(R.layout.wj_content_rn_group, null);
+                Group(convertView, pos);
             } else {
-                status_rn.setText("false");
-                Picasso.get()
-                        .load(R.drawable.icons_image_status_zakaza)
-                        // .placeholder(R.drawable.button_up) заглушку (placeholder)
-                        .error(R.drawable.button_close) //заглушку для ошибки
-                        //   .fit()
-                        .into(img_status);
+                convertView = inflater.inflate(R.layout.wj_content_rn032024, null);
+                GroupNull(convertView, pos);
             }
-        } else {
-            Picasso.get()
-                    .load(R.drawable.icons_image_status_zakaza)
-                    // .placeholder(R.drawable.button_up) заглушку (placeholder)
-                    .error(R.drawable.button_close) //заглушку для ошибки
-                    //   .fit()
-                    .into(img_status);
         }
-
-
-        // Загрузка статуса
-        try {
-         /*   SQLiteDatabase db = context.openOrCreateDatabase(PEREM_DB3_RN, MODE_PRIVATE, null);
-            String query = "SELECT status FROM base_RN_All WHERE data = '" + objects.get(pos).getData() + "'";
-            final Cursor cursor = db.rawQuery(query, null);
-            cursor.moveToFirst();
-            while (cursor.isAfterLast() == false) {
-                String status = cursor.getString(cursor.getColumnIndex("status"));
-
-                }
-                cursor.moveToNext();
-            }
-            cursor.close();
-            db.close();*/
-        } catch (Exception e) {
-            Toast.makeText(context, "Ошибка ошибка статуса", Toast.LENGTH_SHORT).show();
-            Log.e(Log_Text_Error, "Ошибка ошибка статуса");
-        }
-
-
-        // Дебеторская задолжность
-        try {
-            SQLiteDatabase db = context.openOrCreateDatabase(PEREM_DB3_RN, MODE_PRIVATE, null);
-            String query = "SELECT * FROM otchet_debet " +
-                    "WHERE d_kontr_uid = '" + k_agentUID.getText().toString() + "' AND d_summa > 0;";
-            final Cursor cursor = db.rawQuery(query, null);
-            cursor.moveToFirst();
-
-            if (cursor.getCount() > 0) {
-                String d_summa = cursor.getString(cursor.getColumnIndex("d_summa")).replace(",", ".");
-                debet.setText(new DecimalFormat("#00.00").format(Double.parseDouble(d_summa)).replace(",", "."));
-
-            } else {
-                debet.setText("не верный формат");
-            }
-            cursor.close();
-            db.close();
-        } catch (Exception e) {
-            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
-            Log.e(Log_Text_Error, "Ошибка дебеторской задолжности");
-        }
-
-
         return convertView;
     }
 
@@ -240,13 +134,156 @@ public class ListAdapterAde_List_RN_Table extends BaseAdapter implements Filtera
         }
     }
 
-    // Константы для чтения
-    protected void Constanta_Read() {
-        sp = PreferenceManager.getDefaultSharedPreferences(context);
-        PEREM_DB3_CONST = sp.getString("PEREM_DB3_CONST", "0");                  //чтение данных: Путь к базам данных с константами
-        PEREM_DB3_BASE = sp.getString("PEREM_DB3_BASE", "0");                    //чтение данных: Путь к базам данных с товаром
-        PEREM_DB3_RN = sp.getString("PEREM_DB3_RN", "0");                        //чтение данных: Путь к базам данных с накладными
-        PEREM_K_AG_Data = sp.getString("PEREM_K_AG_Data", "0");                        //чтение данных: Путь к базам данных с накладными
+    protected void GroupNull(View convertView, int pos) {
+
+        TextView kodrn = convertView.findViewById(R.id.tvw_rn_RN);
+        TextView k_agent = convertView.findViewById(R.id.tvw_rn_K_Agent);
+        TextView k_agentUID = convertView.findViewById(R.id.tvw_rn_K_UID);
+        TextView vrema = convertView.findViewById(R.id.tvw_rn_Vrema);
+        TextView data = convertView.findViewById(R.id.tvw_rn_Data);
+        TextView summa = convertView.findViewById(R.id.tvw_rn_Summa);
+        TextView itogo = convertView.findViewById(R.id.tvw_rn_Itogo);
+        TextView adress = convertView.findViewById(R.id.tvw_rn_Adress);
+        TextView status_rn = convertView.findViewById(R.id.text_status);
+        TextView sklad = convertView.findViewById(R.id.tvw_rn_sklad);
+        TextView debet = convertView.findViewById(R.id.tvw_rn_debet);
+        TextView skidka = convertView.findViewById(R.id.tvw_rn_skidka);
+
+        TextView statusVisible = convertView.findViewById(R.id.tvw_status_Invoice);
+        ImageView img_status = convertView.findViewById(R.id.image_status_zakaza);
+
+        //   if (PEREM_TYPE_STATUS_WORK.equals(""))
+
+        //SET DATA TO THEM
+        kodrn.setText(objects.get(pos).getKodrn());
+        k_agent.setText(objects.get(pos).getK_agent());
+        k_agentUID.setText(objects.get(pos).getK_agentUID());
+        vrema.setText(objects.get(pos).getVrema());
+        data.setText(objects.get(pos).getData());
+        summa.setText(objects.get(pos).getSumma());
+        itogo.setText(objects.get(pos).getItogo());
+        adress.setText(objects.get(pos).getAdress());
+        skidka.setText(objects.get(pos).getSkidka());
+        sklad.setText(objects.get(pos).getSklad());
+
+        if (objects.get(pos).getStatus() != null) {
+            if (objects.get(pos).getStatus().equals("true")) {
+                status_rn.setText("true");
+                Picasso.get()
+                        .load(R.drawable.icons_image_status_zakaza_up)
+                        // .placeholder(R.drawable.button_up) заглушку (placeholder)
+                        .error(R.drawable.button_close) //заглушку для ошибки
+                        //   .fit()
+                        .into(img_status);
+            } else {
+                status_rn.setText("false");
+                Picasso.get()
+                        .load(R.drawable.icons_image_status_zakaza)
+                        // .placeholder(R.drawable.button_up) заглушку (placeholder)
+                        .error(R.drawable.button_close) //заглушку для ошибки
+                        //   .fit()
+                        .into(img_status);
+            }
+        } else {
+            Picasso.get()
+                    .load(R.drawable.icons_image_status_zakaza)
+                    // .placeholder(R.drawable.button_up) заглушку (placeholder)
+                    .error(R.drawable.button_close) //заглушку для ошибки
+                    //   .fit()
+                    .into(img_status);
+        }
+
+        if (StatusRN(kodrn.getText().toString()))
+            statusVisible.setVisibility(View.VISIBLE);
+        else statusVisible.setVisibility(View.GONE);
+
+        // Дебеторская задолжность
+        try {
+            PreferencesWrite preferencesWrite = new PreferencesWrite(context);
+            preferencesWrite = new PreferencesWrite(context);
+            SQLiteDatabase db = context.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+            String query = "SELECT * FROM otchet_debet " +
+                    "WHERE d_kontr_uid = '" + k_agentUID.getText().toString() + "' AND d_summa > 0;";
+            final Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+            if (cursor.getCount() > 0) {
+                String d_summa = cursor.getString(cursor.getColumnIndexOrThrow("d_summa")).replace(",", ".");
+                debet.setText(new DecimalFormat("#00.00").format(Double.parseDouble(d_summa)).replace(",", "."));
+            } else
+                debet.setText("не верный формат");
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
+            Log.e(logeTAG, "Ошибка дебеторской задолжности");
+        }
+    }
+
+    protected void Group(View convertView, int pos) {
+        PreferencesWrite preferencesWrite = new PreferencesWrite(context);
+        TextView k_agent = convertView.findViewById(R.id.tvwRNGroup_ClientName);
+        TextView adress = convertView.findViewById(R.id.tvwRNGroup_ClientAdress);
+        TextView startDate = convertView.findViewById(R.id.tvwRNGroup_StartDate);
+        TextView endDate = convertView.findViewById(R.id.tvwRNGroup_EndDate);
+        TextView debet = convertView.findViewById(R.id.tvwRNGroup_ClietnDebet);
+        TextView itogo = convertView.findViewById(R.id.tvwRNGroup_Itogo);
+
+        //SET DATA TO THEM
+        k_agent.setText(objects.get(pos).getK_agent());
+        adress.setText(objects.get(pos).getAdress());
+        if (preferencesWrite.Setting_FiltersSelectDate) {
+            startDate.setText(preferencesWrite.Setting_Filters_DataStart);
+            endDate.setText(preferencesWrite.Setting_Filters_DataEND);
+        } else startDate.setText(objects.get(pos).getData());
+
+        debet.setText("не верный формат");
+        itogo.setText(objects.get(pos).getItogo());
+
+        Double ItogoSum = Double.parseDouble(objects.get(pos).getItogo());
+        String clientUID = objects.get(pos).getK_agentUID();
+        Log.e(logeTAG, "clientUID" + clientUID);
+
+        // Дебеторская задолжность
+        try {
+
+            SQLiteDatabase db = context.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+            String query = "SELECT * FROM otchet_debet " +
+                    "WHERE d_kontr_uid = '" + clientUID + "' AND d_summa > 0;";
+            final Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+            Log.e(logeTAG, "cursor" + cursor.getCount());
+            String d_summa = "";
+            if (cursor.getCount() > 0)
+                d_summa = cursor.getString(cursor.getColumnIndexOrThrow("d_summa")).replace(",", ".");
+            debet.setText(d_summa);
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
+            Log.e(logeTAG, "Ошибка дебеторской задолжности");
+        }
+    }
+
+    protected boolean StatusRN(String kodRN) {
+        boolean status = false;
+        // Отображение счет-фактуры
+        try {
+            PreferencesWrite preferencesWrite = new PreferencesWrite(context);
+            SQLiteDatabase db = context.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+            String query = "SELECT kod_rn, uslov_nds FROM base_RN_All WHERE kod_rn = '" + kodRN + "'";
+            final Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+            if (cursor.getCount() > 0) {
+                String statusNDS = cursor.getString(cursor.getColumnIndexOrThrow("uslov_nds"));
+                status = statusNDS.equals("1");
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
+            Log.e(logeTAG, "Ошибка дебеторской задолжности");
+        }
+        return status;
     }
 
 }

@@ -36,7 +36,7 @@ import java.util.Calendar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza;
+import kg.roman.Mobile_Torgovla.FormaZakazaStart.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_RN_END;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_RN_END;
 import kg.roman.Mobile_Torgovla.R;

@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/MT_Layout_Background"
     android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/textView_b2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/splash_LinearLayoutLoge"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Базы данных:"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteY="96dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/textView_bl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Доступ к интернету:"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteY="96dp" />
+        <TextView
+            android:id="@+id/tvw_start_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_TextTitileLoge"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/textView_b3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Файлы XML: "
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteY="96dp" />
+        <TextView
+            android:id="@+id/tvw_start_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:hint="@string/splash_TextValueLoge"
+            android:textColor="@color/colors_ostatok_small"
+            android:textSize="12sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/splash_ConstraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,6 +58,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:visibility="visible"
+            android:contentDescription="@string/excel"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar_xml"
             app:layout_constraintEnd_toEndOf="@+id/progressBar_xml"
             app:layout_constraintStart_toStartOf="@+id/progressBar_xml"
@@ -69,6 +71,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:visibility="visible"
+            android:contentDescription="@string/sqldb"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar_sql"
             app:layout_constraintEnd_toEndOf="@+id/progressBar_sql"
             app:layout_constraintStart_toStartOf="@+id/progressBar_sql"
@@ -81,6 +84,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:visibility="visible"
+            android:contentDescription="@string/internet"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar_internet"
             app:layout_constraintEnd_toEndOf="@+id/progressBar_internet"
             app:layout_constraintStart_toStartOf="@+id/progressBar_internet"
@@ -111,7 +115,6 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvw_start_title"
             app:layout_constraintEnd_toStartOf="@+id/progressBar_xml"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -130,85 +133,6 @@
             app:layout_constraintTop_toTopOf="@+id/progressBar_internet"
             app:layout_constraintVertical_bias="0.5" />
 
-        <TextView
-            android:id="@+id/tvw_start_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Загрузка данных:"
-            android:textStyle="bold|italic"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvw_start_log"
-            app:layout_constraintStart_toStartOf="@+id/tvw_start_log"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar_internet" />
-
-        <TextView
-            android:id="@+id/tvw_start_log"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:hint="Ошибки"
-            android:textStyle="bold|italic"
-            android:textColor="#E53935"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ViewFlipper
-        android:id="@+id/viewFlipper1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="4dp"
-        android:autoStart="true"
-        android:flipInterval="1500"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView_cussons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/anim_logo_1" />
-
-        <ImageView
-            android:id="@+id/imageView_pcc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/anim_logo_2" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/anim_logo_3" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/anim_logo_4" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/anim_logo_5" />
-
-    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

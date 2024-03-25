@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="@drawable/logo_back_all_5"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L2">
+    tools:context="kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.WJ_Forma_Zakaza_L2">
 
     <ListView
         android:id="@+id/ListView_Klients_Tovar"

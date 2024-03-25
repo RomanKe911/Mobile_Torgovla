@@ -245,6 +245,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textStyle">bold|italic</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
     <style name="style_work_list_1">
@@ -282,8 +283,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:layout_marginRight">5dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
     </style>
 
     <style name="style_list_klient_select_1">
@@ -306,9 +305,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginLeft">3dp</item>
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/panel_color_2</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_horizontal|center_vertical</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textColor">@color/add_dialog_tovar_1</item>
     </style>
 
     <style name="AppTheme.Plushe" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -384,8 +385,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 
@@ -394,13 +396,19 @@
     <style name="MT_Layout_Background">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@drawable/logo_back_sunbell_start_new</item>
+        <!--<item name="android:background">@drawable/logo_back_sunbell_start_new</item>-->
+        <!--<item name="android:background">@drawable/test_new2024</item>-->
+
+
+        <item name="android:background">@drawable/back_mobitrade</item>
+
     </style>
 
     <style name="MT_Layout_Background_Work">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@drawable/logo_back_sunbell</item>
+        <item name="android:background">@drawable/test_mobitrading3_50</item>
+        <!--<item name="android:background">@drawable/logo_back_sunbell</item>-->
     </style>
     Стили для WG_Global_Activity
 
@@ -438,7 +446,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginTop">4dp</item>
-        <item name="android:layout_marginStart">4dp</item>
     </style>
 
     <style name="textview_aut_text">
@@ -510,8 +517,10 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginLeft">3dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/panel_color_1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:layout_gravity">center_horizontal|center_vertical</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="style_new_contragent_title">
@@ -641,13 +650,14 @@
         <item name="android:background">@drawable/selector_button_ftp_download</item>
     </style>
 
-
+<!--
     <style name="AppTheme.Setting">
-        <!-- Кастомная тема для настроек -->
+        &lt;!&ndash; Кастомная тема для настроек &ndash;&gt;
         <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
-        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+       <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния-
+
         <item name="colorAccent">#00897B</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
-        <item name="android:colorControlNormal">#000000</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlNormal">#C8C8C8</item>             //  Цвет для неактивных компонентов
         <item name="android:colorControlActivated">#00796B</item>          //  Цвет для активных компонентов
         <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
 
@@ -657,8 +667,153 @@
        <item name="android:windowBackground">#FFFFFF</item>        //  Цвет фона
 
         <item name="windowActionBar">true</item>
+    </style>-->
+
+
+    <style name="AppTheme.FirstActivity" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Кастомная тема для настроек -->
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+        <item name="colorAccent">#3D71B7</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#BCBCBC</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#4A8AC9</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#E64A19</item>        //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>        //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>        //  Цвет текста заголовка пунктов
+        <item name="android:background">#FFFFFF</item>        //  Цвет фона
+
+        <item name="windowActionBar">true</item>
     </style>
 
+  <!--  <style name="AppTheme.FormaZakaza" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <style name="AppTheme.FormaZakaza" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Кастомная тема для настроек -->
+    <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+    <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+    <item name="colorAccent">#0097A7</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+    <item name="android:colorControlNormal">#9A9999</item>             //  Цвет для неактивных компонентов
+    <item name="android:colorControlActivated">#0097A7</item>          //  Цвет для активных компонентов
+    <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+    <item name="android:textColorPrimary">#1976D2</item>              //  Цвет текста элементов заголовков
+    <item name="android:textColorPrimaryInverse">#000000</item>       //  Цвет текста элементов заголовков _2 выделенных
+    <item name="android:textColorSecondaryInverse">#000000</item>     //  Цвет текста заголовка пунктов
+    <item name="android:windowBackground">#FFFFFF</item>              //  Цвет фона
+    <!--<item name="android:backgroundTint">#FFFFFF</item>              //  Цвет фона-->
+    <item name="windowActionBar">true</item>
+</style>
+
+    <style name="AppTheme.FormaZakazaL2" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+        <item name="colorAccent">#0097A7</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#000000</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#0097A7</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.FormaZakaza_Select" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Кастомная тема для настроек -->
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+        <item name="colorAccent">#0097A7</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#000000</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#0097A7</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#1976D2</item>              //  Цвет текста элементов заголовков
+        <item name="android:textColorPrimaryInverse">#000000</item>       //  Цвет текста элементов заголовков _2 выделенных
+        <item name="android:textColorSecondaryInverse">#000000</item>     //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>              //  Цвет фона
+        <item name="windowActionBar">true</item>
+    </style>
+
+
+    <style name="MyHintText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/viero_colorAccent</item>
+    </style>
+
+
+<!--    <style name="AppThemeDopzakaz" parent="Theme.AppCompat">
+        &lt;!&ndash; Кастомная тема для настроек &ndash;&gt;
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+        <item name="colorAccent">#0097A7</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#000000</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#0097A7</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#000000</item>              //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>       //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>     //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>              //  Цвет фона
+        <item name="windowActionBar">true</item>
+    </style>
+
+    <style name="MeText" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+        <item name="android:textColorPrimary">#000000</item>              //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>       //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>     //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>              //  Цвет фона
+    </style>-->
+
+
+    <style name="AppThemeDopzakaz" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Кастомная тема для настроек -->
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+        <item name="colorAccent">#0097A7</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#000000</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#0097A7</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#000000</item>              //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>       //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#090909</item>     //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>              //  Цвет фона
+        <item name="windowActionBar">true</item>
+    </style>
+
+    <style name="MeText" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+        <item name="android:textColorPrimary">#000000</item>              //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>       //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>     //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>              //  Цвет фона
+    </style>
+
+
+
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+
+        <item name="colorPrimary">#00ffff</item>
+        <item name="colorPrimaryDark">#987654</item>
+        <item name="colorAccent">#ff00ff</item>
+        <item name="android:buttonBarNegativeButtonStyle" >@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/NegativeButtonStyle</item>
+
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">#ff00ff</item>
+    </style>
 
 
 </resources>

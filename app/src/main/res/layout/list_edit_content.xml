@@ -1,160 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:descendantFocusability="blocksDescendants"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    android:background="@drawable/back_group"
     android:orientation="horizontal"
     android:padding="3dp">
 
-
     <ImageView
-        android:id="@+id/img_select"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_weight="1"
+        android:id="@+id/Content_Image"
+        android:layout_width="55dp"
+        android:layout_height="80dp"
+        android:background="@drawable/back_contentimage"
+        android:src="@drawable/android_logo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Relative_layout_edit"
+        app:layout_constraintEnd_toStartOf="@+id/Content_ConstraintLayoutTable"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bella_perfecta_10_rose" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/Relative_layout_edit"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Content_ConstraintLayoutTable"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="4dp"
-        android:layout_weight="1"
-        android:focusable="false"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:background="#43CACACA"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_delete_id"
-        app:layout_constraintStart_toEndOf="@+id/img_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Content_Image"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/cont_edit_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ID"
-            android:textColor="@color/colorKatalog"
-            android:textSize="16sp"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/wj_cont_name"
+            android:id="@+id/Content_TovarName"
             style="@style/style_work_list_1"
+            android:layout_width="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="left|center_vertical"
-            android:text="Bella, Cussons, PCC"
-            android:textColor="@color/work_colors_1" />
+            android:hint="Bella, Cussons, PCC"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:textColor="@color/add_dialog_tovar_1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/wj_cont_kod"
+            android:id="@+id/Content_TovarUID"
             style="@style/style_work_list_1"
-            android:layout_below="@+id/wj_cont_name"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="0000/0000/0000"
-            android:textColor="@color/work_colors_2" />
+            android:layout_width="0dp"
+            android:layout_marginTop="2dp"
+            android:gravity="left|center_vertical"
+            android:hint="uid-kod: 9028DC90-0B5E-4A27-8BEC-725054134D13"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:textColor="@color/work_colors_1"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/Content_TovarUniv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/Content_TovarName"
+            app:layout_constraintTop_toBottomOf="@+id/Content_TovarName"
+            tools:visibility="gone" />
 
         <TextView
-            android:id="@+id/cont_edit_kol"
+            android:id="@+id/Content_TovarUniv"
             style="@style/style_work_list_1"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_marginLeft="5dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="144 шт"
-            android:textColor="@color/work_colors_3" />
-
-        <TextView
-            android:id="@+id/wj_cont_cena"
-            style="@style/style_work_list_1"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/textView_z1"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="65.00"
-            android:textColor="@color/work_colors_3" />
-
-        <TextView
-            android:id="@+id/cont_edit_summa"
-            style="@style/style_work_list_1"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/textViewz2"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="9360.00"
-            android:textColor="@color/work_colors_3" />
-
-        <TextView
-            android:id="@+id/textView_z1"
-            style="@style/style_arf_znak"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/cont_edit_kol"
-            android:text="x" />
-
-        <TextView
-            android:id="@+id/textViewz2"
-            style="@style/style_arf_znak"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/wj_cont_cena"
-            android:text="=" />
-
-        <TextView
-            android:id="@+id/cont_edit_skidka"
-            style="@style/style_arf_znak"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/tvw_skidka_1"
-            android:text="SK" />
+            android:layout_marginBottom="48dp"
+            android:hint="univ-kod: 0000/0000/0000"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:textColor="@color/work_colors_2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/Content_TovarUID"
+            app:layout_constraintTop_toBottomOf="@+id/Content_TovarUID"
+            tools:visibility="gone" />
 
-        <TextView
-            android:id="@+id/tvw_skidka_1"
-            style="@style/style_arf_znak"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout20"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/cont_edit_summa"
-            android:text="-" />
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Content_TovarName"
+            app:layout_constraintVertical_bias="0.7">
 
-        <TextView
-            android:id="@+id/tvw_skidka_2"
-            style="@style/style_arf_znak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/cont_edit_skidka"
-            android:text="% =" />
+            <TextView
+                android:id="@+id/Content_Count"
+                style="@style/style_work_list_1"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:hint="0"
+                android:textColor="@color/work_colors_3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cont_edit_itogo"
-            style="@style/style_arf_znak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/wj_cont_kod"
-            android:layout_toRightOf="@+id/tvw_skidka_2"
-            android:text="5000" />
-    </RelativeLayout>
 
-    <Button
-        android:id="@+id/button_delete_id"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/selector_button_delete_id"
-        android:focusable="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Relative_layout_edit"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView_z1"
+                style="@style/style_arf_znak"
+                android:text=" шт X "
+                app:layout_constraintBottom_toBottomOf="@+id/Content_Count"
+                app:layout_constraintEnd_toStartOf="@+id/Content_Price"
+                app:layout_constraintStart_toEndOf="@+id/Content_Count"
+                app:layout_constraintTop_toTopOf="@+id/Content_Count" />
+
+            <TextView
+                android:id="@+id/Content_Price"
+                style="@style/style_work_list_1"
+                android:hint="00"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_z1"
+                app:layout_constraintStart_toEndOf="@+id/textView_z1"
+                app:layout_constraintTop_toTopOf="@+id/textView_z1"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/textViewz2"
+                style="@style/style_arf_znak"
+                android:text="c = "
+                app:layout_constraintBottom_toBottomOf="@+id/Content_Price"
+                app:layout_constraintStart_toEndOf="@+id/Content_Price"
+                app:layout_constraintTop_toTopOf="@+id/Content_Price"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/Content_Summa"
+                style="@style/style_work_list_1"
+                android:hint="00"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewz2"
+                app:layout_constraintStart_toEndOf="@+id/textViewz2"
+                app:layout_constraintTop_toTopOf="@+id/textViewz2" />
+
+            <TextView
+                android:id="@+id/tvw_skidka_1"
+                style="@style/style_arf_znak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                app:layout_constraintBottom_toBottomOf="@+id/Content_Summa"
+                app:layout_constraintStart_toEndOf="@+id/Content_Summa"
+                app:layout_constraintTop_toTopOf="@+id/Content_Summa"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/Content_Sale"
+                style="@style/style_arf_znak"
+                android:hint="0"
+                app:layout_constraintBottom_toBottomOf="@+id/tvw_skidka_1"
+                app:layout_constraintStart_toEndOf="@+id/tvw_skidka_1"
+                app:layout_constraintTop_toTopOf="@+id/tvw_skidka_1" />
+
+            <TextView
+                android:id="@+id/tvw_skidka_2"
+                style="@style/style_arf_znak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" % = "
+                app:layout_constraintBottom_toBottomOf="@+id/Content_Sale"
+                app:layout_constraintStart_toEndOf="@+id/Content_Sale"
+                app:layout_constraintTop_toTopOf="@+id/Content_Sale" />
+
+            <TextView
+                android:id="@+id/Content_Itogo"
+                style="@style/style_work_list_1"
+                android:hint="00"
+                app:layout_constraintBottom_toBottomOf="@+id/tvw_skidka_2"
+                app:layout_constraintStart_toEndOf="@+id/tvw_skidka_2"
+                app:layout_constraintTop_toTopOf="@+id/tvw_skidka_2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

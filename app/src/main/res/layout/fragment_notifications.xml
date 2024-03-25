@@ -1,22 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MT_Layout_Background_Work"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/FragmentNotific"
     tools:context=".ui.notifications.NotificationsFragment">
 
     <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
+        android:id="@+id/tvw_Clients"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:hint="контрагент"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutParams"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutParams"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvw_Clients">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:theme="@style/MeText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView48">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:endIconMode="clear_text"
+                app:helperText="не более 100 символов">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_comment"
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:inputType="textMultiLine"
+                    android:maxEms="5"
+                    android:maxLength="100"
+                    android:singleLine="false"
+                    android:textColor="#00897B"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_d_data"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/selector_button_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox_d" />
+
+        <CheckBox
+            android:id="@+id/checkBox_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="счет-фактурой"
+            app:layout_constraintStart_toStartOf="@+id/textView39"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <EditText
+            android:id="@+id/edt_credite_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:ems="5"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="дней конс."
+            android:inputType="number"
+            android:maxLength="3"
+            android:textColor="#F80404"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_select_credit"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!--        <EditText
+            android:id="@+id/edit_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:ems="12"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="не более 100 символов"
+            android:inputType="textPersonName"
+            android:maxLength="100"
+            android:textColor="#00897B"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/textView48"
+            app:layout_constraintTop_toBottomOf="@+id/textView48" />-->
+
+        <Spinner
+            android:id="@+id/spinner_select_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/textView37"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+        <TextView
+            android:id="@+id/textView37"
+            style="@style/forma_dop_zakaz"
+            android:layout_marginStart="8dp"
+            android:text="Вид оплаты:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView39"
+            style="@style/forma_dop_zakaz"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="Вариант реализации:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_select_credit" />
+
+        <TextView
+            android:id="@+id/textView40"
+            style="@style/forma_dop_zakaz"
+            android:layout_marginStart="8dp"
+            android:text="Дата доставки:"
+            app:layout_constraintStart_toEndOf="@+id/btn_d_data"
+            app:layout_constraintTop_toTopOf="@+id/btn_d_data" />
+
+        <TextView
+            android:id="@+id/tvw_d_data"
+            style="@style/forma_dop_zakaz"
+            android:layout_marginTop="4dp"
+            android:hint="00.00.0000"
+            android:textSize="8pt"
+            app:layout_constraintEnd_toEndOf="@+id/textView40"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView40"
+            app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+        <TextView
+            android:id="@+id/textView48"
+            style="@style/forma_dop_zakaz"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="Комментарий:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_d_data" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutSkidka"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/back_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutParams">
+
+        <Spinner
+            android:id="@+id/spinner_skidka"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_end_title2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edit_end_skidka"
+            app:layout_constraintTop_toTopOf="@+id/tvw_end_title2" />
+
+        <TextView
+            android:id="@+id/tvw_end_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Сумма без скидки:"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_end_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvw_end_count" />
+
+        <TextView
+            android:id="@+id/tvw_end_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Скидка%:"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_end_skidka"
+            app:layout_constraintStart_toStartOf="@+id/tvw_end_title1"
+            app:layout_constraintTop_toTopOf="@+id/edit_end_skidka" />
+
+        <TextView
+            android:id="@+id/tvw_end_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Итого к оплате:"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_end_count2"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_end_count2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvw_end_title2"
+            app:layout_constraintTop_toTopOf="@+id/tvw_end_count2"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tvw_end_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/tvw_end_title1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvw_end_count2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/tvw_end_title3"
+            app:layout_constraintTop_toBottomOf="@+id/edit_end_skidka" />
+
+        <EditText
+            android:id="@+id/edit_end_skidka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:ems="5"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="скидка"
+            android:inputType="number"
+            android:maxLength="2"
+            android:textColor="#F80404"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/tvw_end_title2"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_end_count"
+            tools:visibility="invisible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        app:fabCustomSize="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="40dp"
+        app:srcCompat="@drawable/button_up" />
+
+    <ProgressBar
+        android:id="@+id/FormaClients_progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/cotton_colorPrimary"
+        android:secondaryProgressTint="@color/balt_et_colorAccent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButton"
+        tools:visibility="invisible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

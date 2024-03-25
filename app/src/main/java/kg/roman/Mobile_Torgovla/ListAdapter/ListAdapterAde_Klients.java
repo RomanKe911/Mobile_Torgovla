@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import kg.roman.Mobile_Torgovla.FormaZakaza.ListAdapterSimple_Klients;
+import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.ListAdapterSimple_Klients;
 import kg.roman.Mobile_Torgovla.R;
 
 /**

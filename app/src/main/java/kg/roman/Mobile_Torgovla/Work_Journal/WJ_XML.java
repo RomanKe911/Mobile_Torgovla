@@ -255,8 +255,8 @@ public class WJ_XML extends AppCompatActivity {
 
         int k = 0;
         while (cursor.isAfterLast() == false) {
-            String index = (cursor.getString(cursor.getColumnIndex("id")));
-            String kod_univ = (cursor.getString(cursor.getColumnIndex("kod_univ")));
+            String index = (cursor.getString(cursor.getColumnIndexOrThrow("id")));
+            String kod_univ = (cursor.getString(cursor.getColumnIndexOrThrow("kod_univ")));
 
             if (!kod_univ.equals("КНД")) {
                 localContentValuesup.put("k_agent", mass_k_agent[k]);
@@ -286,15 +286,15 @@ public class WJ_XML extends AppCompatActivity {
         ContentValues localContentValuesup = new ContentValues();
         int k = 0;
         while (cursor.isAfterLast() == false) {
-            String index = (cursor.getString(cursor.getColumnIndex("id")));
-            String kod_univ = (cursor.getString(cursor.getColumnIndex("kod_univ")));
-            String name = (cursor.getString(cursor.getColumnIndex("name")));
-            String cena = (cursor.getString(cursor.getColumnIndex("cena")));
-            String kol = (cursor.getString(cursor.getColumnIndex("kol")));
+            String index = (cursor.getString(cursor.getColumnIndexOrThrow("id")));
+            String kod_univ = (cursor.getString(cursor.getColumnIndexOrThrow("kod_univ")));
+            String name = (cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            String cena = (cursor.getString(cursor.getColumnIndexOrThrow("cena")));
+            String kol = (cursor.getString(cursor.getColumnIndexOrThrow("kol")));
 
-            String ras = (cursor.getString(cursor.getColumnIndex("ras")));
-            String nomer = (cursor.getString(cursor.getColumnIndex("nomer")));
-            String k_agent = (cursor.getString(cursor.getColumnIndex("k_agent")));
+            String ras = (cursor.getString(cursor.getColumnIndexOrThrow("ras")));
+            String nomer = (cursor.getString(cursor.getColumnIndexOrThrow("nomer")));
+            String k_agent = (cursor.getString(cursor.getColumnIndexOrThrow("k_agent")));
 
             if (!kod_univ.equals("КНД")) {
                 localContentValuesup.put("ras", mass_data[k][0]);
@@ -363,7 +363,7 @@ public class WJ_XML extends AppCompatActivity {
         cursor.moveToFirst();
         ContentValues localContentValues = new ContentValues();
         while (cursor.isAfterLast() == false) {
-            String name = (cursor.getString(cursor.getColumnIndex("name"))).replaceAll("\\s+", "");
+            String name = (cursor.getString(cursor.getColumnIndexOrThrow("name"))).replaceAll("\\s+", "");
             localContentValues.put("name", name);
             db.insert("base2", null, localContentValues);
             cursor.moveToNext();

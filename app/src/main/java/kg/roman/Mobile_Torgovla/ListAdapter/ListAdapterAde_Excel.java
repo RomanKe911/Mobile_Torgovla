@@ -55,9 +55,9 @@ public class ListAdapterAde_Excel extends BaseAdapter
         TextView localTextView4 = (TextView)paramView.findViewById(2131624199);*/
 
         TextView localTextView1 = (TextView) paramView.findViewById(R.id.wj_cont_kod);
-        TextView localTextView2 = (TextView) paramView.findViewById(R.id.wj_cont_name);
-        TextView localTextView3 = (TextView) paramView.findViewById(R.id.cont_edit_kol);
-        TextView localTextView4 = (TextView) paramView.findViewById(R.id.wj_cont_cena);
+        TextView localTextView2 = (TextView) paramView.findViewById(R.id.Content_TovarUID);
+        TextView localTextView3 = (TextView) paramView.findViewById(R.id.Content_Count);
+        TextView localTextView4 = (TextView) paramView.findViewById(R.id.Content_Price);
 
 
         localTextView1.setText(((ListAdapterSimple_Excel) this.objects.get(paramInt)).getKod());

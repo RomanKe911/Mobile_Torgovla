@@ -22,7 +22,6 @@ public class ListAdapterSimple_List_RN_Table {
                                            String vrema, String data, String summa, String itogo,
                                            String adress, String skidka, String debet, String status,
                                            String sklad) {
-
         this.kodrn = kodrn;
         this.k_agent = k_agent;
         this.k_agentUID = k_agentUID;
@@ -31,7 +30,6 @@ public class ListAdapterSimple_List_RN_Table {
         this.itogo = itogo;
         this.summa = summa;
         this.adress = adress;
-
         this.debet = debet;
         this.status = status;
         this.skidka = skidka;

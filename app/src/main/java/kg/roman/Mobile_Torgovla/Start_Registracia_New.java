@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,12 +11,10 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,12 +22,11 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static java.sql.Types.TIMESTAMP;
+import kg.roman.Mobile_Torgovla.Authorization.Start_Second_Activity;
 
 
 public class Start_Registracia_New extends AppCompatActivity {
@@ -64,7 +60,7 @@ public class Start_Registracia_New extends AppCompatActivity {
         text_kod = findViewById(R.id.tvw_reg_text_04);
 
         button = findViewById(R.id.button);
-        spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.avtoris_SpinnerSelectUser);
         //spinner2 = findViewById(R.id.spinner2);
         Pack_Info();
 
@@ -234,7 +230,7 @@ public class Start_Registracia_New extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             WaitingDialog.dismiss();
             Toast.makeText(context_Activity, "Данные успешно отправленны!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(context_Activity, Start_AutorithActivity.class);
+            Intent intent = new Intent(context_Activity, Start_Second_Activity.class);
             startActivity(intent);
             finish();
             //((Activity)mainContext).finish();

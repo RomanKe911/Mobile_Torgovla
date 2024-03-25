@@ -124,6 +124,7 @@ public class MyViewModel extends AndroidViewModel {
                                         }
                                     }
                                     w_fileImage = "logo_" + w_brends.toLowerCase().substring(3) + ".png";
+                                 //   w_fileImage = "logo_menu_" + w_brends.toLowerCase().substring(3) + ".png";
 
                                     Log.e("Files: ", "Бренд> " + w_brends);
                                     Log.e("Files: ", "Дата обновления> " + w_dataUpdate);

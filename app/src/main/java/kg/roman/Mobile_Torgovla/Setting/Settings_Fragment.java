@@ -4,17 +4,23 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.datastore.preferences.core.Preferences;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
@@ -44,22 +50,28 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.DialogFragment_EditPosition;
 import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.Permission.PermissionUtils;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash;
 import kg.roman.Mobile_Torgovla.R;
+import kg.roman.Mobile_Torgovla.databinding.MtWjFormaDopDataBinding;
+import kg.roman.Mobile_Torgovla.databinding.SettingLayoutBinding;
 
 
 public class Settings_Fragment extends PreferenceFragmentCompat {
 
     ListPreference listPreference_ftpConnect, listPreference_path,
-            listPreference_trade_status, listPreference_trade_nal, listPreference_trade_kons;
-    Preference preference_LoadDataFile;
+            listPreference_trade_status, listPreference_SaleStandart, listPreference_SaleforFarm, listPreference_MinSumTrade;
+    Preference preference_LoadDataFile, preferenceMyID;;
+    Preference preferenceClear, preferencesImageManager, preferences_ImageManagerIcons;
     SwitchPreference switchPreference_ImageOld, switchPreference_ImagePhone,
             switchPreference_ImageSD, switchPreference_Permission;
     SwitchPreference switchPreference_BrendsAll, switchPreference_BrendsAgents,
-            switchPreference_BrendsFirms, switchPreference_BrendsManual, switchPreference_SortedBy;
+            switchPreference_BrendsFirms, switchPreference_BrendsManual, switchPreference_SortedBy, switchPreference_MailMessege;
     MultiSelectListPreference multiSelectListPreference_BrendsManual;
+    Preference editTextPreferenceMinSumSale;
     Async_ViewModel_Setiing model_setting;
     String logeTAG = "Setting";
     private static final int PERMISSION_STORAGE = 101;
@@ -73,13 +85,23 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         addPreferencesFromResource(R.xml.setting);
         context = this.getActivity();
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         mSettings = getActivity().getApplication().getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+
+        preferenceMyID = findPreference("PEREM_ANDROID_ID");
+        preferenceMyID.setSummary("["+mSettings.getString("PEREM_ANDROID_ID", "")+"]");
+
+
+
 
 
         Preference_FTPConnects();           // Подключение к FTP
-        Preference_Trade();                 // Настройки для торговых условий
+        Preference_TradeSale();             // Настройки для торговых условий
         SwitchPreference_Image();           // База картинок(переключатели доступа к картинкам)
         SwitchPreference_Nomenclature();    // Номенклатура
+        Preference_Clears();                // Очистка данных
 
         putFTPgetFiles = mSettings.getString("setting_ftpPathData", "null");
         FirstData_forDisplay(); // отображения описания под пунктами
@@ -117,6 +139,15 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
         listPreference_ftpConnect = findPreference("setting_ftpIP");        // ip-адрес
         listPreference_path = findPreference("setting_ftpPathData");        // путь: /MT_Sunbell_Karakol/
         preference_LoadDataFile = findPreference("setting_LoadDataFile");   // описание
+        switchPreference_MailMessege = findPreference("key_ftpMailMessege"); // настройки для отправки сообщения
+
+        switchPreference_MailMessege.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (newValue.equals(true))
+                switchPreference_MailMessege.setSummary("настройки из файла");
+            else switchPreference_MailMessege.setSummary("настройки из приложения");
+
+            return true;
+        });
 
 
         listPreference_ftpConnect.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -172,40 +203,73 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
 
             return false;
         });
+
+
     }
 
-    protected void Preference_Trade() {
-        listPreference_trade_status = findPreference("preference_TradeStatus");      // торговые условия
-        listPreference_trade_nal = findPreference("preference_ListTradeNal");       // скидка за налиный расчет
-        listPreference_trade_kons = findPreference("preference_ListTradeKons");     // скидка под конс
+    protected void Preference_TradeSale() {
+        listPreference_trade_status = findPreference("preference_TradeStatus");        // тип торгвых условий
+        listPreference_MinSumTrade = findPreference("preference_ListMinSumTrade");     // мин. сумма для оформления заказа
+        editTextPreferenceMinSumSale = findPreference("preference_MinSumSale");        // Сумма для получения скидки
+        listPreference_SaleStandart = findPreference("preference_ListSaleStandart");   // скидка стандартная
+        listPreference_SaleforFarm = findPreference("preference_ListSaleFarm");        // скидка для фарма и сетей
 
+
+        // listPreference_trade_status.setSummary(mSettings.getString("preference_TradeStatus", ""));
         listPreference_trade_status.setOnPreferenceChangeListener((preference, newValue) -> {
             for (int i = 0; i < getResources().getStringArray(R.array.mass_type_ty_value).length; i++)
                 if (newValue.equals(getResources().getStringArray(R.array.mass_type_ty_value)[i]))
                     listPreference_trade_status.setSummary(getResources().getStringArray(R.array.mass_type_ty_title)[i]);
+
+            if (newValue.equals("random_ty")) {
+                editTextPreferenceMinSumSale.setVisible(false);
+                listPreference_SaleStandart.setVisible(false);
+                listPreference_SaleforFarm.setVisible(false);
+
+            } else {
+                editTextPreferenceMinSumSale.setVisible(true);
+                listPreference_SaleStandart.setVisible(true);
+                listPreference_SaleforFarm.setVisible(true);
+            }
+            return true;
+        });
+        listPreference_MinSumTrade.setOnPreferenceChangeListener((preference, newValue) -> {
+            for (int i = 1; i < getResources().getStringArray(R.array.list_MinSummaTrade).length; i++)
+                if (newValue.equals(getResources().getStringArray(R.array.list_MinSummaTrade)))
+                    listPreference_MinSumTrade.setSummary(getResources().getStringArray(R.array.list_MinSummaTrade_Count)[0]);
             return true;
         });
 
 
-        listPreference_trade_nal.setOnPreferenceChangeListener((preference, newValue) -> {
+        editTextPreferenceMinSumSale.setSummary(mSettings.getString("preference_MinSumSale", "") + "c");
+        editTextPreferenceMinSumSale.setOnPreferenceChangeListener((preference, newValue) -> {
+            preference.setSummary(newValue.toString() + "c");
+            return true;
+        });
+        androidx.preference.EditTextPreference editTextPreferenceMinSumSale = getPreferenceManager().findPreference("preference_MinSumSale");
+        editTextPreferenceMinSumSale.setOnBindEditTextListener(editText -> {
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+            editText.setSelection(editText.getText().length());
+        });
+
+        listPreference_SaleStandart.setOnPreferenceChangeListener((preference, newValue) -> {
 
             if (newValue.equals("0"))
-                listPreference_trade_nal.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[0]);
+                listPreference_SaleStandart.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[0]);
 
             for (int i = 1; i < getResources().getStringArray(R.array.list_ty_entries).length; i++)
                 if (newValue.equals(getResources().getStringArray(R.array.list_ty_entries)))
-                    listPreference_trade_nal.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[0]);
+                    listPreference_SaleStandart.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[0]);
             return true;
         });
-
-        listPreference_trade_kons.setOnPreferenceChangeListener((preference, newValue) -> {
+        listPreference_SaleforFarm.setOnPreferenceChangeListener((preference, newValue) -> {
 
             if (newValue.equals("0"))
-                listPreference_trade_kons.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[0]);
+                listPreference_SaleforFarm.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[0]);
 
             for (int i = 1; i < getResources().getStringArray(R.array.list_ty_entries).length; i++)
                 if (newValue.equals(getResources().getStringArray(R.array.list_ty_entries)[i]))
-                    listPreference_trade_kons.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[i]);
+                    listPreference_SaleforFarm.setSummary(getResources().getStringArray(R.array.list_ty_entryValues)[i]);
             return true;
         });
     }
@@ -216,12 +280,18 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
         switchPreference_ImagePhone = findPreference("key_settingImagePhone");  // путь к директории картинок новая в телефоне
         switchPreference_ImageSD = findPreference("key_settingImageSDCard");    // путь к директории картинок на SD-карте
         switchPreference_Permission = findPreference("key_SwitchPreferencePermission");    // путь к директории картинок на SD-карте
+        editor = mSettings.edit();
+
 
         switchPreference_ImageOld.setOnPreferenceChangeListener((preference, newValue) -> {
             if (newValue.equals(true)) {
                 switchPreference_ImageOld.setChecked(true);
                 switchPreference_ImagePhone.setChecked(false);
                 switchPreference_ImageSD.setChecked(false);
+
+                editor.putBoolean("key_settingImageOld", true);
+                editor.putBoolean("key_settingImagePhone", false);
+                editor.putBoolean("key_settingImageSDCard", false);
             }
             return false;
         });
@@ -231,6 +301,10 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
                 switchPreference_ImageOld.setChecked(false);
                 switchPreference_ImagePhone.setChecked(true);
                 switchPreference_ImageSD.setChecked(false);
+
+                editor.putBoolean("key_settingImageOld", false);
+                editor.putBoolean("key_settingImagePhone", true);
+                editor.putBoolean("key_settingImageSDCard", false);
             }
             return false;
         });
@@ -240,27 +314,29 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
                 switchPreference_ImageOld.setChecked(false);
                 switchPreference_ImagePhone.setChecked(false);
                 switchPreference_ImageSD.setChecked(true);
+
+                editor.putBoolean("key_settingImageOld", false);
+                editor.putBoolean("key_settingImagePhone", false);
+                editor.putBoolean("key_settingImageSDCard", true);
             }
             return false;
         });
 
 
-        editor = mSettings.edit();
         if (PermissionUtils.hasPermissions(getActivity())) {
             Log.e(logeTAG, "Разрешение получено");
             switchPreference_Permission.setSummary("Разрешение получено");
             switchPreference_Permission.setChecked(true);
             switchPreference_Permission.setEnabled(false);
             editor.putBoolean("switch_preference_data", true);
-            editor.commit();
         } else {
             switchPreference_Permission.setEnabled(true);
             switchPreference_Permission.setChecked(false);
             switchPreference_Permission.setSummary("Разрешение не предоставлено");
             editor.putBoolean("switch_preference_data", false);
-            editor.commit();
         }
 
+        editor.commit();
 
         switchPreference_Permission.setOnPreferenceChangeListener((preference, newValue) -> {
             if (PermissionUtils.hasPermissions(context)) return true;
@@ -283,6 +359,9 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
             if (newValue.equals(true)) {
                 switchPreference_BrendsAgents.setChecked(false);
                 switchPreference_BrendsManual.setChecked(false);
+                switchPreference_BrendsFirms.setChecked(false);
+            } else {
+                switchPreference_BrendsAgents.setChecked(true);
             }
             return true;
         });
@@ -291,6 +370,9 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
             if (newValue.equals(true)) {
                 switchPreference_BrendsAll.setChecked(false);
                 switchPreference_BrendsManual.setChecked(false);
+                switchPreference_BrendsFirms.setChecked(false);
+            } else {
+                switchPreference_BrendsAll.setChecked(true);
             }
             return true;
         });
@@ -302,8 +384,6 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
             }
             return true;
         });
-
-
 
 
     }
@@ -326,13 +406,46 @@ public class Settings_Fragment extends PreferenceFragmentCompat {
         multiSelectListPreference_BrendsManual.setEntries(mytree.keySet().toArray(new CharSequence[mytree.keySet().size()]));
         multiSelectListPreference_BrendsManual.setEntryValues(mytree.values().toArray(new CharSequence[mytree.values().size()]));
     }
+
+    protected void Preference_Clears()
+    {
+        preferenceClear = findPreference("setting_ClearPrederence");       // Очистить данные
+        preferencesImageManager = findPreference("setting_ClearImageProduct");       // Очистить данные
+        preferences_ImageManagerIcons = findPreference("setting_ClearImageIcons");       // Очистить данные
+
+
+        preferenceClear.setOnPreferenceClickListener(preference -> {
+            DialogFragment_DeletePreference dialog = new DialogFragment_DeletePreference();
+            Bundle args = new Bundle();
+            args.putString("typeClear", "clearPreference");
+            dialog.setArguments(args);
+            dialog.show(getActivity().getSupportFragmentManager(), "DialogClearPreference");
+            return false;
+        });
+
+        preferencesImageManager.setOnPreferenceClickListener(preference -> {
+            DialogFragment_DeletePreference dialog = new DialogFragment_DeletePreference();
+            Bundle args = new Bundle();
+            args.putString("typeClear", "clearImageManager");
+            dialog.setArguments(args);
+            dialog.show(getActivity().getSupportFragmentManager(), "DialogClearPreference");
+            return false;
+        });
+
+        preferences_ImageManagerIcons.setOnPreferenceClickListener(preference -> {
+            DialogFragment_DeletePreference dialog = new DialogFragment_DeletePreference();
+            Bundle args = new Bundle();
+            args.putString("typeClear", "clearImageManagerIcons");
+            dialog.setArguments(args);
+            dialog.show(getActivity().getSupportFragmentManager(), "DialogClearPreference");
+            return false;
+        });
+    }
+
+
 }
 
 
 
 
-/*       editor = mSettings.edit();
-        editor.remove("key_MultiSelectPreference_BrendsManual");
-        editor.putStringSet("key_MultiSelectPreference_BrendsManual", mySet);
-        editor.putStringSet("key_MultiSelectPreference_BrendsManual", mySet);
-        editor.commit();*/
+

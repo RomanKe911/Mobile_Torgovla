@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_Nomeclature;
-import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza_L2;
+import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.WJ_Forma_Zakaza_L2;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_WJ_Scan;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_WJ_Zakaz;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_WJ_Scan;
@@ -385,7 +385,7 @@ public class WJ_Strih_Kod extends AppCompatActivity {
             String skidka = cursor.getString(cursor.getColumnIndex("Skidka"));
             String itogo = cursor.getString(cursor.getColumnIndex("Itogo"));
             String image = cursor.getString(cursor.getColumnIndex("Image"));
-            list_zakaz.add(new ListAdapterSimple_WJ_Zakaz(name, kod_univ, kol, cena, null, summa, skidka, itogo, image));
+            list_zakaz.add(new ListAdapterSimple_WJ_Zakaz(name, "", kod_univ, kol, cena, null, summa, skidka, itogo, image));
             cursor.moveToNext();
         }
         cursor.close();

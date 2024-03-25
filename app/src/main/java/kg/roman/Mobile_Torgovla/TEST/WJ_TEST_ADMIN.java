@@ -15,16 +15,10 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
-import kg.roman.Mobile_Torgovla.FTP.FtpAction;
-import kg.roman.Mobile_Torgovla.FTP.FtpAsyncTask_RN_Up_Excel;
-import kg.roman.Mobile_Torgovla.FTP.FtpConnection;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Admin_List;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Admin_List;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Excel;
-import kg.roman.Mobile_Torgovla.MailSenderClass;
 import kg.roman.Mobile_Torgovla.R;
-import kg.roman.Mobile_Torgovla.Start_AutorithActivity;
 
 public class WJ_TEST_ADMIN extends AppCompatActivity {
     public ArrayList<ListAdapterSimple_Login> login_aut = new ArrayList<ListAdapterSimple_Login>();

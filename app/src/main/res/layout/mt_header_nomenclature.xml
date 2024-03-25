@@ -12,7 +12,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/AppTheme.FormaZakazaL2">
 
     <ImageView
         android:id="@+id/nav_header_nomenclature"
@@ -21,7 +21,7 @@
         android:layout_gravity="center_vertical"
         android:padding="10dp"
         android:background="@drawable/back_image"
-        app:srcCompat="@drawable/logo_sunbell"
+        app:srcCompat="@drawable/icons_title_nomeclatura"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
@@ -33,23 +33,32 @@
         tools:ignore="RtlHardcoded">
 
         <TextView
-            android:id="@+id/textView_title_1"
+            android:id="@+id/tvw_nav_headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:text="@string/firma_name"
             tools:ignore="SmallSp" />
 
         <TextView
-            android:id="@+id/textView_title_2"
+            android:id="@+id/tvw_nav_headerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10sp"
             android:textColor="@color/black"
             android:text="@string/firma_title"
             tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/tvw_nav_headerPref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:hint="состояние номенклатуры"
+            tools:ignore="SmallSp"/>
     </LinearLayout>
 
 </LinearLayout>

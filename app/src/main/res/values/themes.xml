@@ -6,4 +6,22 @@
     </style>
 
     <style name="AppTheme3" parent="Base.AppTheme3" />
+
+    <style name="AppTheme.Setting" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Кастомная тема для настроек -->
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+
+        <item name="colorAccent">#00897B</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#C8C8C8</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#00796B</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#E64A19</item>        //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>        //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>        //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>        //  Цвет фона
+
+        <item name="windowActionBar">true</item>
+    </style>
 </resources>

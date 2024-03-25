@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import kg.roman.Mobile_Torgovla.FormaZakaza.WJ_Forma_Zakaza;
+import kg.roman.Mobile_Torgovla.FormaZakazaStart.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.MT_BackUp.BackUp;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_GroupID;
 import kg.roman.Mobile_Torgovla.DB_NewSV.DbContract_Image;
@@ -51,7 +51,6 @@ import kg.roman.Mobile_Torgovla.FTP.FtpAsyncTask_RN_Up;
 import kg.roman.Mobile_Torgovla.FTP.FtpAsyncTask_Single_Conn_UpServ;
 import kg.roman.Mobile_Torgovla.FTP.FtpConnection;
 import kg.roman.Mobile_Torgovla.FTP.ITTN_Obmen;
-import kg.roman.Mobile_Torgovla.FTP.PDF_Create;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAction;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask_Filial;
@@ -60,7 +59,10 @@ import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpConnection;
 import kg.roman.Mobile_Torgovla.ImagePack.UpdateImage;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_DB_Data;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Data;
+import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
 import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.MailSenderClass;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity;
 import kg.roman.Mobile_Torgovla.R;
@@ -157,9 +159,10 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
         intent_start_act = null;
         Constanta_Read();
 
+        CalendarThis calendars = new CalendarThis();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.icon_image);
-        getSupportActionBar().setTitle("Рабочий стол");
+        getSupportActionBar().setIcon(R.mipmap.icon_logotoolbar);
+        getSupportActionBar().setTitle(calendars.CalendarofDay());
         getSupportActionBar().setSubtitle(PEREM_AG_NAME);
 
 
@@ -218,7 +221,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        // getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -240,7 +243,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
     }
 
     public void onBackPressed() {
-        dialog_cancel = new androidx.appcompat.app.AlertDialog.Builder(context_Activity);
+        dialog_cancel = new AlertDialog.Builder(context_Activity);
         dialog_cancel.setTitle("Вы хотите выйти из программы?");
         dialog_cancel.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
@@ -417,7 +420,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
 
                 case R.id.forma_title_4_up: //Выгрузить данные на сервер
-                  //  Toast.makeText(context_Activity, "Временно не работает, выгрузка данных производится из \"формы заказа\"", Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(context_Activity, "Временно не работает, выгрузка данных производится из \"формы заказа\"", Toast.LENGTH_SHORT).show();
                   /*  try {
                         ListAdapet_Internet_Load();
                         Mail();
@@ -911,7 +914,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
                     case "XML тест": //Синхронизировать остатки
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
                             intent_start_act = null;
                             intent_start_act = new Intent(context_Activity, WJ_Karakil_newRN.class);
@@ -920,12 +924,13 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     }
                     break;
                     case "Печать тест": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             //  Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
                             intent_start_act = null;
                             intent_start_act = new Intent(context_Activity, WJ_Smart_Voice.class);
@@ -934,13 +939,14 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     }
                     break;
 
                     case "Fragment тест": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             //  Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
                             intent_start_act = null;
                             intent_start_act = new Intent(context_Activity, WJ_Fragment.class);
@@ -949,12 +955,13 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     }
                     break;
                     case "Акции тест": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             //  Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
                             intent_start_act = null;
                             intent_start_act = new Intent(context_Activity, WJ_Forma_Zakaza_Akcia.class);
@@ -963,13 +970,15 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     }
                     break;
 
                     case "Акции": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+
+                      /*  try {
 
                             //   Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
@@ -996,8 +1005,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             if (!sklad_uid.equals(PEREM_AG_UID_SKLAD)) {
                                 mass_sklad[cursor.getPosition()][0] = sklad_name;
                                 mass_sklad[cursor.getPosition()][1] = sklad_uid;
-                               /* Log.e("1)Имя складов:", "-" + sklad_name);
-                                Log.e("1)uid складов:", "-" + sklad_uid);*/
+                               *//* Log.e("1)Имя складов:", "-" + sklad_name);
+                                Log.e("1)uid складов:", "-" + sklad_uid);*//*
                                 cursor.moveToNext();
                             } else cursor.moveToNext();
 
@@ -1009,8 +1018,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         // tovar_uid = "14E86029-A4F4-4F7B-887E-2C78D10675E6";
                         tovar_uid = "43B3FD03-AB00-42B3-AB9F-960E5FA9614C";
                         tovar_count = "200";
-                       /* Log.e("TT", "Имя:" + PEREM_AG_SKLAD);
-                        Log.e("TT", "Имя:" + PEREM_AG_UID_SKLAD);*/
+                       *//* Log.e("TT", "Имя:" + PEREM_AG_SKLAD);
+                        Log.e("TT", "Имя:" + PEREM_AG_UID_SKLAD);*//*
 
                         SQLiteDatabase db_sklad = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
                         String query_sklad = "SELECT * FROM base_in_ostatok\n" +
@@ -1032,9 +1041,9 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             Log.e("Поиск:", "новый товар:" + new_count_tovar);
                             Log.e("Поиск:", "новый остаток:" + new_count_sklad);
                         } else {
-                            /*Log.e("НТЕ", "Имя:");
+                            *//*Log.e("НТЕ", "Имя:");
                             Log.e("НТЕ", "Склад:");
-                            Log.e("НТЕ", "Заказ:" + Integer.parseInt(tovar_count));*/
+                            Log.e("НТЕ", "Заказ:" + Integer.parseInt(tovar_count));*//*
                             for (int k = 0; k < mass_sklad.length; k++) {
                                 String query = "SELECT * FROM base_in_ostatok\n" +
                                         "JOIN const_sklad ON base_in_ostatok.sklad_uid = const_sklad.sklad_uid\n" +
@@ -1062,11 +1071,12 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             }
 
 
-                        }
+                        }*/
                     }
                     break;
                     case "XML": //Розница
                     {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
                         try {
                             Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
@@ -1082,7 +1092,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                     break;
                     case "Администрирование": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
                             intent_start_act = null;
@@ -1093,13 +1104,14 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     }
                     break;
 
                     case "Обработка с эттн": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
                             intent_start_act = null;
@@ -1109,13 +1121,15 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
-                    } break;
+                        }*/
+                    }
+                    break;
 
 
                     case "Создание PDF": //Розница
                     {
-                        try {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+/*                        try {
                             Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
                             intent_start_act = null;
@@ -1125,9 +1139,12 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         } catch (Exception e) {
                             Log.e("Pref", "Создание PDF");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }
-                    } break;
-                    default:Toast.makeText(context_Activity, "нет выбранного значения", Toast.LENGTH_SHORT).show();break;
+                        }*/
+                    }
+                    break;
+                    default:
+                        Toast.makeText(context_Activity, "нет выбранного значения", Toast.LENGTH_SHORT).show();
+                        break;
                 }
             }
         }
@@ -1270,8 +1287,9 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                     break;
                     case "Инвентаризация":  // Инвентаризация
                     {
+                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
                         try {
-                            Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
                            /* intent_start_act = null;
                             intent_start_act = new Intent(context_Activity, SPR_Ostatok_Inventoriz_NEW.class);
                             startActivity(intent_start_act);*/
@@ -1518,7 +1536,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             Log.e("Pref", "Ошибка журнала");
                             Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
                         }
-                    } break;
+                    }
+                    break;
 
                 }
             }
@@ -1574,8 +1593,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
         PEREM_DB3_BASE = sp.getString("PEREM_DB3_BASE", "0");                    //чтение данных: Путь к базам данных с товаром
         PEREM_DB3_RN = sp.getString("PEREM_DB3_RN", "0");                        //чтение данных: Путь к базам данных с накладными
         PEREM_ANDROID_ID_ADMIN = sp.getString("PEREM_ANDROID_ID_ADMIN", "0");    //чтение данных: Универсальный номер для админа
-        PEREM_ANDROID_ID = sp.getString("PEREM_ANDROID_ID", "0");                //чтение данных: Универсальный номер пользователя
-        PEREM_KOD_BRENDS_VISIBLE = sp.getString("PEREM_KOD_BRENDS_VISIBLE", "0");                //чтение данных: Универсальный номер пользователя
+        PEREM_ANDROID_ID = sp.getString("PEREM_ANDROID_ID", "0");                  //чтение данных: Универсальный номер пользователя
+        PEREM_KOD_BRENDS_VISIBLE = sp.getString("PEREM_KOD_BRENDS_VISIBLE", "0");  //чтение данных: Универсальный номер пользователя 02/2024
         Log.e("PEREM_KOD_BRENDS_VISIB", PEREM_KOD_BRENDS_VISIBLE);
 
 
@@ -1944,7 +1963,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
             try {
 
                 FTPClient ftpClient = new FTPClient();
-                FtpConnectData ftpConnectData=new FtpConnectData();
+                FtpConnectData ftpConnectData = new FtpConnectData();
                 String server = ftpConnectData.server_name;
                 int port = 21;
                 String user = ftpConnectData.server_username;
@@ -1954,7 +1973,14 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                     ftpClient.connect(server, port);
                     ftpClient.login(user, pass);
                     ftpClient.enterLocalPassiveMode();
-                    String remoteDirPath_XML = PEREM_FTP_DISTR_XML;
+
+                    PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                    String remoteDirPath_XML = preferencesWrite.PEREM_FTP_PathData + "MTW_Data";
+
+                    Log.e("TAG", "getFloor: " + PEREM_FTP_DISTR_XML);
+
+                    //    String remoteDirPath_XML = PEREM_FTP_DISTR_XML;
+
 
                     long[] dirInfo = calculateDirectoryInfo(ftpClient, remoteDirPath_XML, "");
                     System.out.println("Total dirs: " + dirInfo[0]);
@@ -1976,7 +2002,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                         f1 = f1.add(pointOne);
                         pDialog.setProgress(f1.intValue());
                         Log.e("Путь=", " = " + ftpFile_XML.getName());
-                        String file_server_xml = PEREM_FTP_DISTR_XML + "/" + ftpFile_XML.getName(); // путь на сервере
+                        String file_server_xml = remoteDirPath_XML + "/" + ftpFile_XML.getName(); // путь на сервере
                         if (ftpFile_XML.isFile()) {
                             for (int i = 0; i < mass_update_files.length; i++) {
                                 if (ftpFile_XML.getName().equals(mass_update_files[i])) {
@@ -2061,18 +2087,27 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
             pDialog.setMessage("Обновление файлов. Подождите...");
             try {
 
+
+
+
                 FTPClient ftpClient = new FTPClient();
-                String server = PEREM_FTP_SERV;
+                FtpConnectData connectData = new FtpConnectData();
+                String server = connectData.server_name;
                 int port = 21;
-                String user = PEREM_FTP_LOGIN;
-                String pass = PEREM_FTP_PASS;
+                String user = connectData.server_username;
+                String pass = connectData.server_password;
 
                 try {
                     ftpClient.connect(server, port);
                     ftpClient.login(user, pass);
                     ftpClient.enterLocalPassiveMode();
-                    String remoteDirPath_DB3 = PEREM_FTP_DISTR_db3 + "/sunbell_const_db.db3";
-                    long[] dirInfo = calculateDirectoryInfo(ftpClient, remoteDirPath_DB3, "");
+
+                    PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+
+                    String DirPath_DB3 = preferencesWrite.PEREM_FTP_PathData + "SqliteDB/sunbell_const_db.db3";
+                    String DirPathPhone = getApplication().getDatabasePath("sunbell_const_db.db3").getAbsolutePath(); // путь к databases
+
+                    long[] dirInfo = calculateDirectoryInfo(ftpClient, DirPath_DB3, "");
                     System.out.println("Total dirs: " + dirInfo[0]);
                     System.out.println("Total files: " + dirInfo[1]);
                     System.out.println("Total size: " + dirInfo[2]);
@@ -2086,32 +2121,9 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                     files_size = dirInfo[2] / 1048576 + " мбайт";
 
 
-                    BigDecimal f1 = new BigDecimal(0.0);
-                    BigDecimal pointOne = new BigDecimal(100 / Double.valueOf(dirInfo[1]));
 
-                    FTPFile[] ftpFiles_list_DB3 = ftpClient.listFiles(remoteDirPath_DB3);
-                    for (FTPFile ftpFile_DB3 : ftpFiles_list_DB3) {
-                        f1 = f1.add(pointOne);
-                        pDialog.setProgress(f1.intValue());
-                        String file_server_db3 = PEREM_FTP_DISTR_db3 + "/" + ftpFile_DB3.getName(); // путь на сервере
-                        String file_db = WJ_Global_Activity.this.getDatabasePath(ftpFile_DB3.getName()).getAbsolutePath(); // путь к databases
-
-                        if (ftpFile_DB3.isFile()) {
-                            for (int k = 0; k < mass_update_files.length; k++) {
-                                if (ftpFile_DB3.getName().equals(mass_update_files[k])) {
-                                    Log.e("Дирикторий=", " = " + ftpFile_DB3.getName());
-                                    // кода для скачивания файла с FTP
-                                    outputStream = new FileOutputStream(new File(file_db));  // путь куда сохранить данные
-                                    ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-                                    ftpClient.enterLocalPassiveMode();
-                                    // ftp: забрать файл из этой директ, в эту директ
-                                    ftpClient.retrieveFile(file_server_db3, outputStream);
-                                    outputStream.close();
-                                }
-                            }
-
-                        }
-                    }
+                    FTPWebhost ftpWebhost = new FTPWebhost();
+                    ftpWebhost.getFile_FTPToPhone(DirPath_DB3, DirPathPhone, context_Activity, true);
 
                     ftpClient.logout();
                     ftpClient.disconnect();
@@ -2199,7 +2211,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_ResidueGoodsPR() throws InterruptedException {
             try {
-                SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
                 db.delete("base_in_ostatok", null, null);
                 String query_up = "SELECT * FROM base_in_ostatok";
                 cursor = db.rawQuery(query_up, null);
@@ -2246,7 +2259,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_Price() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
                 db_prev.delete("base_in_price", null, null);
                 String query = "SELECT * FROM base_in_price;";
                 cursor = db_prev.rawQuery(query, null);
@@ -2289,7 +2303,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_CustomersDebet() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_RN, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
                 db_prev.delete("otchet_debet", null, null);
                 String query = "SELECT * FROM otchet_debet;";
                 cursor = db_prev.rawQuery(query, null);
@@ -2741,6 +2756,12 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
         }
     }
 
+
+    // Класс для отображения состояния: всплывающее окно
+    protected void ToastOverride(String text) {
+        Toast.makeText(context_Activity, text, Toast.LENGTH_SHORT).show();
+    }
+
     // Полная синхронизация данных
     private class MyAsyncTask_Sync_All extends AsyncTask<Void, Integer, Void> {
         @Override
@@ -2830,7 +2851,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_Brends() throws InterruptedException {
             pDialog.setMessage("Обработка данных. 1/8 Подождите...");
-            SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+            PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+            SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
             db_prev.delete("base_in_brends_id", null, null);
             db_prev.delete("base_in_brends_sub_id", null, null);
             String query = "SELECT * FROM base_in_brends_id;";
@@ -2866,9 +2888,11 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                             localContentValues_Breds_ID.put("parent_kod", subBrends.getParents_kod());
                             localContentValues_Breds_ID.put("prefic", subBrends.getPrefic().toLowerCase());
 
-                            while (cursor_w.isAfterLast() == false) {
+                            ///// 19.02.2024 временно закрытьо
+/*                            while (cursor_w.isAfterLast() == false) {
                                 String kod = cursor_w.getString(cursor_w.getColumnIndexOrThrow("brends_kod"));
                                 String group = cursor_w.getString(cursor_w.getColumnIndexOrThrow("brends_group"));
+
                                 if (kod.equals(subBrends.getKod())) {
                                     localContentValues_Breds_ID.put("group_type", group);
                                     cursor_w.moveToLast();
@@ -2876,7 +2900,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                                     localContentValues_Breds_ID.put("group_type", "g_null");
                                 }
                                 cursor_w.moveToNext();
-                            }
+                            }*/
 
                         /*    for (int i = 0; i < mass_breds_group.length; i++) {
                                 if (subBrends.getKod().equals(mass_breds_group[i])) {
@@ -2919,8 +2943,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
         }
 
         private void getFloor_MTW_In_Nomenclatures() throws InterruptedException {
-
-            SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+            PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+            SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
             db_prev.delete("base_in_nomeclature", null, null);
             String query = "SELECT * FROM base_in_nomeclature;";
             cursor = db_prev.rawQuery(query, null);
@@ -3010,7 +3034,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_Image() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
                 db_prev.delete("base_in_image", null, null);
 
                 String query = "SELECT base_in_nomeclature.name, base_in_nomeclature.koduid," +
@@ -3044,7 +3069,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
             } catch (Exception e) {
 
-                Toast.makeText(context_Activity, "Ошибка синхронизации складов!", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(context_Activity, "Ошибка синхронизации складов!", Toast.LENGTH_SHORT).show();
                 Log.e("Error...", "Ошибка синхронизации складов!");
             }
 
@@ -3052,7 +3077,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_ResidueGoodsPR() throws InterruptedException {
             try {
-                SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
                 db.delete("base_in_ostatok", null, null);
                 String query_up = "SELECT * FROM base_in_ostatok";
                 cursor = db.rawQuery(query_up, null);
@@ -3099,7 +3125,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_Price() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
                 db_prev.delete("base_in_price", null, null);
                 String query = "SELECT * FROM base_in_price;";
                 cursor = db_prev.rawQuery(query, null);
@@ -3142,7 +3169,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_Customers() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_CONST, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_CONST, MODE_PRIVATE, null);
                 db_prev.delete("const_contragents", null, null);
                 String query = "SELECT * FROM const_contragents;";
                 cursor = db_prev.rawQuery(query, null);
@@ -3188,7 +3216,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_Warehouse() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_CONST, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_CONST, MODE_PRIVATE, null);
                 db_prev.delete("const_sklad", null, null);
                 String query = "SELECT * FROM const_sklad;";
                 cursor = db_prev.rawQuery(query, null);
@@ -3230,7 +3259,8 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
         private void getFloor_MTW_In_CustomersDebet() throws InterruptedException {
             try {
-                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(PEREM_DB3_RN, MODE_PRIVATE, null);
+                PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                SQLiteDatabase db_prev = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
                 db_prev.delete("otchet_debet", null, null);
                 String query = "SELECT * FROM otchet_debet;";
                 cursor = db_prev.rawQuery(query, null);
@@ -3876,6 +3906,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
             }
 
         }
+
 
     }
 

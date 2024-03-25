@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/list_layout_read"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="2dp"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/image_status_zakaza"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icons_image_status_zakaza" />
+
+        <TextView
+            android:id="@+id/tvw_rn_Adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="адрес торговой точки"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_rn_K_Agent" />
+
+        <TextView
+            android:id="@+id/tvw_rn_Vrema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:text="23:29:59"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/tvw_rn_Data"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvw_rn_Summa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="0000,00"
+            android:textColor="@color/colors_ostatok_small"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_rn_K_UID"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_rn_K_UID"
+            app:layout_constraintTop_toTopOf="@+id/tvw_rn_K_UID"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvw_rn_RN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:text="RnMay00021"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvw_rn_K_UID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="//-//-//-//-//"
+            android:textColor="@color/black"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_status_zakaza" />
+
+        <TextView
+            android:id="@+id/tvw_rn_K_Agent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="апт №948/5 (Гуля)"
+            android:textColor="@color/colors_ostatok_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_rn_RN" />
+
+        <TextView
+            android:id="@+id/tvw_rn_skidka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="15"
+            android:text="15"
+            android:textColor="@color/add_dialog_tovar_1"
+            app:layout_constraintBottom_toBottomOf="@+id/textView68"
+            app:layout_constraintEnd_toStartOf="@+id/textView68"
+            app:layout_constraintTop_toTopOf="@+id/textView68" />
+
+        <TextView
+            android:id="@+id/tvw_rn_Itogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="000,00"
+            android:text="0000,00"
+            android:textColor="@color/add_dialog_tovar_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_rn_Adress" />
+
+        <TextView
+            android:id="@+id/tvw_rn_Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:text="2020-05-04"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/tvw_rn_RN"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:text="Обший долг:"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvw_rn_Adress" />
+
+        <TextView
+            android:id="@+id/tvw_rn_debet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="0000,00"
+            android:text="1250.0"
+            android:textColor="#FB0600"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView62"
+            app:layout_constraintStart_toEndOf="@+id/textView62"
+            app:layout_constraintTop_toTopOf="@+id/textView62" />
+
+        <TextView
+            android:id="@+id/textView67"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="итого:"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_rn_skidka"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_rn_skidka"
+            app:layout_constraintTop_toTopOf="@+id/tvw_rn_skidka" />
+
+        <TextView
+            android:id="@+id/textView68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="%"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvw_rn_Itogo"
+            app:layout_constraintEnd_toStartOf="@+id/tvw_rn_Itogo"
+            app:layout_constraintTop_toTopOf="@+id/tvw_rn_Itogo" />
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="false"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/image_status_zakaza"
+            app:layout_constraintEnd_toStartOf="@+id/image_status_zakaza"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvw_rn_sklad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="склад"
+            android:textColor="@color/sofidel_colorPrimary"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme2" parent="Base.AppTheme2">
+        <!-- Transparent system bars for edge-to-edge. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+
+    <style name="AppTheme.Setting" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Кастомная тема для настроек -->
+        <item name="colorPrimary">@color/setting_color_primary</item>      // основной цвет для интерфейса программы - панель, кнопки и т.д.
+       <!-- <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния-->
+        <item name="colorPrimaryDark">@color/setting_color_second</item>   // цвет для системных элементов - строка состояния
+
+        <item name="colorAccent">#00897B</item>                            // Цвет по умолчанию для компонентов, которые находятся в фокусе или активны
+        <item name="android:colorControlNormal">#C8C8C8</item>             //  Цвет для неактивных компонентов
+        <item name="android:colorControlActivated">#00796B</item>          //  Цвет для активных компонентов
+        <item name="android:colorControlHighlight">#4F00796B</item>        //  Цвет для нажатых элементов интерфейса
+
+        <item name="android:textColorPrimary">#E64A19</item>        //  Цвет для нажатых элементов интерфейса
+        <item name="android:textColorPrimaryInverse">#78656D</item>        //  Цвет текста заголовка пунктов
+        <item name="android:textColorSecondaryInverse">#E64A19</item>        //  Цвет текста заголовка пунктов
+        <item name="android:windowBackground">#FFFFFF</item>        //  Цвет фона
+
+        <item name="windowActionBar">true</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+
+        <item name="colorPrimary">#00ffff</item>
+        <item name="colorPrimaryDark">#987654</item>
+        <item name="colorAccent">#ff00ff</item>
+        <item name="android:buttonBarNegativeButtonStyle" >@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/NegativeButtonStyle</item>
+
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">#ff00ff</item>
+    </style>
+</resources>

@@ -74,9 +74,9 @@ public class ListAdapterAde_WJ_Scan extends BaseAdapter implements Filterable {
         PEREM_SD = sp.getString("PEREM_IMAGE_PUT_SDCARD", "0");
         PEREM_PHONE = sp.getString("PEREM_IMAGE_PUT_PHONE", "0");
 
-        TextView txtName = (TextView) convertView.findViewById(R.id.wj_cont_name);
+        TextView txtName = (TextView) convertView.findViewById(R.id.Content_TovarUID);
         TextView txtKod = (TextView) convertView.findViewById(R.id.wj_cont_kod);
-        TextView txtCena = (TextView) convertView.findViewById(R.id.wj_cont_cena);
+        TextView txtCena = (TextView) convertView.findViewById(R.id.Content_Price);
         TextView txtStrih = (TextView) convertView.findViewById(R.id.wj_cont_strih);
         TextView txtOstatok = (TextView) convertView.findViewById(R.id.wj_cont_ostatok);
         ImageView image = (ImageView) convertView.findViewById(R.id.wj_cont_image);

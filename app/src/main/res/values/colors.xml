@@ -67,7 +67,7 @@
     <color name="yokosun_colorPrimaryDark">#818181</color>
     <color name="yokosun_colorAccent">#5f5b8d</color>
 
-    <color name="president_colorPrimary">#808080</color>
+    <color name="president_colorPrimary">#42A5F5</color>
     <color name="president_colorPrimaryDark">#818181</color>
     <color name="president_colorAccent">#5f5b8d</color>
 
@@ -150,4 +150,12 @@
     <color name="setting_color_primary">#00796B</color>
     <color name="setting_color_second">#004D40</color>
     <color name="setting_color_text">#000000</color>
+
+
+
+    <color name="SeedBarBackground">#0097A7</color>
+
+
+
+
 </resources>

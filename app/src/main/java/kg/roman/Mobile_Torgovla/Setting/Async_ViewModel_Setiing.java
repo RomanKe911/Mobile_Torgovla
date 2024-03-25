@@ -75,17 +75,21 @@ public class Async_ViewModel_Setiing extends AndroidViewModel {
     public void execute() {
         isLoading.postValue(true);
         Toast.makeText(getApplication(), "Подождите, идет скачивание файлов....", Toast.LENGTH_SHORT).show();
+
         mSettings = getApplication().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         Runnable runnable = () -> {
             try {
                 FTPWebhost ftpWebhost = new FTPWebhost();
                 ftpWebhost.getFileToPhone(mSettings.getString("setting_ftpPathData", "null") + "MTW_Data", "", getApplication(), false);
                 ftpWebhost.getFileToPhone(mSettings.getString("setting_ftpPathData", "null") + "SqliteDB", "", getApplication(), false);
+
+                Log.e(logeTAG, "ftpWebHost1: "+mSettings.getString("setting_ftpPathData", "null") + "MTW_Data");
+                Log.e(logeTAG, "ftpWebHost2: "+mSettings.getString("setting_ftpPathData", "null") + "SqliteDB");
                 Log.e(logeTAG, "execute: .........");
-                Thread.sleep(50);
+                Thread.sleep(500);
                 // PrefActivity_Splash.this.getDatabasePath(ftpFile_XML.getName()).getAbsolutePath()
             } catch (Exception e) {
-
+                Log.e(logeTAG, "Ошибка данных скачивания файлов");
             }
             messegeStatus.postValue("END");
             isLoading.postValue(false);

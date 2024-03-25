@@ -7,13 +7,4 @@
         app:actionViewClass="android.widget.SearchView"
         android:title="search"
         android:icon="@drawable/dialog_screen"/>
-    <item
-        app:showAsAction="ifRoom"
-        android:id="@+id/menu_sync_up"
-        android:icon="@drawable/menu_logo_engineer_96"
-        android:title="фильтр" />
-
-
-
-
 </menu>

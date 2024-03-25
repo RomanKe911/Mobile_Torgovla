@@ -8,15 +8,14 @@
         android:title=""
         app:showAsAction="always">
         <menu android:id="@+id/menu_preferenc_1">
-        <item
-            android:id="@+id/menu_item_base_backup"
-            android:icon="@drawable/ic_menu_send"
-            android:title="резервное копирование данных" />
-
-        <item
-            android:id="@+id/menu_item_base_null"
-            android:icon="@drawable/ic_menu_send"
-            android:title="загрузить данные" />
+            <item
+                android:id="@+id/menu_item_base_null"
+                android:icon="@drawable/ic_menu_send"
+                android:title="загрузить данные" />
+            <item
+                android:id="@+id/menu_item_base_backup"
+                android:icon="@drawable/ic_menu_send"
+                android:title="создать рез. копию" />
         </menu>
     </item>
 

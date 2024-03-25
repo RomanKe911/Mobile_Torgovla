@@ -1,17 +1,15 @@
 package kg.roman.Mobile_Torgovla.MT_FTP;
 
 
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import androidx.annotation.NonNull;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -22,18 +20,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -41,15 +36,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.TreeMap;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
 import kg.roman.Mobile_Torgovla.ImagePack.ImagePack_R_Simple;
 import kg.roman.Mobile_Torgovla.ImagePack.ListAdapterSimple_Ftp_Image;
-import kg.roman.Mobile_Torgovla.MT_BackUp.RecyclerView_Simple_BackUp;
 
 
 //public class FTPWebhost extends FtpConnection {
@@ -67,6 +56,10 @@ public class FTPWebhost {
     SimpleDateFormat sdf1;
     FTPFile dataFile;
     long[] dirInfo_db3;
+
+    private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
+    SharedPreferences mSettings;
+    SharedPreferences.Editor editor;
 
 
     // Получение списка фалов из папки сервера
@@ -277,44 +270,45 @@ public class FTPWebhost {
 
     // Отправить файл(ы) на FTP
     public void getFileToFTP(String put_toFilesSTART, String put_toFilesEND, Boolean first_file) {
-        try {
-            FTPClient ftpClient = new FTPClient();
-            FtpConnectData connectData = new FtpConnectData();
-            ftpClient.connect(connectData.server_name, connectData.port);
-            ftpClient.login(connectData.server_username, connectData.server_password);
-            ftpClient.enterLocalPassiveMode();
-
-            Log.e("FTP", "Путь старта: " + put_toFilesSTART);
-            Log.e("FTP", "Путь конца: " + put_toFilesEND);
-
-            if (first_file) {
-                FileInputStream in = new FileInputStream(new File(put_toFilesSTART));    // Путь к файлам для отправки
-                ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        Runnable runnable = () -> {
+            try {
+                FTPClient ftpClient = new FTPClient();
+                FtpConnectData connectData = new FtpConnectData();
+                ftpClient.connect(connectData.server_name, connectData.port);
+                ftpClient.login(connectData.server_username, connectData.server_password);
                 ftpClient.enterLocalPassiveMode();
-                ftpClient.storeFile(put_toFilesEND, in);                                 // Конечный путь куда отправить файлы
-            } else {
-                File file = new File(put_toFilesSTART);
-                File fileList[] = file.listFiles();
 
-                for (File file_XML : fileList) {
-                    Log.e("FTP", "FILE: " + file.listFiles().length);
-                    Log.e("Files", "Файлы" + file_XML.getName());
-                    String f = file_XML.getName();
+                Log.e("FTP", "Путь старта: " + put_toFilesSTART);
+                Log.e("FTP", "Путь конца: " + put_toFilesEND);
 
-                    FileInputStream in = new FileInputStream(new File(put_toFilesSTART + file_XML.getName()));  // Путь к файлам для отправки
+                if (first_file) {
+                    FileInputStream in = new FileInputStream(new File(put_toFilesSTART));    // Путь к файлам для отправки
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                     ftpClient.enterLocalPassiveMode();
-                    ftpClient.storeFile(put_toFilesEND + file_XML.getName(), in);  // Конечный путь куда отправить файлы
+                    ftpClient.storeFile(put_toFilesEND, in);                                 // Конечный путь куда отправить файлы
+                } else {
+                    File file = new File(put_toFilesSTART);
+                    File fileList[] = file.listFiles();
 
-                    Log.e("Files", "ftpClient1: " + ftpClient.listNames());
-                    Log.e("Files", "ftpClient2: " + ftpClient.listFiles());
-                    Log.e("Files", "ftpClient3: " + ftpClient.getConnectTimeout());
-                    Log.e("Files", "ftpClient4: " + ftpClient.getLocalPort());
-                    Log.e("Files", "ftpClient5: " + ftpClient.getRemotePort());
-                    Log.e("Files", "ftpClient6: " + ftpClient.getSoTimeout());
+                    for (File file_XML : fileList) {
+                        Log.e("FTP", "FILE: " + file.listFiles().length);
+                        Log.e("Files", "Файлы" + file_XML.getName());
+                        String f = file_XML.getName();
 
+                        FileInputStream in = new FileInputStream(new File(put_toFilesSTART + file_XML.getName()));  // Путь к файлам для отправки
+                        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+                        ftpClient.enterLocalPassiveMode();
+                        ftpClient.storeFile(put_toFilesEND + file_XML.getName(), in);  // Конечный путь куда отправить файлы
+
+                        Log.e("Files", "ftpClient1: " + ftpClient.listNames());
+                        Log.e("Files", "ftpClient2: " + ftpClient.listFiles());
+                        Log.e("Files", "ftpClient3: " + ftpClient.getConnectTimeout());
+                        Log.e("Files", "ftpClient4: " + ftpClient.getLocalPort());
+                        Log.e("Files", "ftpClient5: " + ftpClient.getRemotePort());
+                        Log.e("Files", "ftpClient6: " + ftpClient.getSoTimeout());
+
+                    }
                 }
-            }
 
 
 
@@ -344,11 +338,16 @@ public class FTPWebhost {
 
             }
 */
-            ftpClient.logout();
-            ftpClient.disconnect();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+                ftpClient.logout();
+                ftpClient.disconnect();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                Log.e("FTP", "FTP: ftpWebhost; " + ex);
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+
 
     }
 
@@ -442,8 +441,9 @@ public class FTPWebhost {
             context, Boolean first_file) {
         try {
             FTPClient ftpClient = new FTPClient();
-            ftpClient.connect(ftp_server, ftp_port);
-            ftpClient.login(ftp_user_name, ftp_password);
+            FtpConnectData connectData = new FtpConnectData();
+            ftpClient.connect(connectData.server_name, connectData.port);
+            ftpClient.login(connectData.server_username, connectData.server_password);
             ftpClient.enterLocalPassiveMode();
 
             Log.e("FTP", "Путь старта: " + put_toFilesSTART);
@@ -839,6 +839,78 @@ public class FTPWebhost {
         return listFilesNoPhone;
     }
 
+    public boolean getExistFileToFTP(String fileName) {
+        final boolean[] isFile = {false};
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                FTPClient ftpClient = new FTPClient();
+                FtpConnectData connectData = new FtpConnectData();
+                try {
+                    ftpClient.connect(connectData.server_name, connectData.port);
+                    ftpClient.login(connectData.server_username, connectData.server_password);
+                    ftpClient.enterLocalPassiveMode();
+                    InputStream inputStream = ftpClient.retrieveFileStream(fileName);
+                    int returnCode = ftpClient.getReplyCode();
+                    if (inputStream != null || returnCode != 550) {
+                        Log.e("FTPWEB", "файл существует");
+                        isFile[0] = true;
+                    } else {
+                        Log.e("FTPWEB", "файл не существует");
+                        isFile[0] = false;
+                    }
+                } catch (Exception e) {
+                    Log.e("getExistFileToFTP", "Runn Error: " + e);
+                } finally {
+                    try {
+                        if (ftpClient.isConnected()) {
+                            ftpClient.logout();
+                            ftpClient.disconnect();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        Thread getFileNoImage = new Thread(runnable);
+        getFileNoImage.start();
+        return isFile[0];
+    }
+
+
+    /*
+            Log.e("FTPWEB", "geMake:" + ftpClient.makeDirectory(fileName));
+
+            FTPFile[] fileXMLName3 = ftpClient.listFiles("/MT_Sunbell_Karakol/03_WDay/");
+            for (FTPFile d : fileXMLName3) {
+                Log.e("FTPWEB", "getExistFileToFTPWork:" + d.getName());
+                if (d.getName().equals(fileName)) {
+                    Log.e("FTPWEB", "getExistFileToFTPWork: есть совападения" + d.getName());
+                    Log.e("FTPWEB", "getExistFileToFTPWork: есть совападения" + fileName);
+                }
+
+            }
+
+            FTPFile fileXMLName = ftpClient.mdtmFile(fileName);
+            Log.e("FTPWEB", "getExistFileToFTPmdtm: " + fileXMLName.getName());
+            Log.e("FTPWEB", "getExistFileToFTPFile: " + fileXMLName.isFile());
+            Log.e("FTPWEB", "getExistFileToFTPDirt: " + fileXMLName.isDirectory());
+
+
+
+
+
+            String fileXMLName2 = ftpClient.mdtmFile(fileName).getName();
+            Log.e("FTPWEB", "getExistFileToFTP2: " + fileXMLName2);
+
+            if (fileName.equals(fileXMLName2)) {
+                Log.e("FTPWEB", "getExistFileToFTP2: есть совпадения");
+            } else
+                Log.e("FTPWEB", "getExistFileToFTP2: нет совпадения");
+
+*/
 
     //// Скачивание файлов которых нет в дириктории
     public boolean getLoadingFileImage(String put_toFilesSTART, String

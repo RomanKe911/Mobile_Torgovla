@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,22 +84,22 @@ public class ListAdapterAde_WJ_Zakaz extends BaseAdapter implements Filterable {
         PEREM_PHONE = sp.getString("PEREM_IMAGE_PUT_PHONE", "0");
         PEREM_DB3_RN = sp.getString("PEREM_DB3_RN", "0");                        //чтение данных: Путь к базам данных с накладными
 
-        TextView txtID = (TextView) convertView.findViewById(R.id.cont_edit_id);
-        TextView txtName = (TextView) convertView.findViewById(R.id.wj_cont_name);
+        TextView txtID = (TextView) convertView.findViewById(R.id.Content_TovarUniv);
+        TextView txtName = (TextView) convertView.findViewById(R.id.Content_TovarUID);
         TextView txtKod = (TextView) convertView.findViewById(R.id.wj_cont_kod);
-        TextView txtKol = (TextView) convertView.findViewById(R.id.cont_edit_kol);
-        TextView txtCena = (TextView) convertView.findViewById(R.id.wj_cont_cena);
+        TextView txtKol = (TextView) convertView.findViewById(R.id.Content_Count);
+        TextView txtCena = (TextView) convertView.findViewById(R.id.Content_Price);
        // TextView txtCena_Sk = (TextView) convertView.findViewById(R.id.wj_cont_cena);
-        TextView txtSumma = (TextView) convertView.findViewById(R.id.cont_edit_summa);
-        TextView txtSkidka = (TextView) convertView.findViewById(R.id.cont_edit_skidka);
-        TextView txtItogo = (TextView) convertView.findViewById(R.id.cont_edit_itogo);
-        Button button = (Button) convertView.findViewById(R.id.button_delete_id);
-        ImageView image = (ImageView) convertView.findViewById(R.id.img_select);
+        TextView txtSumma = (TextView) convertView.findViewById(R.id.Content_Summa);
+        TextView txtSkidka = (TextView) convertView.findViewById(R.id.Content_Sale);
+        TextView txtItogo = (TextView) convertView.findViewById(R.id.Content_Itogo);
+      //  Button button = (Button) convertView.findViewById(R.id.button_delete_id);
+        ImageView image = (ImageView) convertView.findViewById(R.id.Content_Image);
 
-        txtID.setText(objects.get(pos).getId());
+        txtID.setText(objects.get(pos).getUID());
         txtName.setText(objects.get(pos).getName());
         txtKod.setText(objects.get(pos).getKod());
-        txtKol.setText(objects.get(pos).getKol());
+        txtKol.setText(objects.get(pos).getCount());
         txtCena.setText(objects.get(pos).getCena());
         txtSumma.setText(objects.get(pos).getSumma());
         txtSkidka.setText(objects.get(pos).getSkidka());
@@ -160,8 +159,8 @@ public class ListAdapterAde_WJ_Zakaz extends BaseAdapter implements Filterable {
             Log.e("Image_Error", "Нет картинов в ресурсах");
         }
 
-
-        button.setOnClickListener(new View.OnClickListener() {
+ // BUTTON DELETE
+/*        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -197,7 +196,7 @@ public class ListAdapterAde_WJ_Zakaz extends BaseAdapter implements Filterable {
                         });
                 builder.show();
             }
-        });
+        });*/
 
 
         return convertView;
@@ -227,7 +226,8 @@ public class ListAdapterAde_WJ_Zakaz extends BaseAdapter implements Filterable {
                     if (filterList.get(i).getName().toUpperCase().contains(constraint)) {
                         ListAdapterSimple_WJ_Zakaz p = new ListAdapterSimple_WJ_Zakaz(filterList.get(i).getName(),
                                 filterList.get(i).getKod(),
-                                filterList.get(i).getKol(),
+                                filterList.get(i).getKodUniv(),
+                                filterList.get(i).getCount(),
                                 filterList.get(i).getCena(),
                                 filterList.get(i).getCena_Sk(),
                                 filterList.get(i).getSumma(),

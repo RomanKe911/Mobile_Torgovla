@@ -14,14 +14,15 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="kg.roman.Mobile_Torgovla.FormaZakazaNew.ui.dashboard.DashboardFragment"
+        android:name="kg.roman.Mobile_Torgovla.FormaZakazaNew.ui.FormaZakazaBody.FragmentBody"
         android:label="@string/title_button_navigator_02"
         tools:layout="@layout/fragment_dashboard" >
     </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="kg.roman.Mobile_Torgovla.FormaZakazaNew.ui.notifications.NotificationsFragment"
-        android:label="@string/title_button_navigator_03"
+        android:name="kg.roman.Mobile_Torgovla.FormaZakazaNew.ui.FormaZakaza_End.Fragment_End"
+        android:label="Информация об заказе"
+        android:icon="@mipmap/icon_toolbar_forma_zakaz"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
