@@ -1,11 +1,5 @@
 package kg.roman.Mobile_Torgovla.Work_Journal;
 
-import static kotlinx.coroutines.BuildersKt.launch;
-
-import android.app.ProgressDialog;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -16,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.media.Image;
-import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -31,8 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 public class PDF_Create extends AppCompatActivity {

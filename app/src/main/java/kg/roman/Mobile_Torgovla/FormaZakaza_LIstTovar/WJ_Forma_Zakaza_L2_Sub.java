@@ -4,11 +4,11 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -23,8 +23,6 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,6 +31,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +40,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
@@ -48,11 +48,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Suncape_Forma;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Suncape_Forma;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
-import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Nomeclatura;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.Preferences_MTSetting;
 import kg.roman.Mobile_Torgovla.R;
-
-import static java.lang.Boolean.FALSE;
 
 
 public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
@@ -67,11 +66,9 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
     public Toolbar toolbar;
     public androidx.appcompat.app.AlertDialog.Builder dialog;
     public View navHeader;
-    public ImageView imageView_header;
-    public TextView textView_header1, textView_header2;
     public TextView dg_tw_name, dg_tw_koduid, dg_tw_koduniv, dg_tw_cena, dg_tw_ostatok, dg_tw_kol, dg_tw_summa, dg_tw_summa_sk, dg_tw_kolbox, dg_tw_kolbox_org;
     public EditText dg_ed_skidka, dg_ed_editkol;
-    public LinearLayout linearLayout_header;
+
     public Button btn_down, btn_up, button_ok, button_cancel;
     public View localView;
 
@@ -79,8 +76,6 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
     public RadioButton radioGroup_one, radioGroup_much, radioGroup_edit;
 
     public Calendar localCalendar = Calendar.getInstance();
-;
-
     public Integer checked_group, kol_box_info, max_box;
     public Integer thisdata, thismonth, thisyear, thisminyte, thishour, thissecond;
     public Integer perem_int_summa, perem_int_ostatok, perem_int_cena, perem_int_kol, perem_kol_group_one, perem_int_kolbox;
@@ -94,31 +89,19 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             lst_tw_uid_sklad, lst_tw_name_sklad;
     public String kol_group_one, kol_group_much;
 
-    public SharedPreferences.Editor ed;
-    public String Log_Text_Error;
-
-
-    // public String PEREM_SELECT_BRENDS;
-    public String PEREM_K_AG_NAME, PEREM_K_AG_UID, PEREM_K_AG_ADRESS, PEREM_K_AG_KodRN, PEREM_K_AG_Data, PEREM_K_AG_Vrema, PEREM_K_AG_GPS;
-    public String PEREM_FTP_SERV, PEREM_FTP_LOGIN, PEREM_FTP_PASS, PEREM_FTP_DISTR_XML, PEREM_FTP_DISTR_db3,
-            PEREM_IMAGE_PUT_SDCARD, PEREM_IMAGE_PUT_PHONE;
-    public String PEREM_MAIL_LOGIN, PEREM_MAIL_PASS, PEREM_MAIL_START, PEREM_MAIL_END,
-            PEREM_DB3_CONST, PEREM_DB3_BASE, PEREM_DB3_RN, PEREM_ANDROID_ID_ADMIN, PEREM_ANDROID_ID;
-    public String PEREM_AG_UID, PEREM_AG_NAME, PEREM_AG_REGION, PEREM_AG_UID_REGION, PEREM_AG_CENA,
-            PEREM_AG_SKLAD, PEREM_AG_UID_SKLAD, PEREM_AG_TYPE_REAL, PEREM_AG_TYPE_USER,
-            PEREM_WORK_DISTR, PEREM_KOD_MOBILE, PEREM_KOD_UID_KODRN, PEREM_KOD_BRENDS_VISIBLE;
-    public String PEREM_KLIENT_UID, PEREM_DIALOG_UID, PEREM_DIALOG_DATA_START, PEREM_DIALOG_DATA_END, PEREM_DISPLAY_START, PEREM_DISPLAY_END;
-    public Boolean perem_switch_group_sql;
 
     // 01.2024 новые параметры, переделывание
     String logeTAG = "Forma_Zakaza_F2Sub";
-  //  private MtNomenclaturaContentBinding binding;   нужно разобраться с inding lkz ActionBAr
+    //  private MtNomenclaturaContentBinding binding;   нужно разобраться с inding lkz ActionBAr
     public SharedPreferences mSettings;
+    public SharedPreferences.Editor ed;
     private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
     public Context context_Activity = WJ_Forma_Zakaza_L2_Sub.this;
     public String mSettings_subBrends;
     RecyclerView recyclerView;
     ProgressBar progressBar;
+    String wCodeOrder;
+    Preferences_MTSetting preferencesMtSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,20 +113,18 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
 
         recyclerView = findViewById(R.id.nomenclatura_RecyclearView);
         progressBar = findViewById(R.id.nomenclatura_ProgressBar);
-     //  progressBar2 = findViewById(R.id.nomenclatura_ProgressBarMT);
-
+        //  progressBar2 = findViewById(R.id.nomenclatura_ProgressBarMT);
 
 
         mSettings = getApplication().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         mSettings_subBrends = mSettings.getString("sp_BREND", "0");
-        Log.e("TEST", "selectBrends=" + mSettings_subBrends + ".");
-        Constanta_Read();
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-       getSupportActionBar().setTitle(mSettings_subBrends);
+        getSupportActionBar().setTitle(mSettings_subBrends);
         getSupportActionBar().setIcon(R.drawable.user_pda);
 
         //getSupportActionBar().setSubtitle(sp_BREND);
@@ -159,6 +140,10 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         navigationView.inflateMenu(R.menu.menu_nomeclature_brends);
         navigationView.setNavigationItemSelectedListener(this);
 
+        preferencesMtSetting = new Preferences_MTSetting();
+        wCodeOrder = preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getCodeOrder());
+
+
         // Ошибки при загрузке 07.11.2023
 
         Navigation_Menu(mSettings_subBrends);           // Normal
@@ -170,9 +155,6 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         ed.commit();
         id_st = topChannelMenu.getItem(0).toString();
         Log.e("TEST", "select_subBrends=" + id_st + ".");
-
-
-
 
 
         //Navigation_Group_Name();
@@ -195,26 +177,6 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         super.onBackPressed();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Настройки в приложении
-        Log.e("TEST", "onOptionsItemSelected");
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent intent3 = new Intent(context_Activity, PrefActivity_Nomeclatura.class);
-            startActivity(intent3);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -234,7 +196,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             RecyclerView_Adapter_ViewHolder_Nomeclatura.OnStateClickListener stateClickListener = new RecyclerView_Adapter_ViewHolder_Nomeclatura.OnStateClickListener() {
                 @Override
                 public void onStateClick(ListAdapterSimple_Suncape_Forma clientClick, int position) {
-                    Log.e("TEST", "Click"+clientClick.getName());
+                    Log.e("TEST", "Click" + clientClick.getName());
                     ClickList(clientClick);
                 }
             };
@@ -254,11 +216,10 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             {
                 if (status == true) {
                     progressBar.setVisibility(View.VISIBLE);
-                  //  progressBar2.setVisibility(View.VISIBLE);
-                } else
-                {
+                    //  progressBar2.setVisibility(View.VISIBLE);
+                } else {
                     progressBar.setVisibility(View.INVISIBLE);
-                 //  progressBar2.setVisibility(View.INVISIBLE);
+                    //  progressBar2.setVisibility(View.INVISIBLE);
                 }
             });
             model.execute();
@@ -286,11 +247,11 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             String ovvr_selectBrends = selectBrends.toLowerCase().trim();
             PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
 
-            Log.e(logeTAG, "t1="+ovvr_selectBrends);
+            Log.e(logeTAG, "t1=" + ovvr_selectBrends);
             SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
             String query = "SELECT brends, subbrends FROM base_in_brends_id\n" +
                     "LEFT JOIN base_in_brends_sub_id ON base_in_brends_id.kod = base_in_brends_sub_id.parent_kod\n" +
-                    "WHERE trim(LOWER(brends)) == '"+ovvr_selectBrends+"'";
+                    "WHERE trim(LOWER(brends)) == '" + ovvr_selectBrends + "'";
             final Cursor cursor = db.rawQuery(query, null);
             cursor.moveToFirst();
             Menu m = navigationView.getMenu();
@@ -302,19 +263,16 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
 
                 brend_new = brend.substring(0, 1) + brend.substring(1).toLowerCase();
                 subBrend_new = sub_brends.substring(0, 1) + sub_brends.substring(1).toLowerCase();
-                Log.e(logeTAG, "t1="+ovvr_selectBrends+", t2="+ brend_new +", t3="+ subBrend_new);
+                Log.e(logeTAG, "t1=" + ovvr_selectBrends + ", t2=" + brend_new + ", t3=" + subBrend_new);
 
 
                 if ((brend.toLowerCase().trim()).equals(ovvr_selectBrends))
                     topChannelMenu.add(subBrend_new).setIcon(R.drawable.ic_cost);
-
                 cursor.moveToNext();
             }
             cursor.close();
             db.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e(logeTAG, "ошибка заполнения списка подгруппы бренда");
             Toast.makeText(context_Activity, "ошибка заполнения списка подгруппы бренда", Toast.LENGTH_SHORT).show();
         }
@@ -322,7 +280,21 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         Log.e(logeTAG, "Navigation_Menu: END");
     }  // Программное создание меню
 
-
+    //////////////////////////////////  02.2024
+    //// Поиск картинки для брендов в номенклатуре
+    protected Drawable IconsForBrends(String pref) {
+        // setIcon(Drawable.createFromPath(getFilesDir().getAbsolutePath()+"/Icons/icons_image_for_icons.png"));
+        String filename = "icons_logo_menu_" + pref + ".png";
+        //Log.e(logeTAG, "fileName"+filename);
+        File file = new File(getFilesDir().getAbsolutePath() + "/Icons/" + filename);
+        if (file.exists())
+            return Drawable.createFromPath(file.getPath());
+        else {
+            Resources res = getResources();
+            Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.no_image, null);
+            return drawable;
+        }
+    }
 
 
     protected void Navigation_Title_Image() {
@@ -358,7 +330,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
                 getSupportActionBar().setIcon(R.drawable.logo_bella);
                 imageView_header.setImageResource(R.drawable.logo_bella);
                 textView_header1.setText(R.string.header_bella_title_1);*//*
-  *//*              textView_header2.setText(R.string.header_bella_title_2);
+         *//*              textView_header2.setText(R.string.header_bella_title_2);
                 linearLayout.setBackground(getDrawable(R.drawable.side_nav_bar_bella));*//*
 
                 // для API 21>
@@ -669,8 +641,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
 
     }  // Загрузка визуального оформления для меню по брендам
 
-    protected void ClickList(ListAdapterSimple_Suncape_Forma tovar)
-    {
+    protected void ClickList(ListAdapterSimple_Suncape_Forma tovar) {
 
         try {
             lst_tw_name = tovar.name;
@@ -912,146 +883,8 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         asyncTask.execute();*/
 
 
-
         Log.e("TEST", "Loading_Db_Nomencalture END");
     }  // Загрузка номенклатуры по брендам и по группам
-
-
-    /// Работа с потоками
-
-    private class MyAsyncTask_Sync extends AsyncTask<Void, Integer, Void> {
-        @Override
-        protected void onPreExecute() { // Вызывается в начале потока
-            super.onPreExecute();
-            Log.e("ПОТОК=", "Начало потока");
-/*            progressBarOR.setVisibility(View.VISIBLE);
-            product_str.clear();
-            adapterPriceClients = new ListAdapterAde_Suncape_Forma(context_Activity, product_str);
-            adapterPriceClients.notifyDataSetChanged();
-            listView.setAdapter(adapterPriceClients);*/
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) { // Вызывается для обновления данных после загрузки
-            super.onProgressUpdate(values);
-            //pDialog.setMessage("Синхронизация цен. Подождите...");
-            // pDialog.setProgress(values[0]);
-            Log.e("ПОТОК=", "поток работает" + values);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) { // Для создания сложных потоков
-            try {
-                publishProgress(1);
-                getFloor();  // Синхронизация файлов для всех складов
-            } catch (InterruptedException e) {
-                Log.e("ПОТОК=", "Ошибка в потоке данных!");
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) { // Вызывается в конце потока
-            super.onPostExecute(aVoid);
-            Log.e("ПОТОК=", "Конец потока");
-            progressBar.setVisibility(View.INVISIBLE);
-            Log.e("TEST", "Loading_Db_Nomencalture ListView");
-            if (!product_str.isEmpty()) {
-                adapterPriceClients = new ListAdapterAde_Suncape_Forma(context_Activity, product_str);
-                adapterPriceClients.notifyDataSetChanged();
-               // listView.setAdapter(adapterPriceClients);
-
-            } else
-                Toast.makeText(context_Activity, "В данной категории нет товара", Toast.LENGTH_SHORT).show();
-
-
-            //  pDialog.dismiss();
-        }
-
-        private void getFloor() throws InterruptedException {
-            //  pDialog.setMessage("Загрузка продуктов. Подождите...");
-            SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
-            String query;
-            if (perem_switch_group_sql) {
-                query = "SELECT base_in_nomeclature.name, base_in_nomeclature.brends, base_in_nomeclature.p_group, base_in_nomeclature.kod, base_in_image.kod_image, \n" +
-                        "base_in_nomeclature.kolbox, base_in_ostatok.count, base_in_ostatok.sklad_uid, base_in_ostatok.sklad_uid, const_sklad.sklad_name,\n" +
-                        "base_in_price.price, base_in_nomeclature.strih, base_in_nomeclature.kod_univ, base_in_nomeclature.koduid\n" +
-                        "FROM base_in_nomeclature\n" +
-                        "LEFT JOIN base_in_ostatok ON base_in_nomeclature.koduid = base_in_ostatok.nomenclature_uid\n" +
-                        "LEFT JOIN base_in_price ON base_in_nomeclature.koduid = base_in_price.nomenclature_uid\n" +
-                        "LEFT JOIN base_in_image ON base_in_nomeclature.koduid = base_in_image.koduid\n" +
-                        "LEFT JOIN base_group_sql ON base_in_nomeclature.koduid = base_group_sql.uid_name\n" +
-                        "LEFT JOIN const_sklad ON base_in_ostatok.sklad_uid = const_sklad.sklad_uid\n" +
-                        "WHERE count > 0\n" +
-                        "ORDER BY base_in_nomeclature.brends, base_in_nomeclature.p_group, base_group_sql.type_group ASC;";
-                //  "GROUP BY base_in_nomeclature.name\n" +
-            } else {
-                query = "SELECT base_in_nomeclature.name, base_in_nomeclature.brends, " +
-                        "base_in_nomeclature.p_group, base_in_nomeclature.kod, base_in_image.kod_image, \n" +
-                        "base_in_nomeclature.kolbox, base_in_ostatok.count, base_in_ostatok.sklad_uid, " +
-                        "base_in_ostatok.sklad_uid, const_sklad.sklad_name,\n" +
-                        "base_in_price.price, base_in_nomeclature.strih, base_in_nomeclature.kod_univ, base_in_nomeclature.koduid\n" +
-                        "FROM base_in_nomeclature\n" +
-                        "LEFT JOIN base_in_ostatok ON base_in_nomeclature.koduid = base_in_ostatok.nomenclature_uid\n" +
-                        "LEFT JOIN base_in_price ON base_in_nomeclature.koduid = base_in_price.nomenclature_uid\n" +
-                        "LEFT JOIN base_in_image ON base_in_nomeclature.koduid = base_in_image.koduid\n" +
-                        "LEFT JOIN base_group_sql ON base_in_nomeclature.koduid = base_group_sql.uid_name\n" +
-                        "LEFT JOIN const_sklad ON base_in_ostatok.sklad_uid = const_sklad.sklad_uid\n" +
-                        "WHERE count > 0\n" +
-                        "ORDER BY base_in_nomeclature.brends, base_in_nomeclature.p_group, base_group_sql.type_group ASC;";
-
-                //  "GROUP BY base_in_nomeclature.name\n" +
-            }
-
-            final Cursor cursor = db.rawQuery(query, null);
-            cursor.moveToFirst();
-            while (cursor.isAfterLast() == false) {
-                String brend = cursor.getString(cursor.getColumnIndexOrThrow("brends"));
-                String p_group = cursor.getString(cursor.getColumnIndexOrThrow("p_group"));
-                String kod = cursor.getString(cursor.getColumnIndexOrThrow("kod"));
-                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                String kolbox = cursor.getString(cursor.getColumnIndexOrThrow("kolbox"));
-                String count = cursor.getString(cursor.getColumnIndexOrThrow("count"));
-                cena = cursor.getString(cursor.getColumnIndexOrThrow("price"));
-                String image = cursor.getString(cursor.getColumnIndexOrThrow("kod_image"));
-                String strih = cursor.getString(cursor.getColumnIndexOrThrow("strih"));
-                String kod_univ = cursor.getString(cursor.getColumnIndexOrThrow("kod_univ"));
-                String koduid = cursor.getString(cursor.getColumnIndexOrThrow("koduid"));
-                String uid_sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad_uid"));
-                String name_sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad_name"));
-                String brends = brend.substring(0, 1) + brend.substring(1).toLowerCase();
-
-                String sub_brends = p_group.substring(0, 1) + p_group.substring(1).toLowerCase();
-                String ostatok;
-                if (count != (null)) {
-                    ostatok = count + "шт";
-                } else ostatok = "закончился";
-
-                Params();
-                Cena_for_DB();
-                if (brends.equals(mSettings_subBrends)) {
-                    if (id_st.equals(sub_brends)) {
-                        if (image != null) {
-                            Log.e("Loading1", "name= " + name);
-                            product_str.add(new ListAdapterSimple_Suncape_Forma(koduid, kod_univ, name, kolbox, cena, Cena_Nal, strih, ostatok, image, name_sklad, uid_sklad));
-                            cursor.moveToNext();
-                        } else {
-                            Log.e("Loading2", "name= " + name);
-                            // Log.e("Sub=", p_group + ", " + sub_brends);
-                            product_str.add(new ListAdapterSimple_Suncape_Forma(koduid, kod_univ, name, kolbox, cena, Cena_Nal, strih, ostatok, "no_image", name_sklad, uid_sklad));
-                            cursor.moveToNext();
-                        }
-                    } else cursor.moveToNext();
-                } else cursor.moveToNext();
-            }
-            cursor.close();
-            db.close();
-
-        }  // Синхронизация файлов для всех складов
-
-    }
-
 
 
     protected void Params() {
@@ -1075,7 +908,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
 
     }  // Загрузка тогровых условий
 
-    protected void Cena_for_DB() {
+/*    protected void Cena_for_DB() {
         Doub_Cena = Double.parseDouble(cena);
         // Log.e("Mat_Cena: ", Doub_Cena.toString());
         String Format1 = new DecimalFormat("#00.00").format(Doub_Cena).replace(",", ".");
@@ -1108,7 +941,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             Log.e(Log_Text_Error, "Ошибка ценообразования");
         }
 
-    }  // Вычисление цен(своя, скидка за нал и конс)
+    }  // Вычисление цен(своя, скидка за нал и конс)*/
 
 
     protected void Fun_Messeger_Panel(final Integer cena, final Integer ostatok, final Integer box,
@@ -1549,7 +1382,8 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
 
     protected void Search_Image(String uid) {
         try {
-            SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+            PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+            SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_BASE, MODE_PRIVATE, null);
             String query = "SELECT base_in_nomeclature.name, base_in_nomeclature.kod_univ, base_in_image.kod_image\n" +
                     "FROM base_in_nomeclature\n" +
                     "LEFT JOIN base_in_image ON base_in_nomeclature.koduid = base_in_image.koduid\n" +
@@ -1565,7 +1399,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
             db.close();
         } catch (Exception e) {
             Toast.makeText(context_Activity, "Ошибка загрузки картинок!", Toast.LENGTH_SHORT).show();
-            Log.e(Log_Text_Error, "Ошибка загрузки картинок!");
+            Log.e(logeTAG, "Ошибка загрузки картинок!");
         }
 
     }
@@ -1598,12 +1432,13 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
                                   final String skidka, final Double summaSK, final String image,
                                   final String sklad_name, final String sklad_uid) {
         PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+        CalendarThis calendarThis = new CalendarThis();
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
         // Заполнения карточки товара
         ContentValues localContentValues = new ContentValues();
-        localContentValues.put("Kod_RN", PEREM_K_AG_KodRN);
-        localContentValues.put("Vrema", PEREM_K_AG_Vrema);
-        localContentValues.put("Data", PEREM_K_AG_Data);
+        localContentValues.put("Kod_RN", wCodeOrder);
+        localContentValues.put("Vrema", calendarThis.getThis_DateFormatVrema);
+        localContentValues.put("Data", calendarThis.getThis_DateFormatSqlDB);
         localContentValues.put("Kod_Univ", koduniv);
         localContentValues.put("koduid", kod_uid);
         localContentValues.put("Name", name);
@@ -1616,32 +1451,36 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         localContentValues.put("sklad_name", sklad_name);
         localContentValues.put("sklad_uid", sklad_uid);
 
-        if (!skidka.isEmpty()) {
+        localContentValues.put("Skidka", createNewParamsSale(preferencesWrite, cena, summa).getSale());
+        localContentValues.put("Cena_SK", createNewParamsSale(preferencesWrite, cena, summa).getPriceSale());
+        localContentValues.put("Itogo ", createNewParamsSale(preferencesWrite, cena, summa).getItogoSale());
+
+        /*
+        *         if (!preferencesWrite.Setting_MT_K_AG_Sale.isEmpty() && Integer.parseInt(preferencesWrite.Setting_MT_K_AG_Sale) > 0) {
+            if (Double.parseDouble(summa) >= Double.parseDouble(preferencesWrite.Setting_TY_SaleMinSumSale)) {
+
+            }
             String Format_summa = new DecimalFormat("#00.00").format(summaSK).replace(",", ".");
-            ;
-            localContentValues.put("Skidka", skidka);
 
             Double db1 = Double.parseDouble(skidka), db2 = Double.parseDouble(cena), db3;
             db3 = db2 - (db2 * (db1 / 100));
-            localContentValues.put("Cena_SK", db3.toString());
             Log.e("WJZakS2=", db1 + " " + db2 + " " + db3);
+            localContentValues.put("Skidka", skidka);
+            localContentValues.put("Cena_SK", db3.toString());
             localContentValues.put("Itogo", Format_summa.replaceAll(",", "."));
         } else {
             localContentValues.put("Skidka", "0");
             localContentValues.put("Cena_SK", "0");
             localContentValues.put("Itogo", summa);
-        }
-
-        Log.e("WJZakS2=", localContentValues.toString());
-
+        }*/
 
         // Проверка сходства позиций
-        String query_Search = "SELECT base_RN.Kod_RN, base_RN.Kod_Univ " +
-                "FROM base_RN WHERE base_RN.Kod_RN LIKE '%" + PEREM_K_AG_KodRN + "%'";
+        String query_Search = "SELECT Kod_RN, Kod_Univ " +
+                "FROM '" + SelectRN() + "'WHERE Kod_RN = '" + wCodeOrder + "'";
         Cursor cursor = db.rawQuery(query_Search, null);
         cursor.moveToFirst();
-        Integer k = 0;
-        while (cursor.isAfterLast() == false) {
+        int k = 0;
+        while (!cursor.isAfterLast()) {
             String kod_univ = cursor.getString(cursor.getColumnIndexOrThrow("Kod_Univ"));
             String kod_rn = cursor.getString(cursor.getColumnIndexOrThrow("Kod_RN"));
             if (koduniv.equals(kod_univ)) {
@@ -1652,7 +1491,7 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
         }
 
         if (k == 0) {
-            db.insert("base_RN", null, localContentValues);
+            db.insert(SelectRN(), null, localContentValues);
             Toast.makeText(context_Activity, "Товар добавлен!", Toast.LENGTH_SHORT).show();
             cursor.moveToNext();
         } else Toast.makeText(context_Activity, "Товар уже есть!", Toast.LENGTH_SHORT).show();
@@ -1666,71 +1505,219 @@ public class WJ_Forma_Zakaza_L2_Sub extends AppCompatActivity
 
         } catch (Exception e) {
             Toast.makeText(context_Activity, "Ошибка записи данных!", Toast.LENGTH_SHORT).show();
-            Log.e(Log_Text_Error, "Ошибка записи данных!");
+            Log.e(logeTAG, "Ошибка записи данных!" + e);
         }
 
 
     }
 
-
-    // Константы для чтения
-    protected void Constanta_Read() {
-        mSettings = PreferenceManager.getDefaultSharedPreferences(context_Activity);
-        PEREM_FTP_SERV = mSettings.getString("PEREM_FTP_SERV", "0");                    //чтение данных: имя сервера
-        PEREM_FTP_LOGIN = mSettings.getString("PEREM_FTP_LOGIN", "0");                  //чтение данных: имя логин
-        PEREM_FTP_PASS = mSettings.getString("PEREM_FTP_PASS", "0");                    //чтение данных: имя пароль
-        PEREM_FTP_DISTR_XML = mSettings.getString("PEREM_FTP_DISTR_XML", "0");          //чтение данных: путь к файлам XML
-        PEREM_FTP_DISTR_db3 = mSettings.getString("PEREM_FTP_DISTR_db3", "0");          //чтение данных: путь к файлам DB3
-        PEREM_IMAGE_PUT_SDCARD = mSettings.getString("PEREM_IMAGE_PUT_SDCARD", "0");    // путь картинок на телефоне /sdcard/Price/Image/
-        PEREM_IMAGE_PUT_PHONE = mSettings.getString("PEREM_IMAGE_PUT_PHONE", "0");      // Путь картинок в др. приложении android.resource://kg.price_list.roman_kerkin.sunbell_price/drawable/
-
-        PEREM_MAIL_LOGIN = mSettings.getString("PEREM_MAIL_LOGIN", "0");                //чтение данных: для почты логин
-        PEREM_MAIL_PASS = mSettings.getString("PEREM_MAIL_PASS", "0");                  //чтение данных: для почты пароль
-        PEREM_MAIL_START = mSettings.getString("PEREM_MAIL_START", "0");                //чтение данных: для почты от кого
-        PEREM_MAIL_END = mSettings.getString("PEREM_MAIL_END", "0");                    //чтение данных: для почты от кому
-        PEREM_DB3_CONST = mSettings.getString("PEREM_DB3_CONST", "0");                  //чтение данных: Путь к базам данных с константами
-        PEREM_DB3_BASE = mSettings.getString("PEREM_DB3_BASE", "0");                    //чтение данных: Путь к базам данных с товаром
-        PEREM_DB3_RN = mSettings.getString("PEREM_DB3_RN", "0");                        //чтение данных: Путь к базам данных с накладными
-        PEREM_ANDROID_ID_ADMIN = mSettings.getString("PEREM_ANDROID_ID_ADMIN", "0");    //чтение данных: Универсальный номер для админа
-        PEREM_ANDROID_ID = mSettings.getString("PEREM_ANDROID_ID", "0");                //чтение данных: Универсальный номер пользователя
-      //  PEREM_SELECT_BRENDS = mSettings.getString("PEREM_SELECT_BRENDS", "0");          //чтение данных: Универсальный номер пользователя
-
-
-        PEREM_AG_UID = mSettings.getString("PEREM_AG_UID", "0");                         //чтение данных: передача кода агента (A8BA1F48-C7E1-497B-B74A-D86426684712)
-        PEREM_AG_NAME = mSettings.getString("PEREM_AG_NAME", "0");                       //чтение данных: передача кода агента (Имя пользователя)
-        PEREM_AG_REGION = mSettings.getString("PEREM_AG_REGION", "0");                   //чтение данных: маршруты для привязки к контагентам
-        PEREM_AG_UID_REGION = mSettings.getString("PEREM_AG_UID_REGION", "0");           //чтение данных: uid маршруты для привязки к контагентам
-        PEREM_AG_CENA = mSettings.getString("PEREM_AG_CENA", "0");                       //чтение данных: цены для агентов
-        PEREM_AG_SKLAD = mSettings.getString("PEREM_AG_SKLAD", "0");                     //чтение данных: склады для агентов
-        PEREM_AG_UID_SKLAD = mSettings.getString("PEREM_AG_UID_SKLAD", "0");             //чтение данных: UID склады для агентов
-        PEREM_AG_TYPE_REAL = mSettings.getString("PEREM_AG_TYPE_REAL", "0");             //чтение данных: выбор типа торгового агента 1-OSDO или 2-PRES
-        PEREM_AG_TYPE_USER = mSettings.getString("PEREM_AG_TYPE_USER", "0");             //чтение данных: тип учетной записи агент или экспедитор
-        PEREM_WORK_DISTR = mSettings.getString("PEREM_WORK_DISTR", "0");                 //чтение данных: имя папки с данными (01_WDay)
-        PEREM_KOD_MOBILE = mSettings.getString("PEREM_KOD_MOBILE", "0");                 //чтение данных:
-        PEREM_KOD_UID_KODRN = mSettings.getString("PEREM_KOD_UID_KODRN", "0");           //чтение данных: уникальный код для накладной
-        PEREM_KOD_BRENDS_VISIBLE = mSettings.getString("PEREM_KOD_BRENDS_VISIBLE", "0");                 //чтение данных:
-
-        PEREM_KLIENT_UID = mSettings.getString("PEREM_KLIENT_UID", "0");                 //чтение данных: передача кода выбранного uid клиента
-        PEREM_DIALOG_UID = mSettings.getString("PEREM_DIALOG_UID", "0");                 //чтение данных: передача кода выбранного uid клиента
-        PEREM_DIALOG_DATA_START = mSettings.getString("PEREM_DIALOG_DATA_START", "0");   //чтение данных: передача кода начальной даты
-        PEREM_DIALOG_DATA_END = mSettings.getString("PEREM_DIALOG_DATA_END", "0");       //чтение данных: передача кода конечной даты
-        PEREM_DISPLAY_START = mSettings.getString("PEREM_DISPLAY_START", "0");           //чтение данных: передача кода для димплея начальной даты
-        PEREM_DISPLAY_END = mSettings.getString("PEREM_DISPLAY_END", "0");                //чтение данных: передача кода для димплея конечной даты
-
-        PEREM_K_AG_NAME = mSettings.getString("PEREM_K_AG_NAME", "0");          //чтение данных: имя контраегнта
-        PEREM_K_AG_UID = mSettings.getString("PEREM_K_AG_UID", "0");            //чтение данных: uid контрагента
-        PEREM_K_AG_ADRESS = mSettings.getString("PEREM_K_AG_ADRESS", "0");      //чтение данных: адрес контрагент
-        PEREM_K_AG_KodRN = mSettings.getString("PEREM_K_AG_KodRN", "0");         //чтение данных: код накладной
-        PEREM_K_AG_Data = mSettings.getString("PEREM_K_AG_Data", "0");           //чтение данных: время создание н
-        PEREM_K_AG_Vrema = mSettings.getString("PEREM_K_AG_Vrema", "0");        //чтение данных: дата создание на
-        PEREM_K_AG_GPS = mSettings.getString("PEREM_K_AG_GPS", "0");             //чтение данных: координаты gps
-
-        perem_switch_group_sql = mSettings.getBoolean("switch_preference_group_sql", FALSE);             //чтение данных: координаты gps
-    }
-
     /////////////////   01.2024
     /////// Перезаполнение
+
+    protected String SelectRN() {
+        if (preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getStatusOrder()).equals("Edit"))
+            return "base_RN_Edit";
+        else return "base_RN";
+    }
+
+    protected newWriteSale createNewParamsSale(PreferencesWrite preferencesWrite, String w_Price, String w_Sum) {
+        newWriteSale newWrite = new newWriteSale(0, 0, 0);
+
+        int sale, saleSetting = preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getSaleCount());
+        double priceSale, itogoSale;
+        if (saleSetting == 0) {
+            if (Double.parseDouble(w_Sum) >= Double.parseDouble(preferencesWrite.Setting_TY_SaleMinSumSale)) {
+                sale = Integer.parseInt(preferencesWrite.Setting_TY_Sale);
+                priceSale = Double.parseDouble(w_Price) - (Double.parseDouble(w_Price) * ((double) sale / 100));
+                itogoSale = Double.parseDouble(w_Sum) - (Double.parseDouble(w_Sum) * ((double) sale / 100));
+            } else {
+                sale = 0;
+                priceSale = Double.parseDouble(w_Price);
+                itogoSale = Double.parseDouble(w_Sum);
+            }
+
+        } else {
+            sale = saleSetting;
+            priceSale = Double.parseDouble(w_Price) - (Double.parseDouble(w_Price) * ((double) sale / 100));
+            itogoSale = Double.parseDouble(w_Sum) - (Double.parseDouble(w_Sum) * ((double) sale / 100));
+        }
+        newWrite.setSale(sale);
+        newWrite.setPriceSale(priceSale);
+        newWrite.setItogoSale(itogoSale);
+        // return new newWriteSale(sale, priceSale, itogoSale);
+        return newWrite;
+    }
+
+    static class newWriteSale {
+        private int Sale;
+        private double priceSale;
+        private double ItogoSale;
+
+        newWriteSale(int w_Sale, double w_PriceSale, double w_ItogoSale) {
+            this.Sale = w_Sale;
+            this.priceSale = w_PriceSale;
+            this.ItogoSale = w_ItogoSale;
+        }
+
+        public int getSale() {
+            return Sale;
+        }
+
+        public void setSale(int sale) {
+            this.Sale = sale;
+        }
+
+        public void setPriceSale(double priceSale) {
+            this.priceSale = priceSale;
+        }
+
+        public void setItogoSale(double ItogoSale) {
+            this.ItogoSale = ItogoSale;
+        }
+
+        public String getPriceSale() {
+            return new DecimalFormat("#00.00").format(priceSale).replace(",", ".");
+        }
+
+        public String getItogoSale() {
+            return new DecimalFormat("#00.00").format(ItogoSale).replace(",", ".");
+        }
+    }
 
 
 }
 
+/*    /// Работа с потоками
+
+    private class MyAsyncTask_Sync extends AsyncTask<Void, Integer, Void> {
+        @Override
+        protected void onPreExecute() { // Вызывается в начале потока
+            super.onPreExecute();
+            Log.e("ПОТОК=", "Начало потока");
+*//*            progressBarOR.setVisibility(View.VISIBLE);
+            product_str.clear();
+            adapterPriceClients = new ListAdapterAde_Suncape_Forma(context_Activity, product_str);
+            adapterPriceClients.notifyDataSetChanged();
+            listView.setAdapter(adapterPriceClients);*//*
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) { // Вызывается для обновления данных после загрузки
+            super.onProgressUpdate(values);
+            //pDialog.setMessage("Синхронизация цен. Подождите...");
+            // pDialog.setProgress(values[0]);
+            Log.e("ПОТОК=", "поток работает" + values);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) { // Для создания сложных потоков
+            try {
+                publishProgress(1);
+                getFloor();  // Синхронизация файлов для всех складов
+            } catch (InterruptedException e) {
+                Log.e("ПОТОК=", "Ошибка в потоке данных!");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) { // Вызывается в конце потока
+            super.onPostExecute(aVoid);
+            Log.e("ПОТОК=", "Конец потока");
+            progressBar.setVisibility(View.INVISIBLE);
+            Log.e("TEST", "Loading_Db_Nomencalture ListView");
+            if (!product_str.isEmpty()) {
+                adapterPriceClients = new ListAdapterAde_Suncape_Forma(context_Activity, product_str);
+                adapterPriceClients.notifyDataSetChanged();
+                // listView.setAdapter(adapterPriceClients);
+
+            } else
+                Toast.makeText(context_Activity, "В данной категории нет товара", Toast.LENGTH_SHORT).show();
+
+
+            //  pDialog.dismiss();
+        }
+
+        private void getFloor() throws InterruptedException {
+            //  pDialog.setMessage("Загрузка продуктов. Подождите...");
+            SQLiteDatabase db = getBaseContext().openOrCreateDatabase(PEREM_DB3_BASE, MODE_PRIVATE, null);
+            String query;
+            if (perem_switch_group_sql) {
+                query = "SELECT base_in_nomeclature.name, base_in_nomeclature.brends, base_in_nomeclature.p_group, base_in_nomeclature.kod, base_in_image.kod_image, \n" +
+                        "base_in_nomeclature.kolbox, base_in_ostatok.count, base_in_ostatok.sklad_uid, base_in_ostatok.sklad_uid, const_sklad.sklad_name,\n" +
+                        "base_in_price.price, base_in_nomeclature.strih, base_in_nomeclature.kod_univ, base_in_nomeclature.koduid\n" +
+                        "FROM base_in_nomeclature\n" +
+                        "LEFT JOIN base_in_ostatok ON base_in_nomeclature.koduid = base_in_ostatok.nomenclature_uid\n" +
+                        "LEFT JOIN base_in_price ON base_in_nomeclature.koduid = base_in_price.nomenclature_uid\n" +
+                        "LEFT JOIN base_in_image ON base_in_nomeclature.koduid = base_in_image.koduid\n" +
+                        "LEFT JOIN base_group_sql ON base_in_nomeclature.koduid = base_group_sql.uid_name\n" +
+                        "LEFT JOIN const_sklad ON base_in_ostatok.sklad_uid = const_sklad.sklad_uid\n" +
+                        "WHERE count > 0\n" +
+                        "ORDER BY base_in_nomeclature.brends, base_in_nomeclature.p_group, base_group_sql.type_group ASC;";
+                //  "GROUP BY base_in_nomeclature.name\n" +
+            } else {
+                query = "SELECT base_in_nomeclature.name, base_in_nomeclature.brends, " +
+                        "base_in_nomeclature.p_group, base_in_nomeclature.kod, base_in_image.kod_image, \n" +
+                        "base_in_nomeclature.kolbox, base_in_ostatok.count, base_in_ostatok.sklad_uid, " +
+                        "base_in_ostatok.sklad_uid, const_sklad.sklad_name,\n" +
+                        "base_in_price.price, base_in_nomeclature.strih, base_in_nomeclature.kod_univ, base_in_nomeclature.koduid\n" +
+                        "FROM base_in_nomeclature\n" +
+                        "LEFT JOIN base_in_ostatok ON base_in_nomeclature.koduid = base_in_ostatok.nomenclature_uid\n" +
+                        "LEFT JOIN base_in_price ON base_in_nomeclature.koduid = base_in_price.nomenclature_uid\n" +
+                        "LEFT JOIN base_in_image ON base_in_nomeclature.koduid = base_in_image.koduid\n" +
+                        "LEFT JOIN base_group_sql ON base_in_nomeclature.koduid = base_group_sql.uid_name\n" +
+                        "LEFT JOIN const_sklad ON base_in_ostatok.sklad_uid = const_sklad.sklad_uid\n" +
+                        "WHERE count > 0\n" +
+                        "ORDER BY base_in_nomeclature.brends, base_in_nomeclature.p_group, base_group_sql.type_group ASC;";
+
+                //  "GROUP BY base_in_nomeclature.name\n" +
+            }
+
+            final Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+            while (cursor.isAfterLast() == false) {
+                String brend = cursor.getString(cursor.getColumnIndexOrThrow("brends"));
+                String p_group = cursor.getString(cursor.getColumnIndexOrThrow("p_group"));
+                String kod = cursor.getString(cursor.getColumnIndexOrThrow("kod"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String kolbox = cursor.getString(cursor.getColumnIndexOrThrow("kolbox"));
+                String count = cursor.getString(cursor.getColumnIndexOrThrow("count"));
+                cena = cursor.getString(cursor.getColumnIndexOrThrow("price"));
+                String image = cursor.getString(cursor.getColumnIndexOrThrow("kod_image"));
+                String strih = cursor.getString(cursor.getColumnIndexOrThrow("strih"));
+                String kod_univ = cursor.getString(cursor.getColumnIndexOrThrow("kod_univ"));
+                String koduid = cursor.getString(cursor.getColumnIndexOrThrow("koduid"));
+                String uid_sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad_uid"));
+                String name_sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad_name"));
+                String brends = brend.substring(0, 1) + brend.substring(1).toLowerCase();
+
+                String sub_brends = p_group.substring(0, 1) + p_group.substring(1).toLowerCase();
+                String ostatok;
+                if (count != (null)) {
+                    ostatok = count + "шт";
+                } else ostatok = "закончился";
+
+                Params();
+                Cena_for_DB();
+                if (brends.equals(mSettings_subBrends)) {
+                    if (id_st.equals(sub_brends)) {
+                        if (image != null) {
+                            Log.e("Loading1", "name= " + name);
+                            product_str.add(new ListAdapterSimple_Suncape_Forma(koduid, kod_univ, name, kolbox, cena, Cena_Nal, strih, ostatok, image, name_sklad, uid_sklad));
+                            cursor.moveToNext();
+                        } else {
+                            Log.e("Loading2", "name= " + name);
+                            // Log.e("Sub=", p_group + ", " + sub_brends);
+                            product_str.add(new ListAdapterSimple_Suncape_Forma(koduid, kod_univ, name, kolbox, cena, Cena_Nal, strih, ostatok, "no_image", name_sklad, uid_sklad));
+                            cursor.moveToNext();
+                        }
+                    } else cursor.moveToNext();
+                } else cursor.moveToNext();
+            }
+            cursor.close();
+            db.close();
+
+        }  // Синхронизация файлов для всех складов
+
+    }*/

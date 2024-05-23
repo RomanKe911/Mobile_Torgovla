@@ -3,8 +3,8 @@ package kg.roman.Mobile_Torgovla.FormaZakazaStart;
 
 import android.content.Context;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 
 interface InterfaceFilters {
     String filterDate();
@@ -42,6 +42,7 @@ public class FiltersFormaZakaza implements InterfaceFilters {
 
     @Override
     public String filterGroup() {
+
         String query;
         //// Данные без фильтров
         query = "SELECT agent_name, agent_uid, k_agn_uid, k_agn_name, k_agn_adress, data, SUM(itogo) AS 'itogo' " +
@@ -78,6 +79,7 @@ public class FiltersFormaZakaza implements InterfaceFilters {
                     "AND k_agn_uid = '" + clientUID + "'" +
                     "AND data BETWEEN '" + DateStart + "' AND '" + DateEnd + "'" +
                     "GROUP BY k_agn_uid;";
+
 
         return query;
     }

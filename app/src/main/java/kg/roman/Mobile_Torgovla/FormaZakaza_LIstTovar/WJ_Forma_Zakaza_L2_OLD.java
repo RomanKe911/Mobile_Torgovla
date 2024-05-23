@@ -66,7 +66,7 @@ import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_WJ_Zakaz;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Excel;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Spinner_TY;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_WJ_Zakaz;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 public class WJ_Forma_Zakaza_L2_OLD extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

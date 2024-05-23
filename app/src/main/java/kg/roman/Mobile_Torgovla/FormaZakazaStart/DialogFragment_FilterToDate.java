@@ -20,8 +20,7 @@ import androidx.fragment.app.DialogFragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import kg.roman.Mobile_Torgovla.FormaZakazaStart.RemovableStatusFilter;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
 import kg.roman.Mobile_Torgovla.R;
 
 public class DialogFragment_FilterToDate extends DialogFragment {

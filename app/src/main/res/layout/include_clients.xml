@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/add_dialog_tovar_1">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <TextView
+            android:id="@+id/textView47"
+            style="@style/IncludeClient_Title"
+            android:text="клиент:" />
+
+        <TextView
+            android:id="@+id/tvw_IncludeClient"
+            style="@style/IncludeClient_Count"
+            android:layout_marginStart="4dp"
+            android:hint="торговый клиент"
+            android:text="Аптека №307 (Жекшебаева Бубугулxcvcxvcxvsdfdsfsfdsfdsfsdfdsfsdfcxvcxvcxvcxvcxvcxvcxvvdgdgdgcxvcxvxvxc" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+
+        <TextView
+            android:id="@+id/textView96"
+            style="@style/IncludeClient_Title"
+            android:layout_marginStart="4dp"
+            android:text="адрес:" />
+
+        <TextView
+            android:id="@+id/tvw_IncludeClientAdress"
+            style="@style/IncludeClient_Count"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:hint="адрес клиента"
+            android:text="45CD1D82-4D12-4802-B64C-AC107355B897xcvcvcxvxvxvxcvcxvxvvxvxvcx" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+        <TextView
+            android:id="@+id/textView101"
+            style="@style/IncludeClient_Title"
+            android:text="uid:" />
+
+        <TextView
+            android:id="@+id/tvw_IncludeClientUID"
+            style="@style/IncludeClient_Count"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:hint="uid-клиента"
+            android:text="г.Каракол; ул. Жусаева(Горького); дом №127xcvxcvxcvcxvcxvcxvxcvcxvcxvxvxcvxvcx" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

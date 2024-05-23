@@ -3,12 +3,9 @@ package kg.roman.Mobile_Torgovla.FormaZakazaStart;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -17,13 +14,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 
 public class Async_ViewModel_UpdateStatusZakaz extends AndroidViewModel {
     String logeTAG = "ViewModel_UpdateStatus";

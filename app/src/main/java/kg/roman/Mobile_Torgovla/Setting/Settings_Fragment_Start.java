@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
 import kg.roman.Mobile_Torgovla.R;
 
 

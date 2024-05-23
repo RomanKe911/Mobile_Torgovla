@@ -666,7 +666,8 @@ public class Work_Table_Activity extends AppCompatActivity implements Navigation
             String status = cursor.getString(cursor.getColumnIndex("status")); // добавить обработку скидки
             String debet= cursor.getString(cursor.getColumnIndex("debet_new")); // добавить обработку скидки
             String sklad= cursor.getString(cursor.getColumnIndex("sklad")); // добавить обработку скидки
-            zakaz.add(new ListAdapterSimple_List_RN_Table(Kod_RN, Klients, UID_Klients, Vrema, Data, Summa, Itogo, Adress, skidka, debet, status, sklad));
+            String skladUID= cursor.getString(cursor.getColumnIndex("sklad_uid")); // добавить обработку скидки
+            zakaz.add(new ListAdapterSimple_List_RN_Table(Kod_RN, Klients, UID_Klients, Vrema, Data, Summa, Itogo, Adress, skidka, debet, status, sklad, skladUID));
             cursor.moveToNext();
         }
 

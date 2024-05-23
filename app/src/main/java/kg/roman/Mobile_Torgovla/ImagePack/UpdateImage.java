@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -27,8 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 import kg.roman.Mobile_Torgovla.Permission.PermissionUtils;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.databinding.PermUpdateImageBinding;

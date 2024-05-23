@@ -1,6 +1,5 @@
 package kg.roman.Mobile_Torgovla.FormaZakaza_EndZakaz;
 
-import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,22 +19,30 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import kg.roman.Mobile_Torgovla.FormaZakazaStart.DialogFragment_FilterToDate;
+import org.checkerframework.checker.units.qual.C;
+
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.Removable;
 import kg.roman.Mobile_Torgovla.FormaZakazaStart.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.WJ_Forma_Zakaza_L2;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Spinner_TY;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Spinner_TY;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.Preferences_MTSetting;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.databinding.MtWjFormaDopDataBinding;
 
-public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Removable {
+public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Removable, RemovableNextDate {
 
 
     public ArrayList<ListAdapterSimple_Spinner_TY> spinner_credit = new ArrayList<>();
@@ -46,11 +52,15 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
     private MtWjFormaDopDataBinding binding;
     String logeTAG = "WjFormaDopUslov";
     private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
-    SharedPreferences mSettings;
+
+    SharedPreferences mSettings, wSetting;
     SharedPreferences.Editor editor;
 
     public Context context_Activity;
     PreferencesWrite preferencesWrite;
+    Preferences_MTSetting preferencesMtSetting;
+    String statusRN = "null";
+    String w_CodeOrder;
 
 
     @Override
@@ -65,78 +75,17 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
         getSupportActionBar().setSubtitle("");
 
         mSettings = getApplication().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
         context_Activity = getApplication().getBaseContext();
 
         preferencesWrite = new PreferencesWrite(context_Activity);
+        preferencesMtSetting = new Preferences_MTSetting();
 
-        binding.tvwEZClientName.setText(preferencesWrite.Setting_MT_K_AG_NAME);
-
-        //// Заполнение общей сумой
-        AvtoSumma();
-
-        // Обработка нажатия на: Дата поставки
-        Clicked_Button_Data();
-
-        // Обработка нажатия на: Вариант реализации
-        Clicked_CBox();
-
-        // Коментарий
-        WriteComment();
-
-
-        binding.fabEndZakaz.setOnClickListener(v -> {
-
-
-            double sumItogo = Double.parseDouble(preferencesWrite.Setting_TY_Itogo);
-            double minSum = Double.parseDouble(preferencesWrite.Setting_TY_MinSumma);
-            if (sumItogo >= minSum) {
-                Toast.makeText(context_Activity, "Конец заказа", Toast.LENGTH_SHORT).show();
-                SQLiteWriteData();
-            } else {
-                Toast.makeText(context_Activity, "мин сумма заказа: " + minSum + " добавьте товар в заявку", Toast.LENGTH_LONG).show();
-            }
-
-
-/*            try {
-                if (visible_ty == false & Double.valueOf(summa_read) > 0)  // Проверка условия скидка подхлдит и итого больше 0
-                {
-                    if (s_credit.equals("Консигнация")) {
-                        date_credite_read = editText_credite_date.getText().toString();
-                    } else date_credite_read = "0";
-
-
-                    if (!date_credite_read.equals("")) {
-                        //  Write_Data(text_data.getText().toString(), nds_read, skidka_read, s_credit, summa_read, itogo_read, date_credite_read, editText_comment.getText().toString());
-                        Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza_L2.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(context_Activity, "Введите кол-во дней конс", Toast.LENGTH_SHORT).show();
-                        Log.e("Кнопка TY...", "Введите кол-во дней конс");
-                    }
-
-
-                } else {
-                    Toast.makeText(context_Activity, "эти условия не подходят!", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                Toast.makeText(context_Activity, "Ошибка записи данных", Toast.LENGTH_SHORT).show();
-                Log.e(logeTAG, "Ошибка записи данных!");
-            }*/
-
-
-
-
-                   /* if (Double.valueOf(summa_read) > 0) {
-
-                    } else
-                        Toast.makeText(context_Activity, "Ошибка выбора данных", Toast.LENGTH_SHORT).show();
-                    /*Intent intent = new Intent(context_Activity, SPR_Strih_Kod_Search.class);
-                    startActivity(intent);*/
-        });
-
-
-        // Обработка данных вид торговых условий
+        //// имя контагента
+        binding.tvwEZClientName.setText(preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getClientName()));
+        w_CodeOrder = preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getCodeOrder());
+        //// Торговые условия
+        //// Выборка фрагмента в настройках вид торговых условий: (стандартный и только EditText)
         switch (preferencesWrite.Setting_TY_Type) {
             case "standart": {
                 Log.e(logeTAG, "Стандартные условия");
@@ -146,16 +95,46 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
             }
             break;
             case "random_ty": {
+                Log.e(logeTAG, "Расширенные условия");
                 binding.fragmentSale.getRoot().setVisibility(View.GONE);
                 binding.fragmentSaleRandom.getRoot().setVisibility(View.VISIBLE);
                 FragmentSaleRandom();
             }
             break;
         }
+        //// Заполнить даными активность (Create или (Copy, Edit))
+        if (preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getStatusOrder()).equals("Create"))
+            writeForma_toCreator();
+        else writeForma_toEditor();
 
+
+        // Обработка нажатия на: Вариант реализации
+        Clicked_CBox();
+
+        // Обработка нажатия на: Дата поставки
+        Clicked_Button_Data();
 
         // Обработка данных из спинера вид оплаты
         Spinner_Type_Credit();
+
+        // Коментарий
+        WriteComment();
+
+        // Заполнение общей сумой
+        AvtoSumma();
+
+
+        binding.fabEndZakaz.setOnClickListener(v -> {
+            double sumItogo = Double.parseDouble(binding.fragmentAvtoSumm.textViewThisItog.getText().toString());
+            double minSum = Double.parseDouble(preferencesWrite.Setting_TY_MinSumma);
+            if (sumItogo >= minSum) {
+                Toast.makeText(context_Activity, "Конец заказа", Toast.LENGTH_SHORT).show();
+                SQLiteWriteData();
+            } else {
+                Toast.makeText(context_Activity, "мин сумма заказа: " + minSum + " добавьте товар в заявку", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
@@ -200,14 +179,21 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
                     binding.fragmentSale.editTextNumber2.setText(preferencesWrite.Setting_TY_Sale);
                     binding.fragmentSale.editTextNumber2.setEnabled(false);
                     editor.putString("preference_TypeSale", "standart");    //тип условия
+                    editor.putString("PEREM_K_AG_Sale", preferencesWrite.Setting_TY_Sale);    //тип условия
                     Log.e(logeTAG, "SelectrB: Radio1");
+
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getTYSelectRadioButton(), "standart");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), Integer.parseInt(preferencesWrite.Setting_TY_Sale));
                 }
                 break;
                 case R.id.radioButton2: {
                     binding.fragmentSale.editTextNumber2.setText(preferencesWrite.Setting_TY_SaleFarm);
                     binding.fragmentSale.editTextNumber2.setEnabled(false);
                     editor.putString("preference_TypeSale", "Farms");    //тип условия
+                    editor.putString("PEREM_K_AG_Sale", preferencesWrite.Setting_TY_SaleFarm);    //тип условия
                     Log.e(logeTAG, "SelectrB: Radio2");
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getTYSelectRadioButton(), "Farms");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), Integer.parseInt(preferencesWrite.Setting_TY_SaleFarm));
                 }
                 break;
                 case R.id.radioButton3: {
@@ -215,6 +201,8 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
                     binding.fragmentSale.editTextNumber2.setEnabled(true);
                     editor.putString("preference_TypeSale", "Random");    //тип условия
                     Log.e(logeTAG, "SelectrB: Radio3");
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getTYSelectRadioButton(), "Random");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), 0);
                 }
                 break;
             }
@@ -238,38 +226,17 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
                 editor = mSettings.edit();
                 if (s.length() > 0) {
                     editor.putInt("preference_SaleRandom", Integer.parseInt(s.toString()));    //запись данных даты и времени
-                    Log.e(logeTAG, "_" + Integer.parseInt(s.toString()));
+
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), Integer.parseInt(s.toString()));
                 } else {
                     editor.putInt("preference_SaleRandom", 0);    //запись данных даты и времени
-                    Log.e(logeTAG, "null");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), 0);
                 }
 
                 editor.commit();
                 AvtoSumma();
             }
         });
-
-/*        binding.fragmentSale.radioButton.setOnClickListener(v -> {
-            Toast.makeText(context_Activity, binding.fragmentSale.radioButton.getText(), Toast.LENGTH_SHORT).show();
-            binding.fragmentSale.editTextNumber2.setText(preferencesWrite.Setting_TY_Sale);
-            binding.fragmentSale.editTextNumber2.setEnabled(false);
-            binding.fragmentSale.radioButton2.setChecked(false);
-            binding.fragmentSale.radioButton3.setChecked(false);
-        });
-        binding.fragmentSale.radioButton2.setOnClickListener(v -> {
-            Toast.makeText(context_Activity, binding.fragmentSale.radioButton2.getText(), Toast.LENGTH_SHORT).show();
-            binding.fragmentSale.editTextNumber2.setText(preferencesWrite.Setting_TY_SaleFarm);
-            binding.fragmentSale.editTextNumber2.setEnabled(false);
-            binding.fragmentSale.radioButton.setChecked(false);
-            binding.fragmentSale.radioButton3.setChecked(false);
-        });
-        binding.fragmentSale.radioButton3.setOnClickListener(v -> {
-            Toast.makeText(context_Activity, binding.fragmentSale.radioButton3.getText(), Toast.LENGTH_SHORT).show();
-            binding.fragmentSale.editTextNumber2.setText("");
-            binding.fragmentSale.editTextNumber2.setEnabled(true);
-            binding.fragmentSale.radioButton.setChecked(false);
-            binding.fragmentSale.radioButton2.setChecked(false);
-        });*/
 
     }
 
@@ -295,27 +262,32 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
             @Override
             public void afterTextChanged(Editable s) {
-                editor = mSettings.edit();
+                if (!s.toString().equals(""))
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), Integer.parseInt(s.toString()));
+                else {
+                    binding.fragmentSaleRandom.editTextNumber2.setText("0");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), 0);
+                }
+
+
+/*                editor = mSettings.edit();
                 if (s.length() > 0) {
                     editor.putInt("preference_SaleRandom", Integer.parseInt(s.toString()));    //запись данных даты и времени
-                    Log.e(logeTAG, "_" + Integer.parseInt(s.toString()));
+
                 } else {
                     editor.putInt("preference_SaleRandom", 0);    //запись данных даты и времени
-                    Log.e(logeTAG, "null");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), 0);
                 }
+
+                editor.commit();*/
+
                 AvtoSumma();
-
-                editor.commit();
-
-
             }
         });
     }
 
-
     // Обработка нажатия на: Дата поставки
     protected void Clicked_Button_Data() {
-        editor = mSettings.edit();
         Calendar c = Calendar.getInstance();
         AtomicInteger mYear = new AtomicInteger();
         AtomicInteger mMonth = new AtomicInteger();
@@ -326,69 +298,24 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
         c.set(mYear.get(), mMonth.get(), mDay.get());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String data_start = dateFormat.format(c.getTime());
-        binding.tvwDData.setText(data_start);
+        //binding.tvwDData.setText(data_start);
 
-        editor.putString("setting_TY_DateNextUP", data_start);
-        editor.commit();
-
-
-
-/*        Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date = (view1, year, monthOfYear, dayOfMonth) -> {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-*//*                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd.MM.yyyy");
-                    String data_up = dateFormat1.format(myCalendar.getTime());
-                    binding.tvwDData.setText(data_up);
-
-                    editor.putString("setting_TY_DateNextUP", data_up);
-                    editor.commit();*//*
-        };
-        DatePickerDialog datePickerDialog = new DatePickerDialog(context_Activity, R.style.AppTheme, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));*/
-
-        binding.btnDData.setOnClickListener(view -> {
-            try {
-
-                mYear.set(c.get(Calendar.YEAR));
-                mMonth.set(c.get(Calendar.MONTH));
-                mDay.set(c.get(Calendar.DAY_OF_MONTH));
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context_Activity,
-                        (view1, year, monthOfYear, dayOfMonth) -> {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.set(year, monthOfYear, dayOfMonth);
-                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd.MM.yyyy");
-                            String data_up = dateFormat1.format(calendar.getTime());
-                            binding.tvwDData.setText(data_up);
-
-                            editor.putString("setting_TY_DateNextUP", data_up);
-                            editor.commit();
-                        }, mYear.get(), mMonth.get(), mDay.get());
-                datePickerDialog.show();
-
-            } catch (Exception e) {
-                Log.e(logeTAG, "Error: " + e);
-                Toast.makeText(context_Activity, "Error: " + e, Toast.LENGTH_SHORT).show();
-            }
-
-
+        binding.btnNextData.setOnClickListener(view -> {
+            DialogFragment_NextDate dialog = new DialogFragment_NextDate();
+            dialog.show(getSupportFragmentManager(), "customSelectNextDate");
         });
 
 
     }
 
+
     // Обработка нажатия на: Вариант реализации
     protected void Clicked_CBox() {
         binding.checkBoxType.setOnCheckedChangeListener((compoundButton, booleanClick) -> {
-            int valueBoolean = 0;
+            int valueBoolean;
             if (booleanClick) valueBoolean = 1;
             else valueBoolean = 0;
-            editor = mSettings.edit();
-            editor.remove("setting_TY_TypeRelise");
-            editor.putInt("setting_TY_TypeRelise", valueBoolean);
-            editor.commit();
+            preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getTypeOrder(), valueBoolean);
         });
     }
 
@@ -408,21 +335,15 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     try {
-                        editor = mSettings.edit();
-                        TextView tvw_d_skidka = view.findViewById(R.id.tvw_ty_title1);
-                        binding.edtCrediteDate.setText("");
-                        String s_credit = tvw_d_skidka.getText().toString();
-                        Log.e("Type ", tvw_d_skidka.getText().toString());
-                        if (tvw_d_skidka.getText().toString().equals("Консигнация"))
+                        TextView tvwTypePay = view.findViewById(R.id.tvw_ty_title1);
+                        if (tvwTypePay.getText().toString().equals("Консигнация"))
                             binding.edtCrediteDate.setVisibility(View.VISIBLE);
-                        else
+                        else {
                             binding.edtCrediteDate.setVisibility(View.GONE);
-
-
-                        editor.putString("setting_TY_CREDIT", s_credit);
-                        editor.commit();
-                    } catch (
-                            Exception e) {
+                            preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getInfoOrderCreditCountDay(), 0);
+                        }
+                        preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getInfoOrderCredit(), tvwTypePay.getText().toString());
+                    } catch (Exception e) {
                         Log.e(logeTAG, "Ошибка, вид оплаты");
                         Toast.makeText(context_Activity, "Ошибка, вид оплаты", Toast.LENGTH_SHORT).show();
                     }
@@ -434,6 +355,34 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
                 }
             });
+
+            //// Вид оплаты
+            binding.spinnerSelectCredit.setSelection(0);
+            binding.edtCrediteDate.setVisibility(View.INVISIBLE);
+
+            String statusPay = preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getInfoOrderCredit());
+            int countDayPay = preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getInfoOrderCreditCountDay());
+
+            for (int i = 0; i < mass_type.length; i++) {
+                if (mass_type[i].equals(statusPay))
+                {
+                    Log.e(logeTAG, "statusPay" + statusPay);
+                    binding.spinnerSelectCredit.setSelection(i);
+                    if (statusPay.equals("Консигнация")) {
+                        binding.edtCrediteDate.setVisibility(View.VISIBLE);
+                        binding.edtCrediteDate.setText(String.valueOf(countDayPay));
+                    }
+                }
+
+            }
+
+
+            if (binding.edtCrediteDate.getVisibility() == View.VISIBLE) {
+                if (countDayPay > 0)
+                    binding.edtCrediteDate.setText(String.valueOf(countDayPay));
+                else binding.edtCrediteDate.setText(String.valueOf(0));
+                Log.e(logeTAG, "КОНС");
+            }
 
             binding.edtCrediteDate.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -448,13 +397,16 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    editor = mSettings.edit();
-                    if (binding.edtCrediteDate.getVisibility() == View.VISIBLE)
-                        editor.putString("setting_TY_CREDITE_DATE", binding.edtCrediteDate.getText().toString());
-                    else
-                        editor.putString("setting_TY_CREDITE_DATE", "0");
-                    editor.commit();
+                    if (!s.toString().equals(""))
+                        preferencesMtSetting.writeSettingInt(context_Activity,
+                                preferencesMtSetting.getInfoOrderCreditCountDay(),
+                                Integer.parseInt(s.toString()));
+                    else {
+                        binding.edtCrediteDate.setText("0");
+                        preferencesMtSetting.writeSettingInt(context_Activity,
+                                preferencesMtSetting.getInfoOrderCreditCountDay(), 0);
 
+                    }
                 }
             });
         } catch (
@@ -467,7 +419,6 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
     //// Запись коментарий в память
     protected void WriteComment() {
-        StringBuilder stringBuilder = new StringBuilder();
         binding.editComment.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -481,13 +432,9 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
             @Override
             public void afterTextChanged(Editable s) {
-                stringBuilder.append(s.toString());
-
+                preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getComment(), s.toString());
             }
         });
-        editor = mSettings.edit();
-        editor.putString("setting_TY_COMMENT", stringBuilder.toString());
-        editor.commit();
     }
 
 
@@ -499,11 +446,22 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
         Sales();
 
-        PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+        preferencesMtSetting = new Preferences_MTSetting();
+        for (Map.Entry<String, String> map : preferencesMtSetting.getAutoSum(context_Activity).entrySet()) {
+            if (map.getKey().equals("sum"))
+                binding.fragmentAvtoSumm.textViewThisSumma.setText(map.getValue());
+            if (map.getKey().equals("count"))
+                binding.fragmentAvtoSumm.textViewThisCount.setText(map.getValue());
+            if (map.getKey().equals("itg"))
+                binding.fragmentAvtoSumm.textViewThisItog.setText(map.getValue());
+        }
+
+
+/*        PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
         SQLiteDatabase db = context_Activity.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
-        String querySumma = "SELECT Kod_RN, SUM(Summa) AS 'AvtoSum' FROM base_RN WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
-        String queryCount = "SELECT Kod_RN, SUM(Kol) AS 'AvtoCount' FROM base_RN WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
-        String queryItogo = "SELECT Kod_RN, SUM(Itogo) AS 'AvtoItogo' FROM base_RN WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
+        String querySumma = "SELECT Kod_RN, SUM(Summa) AS 'AvtoSum' FROM '" + SelectRN() + "' WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
+        String queryCount = "SELECT Kod_RN, SUM(Kol) AS 'AvtoCount' FROM '" + SelectRN() + "' WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
+        String queryItogo = "SELECT Kod_RN, SUM(Itogo) AS 'AvtoItogo' FROM '" + SelectRN() + "' WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
         Cursor cursor = db.rawQuery(querySumma, null);
         //// Подсчет общей суммы
         cursor.moveToFirst();
@@ -535,20 +493,23 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
 
         cursor.close();
         db.close();
-        editor.commit();
+        editor.commit();*/
     }
 
     //// Перерасчет суммы отночительно скидок
     protected void Sales() {
         PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
         SQLiteDatabase db = context_Activity.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
-        String querySumma = "SELECT Kod_RN, SUM(Itogo) AS 'AvtoSum' FROM base_RN WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
+        String querySumma = "SELECT Kod_RN, SUM(Itogo) AS 'AvtoSum' FROM '" + SelectRN() + "' WHERE Kod_RN = '" + w_CodeOrder + "';";
         Cursor cursor = db.rawQuery(querySumma, null);
         //// Подсчет общей суммы
         cursor.moveToFirst();
         if (cursor.getCount() > 0 && cursor.getString(cursor.getColumnIndexOrThrow("AvtoSum")) != null) {
             String s = cursor.getString(cursor.getColumnIndexOrThrow("AvtoSum"));
-            if (Double.parseDouble(s) >= Double.parseDouble(preferencesWrite.Setting_TY_SaleMinSumSale)) {
+
+            if (preferencesWrite.Setting_TY_SaleType.equals("Random"))
+                SQLiteQuery(SelectTypeSale());
+            else if (Double.parseDouble(s) >= Double.parseDouble(preferencesWrite.Setting_TY_SaleMinSumSale)) {
                 SQLiteQuery(SelectTypeSale());
             } else SQLiteQuery(0);
         }
@@ -560,7 +521,7 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
     protected void SQLiteQuery(int SaleTY) {
         PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
         SQLiteDatabase db = context_Activity.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
-        String query = "SELECT * FROM base_RN WHERE base_RN.Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
+        String query = "SELECT * FROM '" + SelectRN() + "' WHERE Kod_RN = '" + w_CodeOrder + "';";
         ContentValues contentValues = new ContentValues();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
@@ -580,8 +541,8 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
                 contentValues.put("Cena_SK", formatDoubleToString(Double.parseDouble(price)));
                 contentValues.put("Itogo", formatDoubleToString(Double.parseDouble(summa)));
             }
-            db.update("base_RN", contentValues, "koduid = ? AND Kod_RN = ?",
-                    new String[]{uid, preferencesWrite.Setting_MT_K_AG_KodRN});
+            db.update(SelectRN(), contentValues, "koduid = ? AND Kod_RN = ?",
+                    new String[]{uid, w_CodeOrder});
 
             cursor.moveToNext();
         }
@@ -612,58 +573,29 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
     /////////////////////////////////////////////////////
 
 
+    protected String SelectRN() {
+        if (preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getStatusOrder()).equals("Edit"))
+            return "base_RN_Edit";
+        else return "base_RN";
+    }
+
     // Запись данных
     protected void SQLiteWriteData() {
-        // String wr_data, String wr_nds, String wr_skidka, String wr_credit, String wr_summa, String wr_itogo, String wr_credite_date, String wr_comment
-        preferencesWrite = new PreferencesWrite(context_Activity);
-        Log.e("Дата поставки: ", preferencesWrite.Setting_TY_DateNextUP);
-        Log.e("НДС: ", "Счет-фактура: " + preferencesWrite.Setting_TY_TypeRelise);
-        Log.e("Скидка: ", preferencesWrite.Setting_TY_Sale);
-        Log.e("Тип оплаты: ", preferencesWrite.Setting_TY_CREDIT);
-        Log.e("Дней конс: ", preferencesWrite.Setting_TY_CREDITE_DATE);
-        Log.e("Комментарий: ", preferencesWrite.Setting_TY_Comment);
+        preferencesMtSetting = new Preferences_MTSetting();
+        Log.e("Дата поставки: ", preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getDateDelivery()));
+        Log.e("НДС: ", "Счет-фактура: " + preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getTypeOrder()));
+        Log.e("Скидка: ", String.valueOf(preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getSaleCount())));
+        Log.e("Тип оплаты: ", preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getInfoOrderCredit()));
+        Log.e("Дней конс: ", String.valueOf(preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getInfoOrderCreditCountDay())));
+        Log.e("Комментарий: ", preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getComment()));
 
-        // Log.e("Сумма: ", wr_summa);
-        //   Log.e("Итого: ", wr_itogo);
-
-
-/*
-        mSettings = getApplication().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        editor = mSettings.edit();
-        editor.putString("PEREM_DOP_DATA_UP", wr_data);
-        editor.putString("PEREM_DOP_NDS", wr_nds);
-        editor.putString("PEREM_DOP_SKIDKA", wr_skidka);
-        editor.putString("PEREM_DOP_CREDIT", wr_credit);
-        editor.putString("PEREM_DOP_SUMMA", wr_summa);
-        editor.putString("PEREM_DOP_ITOGO", wr_itogo);
-        editor.putString("PEREM_DOP_CREDITE_DATE", wr_credite_date);
-        editor.putString("PEREM_DOP_COMMENT", wr_comment);
-        editor.putString("PEREM_CLICK_TY", "true");
-        editor.commit();*/
-
-/*
-
-        PEREM_CLICK_TY = sp.getString("PEREM_CLICK_TY", "0");                    //чтение данных: имя сервера
-        Log.e("RRR", PEREM_CLICK_TY);
-
-        if (!textView_Summa.getText().toString().equals("") & (PEREM_CLICK_TY.equals("true"))) {
-
-
-        } else {
-            Loading_Adapter_Refresh();
-            Log.e("Кнопка Add...", "Ошибка: Не заполнен заказ или не выбраны условия!");
-            Toast.makeText(context_Activity, "Ошибка: Не заполнен заказ или не выбраны условия!", Toast.LENGTH_SHORT).show();
-        }*/
-
-        PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
         DialogFragment_EndZakaz dialog = new DialogFragment_EndZakaz();
         Bundle args = new Bundle();
-        args.putString("client", preferencesWrite.Setting_MT_K_AG_NAME);
-        args.putString("itogo", preferencesWrite.Setting_TY_Itogo);
+        args.putString("client", preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getClientName()));
+        args.putString("itogo", binding.fragmentAvtoSumm.textViewThisItog.getText().toString());
+        args.putString("typeStatus", preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getStatusOrder()));
         dialog.setArguments(args);
         dialog.show(getSupportFragmentManager(), "customEndZakaz");
-
-
     }
 
 
@@ -671,10 +603,265 @@ public class WJ_Forma_Zakaza_Dop_Data extends AppCompatActivity implements Remov
     public void restartAdapter(boolean statusAdapter) {
         if (statusAdapter) {
             Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza.class);
+            intent.putExtra("preferenceSave", "clear");
             startActivity(intent);
             finish();
         }
     }
 
 
+    @Override
+    public void RemovableNextDate(String textDate) {
+        Log.e("Remove", textDate);
+        binding.tvwDData.setText(textDate);
+        preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateDelivery(), textDate);
+    }
+
+
+    //// Заполнение формы при создании нового заказа
+    protected void writeForma_toCreator() {
+
+        //// торговые условия
+        preferencesWrite = new PreferencesWrite(context_Activity);
+        preferencesMtSetting = new Preferences_MTSetting();
+        Log.e(logeTAG, "Статус:" + preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getStatusOrder()));
+        binding.fragmentSale.editTextNumber2.setText(""+preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getSaleCount()));
+
+        switch (preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getTYSelectRadioButton())) {
+            case "standart": {
+                binding.fragmentSale.radioButton.setChecked(true);
+                binding.fragmentSale.radioButton2.setChecked(false);
+                binding.fragmentSale.radioButton3.setChecked(false);
+                binding.fragmentSale.editTextNumber2.setEnabled(false);
+
+              //  binding.fragmentSale.editTextNumber2.setText("0");
+              //  binding.fragmentSaleRandom.editTextNumber2.setText("0");
+            }
+            break;
+            case "Farms": {
+                binding.fragmentSale.radioButton.setChecked(false);
+                binding.fragmentSale.radioButton2.setChecked(true);
+                binding.fragmentSale.radioButton3.setChecked(false);
+                binding.fragmentSale.editTextNumber2.setEnabled(false);
+            }
+            break;
+            case "Random": {
+                binding.fragmentSale.radioButton.setChecked(false);
+                binding.fragmentSale.radioButton2.setChecked(false);
+                binding.fragmentSale.radioButton3.setChecked(true);
+                binding.fragmentSale.editTextNumber2.setEnabled(true);
+            }
+            break;
+        }
+
+
+        //// Счет-фактура
+        if (preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getTypeOrder()) == 0)
+            binding.checkBoxType.setChecked(false);
+        else binding.checkBoxType.setChecked(true);
+
+        //// Дата поставки товара
+        Log.e(logeTAG, "dayUp" + preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getDateDelivery()));
+        binding.tvwDData.setText(preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getDateDelivery()));
+
+
+/*        //// Вид оплаты
+        binding.spinnerSelectCredit.setSelection(0);
+        binding.edtCrediteDate.setVisibility(View.INVISIBLE);
+
+        String[] mass_type = getResources().getStringArray(R.array.mass_select_credit);
+        String statusPay = preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getInfoOrderCredit());
+        int countDayPay = preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getInfoOrderCreditCountDay());
+
+        for (int i = 0; i < mass_type.length; i++) {
+            if (mass_type[i].equals(statusPay))
+            {
+                Log.e(logeTAG, "statusPay" + statusPay);
+                binding.spinnerSelectCredit.setSelection(i);
+                if (statusPay.equals("Консигнация")) {
+                    binding.edtCrediteDate.setVisibility(View.VISIBLE);
+                    binding.edtCrediteDate.setText(String.valueOf(countDayPay));
+                }
+            }
+
+        }*/
+
+        //// Коментарий
+        binding.editComment.setText(preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getComment()));
+    }
+
+    //// Заполнение формы при копировании или редактировании
+    protected void writeForma_toEditor() {
+        //// торговые условия
+        preferencesWrite = new PreferencesWrite(context_Activity);
+        preferencesMtSetting = new Preferences_MTSetting();
+        Log.e(logeTAG, "Статус:" + preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getStatusOrder()));
+
+        binding.fragmentSale.radioButton.setChecked(false);
+        binding.fragmentSale.radioButton2.setChecked(false);
+        binding.fragmentSale.radioButton3.setChecked(true);
+        binding.fragmentSale.editTextNumber2.setEnabled(true);
+        int countSale = preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getSaleCount());
+        int countDayPay = preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getInfoOrderCreditCountDay());
+
+        binding.edtCrediteDate.setText("0");
+        binding.fragmentSale.editTextNumber2.setText("0");
+        binding.fragmentSaleRandom.editTextNumber2.setText("0");
+
+        binding.fragmentSale.editTextNumber2.setText(String.valueOf(countSale));
+
+        //// Счет-фактура
+        if (preferencesMtSetting.readSettingInt(context_Activity, preferencesMtSetting.getTypeOrder()) == 1)
+            binding.checkBoxType.setChecked(true);
+        else binding.checkBoxType.setChecked(false);
+
+        //// Дата поставки товара
+        binding.tvwDData.setText(preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getDateDelivery()));
+
+        //// Вид оплаты
+        String[] mass_type = getResources().getStringArray(R.array.mass_select_credit);
+        binding.edtCrediteDate.setVisibility(View.INVISIBLE);
+        String statusPay = preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getInfoOrderCredit());
+        Log.e(logeTAG, "countDay: " + countDayPay);
+        for (int i = 0; i < mass_type.length; i++) {
+            Log.e(logeTAG, "credit: " + statusPay + "__" + mass_type[i]);
+            if (mass_type[i].toString().equals(statusPay)) {
+                Log.e(logeTAG, "position: " + i);
+                binding.spinnerSelectCredit.setSelection(i);
+            }
+
+            if (statusPay.equals("Консигнация")) {
+                binding.edtCrediteDate.setVisibility(View.VISIBLE);
+                binding.edtCrediteDate.setText(String.valueOf(countDayPay));
+            }
+
+        }
+        //// Коментарий
+        //// Дата отгрузки: 01.04.2024; Cкидка: 4%;cmn_вторник
+        binding.editComment.setText(preferencesMtSetting.readSettingString(context_Activity, preferencesMtSetting.getComment()));
+    }
 }
+
+
+
+
+
+/*    protected void selectEditZakaz() {
+        Log.e(logeTAG, "Параметры: " + statusRN);
+        preferencesWrite = new PreferencesWrite(context_Activity);
+        SQLiteDatabase db = getApplication().getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+        String queryAll = "SELECT * FROM base_RN_All WHERE Kod_RN = '" + preferencesWrite.Setting_MT_K_AG_KodRN + "';";
+        Cursor cursor = db.rawQuery(queryAll, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String client = cursor.getString(cursor.getColumnIndexOrThrow("k_agn_name"));
+            String clientUID = cursor.getString(cursor.getColumnIndexOrThrow("k_agn_uid"));
+            String clientAdress = cursor.getString(cursor.getColumnIndexOrThrow("k_agn_adress"));
+            String data_xml = cursor.getString(cursor.getColumnIndexOrThrow("data_xml"));
+            String credit = cursor.getString(cursor.getColumnIndexOrThrow("credit"));
+            String sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad"));
+            String sklad_uid = cursor.getString(cursor.getColumnIndexOrThrow("sklad_uid"));
+            String cena_price = cursor.getString(cursor.getColumnIndexOrThrow("cena_price"));
+            String credite_date = cursor.getString(cursor.getColumnIndexOrThrow("credite_date"));
+            String skidka_title = cursor.getString(cursor.getColumnIndexOrThrow("skidka_title"));
+            String coment = cursor.getString(cursor.getColumnIndexOrThrow("coment"));
+            String uslov_nds = cursor.getString(cursor.getColumnIndexOrThrow("uslov_nds"));
+            String data = cursor.getString(cursor.getColumnIndexOrThrow("data"));
+            String vrema = cursor.getString(cursor.getColumnIndexOrThrow("vrema"));
+            String data_up = cursor.getString(cursor.getColumnIndexOrThrow("data_up"));
+            String summa = cursor.getString(cursor.getColumnIndexOrThrow("summa"));
+            String skidka = cursor.getString(cursor.getColumnIndexOrThrow("skidka"));
+            String itogo = cursor.getString(cursor.getColumnIndexOrThrow("itogo"));
+            String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+            String debet_new = cursor.getString(cursor.getColumnIndexOrThrow("debet_new"));
+
+            //// Контрагент
+            binding.tvwEZClientName.setText(client);
+            editor = mSettings.edit();
+            editor.putString("PEREM_K_AG_NAME", client);
+            editor.putString("PEREM_K_AG_UID", clientUID);
+            editor.putString("PEREM_K_AG_ADRESS", clientAdress);
+            editor.putString("setting_TY_DateNextUP", data_up);
+            editor.putInt("setting_TY_TypeRelise", Integer.parseInt(uslov_nds));
+            editor.putString("PEREM_K_AG_Sale", skidka_title);
+            editor.putString("setting_TY_COMMENT", coment.substring(coment.indexOf("cmn_") + 4));
+            editor.commit();
+
+            //// торговые условия
+            preferencesWrite = new PreferencesWrite(context_Activity);
+            binding.fragmentSale.radioButton.setChecked(false);
+            binding.fragmentSale.radioButton2.setChecked(false);
+            binding.fragmentSale.radioButton3.setChecked(true);
+            binding.fragmentSale.editTextNumber2.setEnabled(true);
+            binding.fragmentSale.editTextNumber2.setText(preferencesWrite.Setting_MT_K_AG_Sale);
+
+            //// Дата поставки товара
+            binding.tvwDData.setText(preferencesWrite.Setting_TY_DateNextUP);
+
+            //// Счет-фактура
+            if (preferencesWrite.Setting_TY_TypeRelise == 1)
+                binding.checkBoxType.setChecked(true);
+            else binding.checkBoxType.setChecked(false);
+
+            //// Вид оплаты
+            String[] mass_type = getResources().getStringArray(R.array.mass_select_credit);
+            binding.edtCrediteDate.setVisibility(View.INVISIBLE);
+
+            for (int i = 0; i < mass_type.length; i++) {
+                Log.e(logeTAG, "credit: " + credit + "__" + mass_type[i]);
+                if (mass_type[i].toString().equals(credit)) {
+                    Log.e(logeTAG, "position: " + i);
+                    binding.spinnerSelectCredit.setSelection(i);
+                }
+
+
+                if (credit.equals("Консигнация")) {
+                    binding.edtCrediteDate.setVisibility(View.VISIBLE);
+                    binding.edtCrediteDate.setText(credite_date);
+                }
+
+            }
+            //// Коментарий
+            //// Дата отгрузки: 01.04.2024; Cкидка: 4%;cmn_вторник
+            binding.editComment.setText(preferencesWrite.Setting_TY_Comment);
+            cursor.moveToNext();
+        }
+        Log.e(logeTAG, "Создана копия таблици позиций заказа");
+        cursor.close();
+    }*/
+/*            try {
+                if (visible_ty == false & Double.valueOf(summa_read) > 0)  // Проверка условия скидка подхлдит и итого больше 0
+                {
+                    if (s_credit.equals("Консигнация")) {
+                        date_credite_read = editText_credite_date.getText().toString();
+                    } else date_credite_read = "0";
+
+
+                    if (!date_credite_read.equals("")) {
+                        //  Write_Data(text_data.getText().toString(), nds_read, skidka_read, s_credit, summa_read, itogo_read, date_credite_read, editText_comment.getText().toString());
+                        Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza_L2.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(context_Activity, "Введите кол-во дней конс", Toast.LENGTH_SHORT).show();
+                        Log.e("Кнопка TY...", "Введите кол-во дней конс");
+                    }
+
+
+                } else {
+                    Toast.makeText(context_Activity, "эти условия не подходят!", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(context_Activity, "Ошибка записи данных", Toast.LENGTH_SHORT).show();
+                Log.e(logeTAG, "Ошибка записи данных!");
+            }*/
+
+
+
+
+                   /* if (Double.valueOf(summa_read) > 0) {
+
+                    } else
+                        Toast.makeText(context_Activity, "Ошибка выбора данных", Toast.LENGTH_SHORT).show();
+                    /*Intent intent = new Intent(context_Activity, SPR_Strih_Kod_Search.class);
+                    startActivity(intent);*/

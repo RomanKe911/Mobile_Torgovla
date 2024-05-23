@@ -18,7 +18,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.ListAdapterSimple_Klients;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 
 public class Async_ViewModel_Clients extends AndroidViewModel {
 

@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
 import kg.roman.Mobile_Torgovla.R;
 
 public class ITTN_Obmen_2 extends AppCompatActivity {

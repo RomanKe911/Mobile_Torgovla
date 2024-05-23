@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.TimeZone;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 
 public class MyViewModel extends AndroidViewModel {
 

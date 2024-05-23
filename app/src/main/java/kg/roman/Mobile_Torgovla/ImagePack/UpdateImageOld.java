@@ -25,7 +25,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
 import kg.roman.Mobile_Torgovla.ListSimple.State;
 import kg.roman.Mobile_Torgovla.R;
 

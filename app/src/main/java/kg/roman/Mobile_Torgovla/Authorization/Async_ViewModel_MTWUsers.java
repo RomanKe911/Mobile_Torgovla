@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -25,20 +24,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 
-import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ClassNew.Pair;
-import kg.roman.Mobile_Torgovla.MT_BackUp.RecyclerView_Simple_BackUp;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
-import kg.roman.Mobile_Torgovla.R;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Users;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Users_ResourceParser;
 

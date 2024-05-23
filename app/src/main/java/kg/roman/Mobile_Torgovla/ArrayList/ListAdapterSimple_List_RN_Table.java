@@ -17,11 +17,12 @@ public class ListAdapterSimple_List_RN_Table {
     public String skidka;
     public String status;
     public String sklad;
+    public String skladUID;
 
     public ListAdapterSimple_List_RN_Table(String kodrn, String k_agent, String k_agentUID,
                                            String vrema, String data, String summa, String itogo,
                                            String adress, String skidka, String debet, String status,
-                                           String sklad) {
+                                           String sklad, String skladUID) {
         this.kodrn = kodrn;
         this.k_agent = k_agent;
         this.k_agentUID = k_agentUID;
@@ -34,6 +35,7 @@ public class ListAdapterSimple_List_RN_Table {
         this.status = status;
         this.skidka = skidka;
         this.sklad = sklad;
+        this.skladUID = skladUID;
     }
 
     public String getKodrn() {
@@ -127,6 +129,13 @@ public class ListAdapterSimple_List_RN_Table {
     }
     public void setSklad(String sklad) {
         this.sklad = sklad;
+    }
+
+    public String getSkladUID() {
+        return skladUID;
+    }
+    public void setSkladUID(String skladUID) {
+        this.skladUID = skladUID;
     }
 
 

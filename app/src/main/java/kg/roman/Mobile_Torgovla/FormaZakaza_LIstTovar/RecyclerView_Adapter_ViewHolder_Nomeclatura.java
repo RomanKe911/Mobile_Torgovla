@@ -20,7 +20,7 @@ import java.io.File;
 import java.util.List;
 
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Suncape_Forma;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 import kg.roman.Mobile_Torgovla.R;
 
 public class RecyclerView_Adapter_ViewHolder_Nomeclatura extends RecyclerView.Adapter<RecyclerView_Adapter_ViewHolder_Nomeclatura.ViewHolder> {
@@ -81,8 +81,8 @@ public class RecyclerView_Adapter_ViewHolder_Nomeclatura extends RecyclerView.Ad
                         .error(R.drawable.no_image)
                         .into(holder.imageView); //ссылка на ImageView*/
 
-            Log.e("Image_PUT_PNG", newImage_png + "__" + newImage_png.isFile());
-            Log.e("Image_PUT_JPG", newImage_jpg + "__" + newImage_jpg.isFile());
+/*            Log.e("Image_PUT_PNG", newImage_png + "__" + newImage_png.isFile());
+            Log.e("Image_PUT_JPG", newImage_jpg + "__" + newImage_jpg.isFile());*/
 
         } catch (Exception e) {
             Log.e("Image_Error", "Нет картинов в ресурсах");

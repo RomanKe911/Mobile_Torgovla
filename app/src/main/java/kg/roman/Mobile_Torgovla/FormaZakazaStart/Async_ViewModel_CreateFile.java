@@ -3,7 +3,6 @@ package kg.roman.Mobile_Torgovla.FormaZakazaStart;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,8 +25,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 
 public class Async_ViewModel_CreateFile extends AndroidViewModel {
 

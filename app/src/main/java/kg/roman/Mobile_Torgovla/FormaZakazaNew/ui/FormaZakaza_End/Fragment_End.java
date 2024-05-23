@@ -30,8 +30,8 @@ import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.Removable;
 import kg.roman.Mobile_Torgovla.FormaZakazaStart.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Spinner_TY;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Spinner_TY;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.databinding.FragmentNotificationsBinding;
 

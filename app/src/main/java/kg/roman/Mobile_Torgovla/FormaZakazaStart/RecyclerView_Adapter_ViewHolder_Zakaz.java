@@ -10,9 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,54 +21,54 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_List_RN_Table;
-import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.ListAdapterSimple_Klients;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
-public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<RecyclerView_Adapter_ViewHolder_Zakaz.ViewHolder> {
+public class RecyclerView_Adapter_ViewHolder_Zakaz
+        extends RecyclerView.Adapter<RecyclerView_Adapter_ViewHolder_Zakaz.ViewHolder> {
 
 
     public interface OnStateClickListener {
         void onStateClick(ListAdapterSimple_List_RN_Table clientClick, int position);
+
+        void onStateClickDelete(ListAdapterSimple_List_RN_Table clientClick, int position);
+
+        void onStateClickEdit(ListAdapterSimple_List_RN_Table clientClick, int position);
+
+        void onStateClickCopy(ListAdapterSimple_List_RN_Table clientClick, int position);
     }
 
 
     private final LayoutInflater inflater;
     private final List<ListAdapterSimple_List_RN_Table> imagelist;
-    List<ListAdapterSimple_List_RN_Table> filterList;
-    List<ListAdapterSimple_List_RN_Table> filterListFull;
-    List<Integer> imageList = new ArrayList<>();
-
     private final OnStateClickListener onClickListener;
-
-    String logeTAG = "RecAdapter";
+    String logeTAG = "RecAdapterZakaz";
     Context context;
+    PreferencesWrite preferencesWrite;
 
-    public RecyclerView_Adapter_ViewHolder_Zakaz(Context context, List<ListAdapterSimple_List_RN_Table> backup_list, OnStateClickListener onClickListener) {
+    public RecyclerView_Adapter_ViewHolder_Zakaz(Context context,
+                                                 List<ListAdapterSimple_List_RN_Table> backup_list,
+                                                 OnStateClickListener onClickListener) {
         this.context = context;
         this.imagelist = backup_list;
         this.inflater = LayoutInflater.from(context);
         this.onClickListener = onClickListener;
-        this.filterList = backup_list;
-        filterListFull = new ArrayList<>(backup_list);
+        preferencesWrite = new PreferencesWrite(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        PreferencesWrite preferencesWrite = new PreferencesWrite(context);
+        preferencesWrite = new PreferencesWrite(context);
         View view;
         if (preferencesWrite.Setting_FiltersSelectGroup)
             view = inflater.inflate(R.layout.wj_content_rn_group, parent, false);
         else
-          //    view = inflater.inflate(R.layout.wj_content_rn032024test, parent, false);
-              view = inflater.inflate(R.layout.wj_content_allrn, parent, false);
+            //    view = inflater.inflate(R.layout.wj_content_rn032024test, parent, false);
+            view = inflater.inflate(R.layout.wj_swipe_content, parent, false);
 
         return new ViewHolder(view);
     }
@@ -79,28 +77,61 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ListAdapterSimple_List_RN_Table listID = imagelist.get(position);
 
-        PreferencesWrite preferencesWrite = new PreferencesWrite(context);
-        if (preferencesWrite.Setting_FiltersSelectGroup)
-            Group(holder, listID);
-        else
+        imagelist.get(position).getAdress();
+
+        preferencesWrite = new PreferencesWrite(context);
+        if (!preferencesWrite.Setting_FiltersSelectGroup) {
             GroupNull(holder, listID);
 
-        holder.constraintLayoutClick.setOnClickListener(v -> onClickListener.onStateClick(imagelist.get(position), position));
+            //// Обработка кнопки Просмотра
+            try {
+                holder.constraintLayoutClick.setOnClickListener(v ->
+                {
+                    onClickListener.onStateClick(imagelist.get(position), position);
+                    // Toast.makeText(context, "Нажата Review", Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                Log.e(logeTAG, "Error, Review: " + e);
+            }
 
-        holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Нажата Edit", Toast.LENGTH_SHORT).show();
-                Log.e(logeTAG, "Нажата Edit");
+            //// Обработка кнопки Копирования
+            try {
+                holder.buttonCopy.setOnClickListener(v -> {
+                    onClickListener.onStateClickCopy(imagelist.get(position), position);
+                    Toast.makeText(context, "Нажата Copys", Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                Log.e(logeTAG, "Error, copy: " + e);
             }
-        });
-        holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Нажата Delete", Toast.LENGTH_SHORT).show();
-                Log.e(logeTAG, "Нажата Delete");
+
+            //// Обработка кнопки Редактирования
+            try {
+                if (imagelist.get(position).status.equals("false")) {
+                    holder.buttonEdit.setVisibility(View.VISIBLE);
+                    holder.buttonEdit.setOnClickListener(v -> {
+                        onClickListener.onStateClickEdit(imagelist.get(position), position);
+                        Toast.makeText(context, "Нажата Edits", Toast.LENGTH_SHORT).show();
+                    });
+                } else holder.buttonEdit.setVisibility(View.INVISIBLE);
+            } catch (Exception e) {
+                Log.e(logeTAG, "Error, edit: " + e);
             }
-        });
+
+            //// Обработка кнопки Удаления
+            try {
+                if (imagelist.get(position).status.equals("false")) {
+                    holder.buttonDelete.setVisibility(View.VISIBLE);
+                    holder.buttonDelete.setOnClickListener(v -> {
+                        onClickListener.onStateClickDelete(imagelist.get(position), position);
+                     //   Toast.makeText(context, "Нажата Deletes", Toast.LENGTH_SHORT).show();
+                    });
+                } else holder.buttonDelete.setVisibility(View.INVISIBLE);
+            } catch (Exception e) {
+                Log.e(logeTAG, "Error, delete: " + e);
+            }
+
+        } else
+            Group(holder, listID);
 
     }
 
@@ -116,7 +147,7 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
         ImageView img_status;
         ConstraintLayout constraintLayoutClick;
 
-        Button buttonEdit, buttonDelete;
+        ImageButton buttonEdit, buttonDelete, buttonCopy;
 
 
         ViewHolder(View convertView) {
@@ -146,13 +177,11 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
             grClientDebet = convertView.findViewById(R.id.tvwRNGroup_ClietnDebet);
             grClientItogo = convertView.findViewById(R.id.tvwRNGroup_Itogo);
 
-            buttonEdit = convertView.findViewById(R.id.btnSwipeEdit);
-            buttonDelete = convertView.findViewById(R.id.btnSwipeDelete);
-
-
+            buttonEdit = convertView.findViewById(R.id.btn_SwipeEdit);
+            buttonDelete = convertView.findViewById(R.id.btn_SwipeDelete);
+            buttonCopy = convertView.findViewById(R.id.btn_SwipeCopy);
         }
     }
-
 
     protected void GroupNull(ViewHolder holder, ListAdapterSimple_List_RN_Table listID) {
         holder.kodrn.setText(listID.getKodrn());
@@ -165,6 +194,7 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
         holder.clientItogo.setText(listID.getItogo());
         holder.sale.setText(listID.getSkidka());
         holder.sklad.setText(listID.getSklad());
+        holder.clientDebet.setText(SelectClientDebet(holder.clientUID.getText().toString()));
 
 
         if (listID.getStatus() != null) {
@@ -197,27 +227,6 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
         if (StatusRN(holder.kodrn.getText().toString()))
             holder.statusVisible.setVisibility(View.VISIBLE);
         else holder.statusVisible.setVisibility(View.GONE);
-
-        // Дебеторская задолжность
-        try {
-            PreferencesWrite preferencesWrite = new PreferencesWrite(context);
-            preferencesWrite = new PreferencesWrite(context);
-            SQLiteDatabase db = context.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
-            String query = "SELECT * FROM otchet_debet " +
-                    "WHERE d_kontr_uid = '" + listID.getK_agent().toString() + "' AND d_summa > 0;";
-            final Cursor cursor = db.rawQuery(query, null);
-            cursor.moveToFirst();
-            if (cursor.getCount() > 0) {
-                String d_summa = cursor.getString(cursor.getColumnIndexOrThrow("d_summa")).replace(",", ".");
-                holder.clientDebet.setText(new DecimalFormat("#00.00").format(Double.parseDouble(d_summa)).replace(",", "."));
-            } else
-                holder.clientDebet.setText("не верный формат");
-            cursor.close();
-            db.close();
-        } catch (Exception e) {
-            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
-            Log.e(logeTAG, "Ошибка дебеторской задолжности");
-        }
     }
 
     protected void Group(ViewHolder holder, ListAdapterSimple_List_RN_Table listID) {
@@ -225,7 +234,6 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
 
         holder.grClient.setText(listID.getK_agent());
         holder.grClientAdress.setText(listID.getAdress());
-
 
         if (preferencesWrite.Setting_FiltersSelectDate) {
             holder.grStartDate.setText(preferencesWrite.Setting_Filters_DataStart);
@@ -236,30 +244,8 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
             holder.grStartDate.setText(listID.getData());
         }
 
-        holder.grClientDebet.setText("не верный формат");
+        holder.grClientDebet.setText(SelectClientDebet(listID.getK_agentUID()));
         holder.grClientItogo.setText(listID.getItogo());
-
-        String clientUID = listID.getK_agentUID();
-        Log.e(logeTAG, "clientUID" + clientUID);
-
-        // Дебеторская задолжность
-        try {
-            SQLiteDatabase db = context.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
-            String query = "SELECT * FROM otchet_debet " +
-                    "WHERE d_kontr_uid = '" + clientUID + "' AND d_summa > 0;";
-            final Cursor cursor = db.rawQuery(query, null);
-            cursor.moveToFirst();
-            Log.e(logeTAG, "cursor" + cursor.getCount());
-            String d_summa = "";
-            if (cursor.getCount() > 0)
-                d_summa = cursor.getString(cursor.getColumnIndexOrThrow("d_summa")).replace(",", ".");
-            holder.grClientDebet.setText(d_summa);
-            cursor.close();
-            db.close();
-        } catch (Exception e) {
-            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
-            Log.e(logeTAG, "Ошибка дебеторской задолжности");
-        }
     }
 
     protected boolean StatusRN(String kodRN) {
@@ -284,4 +270,32 @@ public class RecyclerView_Adapter_ViewHolder_Zakaz extends RecyclerView.Adapter<
         return status;
     }
 
+    protected String SelectClientDebet(String clientUID) {
+        // Дебеторская задолжность
+        try {
+
+        } catch (Exception e) {
+            Toast.makeText(context, "Ошибка дебеторской задолжности", Toast.LENGTH_SHORT).show();
+            Log.e(logeTAG, "Ошибка дебеторской задолжности");
+        }
+
+        String d_summa = "";
+        preferencesWrite = new PreferencesWrite(context);
+        SQLiteDatabase db = context.openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+        String query = "SELECT * FROM otchet_debet WHERE d_kontr_uid = '" + clientUID + "' AND d_summa > 0;";
+        final Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        Log.e(logeTAG, "DebetCount" + cursor.getCount());
+        if (cursor.getCount() > 0)
+        {
+            Log.e(logeTAG, "DebetSum" + cursor.getString(cursor.getColumnIndexOrThrow("d_summa")));
+            d_summa = cursor.getString(cursor.getColumnIndexOrThrow("d_summa")).replace(",", ".");
+
+        }
+        else d_summa = "0.0";
+        cursor.close();
+        db.close();
+        Log.e(logeTAG, "Debet" + d_summa);
+        return d_summa;
+    }
 }

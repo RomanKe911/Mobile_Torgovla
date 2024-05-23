@@ -1,4 +1,4 @@
-package kg.roman.Mobile_Torgovla.MT_FTP;
+package kg.roman.Mobile_Torgovla.MT_MyClassSetting;
 
 import android.content.Context;
 import android.content.SharedPreferences;

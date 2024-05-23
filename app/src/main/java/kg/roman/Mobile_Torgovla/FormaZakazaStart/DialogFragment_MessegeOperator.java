@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 public class DialogFragment_MessegeOperator extends DialogFragment {
@@ -41,7 +43,10 @@ public class DialogFragment_MessegeOperator extends DialogFragment {
     String logeTAG = "DialogMessege";
     CalendarThis calendars = new CalendarThis();
     PreferencesWrite preferencesWrite;
-    String messege, messegeArgument;
+    String messege, messegeArgument, messegeTitle;
+    int messegeIcon;
+    View messegeView;
+    TextView textViewDate, textViewName, textViewRegion, textViewCount, textViewSum;
 
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -51,29 +56,55 @@ public class DialogFragment_MessegeOperator extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         messegeArgument = getArguments().getString("selectMessege");
 
+
         switch (messegeArgument) {
             case "AvtoSum": {
+                messegeTitle = "Общие данные...";
+                messegeIcon = R.drawable.icons_speedial_sigma;
+
+/*                View localView = getLayoutInflater().inflate(R.layout.dialog_layout_avtosum, null);
+                textViewDate = localView.findViewById(R.id.tvwMessegeDialogSum_Date);
+                textViewName = localView.findViewById(R.id.tvwMessegeDialogSum_AgentName);
+                textViewRegion = localView.findViewById(R.id.tvwMessegeDialogSum_AgentRegion);
+                textViewCount = localView.findViewById(R.id.tvwMessegeDialogSum_AgentCountTT);
+                textViewSum = localView.findViewById(R.id.tvwMessegeDialogSum_AgentSum);
+
+                textViewDate.setText(calendars.getThis_DateFormatDisplay);
+                textViewName.setText(preferencesWrite.Setting_AG_NAME);
+                textViewRegion.setText(preferencesWrite.Setting_AG_REGION);
+                textViewCount.setText(String.valueOf(CountTT()));
+                textViewSum.setText(String.valueOf(SumTT()));
+                messegeView = localView;*/
+                String def = "--------------------------------------";
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("дата: ").append(calendars.getThis_DateFormatDisplay).append("\n")
-                        .append("-------------------------").append("\n")
-                        .append("торговый агент").append("\n")
+                        .append(def).append("\n")
+                        .append("торговый агент:").append("\n")
                         .append(preferencesWrite.Setting_AG_NAME).append("\n")
-                        .append("-------------------------").append("\n")
+                        .append(def).append("\n")
+                        .append("маршрут:").append("\n")
+                        .append(preferencesWrite.Setting_AG_REGION).append("\n")
+                        .append(def).append("\n")
                         .append("кол-во точек: ").append(CountTT()).append("\n")
                         .append("на сумму: ").append(SumTT());
                 messege = stringBuilder.toString();
+                //  messege = null;
+                messegeView = null;
             }
             break;
             case "Zakaz":
+                messegeTitle = "Выгрузка заказов...";
+                messegeIcon = R.drawable.icons_messege;
+                messegeView = null;
                 messege = "Вы хотите отправить заказы на обработку оператору?";
                 break;
         }
 
         return builder
-                .setTitle("Сообщение...")
+                .setTitle(messegeTitle)
                 .setMessage(messege)
-                .setIcon(R.drawable.office_title_forma_zakaz)
-                //  .setView(localView)
+                .setIcon(messegeIcon)
+                .setView(messegeView)
                 .setPositiveButton("OK", (dialog, which) ->
                 {
                     switch (messegeArgument) {

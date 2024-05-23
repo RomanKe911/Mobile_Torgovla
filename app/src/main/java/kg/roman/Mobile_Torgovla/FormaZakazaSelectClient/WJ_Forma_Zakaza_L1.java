@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,13 +19,16 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import kg.roman.Mobile_Torgovla.FormaZakazaStart.EditorFormaZakaza;
 import kg.roman.Mobile_Torgovla.FormaZakazaStart.WJ_Forma_Zakaza;
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.RecyclerView_Adapter_ViewHolder_Clients;
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.WJ_Forma_Zakaza_L2;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.Preferences_MTSetting;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.databinding.MtWjFormaKlientsBinding;
 
@@ -39,9 +41,12 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
     Async_ViewModel_Clients model;
     SharedPreferences mSettings;
     SharedPreferences.Editor editor;
+    ConstraintLayout panelSelectClient;
+    TextView textViewIncludeClient, textViewIncludeClientUID, textViewIncludeClientAdress;
     private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
     RecyclerView_Adapter_ViewHolder_Clients adapter_clients;
     CalendarThis calendarThis = new CalendarThis();
+
     ////////////////////////  01.2024 переработка данных
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,21 +58,31 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
         getSupportActionBar().setIcon(R.mipmap.icon_toolbar_forma_zakaz);
         getSupportActionBar().setSubtitle("Рабочая дата: " + calendarThis.getThis_DateFormatDisplay);
 
+        panelSelectClient = findViewById(R.id.include_SelectClient);
+        panelSelectClient.setVisibility(View.GONE);
+        textViewIncludeClient = findViewById(R.id.tvw_IncludeClient);
+        textViewIncludeClientUID = findViewById(R.id.tvw_IncludeClientUID);
+        textViewIncludeClientAdress = findViewById(R.id.tvw_IncludeClientAdress);
+
 
         context_Activity = WJ_Forma_Zakaza_L1.this;
-        name_klients = "";
-        name_adress = "";
+        name_klients = null;
+        name_uid = null;
+        name_adress = null;
+
 
         model = new ViewModelProvider(this).get(Async_ViewModel_Clients.class);
         model.getValues().observe(this, list_clients ->
         {
-
             RecyclerView_Adapter_ViewHolder_Clients.OnStateClickListener stateClickListener = (clientClick, position) -> {
-                Toast.makeText(context_Activity, "контрагент: " + clientClick.name,
-                        Toast.LENGTH_SHORT).show();
                 name_klients = clientClick.getName();
                 name_uid = clientClick.getUID();
                 name_adress = clientClick.getAdress().replaceAll("\\s+$", "");
+
+                panelSelectClient.setVisibility(View.VISIBLE);
+                textViewIncludeClient.setText(name_klients);
+                textViewIncludeClientAdress.setText(name_adress);
+                textViewIncludeClientUID.setText(name_uid);
             };
             adapter_clients = new RecyclerView_Adapter_ViewHolder_Clients(getBaseContext(), list_clients, stateClickListener);
             binding.FormaClietnsRecyclerView.setAdapter(adapter_clients);
@@ -98,7 +113,34 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
 
 
         binding.floatingActionButton.setOnClickListener(view -> {
+            if (name_uid != null || !name_uid.isEmpty())
+                try {
+                    Preferences_MTSetting preferencesMtSetting = new Preferences_MTSetting();
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getClientName(), name_klients);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getClientUID(), name_uid);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getClientAdress(), name_adress);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getCodeOrder(), Loading_Kod_RN(calendarThis.getThis_DateFormatAllSqlDB));
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateWork(), calendarThis.getThis_DateFormatSqlDB);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateWorkXML(), calendarThis.getThis_DateFormatXML);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateTime(), calendarThis.getThis_DateFormatVrema);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateDelivery(), calendarThis.getDateToNextDeveloper());
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getInfoOrderCredit(), "Наличными");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getInfoOrderCreditCountDay(), 0);
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getTypeOrder(), 0);
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getComment(), "");
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getTYSelectRadioButton(), "standart");
+                    preferencesMtSetting.writeSettingInt(context_Activity, preferencesMtSetting.getSaleCount(), 0);
+
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getMyGPS(), "startGPS");
+                } catch (Exception e) {
+                    SnackbarOverride("Ошибка, сохранения параметров");
+                    Log.e(logeTAG, "Ошибка, сохранения параметров");
+                }
+
+            else SnackbarOverride("нет активных клиентов, выберите клиента!");
+
             PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+            //// Создание нового кода
             String new_identRN = Loading_Kod_RN(calendarThis.getThis_DateFormatAllSqlDB);
             String mSettings_agentName = preferencesWrite.Setting_AG_NAME;                       // получение из preference: имя агента
             String mSettings_agentUID = preferencesWrite.Setting_AG_UID;                         // получение из preference: uid код агента
@@ -106,6 +148,16 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
             String mSettings_agentSkladUID = preferencesWrite.Setting_AG_UID_SKLAD;              // получение из preference: uid - склада
             String mSettings_agentCena = preferencesWrite.Setting_AG_CENA;                       // получение из preference: сена для агентов
 
+
+            Log.e("Новый код накладной:", new_identRN);
+            if (preferencesWrite.Select_StatusRN.equals("Copy")) {
+                Log.e("Созадеться копия заказа:", new_identRN);
+                EditorFormaZakaza editorFormaZakaza = new EditorFormaZakaza(context_Activity);
+                editorFormaZakaza.editorCopy(new_identRN);
+            }
+
+
+            // Log.e("Создаеться новый заказ:", new_identRN);
             if (!name_klients.isEmpty()) {
                 Constanta_Write(name_uid, name_klients, name_adress, new_identRN, calendarThis.getThis_DateFormatSqlDB, calendarThis.getThis_DateFormatVrema, "");
                 Log.e(logeTAG, name_uid + ", " + name_klients + ", " + name_adress + ", " + new_identRN + ", " + calendarThis.getThis_DateFormatSqlDB + ", " + calendarThis.getThis_DateFormatVrema);
@@ -128,20 +180,26 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
                 Log.e(logeTAG, "Write: " + "Cena_Nds - ");
             } else
                 SnackbarOverride("нет активных клиентов, выберите контрагента из списка");
+
+
         });
     }
+
     ///// Всплывающая строка состояния
     protected void SnackbarOverride(String text) {
         Snackbar.make(binding.FormaClietnsRecyclerView, text, Snackbar.LENGTH_SHORT)
                 .show();
     }
+
     // Вызов метода при выходе назад
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza.class);
+        intent.putExtra("preferenceSave", "clear");
         startActivity(intent);
         finish();
     }
+
     // меню менеджер ????
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -239,7 +297,7 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
     /////// Запись данных для новой активити
     protected void Constanta_Write(String kag_uid, String kag_name, String kag_adress, String kag_kodrn, String kag_data, String kag_vrema, String kag_gps) {
         try {
-            mSettings = context_Activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+/*            mSettings = context_Activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
             editor = mSettings.edit();
             editor.putString("PEREM_K_AG_NAME", kag_name);              //запись данных: имя контраегнта
             editor.putString("PEREM_K_AG_UID", kag_uid);                //запись данных: uid контрагента
@@ -251,7 +309,7 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
             editor.putString("PEREM_K_AG_GPS", kag_gps);                //запись данных: координаты gps
             editor.putString("PEREM_CLICK_TY", "false");
 
-/*            editor.putString("Setting_MT_K_AG_NAME", kag_name);              //запись данных: имя контраегнта
+*//*            editor.putString("Setting_MT_K_AG_NAME", kag_name);              //запись данных: имя контраегнта
             editor.putString("Setting_MT_K_AG_UID", kag_uid);                //запись данных: uid контрагента
             editor.putString("Setting_MT_K_AG_ADRESS", kag_adress);          //запись данных: адрес контрагента
             editor.putString("Setting_MT_K_AG_KodRN", kag_kodrn);            //запись данных: код накладной
@@ -259,8 +317,19 @@ public class WJ_Forma_Zakaza_L1 extends AppCompatActivity {
             editor.putString("Setting_MT_K_AG_Data_WORK", calendarThis.getThis_DateFormatDisplay);    //запись данных: время создание накладной
             editor.putString("Setting_MT_K_AG_Vrema", kag_vrema);            //запись данных: дата создание накладной
             editor.putString("Setting_MT_K_AG_GPS", kag_gps);                //запись данных: координаты gps
-            editor.putString("PEREM_CLICK_TY", "false");*/
-            editor.commit();
+            editor.putString("PEREM_CLICK_TY", "false");*//*
+            editor.commit();*/
+
+            Preferences_MTSetting preferencesMtSetting = new Preferences_MTSetting();
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getClientName(), kag_name);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getClientUID(), kag_uid);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getClientAdress(), kag_adress);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getCodeOrder(), kag_kodrn);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateWork(), kag_data);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateWorkXML(), calendarThis.getThis_DateFormatXML);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getDateTime(), kag_vrema);
+            preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getMyGPS(), kag_gps);
+
         } catch (Exception e) {
             SnackbarOverride("Ошибка, сохранения параметров");
             Log.e(logeTAG, "Ошибка, сохранения параметров");

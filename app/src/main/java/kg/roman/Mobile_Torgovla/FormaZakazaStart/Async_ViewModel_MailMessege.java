@@ -15,10 +15,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.MailSenderClass;
 
 public class Async_ViewModel_MailMessege extends AndroidViewModel {

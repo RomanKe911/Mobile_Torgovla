@@ -156,6 +156,18 @@
     <color name="SeedBarBackground">#0097A7</color>
 
 
+    <color name="colorSelectorSwipeEdit_Pressed">#A6A6A6</color>
+    <color name="colorSelectorSwipeEdit_Focused">#009688</color>
+    <color name="colorSelectorSwipeEdit_Default">#FFA000</color>
+
+    <color name="colorSelectorSwipeDelete_Pressed">#A6A6A6</color>
+    <color name="colorSelectorSwipeDelete_Focused">#009688</color>
+    <color name="colorSelectorSwipeDelete_Default">#D32F2F</color>
+
+    <color name="colorSelectorSwipeCopy_Pressed">#A6A6A6</color>
+    <color name="colorSelectorSwipeCopy_Focused">#009688</color>
+    <color name="colorSelectorSwipeCopy_Default">#43A047</color>
+
 
 
 </resources>

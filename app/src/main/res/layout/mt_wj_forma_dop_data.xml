@@ -71,13 +71,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp" />
+
                 <include
-                    android:visibility="gone"
                     android:id="@+id/fragment_SaleRandom"
                     layout="@layout/fragment_sale_only"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp" />
+                    android:layout_marginLeft="4dp"
+                    android:visibility="gone"
+                    tools:visibility="gone" />
 
             </LinearLayout>
 
@@ -140,7 +142,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView48" />-->
 
                 <Button
-                    android:id="@+id/btn_d_data"
+                    android:id="@+id/btn_next_data"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginStart="8dp"
@@ -163,13 +165,13 @@
                     android:id="@+id/tvw_d_data"
                     style="@style/forma_dop_zakaz"
                     android:layout_marginStart="4dp"
-                    android:hint="00.00.0000"
+                    android:hint="DD.MM.YYYY"
                     android:textSize="8pt"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_d_data"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_next_data"
                     app:layout_constraintEnd_toEndOf="@+id/textView40"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/btn_d_data"
-                    app:layout_constraintTop_toTopOf="@+id/btn_d_data" />
+                    app:layout_constraintStart_toEndOf="@+id/btn_next_data"
+                    app:layout_constraintTop_toTopOf="@+id/btn_next_data" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,6 +241,7 @@
                     android:text="Комментарий:" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"

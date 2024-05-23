@@ -34,8 +34,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash_New;
 import kg.roman.Mobile_Torgovla.R;

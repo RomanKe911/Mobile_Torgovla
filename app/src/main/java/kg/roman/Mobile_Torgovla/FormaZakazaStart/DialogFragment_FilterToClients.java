@@ -18,10 +18,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import java.util.ArrayList;
 
-import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.Removable;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Spinner_Filter;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Spinner_Filter;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 public class DialogFragment_FilterToClients extends DialogFragment {

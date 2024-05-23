@@ -26,13 +26,13 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -41,14 +41,16 @@ import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_List_RN_Table;
 import kg.roman.Mobile_Torgovla.FormaZakazaSelectClient.WJ_Forma_Zakaza_L1;
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.DialogFragment_DeletePosition;
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.RemovableDeletePosition;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.Preferences_MTSetting;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.Work_Journal.WJ_Global_Activity;
 import kg.roman.Mobile_Torgovla.databinding.WjFormaZakazaBinding;
 
 public class WJ_Forma_Zakaza extends AppCompatActivity
-        implements RemovableStatusZakaz, RemovableMessege, RemovableStatusFilter, RemovableStatusFilterClient, RemovableDeletePosition {
+        implements RemovableStatusZakaz, RemovableMessege,
+        RemovableStatusFilter, RemovableStatusFilterClient, RemovableDeletePosition {
     public ArrayList<ListAdapterSimple_List_RN_Table> listZakaz = new ArrayList<>();
     public RecyclerView_Adapter_ViewHolder_Zakaz adapterZakaz;
     public XmlSerializer serializer;
@@ -57,10 +59,12 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
     public WjFormaZakazaBinding binding;
     String logeTAG = "WjFormaZakaza";
     private static final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
-    SharedPreferences mSettings;
+    private static final String APP_PREFERENCES_WriteRN = "myPreferencesRN";
+    SharedPreferences mSettings, wSetting;
     SharedPreferences.Editor editor;
     CalendarThis calendars = new CalendarThis();
     PreferencesWrite preferencesWrite;
+    Preferences_MTSetting preferencesMtSetting;
     public Context context_Activity;
 
     @Override
@@ -78,10 +82,21 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
         editor.putString("PEREM_WORK_DISTR", calendars.CalendarDayOfWeek().first);  // обновление записи рабочей даты
         editor.commit();
 
+        preferencesWrite = new PreferencesWrite(context_Activity);
+        wSetting = getApplication().getSharedPreferences(APP_PREFERENCES_WriteRN, Context.MODE_PRIVATE);
+
         ///////////////// 02.2024
 
-        //// Очистка всех фильтров
-        clearPreferenceFilters();
+        try {
+            //  Log.e(logeTAG, "StatusSave: " +getIntent().getExtras().get("preferenceSave"));
+            Log.e(logeTAG, "StatusSave: " + getIntent().getExtras().getString("clear"));
+            //// Очистка всех фильтров
+            clearPreferenceFilters(getIntent().getExtras().getString("preferenceSave", "clear").toString());
+        } catch (Exception e) {
+            Log.e(logeTAG, "ErrorSt: " + e);
+            SnackbarOverride("Ошибка: " + e, true);
+        }
+
 
         //// Проверка на создание таблиц для группировки брендов
         createTableforBrends();
@@ -98,11 +113,25 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
         //// Обработка нажатия на list
         // SelectedListView();
 
-        binding.RecyclerViewListTovar.setOnClickListener(v -> ToastOverride("В разработке, доступно с версии 4.6.3"));
+/*
+        binding.RecyclerViewListTovar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageButton buttonEdit = v.findViewById(R.id.btn_SwipeDelete);
+                buttonEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastOverride("Нажата кнопка удалить");
+                        Log.e(logeTAG, "Нажата кнопка удалить");
+                    }
+                });
+                // ToastOverride("В разработке, доступно с версии 4.6.3");
+            }
+        });*/
 
 
         //// Удаление позиуии
-        swipeDeletePosition();
+        //  swipeDeletePosition();
 
     }
 
@@ -142,15 +171,15 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
                 break;
                 //// Сброс всех фильтров
                 case R.id.menu_filter_toClear: {
-                    SnackbarOverride("все фильтры сброшены");
-                    clearPreferenceFilters();
+                    SnackbarOverride("все фильтры сброшены", false);
+                    clearPreferenceFilters("clear");
                     UpdateListView();
                 }
                 break;
             }
 
         } catch (Exception e) {
-            SnackbarOverride("Ошибка, фильтрации данных");
+            SnackbarOverride("Ошибка, фильтрации данных", false);
             Log.e(logeTAG, "Ошибка, фильтрации данных, " + e);
         }
         return super.onOptionsItemSelected(item);
@@ -179,17 +208,25 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
 
 
     //// Очистка всех фильтров
-    protected void clearPreferenceFilters() {
+    protected void clearPreferenceFilters(String statusClearFilter) {
         ///// Очистка всех фильтров
-        editor = mSettings.edit();
-        editor.putBoolean("setting_Filters_Group", false);                          // очистка сгрупировки данных
-        editor.putBoolean("setting_Filters_Cliets", false);                         // очистка состояния фильтра по клиентам
-        editor.putString("setting_Filters_Cliets_Name", null);                      // очистка параметров слиента
-        editor.putString("setting_Filters_Cliets_NameUID", null);                   // очистка параметров слиента-UID
-        editor.putBoolean("setting_Filters_Date", false);                           // очистка состояние фильтра по дате
-        editor.putString("setting_Filters_DateStart", null);                        // очистка начальной даты
-        editor.putString("setting_Filters_DateEnd", null);                          // очистка конечной даты
-        editor.commit();
+        if (statusClearFilter.equals("clear")) {
+            mSettings = getApplication().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+            editor = mSettings.edit();
+            editor.putBoolean("setting_Filters_Group", false);           // очистка сгрупировки данных
+            editor.putBoolean("setting_Filters_Cliets", false);          // очистка состояния фильтра по клиентам
+            editor.putString("setting_Filters_Cliets_Name", null);       // очистка параметров слиента
+            editor.putString("setting_Filters_Cliets_NameUID", null);    // очистка параметров слиента-UID
+            editor.putBoolean("setting_Filters_Date", false);            // очистка состояние фильтра по дате
+            editor.putString("setting_Filters_DateStart", null);         // очистка начальной даты
+            editor.putString("setting_Filters_DateEnd", null);           // очистка конечной даты
+            editor.putString("statusRN", null);                          // очистка статуса накладной
+            editor.putString("PEREM_K_AG_Sale", "0");                    // очистка скидок
+            editor.commit();
+        }
+
+        preferencesMtSetting = new Preferences_MTSetting();
+        preferencesMtSetting.clearSetting(context_Activity);
     }
 
     //// Обновление данных в list через Swipe
@@ -217,19 +254,19 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
         speedDialList.add(new SpeedDialActionItem.Builder(R.id.speedDial_Messege, R.drawable.icons_speedial_messege)
                 .setLabel(getString(R.string.speedDial_Text_Messege))
                 .setLabelColor(Color.BLACK)
-                .setLabelBackgroundColor(getResources().getColor(R.color.SeedBarBackground))
+                .setLabelBackgroundColor(getColor(R.color.SeedBarBackground))
                 .setFabImageTintColor(Color.WHITE)
                 .create());
         speedDialList.add(new SpeedDialActionItem.Builder(R.id.speedDial_forXMLOtchet, R.drawable.icons_speedial_report)
                 .setLabel(getString(R.string.speedDial_Text_forXMLOtchet))
                 .setLabelColor(Color.BLACK)
-                .setLabelBackgroundColor(getResources().getColor(R.color.SeedBarBackground))
+                .setLabelBackgroundColor(getColor(R.color.SeedBarBackground))
                 .setFabImageTintColor(Color.WHITE)
                 .create());
         speedDialList.add(new SpeedDialActionItem.Builder(R.id.speedDial_forAvtoSumma, R.drawable.icons_speedial_sigma)
                 .setLabel(getString(R.string.speedDial_Text_forAvtoSumma))
                 .setLabelColor(Color.BLACK)
-                .setLabelBackgroundColor(getResources().getColor(R.color.SeedBarBackground))
+                .setLabelBackgroundColor(getColor(R.color.SeedBarBackground))
                 .setFabImageTintColor(Color.WHITE)
                 .create());
         speedDialList.add(new SpeedDialActionItem.Builder(R.id.speedDial_Sale, R.drawable.icons_speedial_sale)
@@ -252,6 +289,12 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
                 /// Создать новый заказ
                 case R.id.speedDial_Create: {
                     ToastOverride("Новый заказ");
+/*                    editor = mSettings.edit();
+                    editor.putString("statusRN", "Create");  // обновление записи рабочей даты
+                    editor.commit();*/
+
+                    Preferences_MTSetting preferencesMtSetting = new Preferences_MTSetting();
+                    preferencesMtSetting.writeSettingString(context_Activity, preferencesMtSetting.getStatusOrder(), "Create");
                     Intent intent = new Intent(context_Activity, WJ_Forma_Zakaza_L1.class);
                     startActivity(intent);
                     finish();
@@ -508,8 +551,12 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
     }
 
     // Класс для отображения состояния: нижняя строка
-    protected void SnackbarOverride(String text) {
-        Snackbar.make(binding.FormaConstraintLayout, text, Snackbar.LENGTH_SHORT)
+    protected void SnackbarOverride(String text, boolean snackbarLenght) {
+        //// true - LONG, false - SHORT
+        if (snackbarLenght)
+            Snackbar.make(binding.FormaConstraintLayout, text, Snackbar.LENGTH_LONG)
+                    .show();
+        else Snackbar.make(binding.FormaConstraintLayout, text, Snackbar.LENGTH_SHORT)
                 .show();
     }
 
@@ -521,18 +568,71 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
 
     /// Обработка нажатия на List
     protected RecyclerView_Adapter_ViewHolder_Zakaz.OnStateClickListener clickableButtonList() {
-        RecyclerView_Adapter_ViewHolder_Zakaz.OnStateClickListener stateClickListener = (clientClick, position) -> {
-            // ToastOverride("В разработке, доступно с версии 4.6.3");
-            ToastOverride("В разработке, доступно с версии 4.6.3");
+
+        RecyclerView_Adapter_ViewHolder_Zakaz.OnStateClickListener stateClickListener = new RecyclerView_Adapter_ViewHolder_Zakaz.OnStateClickListener() {
+            //// Просмотр заказа
+            @Override
+            public void onStateClick(ListAdapterSimple_List_RN_Table clientClick, int position) {
+                Intent intent_prefActivity = new Intent(context_Activity, EditorFormaZakazaScreen.class);
+                intent_prefActivity.putExtra("selectKod", clientClick.kodrn);
+                intent_prefActivity.putExtra("selectClient", clientClick.k_agent);
+                startActivity(intent_prefActivity);
+                finish();
+            }
+
+            //// Удаление сущ. заказа(долги, остатки, сами заказы)
+            @Override
+            public void onStateClickDelete(ListAdapterSimple_List_RN_Table clientClick, int position) {
+                if (clientClick.status.equals("false")) {
+                    DialogFragment_DeletePosition dialog = new DialogFragment_DeletePosition();
+                    Bundle args = new Bundle();
+                    args.putInt("deletePosition", position);
+                    dialog.setArguments(args);
+                    dialog.show(getSupportFragmentManager(), "zakazDelete");
+                } else
+                    SnackbarOverride("Удаление не возможно, данный заказ уже отправлен на обработку оператору", true);
+            }
+
+            //// Создание копирование сущ заказа
+            @Override
+            public void onStateClickCopy(ListAdapterSimple_List_RN_Table clientClick, int position) {
+
+                DialogFragment_EditorZakaz dialog = new DialogFragment_EditorZakaz();
+                Bundle args = new Bundle();
+                args.putBoolean("editorCopy", true);
+                args.putString("editorCodeOrder", clientClick.kodrn);
+                dialog.setArguments(args);
+                dialog.show(getSupportFragmentManager(), "editorZakaz");
+            }
+
+            //// Изменение заказа
+            @Override
+            public void onStateClickEdit(ListAdapterSimple_List_RN_Table clientClick, int position) {
+                ToastOverride("Изменить заказ");
+                if (clientClick.status.equals("false")) {
+                    DialogFragment_EditorZakaz dialog = new DialogFragment_EditorZakaz();
+                    Bundle args = new Bundle();
+                    args.putBoolean("editorEdit", true);
+                    args.putString("editorCodeOrder", clientClick.kodrn);
+                    dialog.setArguments(args);
+                    dialog.show(getSupportFragmentManager(), "editorZakaz");
+                } else
+                    SnackbarOverride("Редактирование не возможно, данный заказ уже отправлен на обработку оператору", true);
+            }
+
+
         };
+
+
         return stateClickListener;
     }
-
 
     //// Загрузка List
     protected void UpdateListView() {
         listZakaz.clear();
-        Loading_List_Filter();
+        if (!mSettings.getBoolean("setting_Filters_Group", false))
+            Loading_List_Filter();
+        else Loading_List_FilterGroup();
         adapterZakaz = new RecyclerView_Adapter_ViewHolder_Zakaz(getBaseContext(), listZakaz, clickableButtonList());
         binding.RecyclerViewListTovar.setAdapter(adapterZakaz);
         //  adapter.notifyItemChanged(0, 0);
@@ -542,7 +642,14 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
 
 
 
-
+/*                    NewParcelable newParcelable = new NewParcelable(
+                            clientClick.getK_agent(),
+                            clientClick.getK_agentUID(),
+                            clientClick.getAdress(),
+                            clientClick.getKodrn(),
+                            clientClick.getSkidka(),
+                            clientClick.getSkladUID());
+                    args.putParcelable("parselData", newParcelable);*/
 
 /*    preferencesWrite = new PreferencesWrite(context_Activity);
         if (!preferencesWrite.Setting_FiltersSelectGroup) {
@@ -567,6 +674,72 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
            }*/
 
 
+    protected String Loading_Kod_RN(String this_data) {
+        CalendarThis calendarThis = new CalendarThis();
+        //// 2024-03-27 02:19:14
+        Log.e(logeTAG, "Forma_1: рабочая дата " + this_data);
+
+        PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+        String returnKodRN = "";
+        String monthRN = "";
+        try {
+            Calendar calendar = Calendar.getInstance();
+            int month = calendar.get(Calendar.MONTH) + 1;
+            String year = String.valueOf(calendar.get(Calendar.YEAR)).substring(2, 4);
+
+            SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+            //07/04/2022 измение в выборе товара   String query = "SELECT base_RN.Kod_RN, base_RN.Data FROM base_RN ORDER BY base_RN.Data ASC";
+            //  String query = "SELECT base_RN.Kod_RN, base_RN.Data FROM base_RN  WHERE base_RN.Data = '" + this_data + "' ORDER BY base_RN.Kod_RN ASC;";
+            String query = "SELECT base_RN_All.kod_rn, base_RN_All.data FROM base_RN_All ORDER BY base_RN_All.data ASC;";
+            final Cursor cursor = db.rawQuery(query, null);
+            String kod_univ;
+            if (cursor.getCount() > 0) {
+                cursor.moveToLast();
+                kod_univ = cursor.getString(cursor.getColumnIndexOrThrow("kod_rn"));
+            } else
+                kod_univ = "RnTTTTGOD21_0000";
+
+            String[] mass_month = getResources().getStringArray(R.array.mass_month);
+            for (int i = 1; i <= 12; i++)
+                if (month == i)
+                    monthRN = mass_month[i - 1];
+
+
+            int k;
+            if (kod_univ != null & cursor.getCount() > 0 & kod_univ.length() < 16)
+                kod_univ = "RnTTTTGOD21_0000";
+
+
+            if (monthRN.equals(kod_univ.substring(6, kod_univ.length() - 7)))
+                k = Integer.parseInt(kod_univ.substring(12)) + 1;
+            else
+                k = 1;
+
+            String iden = "000";
+            String iden2 = "00";
+            String iden3 = "0";
+            // String iden4 = "0";
+            if (k < 10)
+                returnKodRN = "Rn" + preferencesWrite.Setting_MT_KodUIDKodRN + monthRN + year + "_" + iden + k; // получение из preference: унив код для накладной
+            else if (k < 100)
+                returnKodRN = "Rn" + preferencesWrite.Setting_MT_KodUIDKodRN + monthRN + year + "_" + iden2 + k;
+            else if (k < 1000)
+                returnKodRN = "Rn" + preferencesWrite.Setting_MT_KodUIDKodRN + monthRN + year + "_" + iden3 + k;
+            else if (k < 10000)
+                returnKodRN = "Rn" + preferencesWrite.Setting_MT_KodUIDKodRN + monthRN + year + "_" + k;
+            // else if (k < 100000) KOD_RN = "Rn" + Ident_Mon + Ident_Year + "_" + k;
+            // Log.e("Новый код накладной:", PEREM_FORMA_KOD_RN);
+            cursor.close();
+            db.close();
+
+        } catch (Exception e) {
+            //  SnackbarOverride("Ошибка созадние кодировки накладной!");
+            Log.e(logeTAG, "Ошибка созадние кодировки накладной!");
+        }
+
+        return returnKodRN; // вернуть номер для накладной
+    }
+
     //// Функция Swipe, удаление товара по позиции
     protected void swipeDeletePosition() {
         ItemTouchHelper.SimpleCallback simpleCallback;
@@ -586,7 +759,7 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
             @Override
             public float getSwipeThreshold(@NonNull RecyclerView.ViewHolder viewHolder) {
 
-              //  return super.getSwipeThreshold(viewHolder);
+                //  return super.getSwipeThreshold(viewHolder);
                 return 0.7f;
             }
 
@@ -603,22 +776,7 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
                     Log.e(logeTAG, "onEND"+list_zakaz.get(position).getName());*/
 
 
-                int pos = viewHolder.getAdapterPosition();
-                Log.e(logeTAG, "position " + pos);
-                Log.e(logeTAG, "direction " + direction);
-                Log.e(logeTAG, "viewHolder " + viewHolder);
-                Log.e(logeTAG, "viewHolderView " + viewHolder.itemView.getId());
-
-                DialogFragment_DeletePosition dialog = new DialogFragment_DeletePosition();
-                Bundle args = new Bundle();
-                args.putInt("deletePosition", pos);
-                //args.putString("itogo", "");
-                dialog.setArguments(args);
-
-                dialog.show(getSupportFragmentManager(), "zakazDelete");
-
             }
-
 
 
             @Override
@@ -682,14 +840,13 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
 
                 if (dX < 0) {
                     ///   MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
-                  // getDefaultUIUtil().onDraw(c, recyclerView, myViewHolder, dX/4, dY, actionState, isCurrentlyActive);
+                    // getDefaultUIUtil().onDraw(c, recyclerView, myViewHolder, dX/4, dY, actionState, isCurrentlyActive);
                 }
 
             }
 
 
         };
-
 
 
         mItemTouchHelper = new ItemTouchHelper(simpleCallback);
@@ -699,32 +856,27 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
     @Override
     public void restartAdapterDeletePosition(boolean statusDeletePosition, int selectPosition) {
         Log.e(logeTAG, "Удаление заказа" + listZakaz.get(selectPosition).getKodrn());
-        PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+        //// Полноценное удаление наклданой, долгов и остаток
         try {
             if (statusDeletePosition) {
-
-                //int position = viewHolder.getAdapterPosition();
-                SQLiteDatabase db = getApplication().getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
-                db.delete("base_RN_All", "kod_rn = ?", new String[]{listZakaz.get(selectPosition).getKodrn()});
-                db.delete("base_RN", "Kod_RN = ?", new String[]{listZakaz.get(selectPosition).getKodrn()});
-                db.close();
-
+                EditorFormaZakaza editorFormaZakaza = new EditorFormaZakaza(context_Activity);
+                editorFormaZakaza.editorDelete(
+                        listZakaz.get(selectPosition).getK_agentUID(),
+                        listZakaz.get(selectPosition).getKodrn(),
+                        listZakaz.get(selectPosition).getItogo());
                 listZakaz.remove(selectPosition);
-                adapterZakaz = new RecyclerView_Adapter_ViewHolder_Zakaz(getBaseContext(), listZakaz, null);
+                adapterZakaz.notifyItemRemoved(selectPosition);
                 binding.RecyclerViewListTovar.setAdapter(adapterZakaz);
-                adapterZakaz.notifyItemChanged(selectPosition, 0);
-
+                adapterZakaz.notifyDataSetChanged();
             } else {
-                Log.e(logeTAG, "ОТМЕНА УДАЛЕНИЯ");
-                adapterZakaz = new RecyclerView_Adapter_ViewHolder_Zakaz(getBaseContext(), listZakaz, null);
-                binding.RecyclerViewListTovar.setAdapter(adapterZakaz);
-                adapterZakaz.notifyItemChanged(selectPosition, 0);
+                Log.e(logeTAG, "Отмена удаения заказа: " + selectPosition);
+                adapterZakaz.notifyItemChanged(selectPosition);
             }
 
 
         } catch (Exception e) {
-            Log.e(logeTAG, "ОТМЕНА УДАЛЕНИЯ");
-            SnackbarOverride("Ошибка: удаления позиции "+e);
+            Log.e(logeTAG, "Ошибка удаления: ", e);
+            SnackbarOverride("Ошибка удаления: " + e, true);
         }
 
 
@@ -754,6 +906,11 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
             Log.e("Удаление!", "Ошибка удаления данных!");
         }*/
 
+    }
+
+    @Override
+    public void deleteThisActivity(boolean statusActivity) {
+        if (statusActivity) finish();
     }
 
 
@@ -807,7 +964,8 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
                 String status = cursor.getString(cursor.getColumnIndexOrThrow("status")); // добавить обработку дата отгрузки
                 String debet = cursor.getString(cursor.getColumnIndexOrThrow("debet_new")); // добавить обработку дата отгрузки
                 String sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad")); // добавить обработку дата отгрузки
-                listZakaz.add(new ListAdapterSimple_List_RN_Table(Kod_RN, Klients, UID_Klients, Vrema, Data, Summa, Itogo, Adress, skidka, debet, status, sklad));
+                String skladUID = cursor.getString(cursor.getColumnIndexOrThrow("sklad_uid")); // добавить обработку дата отгрузки
+                listZakaz.add(new ListAdapterSimple_List_RN_Table(Kod_RN, Klients, UID_Klients, Vrema, Data, Summa, Itogo, Adress, skidka, debet, status, sklad, skladUID));
                 cursor.moveToNext();
             }
             Log.e(logeTAG, "zakaz обновлен");
@@ -844,7 +1002,8 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
                 String clientAdress = cursor.getString(cursor.getColumnIndexOrThrow("k_agn_adress"));
                 String Date = cursor.getString(cursor.getColumnIndexOrThrow("data"));
                 String Itogo = cursor.getString(cursor.getColumnIndexOrThrow("itogo"));
-                listZakaz.add(new ListAdapterSimple_List_RN_Table("", clientName, clientUID, "", Date, "", Itogo, clientAdress, "", "", "", ""));
+                String skladUID = cursor.getString(cursor.getColumnIndexOrThrow("sklad_uid")); // добавить обработку дата отгрузки
+                listZakaz.add(new ListAdapterSimple_List_RN_Table("", clientName, clientUID, "", Date, "", Itogo, clientAdress, "", "", "", "", ""));
                 cursor.moveToNext();
             }
             Log.e(logeTAG, "zakaz обновлен");
@@ -1755,11 +1914,6 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
 
 
 
-
-
-
-
-
 /*    protected void ListAdapet_Internet_Load() {
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
         Log.e(this.getLocalClassName(), calendars.getThis_DateFormatSqlDB);
@@ -2155,3 +2309,25 @@ public class WJ_Forma_Zakaza extends AppCompatActivity
         editor.putString("PEREM_DISPLAY_END", calendars.getThis_DateFormatDisplay);              // передача кода конечной даты*/
 
 }
+
+
+//int position = viewHolder.getAdapterPosition();
+/*                SQLiteDatabase db = getApplication().getBaseContext().openOrCreateDatabase(preferencesWrite.PEREM_DB3_RN, MODE_PRIVATE, null);
+                db.delete("base_RN_All", "kod_rn = ?", new String[]{listZakaz.get(selectPosition).getKodrn()});
+                db.delete("base_RN", "Kod_RN = ?", new String[]{listZakaz.get(selectPosition).getKodrn()});
+                db.close();*/
+
+/*               adapterZakaz = new RecyclerView_Adapter_ViewHolder_Zakaz(getBaseContext(), listZakaz, null, null);
+                binding.RecyclerViewListTovar.setAdapter(adapterZakaz);
+                adapterZakaz.notifyItemChanged(selectPosition, 0);*/
+///adapterZakaz.notifyDataSetChanged();
+//  UpdateListView();
+/*  adapterZakaz.notifyItemRemoved(selectPosition);*/
+// adapterZakaz.notifyItemChanged(selectPosition, 0);
+// UpdateListView();
+
+/*                ArrayList<String> clientData = new ArrayList<>();
+                clientData.add(clientClick.k_agent);
+                clientData.add(clientClick.k_agentUID);
+                clientData.add(clientClick.getAdress());
+                args.putStringArrayList("arrayClientData", clientData);*/

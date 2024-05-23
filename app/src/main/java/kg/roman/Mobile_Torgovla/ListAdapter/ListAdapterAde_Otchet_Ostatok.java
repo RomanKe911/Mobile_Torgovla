@@ -10,16 +10,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Otchet_Ostatok;
 import kg.roman.Mobile_Torgovla.R;
 

@@ -31,8 +31,8 @@ import java.util.Map;
 import java.util.TimeZone;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 import kg.roman.Mobile_Torgovla.R;
 
 public class ImagePack_R_Adapter extends RecyclerView.Adapter<ImagePack_R_Adapter.ViewHolder> {

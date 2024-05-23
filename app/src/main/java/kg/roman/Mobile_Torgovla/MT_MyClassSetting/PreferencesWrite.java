@@ -1,10 +1,18 @@
-package kg.roman.Mobile_Torgovla.MT_FTP;
+package kg.roman.Mobile_Torgovla.MT_MyClassSetting;
+
+import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.util.Calendar;
 import java.util.Set;
 import java.util.TreeSet;
+
+import kg.roman.Mobile_Torgovla.R;
 
 public class PreferencesWrite {
 
@@ -24,7 +32,7 @@ public class PreferencesWrite {
 
     public String Setting_MT_K_AG_NAME, Setting_MT_K_AG_UID, Setting_MT_K_AG_ADRESS,
             Setting_MT_K_AG_KodRN, Setting_MT_K_AG_Data, Setting_MT_K_AG_Data_WORK,
-            Setting_MT_K_AG_Vrema, Setting_MT_K_AG_GPS, Setting_MT_KodUIDKodRN;
+            Setting_MT_K_AG_Vrema, Setting_MT_K_AG_GPS, Setting_MT_KodUIDKodRN, Setting_MT_K_AG_SkladUID;
 
     public String Setting_DATA_WORK_DISTR, SelectMenu_forBrends;
     public boolean Setting_DATA_MailMessege;
@@ -37,14 +45,20 @@ public class PreferencesWrite {
     public String Setting_Zakaz_PEREM_NEW_DEBET_WRITE, Setting_TY_CREDIT,
             Setting_TY_DateNextUP, Setting_TY_Comment, Setting_TY_CREDITE_DATE, Setting_TY_Itogo, Setting_NameFileToFtp;
 
-    public String Setting_TY_Sale, Setting_TY_SaleFarm, Setting_TY_SaleMinSum, Setting_TY_SaleMinSumSale, Setting_TY_SaleType;
+    public String Setting_TY_Sale, Setting_TY_SaleFarm, Setting_TY_SaleMinSum, Setting_TY_SaleMinSumSale, Setting_TY_SaleType, Setting_MT_K_AG_Sale;
     public int Setting_TY_SaleRandom, Setting_TY_TypeRelise;
+
+    public String createNewRN, Select_StatusRN, Select_OldKodRN, Select_SkladNameForEdit, Select_SkladUIDForEdit;
 
     public String PinCodes = "8888";  /// Пин-код для входа в приложение
 
+    public String w_getClientName;
+
     public PreferencesWrite(Context context) {
         final String APP_PREFERENCES = "kg.roman.Mobile_Torgovla_preferences";
-        SharedPreferences mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        SharedPreferences mSettings = context.getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+
 
         PEREM_ANDROID_ID = mSettings.getString("PEREM_ANDROID_ID", "0");
         PEREM_ANDROID_ID_ADMIN = mSettings.getString("PEREM_ANDROID_ID_ADMIN", "0");
@@ -84,8 +98,9 @@ public class PreferencesWrite {
         Setting_MT_K_AG_Data = mSettings.getString("PEREM_K_AG_Data", "0");           //чтение данных: время создание н
         Setting_MT_K_AG_Data_WORK = mSettings.getString("PEREM_K_AG_Data_WORK", "0");           //чтение данных: время создание н
         Setting_MT_K_AG_Vrema = mSettings.getString("PEREM_K_AG_Vrema", "0");        //чтение данных: дата создание на
+        Setting_MT_K_AG_SkladUID = mSettings.getString("PEREM_K_AG_SkladUID", "0");        //чтение данных: дата создание на
+        Setting_MT_K_AG_Sale = mSettings.getString("PEREM_K_AG_Sale", "0");        //чтение данных: дата создание на
         Setting_MT_K_AG_GPS = mSettings.getString("PEREM_K_AG_GPS", "0");             //чтение данных: координаты gps
-
 
 
         Setting_Brends_AllBrends = mSettings.getBoolean("key_SwitchPreference_BrendsAll", false);        // Все для всех
@@ -94,7 +109,6 @@ public class PreferencesWrite {
         Setting_Brends_FirmsGroups = mSettings.getBoolean("key_SwitchPreference_BrendsFirms", false);    // Отображение по фирмам
         Setting_Brends_AgentsBrends_List = new TreeSet<>(mSettings.getStringSet("PEREM_BrendsForNomeclature", new TreeSet<>()));
         Setting_Brends_HandsBrends_MultiList = new TreeSet<>(mSettings.getStringSet("key_MultiSelectPreference_BrendsManual", new TreeSet<>()));
-
 
 
         Setting_FiltersSelectGroup = mSettings.getBoolean("setting_Filters_Group", false);   // Групирвока товара
@@ -111,13 +125,9 @@ public class PreferencesWrite {
         Setting_ImageputToSDCard = mSettings.getBoolean("key_settingImageSDCard", false);  // Переменая номер накладной
 
 
-
-
-
-       // Setting_Zakaz_PEREM_NEW_DEBET_WRITE = mSettings.getString("PEREM_NEW_DEBET_WRITE", "0");
-       // Setting_Zakaz_PEREM_DOP_ITOGO = mSettings.getString("PEREM_NEW_DEBET_WRITE", "0");
-       // Setting_Zakaz_PEREM_NEW_DEBET_WRITE = mSettings.getString("PEREM_NEW_DEBET_WRITE", "0");
-
+        // Setting_Zakaz_PEREM_NEW_DEBET_WRITE = mSettings.getString("PEREM_NEW_DEBET_WRITE", "0");
+        // Setting_Zakaz_PEREM_DOP_ITOGO = mSettings.getString("PEREM_NEW_DEBET_WRITE", "0");
+        // Setting_Zakaz_PEREM_NEW_DEBET_WRITE = mSettings.getString("PEREM_NEW_DEBET_WRITE", "0");
 
 
         Setting_TY_Sale = mSettings.getString("preference_ListSaleStandart", "0");              // размер скидки
@@ -126,7 +136,6 @@ public class PreferencesWrite {
         Setting_TY_SaleMinSum = mSettings.getString("preference_ListMinSumTrade", "0");         // размер скидки
         Setting_TY_SaleMinSumSale = mSettings.getString("preference_MinSumSale", "0");          // размер скидки
         Setting_TY_SaleType = mSettings.getString("preference_TypeSale", "standart");          // размер скидки
-
 
 
         Setting_TY_TypeRelise = mSettings.getInt("setting_TY_TypeRelise", 0);            // тип реализации счет-фактура или нет
@@ -138,9 +147,77 @@ public class PreferencesWrite {
         Setting_TY_Itogo = mSettings.getString("setting_EndZakaz_Itogo", "0");
 
 
-
         StatusUpdateList = mSettings.getBoolean("status_UpdateListView", false);
         SelectMenu_forBrends = mSettings.getString("sp_BREND", "null");
 
+
+        createNewRN = getCreateNewRN(context);
+        Select_StatusRN = mSettings.getString("statusRN", "null");
+        Select_OldKodRN = mSettings.getString("oldKodRN", "RN00000");
+
+        Select_SkladNameForEdit = mSettings.getString("SelectEdit_SkladName", "");
+        Select_SkladUIDForEdit = mSettings.getString("SelectEdit_SkladUID", "");
     }
+
+    protected String getCreateNewRN(Context context) {
+        String returnKodRN = "";
+        String monthRN = "";
+        try {
+            Calendar calendar = Calendar.getInstance();
+            int month = calendar.get(Calendar.MONTH) + 1;
+            String year = String.valueOf(calendar.get(Calendar.YEAR)).substring(2, 4);
+
+            SQLiteDatabase db = context.getApplicationContext().openOrCreateDatabase(PEREM_DB3_RN, MODE_PRIVATE, null);
+            //07/04/2022 измение в выборе товара   String query = "SELECT base_RN.Kod_RN, base_RN.Data FROM base_RN ORDER BY base_RN.Data ASC";
+            //  String query = "SELECT base_RN.Kod_RN, base_RN.Data FROM base_RN  WHERE base_RN.Data = '" + this_data + "' ORDER BY base_RN.Kod_RN ASC;";
+            String query = "SELECT base_RN_All.kod_rn, base_RN_All.data FROM base_RN_All ORDER BY base_RN_All.data ASC;";
+            final Cursor cursor = db.rawQuery(query, null);
+            String kod_univ;
+            if (cursor.getCount() > 0) {
+                cursor.moveToLast();
+                kod_univ = cursor.getString(cursor.getColumnIndexOrThrow("kod_rn"));
+            } else
+                kod_univ = "RnTTTTGOD21_0000";
+
+            String[] mass_month = context.getResources().getStringArray(R.array.mass_month);
+            for (int i = 1; i <= 12; i++)
+                if (month == i)
+                    monthRN = mass_month[i - 1];
+
+
+            int k;
+            if (kod_univ != null & cursor.getCount() > 0 & kod_univ.length() < 16)
+                kod_univ = "RnTTTTGOD21_0000";
+
+
+            if (monthRN.equals(kod_univ.substring(6, kod_univ.length() - 7)))
+                k = Integer.parseInt(kod_univ.substring(12)) + 1;
+            else
+                k = 1;
+
+            String iden = "000";
+            String iden2 = "00";
+            String iden3 = "0";
+            // String iden4 = "0";
+            if (k < 10)
+                returnKodRN = "Rn" + Setting_MT_KodUIDKodRN + monthRN + year + "_" + iden + k; // получение из preference: унив код для накладной
+            else if (k < 100)
+                returnKodRN = "Rn" + Setting_MT_KodUIDKodRN + monthRN + year + "_" + iden2 + k;
+            else if (k < 1000)
+                returnKodRN = "Rn" + Setting_MT_KodUIDKodRN + monthRN + year + "_" + iden3 + k;
+            else if (k < 10000)
+                returnKodRN = "Rn" + Setting_MT_KodUIDKodRN + monthRN + year + "_" + k;
+            // else if (k < 100000) KOD_RN = "Rn" + Ident_Mon + Ident_Year + "_" + k;
+
+            cursor.close();
+            db.close();
+
+        } catch (Exception e) {
+            Log.e("preference", "Ошибка созадние кодировки накладной!");
+        }
+
+        return returnKodRN; // вернуть номер для накладной
+    }
+
+
 }

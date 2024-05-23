@@ -59,10 +59,10 @@ import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpConnection;
 import kg.roman.Mobile_Torgovla.ImagePack.UpdateImage;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_DB_Data;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Data;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.MailSenderClass;
 import kg.roman.Mobile_Torgovla.Permission.PrefActivity;
 import kg.roman.Mobile_Torgovla.R;
@@ -76,10 +76,6 @@ import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Nomenclature_Brends;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Ostatok_Golovnoy;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Ostatok_Single;
 import kg.roman.Mobile_Torgovla.Spravochnik.SPR_Strih_Kod_Search;
-import kg.roman.Mobile_Torgovla.TEST.WJ_Forma_Zakaza_Akcia;
-import kg.roman.Mobile_Torgovla.TEST.WJ_Fragment;
-import kg.roman.Mobile_Torgovla.TEST.WJ_Karakil_newRN;
-import kg.roman.Mobile_Torgovla.TEST.WJ_TEST_ADMIN;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_CustomersDebet_ResourceParser;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Customers;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_CustomersDebet;
@@ -164,6 +160,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setIcon(R.mipmap.icon_logotoolbar);
         getSupportActionBar().setTitle(calendars.CalendarofDay());
         getSupportActionBar().setSubtitle(PEREM_AG_NAME);
+
 
 
         ed = sp.edit();
@@ -270,6 +267,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                     intent_start_act = null;
                     intent_start_act = new Intent(context_Activity, WJ_Forma_Zakaza.class); // Создание новой формы 23.10.2023
                     //  intent_start_act = new Intent(context_Activity, WJ_FormaZakaza_2023.class);
+                    intent_start_act.putExtra("preferenceSave", "clear");
                     startActivity(intent_start_act);
                     Constanta_Write();
                     finish();
@@ -1110,18 +1108,22 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
                     case "Обработка с эттн": //Розница
                     {
-                        ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
-/*                        try {
-                            Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
+                        PreferencesWrite preferencesWrite = new PreferencesWrite(context_Activity);
+                        if (preferencesWrite.Setting_AG_NAME.equals("Керкин Роман Максимович")) {
+                            try {
+                                Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
 
-                            intent_start_act = null;
-                            intent_start_act = new Intent(context_Activity, ITTN_Obmen.class);
-                            startActivity(intent_start_act);
+                                intent_start_act = null;
+                                intent_start_act = new Intent(context_Activity, ITTN_Obmen.class);
+                                startActivity(intent_start_act);
 
-                        } catch (Exception e) {
-                            Log.e("Pref", "Ошибка журнала");
-                            Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
-                        }*/
+                            } catch (Exception e) {
+                                Log.e("Pref", "Ошибка журнала");
+                                Toast.makeText(context_Activity, "Ошибка журнала", Toast.LENGTH_SHORT).show();
+                            }
+                        } else
+                            ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
+
                     }
                     break;
 
@@ -1289,7 +1291,7 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
                     {
                         ToastOverride("В разработке(доступно c версии 4.6.5), не доступен для вашего региона");
                         try {
-                           // Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(context_Activity, text_log_name, Toast.LENGTH_SHORT).show();
                            /* intent_start_act = null;
                             intent_start_act = new Intent(context_Activity, SPR_Ostatok_Inventoriz_NEW.class);
                             startActivity(intent_start_act);*/
@@ -2088,8 +2090,6 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
             try {
 
 
-
-
                 FTPClient ftpClient = new FTPClient();
                 FtpConnectData connectData = new FtpConnectData();
                 String server = connectData.server_name;
@@ -2119,7 +2119,6 @@ public class WJ_Global_Activity extends AppCompatActivity implements View.OnClic
 
                     files_kol = dirInfo[1] + "файлов";
                     files_size = dirInfo[2] / 1048576 + " мбайт";
-
 
 
                     FTPWebhost ftpWebhost = new FTPWebhost();

@@ -3,9 +3,7 @@ package kg.roman.Mobile_Torgovla.Setting;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.util.Log;
-import android.util.Pair;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,22 +11,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 
 import kg.roman.Mobile_Torgovla.MT_BackUp.RecyclerView_Simple_BackUp;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
-import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
 
 public class Async_ViewModel_Setiing extends AndroidViewModel {
 

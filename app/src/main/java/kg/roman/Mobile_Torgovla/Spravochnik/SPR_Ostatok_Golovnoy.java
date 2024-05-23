@@ -45,7 +45,7 @@ import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
 import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Otchet_Ostatok;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Otchet_Ostatok;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Nomenclatures;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Nomenclatures_ResourceParser;

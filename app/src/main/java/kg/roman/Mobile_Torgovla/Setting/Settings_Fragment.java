@@ -2,25 +2,17 @@ package kg.roman.Mobile_Torgovla.Setting;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.datastore.preferences.core.Preferences;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
@@ -28,36 +20,15 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
-import com.google.common.collect.Comparators;
-
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
-import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.DialogFragment_EditPosition;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
 import kg.roman.Mobile_Torgovla.Permission.PermissionUtils;
-import kg.roman.Mobile_Torgovla.Permission.PrefActivity_Splash;
 import kg.roman.Mobile_Torgovla.R;
-import kg.roman.Mobile_Torgovla.databinding.MtWjFormaDopDataBinding;
-import kg.roman.Mobile_Torgovla.databinding.SettingLayoutBinding;
 
 
 public class Settings_Fragment extends PreferenceFragmentCompat {

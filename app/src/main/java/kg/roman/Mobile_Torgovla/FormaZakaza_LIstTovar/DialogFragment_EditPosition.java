@@ -21,7 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import kg.roman.Mobile_Torgovla.FormaZakaza_EndZakaz.Async_ViewModel_EndZakaz;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 public class DialogFragment_EditPosition extends DialogFragment {

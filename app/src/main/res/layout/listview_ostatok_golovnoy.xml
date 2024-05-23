@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,14 +10,15 @@
 
     <TextView
         android:id="@+id/tvw_G_ost_name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:gravity="center_horizontal|top|center_vertical"
-        android:padding="4dp"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
         android:text="РБА/Таежные истории/ Маска д/лица, детокс угольная  100 мл 6491"
         android:textColor="@color/colorblack"
         android:textSize="16sp"
@@ -100,8 +102,10 @@
             android:id="@+id/tvw_G_ost_brends_count"
             style="@style/ListView_Ostatok_Golovnoy_Count"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:text="Bella"
             app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_brends"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_brends"
             app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_brends" />
 
@@ -109,8 +113,11 @@
             android:id="@+id/tvw_G_ost_group_count"
             style="@style/ListView_Ostatok_Golovnoy_Count"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:text="Традиция"
             app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_group"
             app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_group" />
 
@@ -118,8 +125,10 @@
             android:id="@+id/tvw_G_ost_sklad_count"
             style="@style/ListView_Ostatok_Golovnoy_Count"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:text="Основной"
             app:layout_constraintBottom_toBottomOf="@+id/tvw_G_ost_sklad"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvw_G_ost_sklad"
             app:layout_constraintTop_toTopOf="@+id/tvw_G_ost_sklad" />
 

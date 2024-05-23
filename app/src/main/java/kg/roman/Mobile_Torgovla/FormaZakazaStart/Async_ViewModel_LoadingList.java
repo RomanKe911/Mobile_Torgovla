@@ -3,7 +3,6 @@ package kg.roman.Mobile_Torgovla.FormaZakazaStart;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,17 +14,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import org.apache.commons.net.ftp.FTPClient;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 
-import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterAde_List_RN_Table;
 import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_List_RN_Table;
-import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_Suncape_Forma;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 
 public class Async_ViewModel_LoadingList extends AndroidViewModel {
     String logeTAG = "ViewModel_LoadingList";
@@ -190,7 +183,8 @@ public class Async_ViewModel_LoadingList extends AndroidViewModel {
                 String status = cursor.getString(cursor.getColumnIndexOrThrow("status")); // добавить обработку дата отгрузки
                 String debet = cursor.getString(cursor.getColumnIndexOrThrow("debet_new")); // добавить обработку дата отгрузки
                 String sklad = cursor.getString(cursor.getColumnIndexOrThrow("sklad")); // добавить обработку дата отгрузки
-                arrayList_zakaz.add(new ListAdapterSimple_List_RN_Table(Kod_RN, Klients, UID_Klients, Vrema, Data, Summa, Itogo, Adress, skidka, debet, status, sklad));
+                String skladUID = cursor.getString(cursor.getColumnIndexOrThrow("sklad_uid")); // добавить обработку дата отгрузки
+                arrayList_zakaz.add(new ListAdapterSimple_List_RN_Table(Kod_RN, Klients, UID_Klients, Vrema, Data, Summa, Itogo, Adress, skidka, debet, status, sklad, skladUID));
                 cursor.moveToNext();
             }
             Log.e(logeTAG, "zakaz обновлен");
@@ -230,7 +224,7 @@ public class Async_ViewModel_LoadingList extends AndroidViewModel {
                 String clientAdress = cursor.getString(cursor.getColumnIndexOrThrow("k_agn_adress"));
                 String Date = cursor.getString(cursor.getColumnIndexOrThrow("data"));
                 String Itogo = cursor.getString(cursor.getColumnIndexOrThrow("itogo"));
-                arrayList_zakaz.add(new ListAdapterSimple_List_RN_Table("", clientName, clientUID, "", Date, "", Itogo, clientAdress, "", "", "", ""));
+                arrayList_zakaz.add(new ListAdapterSimple_List_RN_Table("", clientName, clientUID, "", Date, "", Itogo, clientAdress, "", "", "", "", ""));
                 cursor.moveToNext();
             }
             Log.e(logeTAG, "zakaz обновлен");

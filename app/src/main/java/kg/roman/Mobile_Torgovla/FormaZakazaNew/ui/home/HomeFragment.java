@@ -33,8 +33,8 @@ import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.RecyclerView_Adapter_ViewH
 import kg.roman.Mobile_Torgovla.FormaZakazaNew.ListRecycleAdapterAde_Klients;
 import kg.roman.Mobile_Torgovla.FormaZakazaNew.SelectContrAgent;
 import kg.roman.Mobile_Torgovla.FormaZakazaNew.SelectContrAgetnAdapter;
-import kg.roman.Mobile_Torgovla.MT_FTP.CalendarThis;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.CalendarThis;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.FormaZakaza_LIstTovar.ListAdapterSimple_Klients;
 import kg.roman.Mobile_Torgovla.FormaZakazaNew.State;

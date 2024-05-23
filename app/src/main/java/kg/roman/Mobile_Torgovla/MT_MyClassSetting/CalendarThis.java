@@ -1,19 +1,15 @@
-package kg.roman.Mobile_Torgovla.MT_FTP;
+package kg.roman.Mobile_Torgovla.MT_MyClassSetting;
 
 import android.util.Log;
 import android.util.Pair;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CalendarThis {
-    public String getThis_DateFormatDisplay, getThis_DateFormatSqlDB, getThis_DateFormatXML,
+    public String getThis_DateFormatDisplay, getThis_DateFormatSqlDB, getThis_DateFormatXML, getThis_DateFormatCountTovar,
             getThis_DateFormatVrema, getThis_DateFormatAllSqlDB, getThis_DateFormatAllDisplay;
     public int Year, Month, Day;
     public long getThis_DateFormatAllSqlDBLong;
@@ -23,14 +19,15 @@ public class CalendarThis {
         SimpleDateFormat dateFormatDisplay = new SimpleDateFormat("dd:MM:yyyy");
         SimpleDateFormat dateFormatSqlDB = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat dateFormatXML = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateFormatTovarCount = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat dateFormatVrema = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat dateFormatAll = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat dateFormatAllDisplay = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss");
-
         getThis_DateFormatDisplay = dateFormatDisplay.format(calendar.getTime());                   /// формат даты: dd:MM:yyyy - дата для отображения в рабочей зоне(дисплей)
         getThis_DateFormatAllDisplay = dateFormatAllDisplay.format(calendar.getTime());                   /// формат даты: dd:MM:yyyy HH:mm:ss - дата для отображения в рабочей зоне(дисплей)
         getThis_DateFormatSqlDB = dateFormatSqlDB.format(calendar.getTime());                       /// формат даты: yyyy-MM-dd - дата для отображения сортировки (база данных)
         getThis_DateFormatXML = dateFormatXML.format(calendar.getTime());                           /// формат даты: dd.MM.yyyy - дата для сохранения в формате XML
+        getThis_DateFormatCountTovar = dateFormatTovarCount.format(calendar.getTime());             /// формат даты: dd/MM/yyyy - дата для сохранения в формате XML
         getThis_DateFormatVrema = dateFormatVrema.format(calendar.getTime());                       /// формат даты: HH:mm:ss - формат времени
         getThis_DateFormatAllSqlDB = dateFormatAll.format(calendar.getTime());                      /// формат даты: yyyy-MM-dd HH:mm:ss полный формат для SQLite
         getThis_DateFormatAllSqlDBLong = (calendar.getTime().getTime());                      /// формат даты: yyyy-MM-dd HH:mm:ss полный формат для SQLite
@@ -99,12 +96,27 @@ public class CalendarThis {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         String messege = "";
-        for (int am = 0; am < 7; am++) if (hour == am) messege = "Доброй ночи!";
-        for (int am = 7; am <= 11; am++) if (hour == am) messege = "Доброе утро!";
+        for (int am = 0; am < 6; am++) if (hour == am) messege = "Доброй ночи!";
+        for (int am = 6; am <= 11; am++) if (hour == am) messege = "Доброе утро!";
         for (int am = 12; am <= 16; am++) if (hour == am) messege = "Добрый день!";
         for (int am = 17; am <= 20; am++) if (hour == am) messege = "Добрый вечер!";
         for (int am = 21; am < 24; am++) if (hour == am) messege = "Доброй ночи!";
         return messege;
+    }
+
+    public String getDateToNextDeveloper()
+    {
+        Calendar c = Calendar.getInstance();
+        AtomicInteger mYear = new AtomicInteger();
+        AtomicInteger mMonth = new AtomicInteger();
+        AtomicInteger mDay = new AtomicInteger();
+        mYear.set(c.get(Calendar.YEAR));
+        mMonth.set(c.get(Calendar.MONTH));
+        mDay.set(c.get(Calendar.DAY_OF_MONTH) + 1);
+        c.set(mYear.get(), mMonth.get(), mDay.get());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String data_start = dateFormat.format(c.getTime());
+        return data_start;
     }
 
 

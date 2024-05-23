@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import java.io.File;
 import java.util.List;
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 import kg.roman.Mobile_Torgovla.R;
 
 public class RecyclerView_Adapter_ViewHolder_BackUp extends RecyclerView.Adapter<RecyclerView_Adapter_ViewHolder_BackUp.ViewHolder> {

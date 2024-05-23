@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView105"
+            style="@style/Dialog_MessegeAvtosum_Title"
+            android:text="дата:"/>
+
+        <TextView
+            android:id="@+id/tvwMessegeDialogSum_Date"
+            style="@style/Dialog_MessegeAvtosum_Count" />
+        <View
+            android:id="@+id/view6"
+            style="@style/Dialog_MessegeAvtosum_View"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView106"
+            android:text="торговый агент:"
+            style="@style/Dialog_MessegeAvtosum_Title" />
+
+        <TextView
+            android:id="@+id/tvwMessegeDialogSum_AgentName"
+            android:text="торговый агент:"
+            style="@style/Dialog_MessegeAvtosum_Count" />
+        <View
+        android:id="@+id/view5"
+        style="@style/Dialog_MessegeAvtosum_View"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView107"
+            android:text="маршрут:"
+            style="@style/Dialog_MessegeAvtosum_Title"/>
+        <TextView
+            android:id="@+id/tvwMessegeDialogSum_AgentRegion"
+            style="@style/Dialog_MessegeAvtosum_Count" />
+        <View
+            android:id="@+id/view4"
+            style="@style/Dialog_MessegeAvtosum_View" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView108"
+            android:text="кол-во точек:"
+            style="@style/Dialog_MessegeAvtosum_Title" />
+
+        <TextView
+            android:id="@+id/tvwMessegeDialogSum_AgentCountTT"
+            style="@style/Dialog_MessegeAvtosum_Count" />
+        <View
+            android:id="@+id/view7"
+            style="@style/Dialog_MessegeAvtosum_View" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView109"
+            android:text="на сумму: "
+            style="@style/Dialog_MessegeAvtosum_Title" />
+
+        <TextView
+            android:id="@+id/tvwMessegeDialogSum_AgentSum"
+            style="@style/Dialog_MessegeAvtosum_Count" />
+        <View
+            android:id="@+id/view8"
+            style="@style/Dialog_MessegeAvtosum_View" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

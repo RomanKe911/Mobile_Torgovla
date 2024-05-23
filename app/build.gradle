@@ -9,8 +9,8 @@ android {
         applicationId "kg.roman.Mobile_Torgovla"
         minSdk 28
         targetSdk 34
-        versionCode 58
-        versionName '4.6.02'
+        versionCode 64
+        versionName '4.6.06'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         lintOptions {

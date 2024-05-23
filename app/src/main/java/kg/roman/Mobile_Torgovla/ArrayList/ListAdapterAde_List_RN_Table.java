@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -73,7 +73,7 @@ public class ListAdapterAde_List_RN_Table extends BaseAdapter implements Filtera
                 convertView = inflater.inflate(R.layout.wj_content_rn_group, null);
                 Group(convertView, pos);
             } else {
-                convertView = inflater.inflate(R.layout.wj_content_rn032024, null);
+                convertView = inflater.inflate(R.layout.wj_swipe_include_content, null);
                 GroupNull(convertView, pos);
             }
         }
@@ -113,6 +113,7 @@ public class ListAdapterAde_List_RN_Table extends BaseAdapter implements Filtera
                                 filterList.get(i).getSkidka(),
                                 filterList.get(i).getStatus(),
                                 filterList.get(i).getDebet(),
+                                filterList.get(i).getSkladUID(),
                                 filterList.get(i).getSklad());
                         filters.add(p);
                     }

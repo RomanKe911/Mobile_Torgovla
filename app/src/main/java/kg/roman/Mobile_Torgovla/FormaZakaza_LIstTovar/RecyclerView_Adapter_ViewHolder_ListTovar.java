@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import kg.roman.Mobile_Torgovla.ListSimple.ListAdapterSimple_WJ_Zakaz;
-import kg.roman.Mobile_Torgovla.MT_FTP.FtpConnectData;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FtpConnectData;
 
 import kg.roman.Mobile_Torgovla.R;
 

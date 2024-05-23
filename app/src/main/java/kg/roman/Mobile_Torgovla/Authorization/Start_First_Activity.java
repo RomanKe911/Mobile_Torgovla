@@ -1,7 +1,6 @@
 package kg.roman.Mobile_Torgovla.Authorization;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +9,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,41 +17,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import kg.roman.Mobile_Torgovla.ArrayList.ListAdapterSimple_Login;
 import kg.roman.Mobile_Torgovla.ClassNew.Pair;
-import kg.roman.Mobile_Torgovla.ImagePack.ImagePack_R_Adapter;
-import kg.roman.Mobile_Torgovla.ImagePack.MyViewModel;
-import kg.roman.Mobile_Torgovla.ListAdapter.ListAdapterAde_Login;
-import kg.roman.Mobile_Torgovla.MT_BackUp.Async_ViewModel_BackUp_toFTP;
-import kg.roman.Mobile_Torgovla.MT_FTP.PreferencesWrite;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.PreferencesWrite;
 import kg.roman.Mobile_Torgovla.R;
 import kg.roman.Mobile_Torgovla.Setting.Setting_Start;
 import kg.roman.Mobile_Torgovla.XML_Files.MTW_Users;

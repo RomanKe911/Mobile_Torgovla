@@ -334,7 +334,6 @@
     <style name="style_st_title">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:textStyle"></item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorAccent_2</item>
     </style>
@@ -572,10 +571,12 @@
 
     <style name="ListView_Ostatok_Golovnoy_Count">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:maxLines">2</item>
     </style>
 
 
@@ -648,6 +649,52 @@
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:background">@drawable/selector_button_ftp_download</item>
+    </style>
+
+
+    <style name="IncludeClient_Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="IncludeClient_Count">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Dialog_MessegeAvtosum_Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginLeft">24dp</item>
+    </style>
+    <style name="Dialog_MessegeAvtosum_Count">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/add_dialog_tovar_1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">32dp</item>
+    </style>
+    <style name="Dialog_MessegeAvtosum_View">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">#1976D2</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">48dp</item>
     </style>
 
 <!--

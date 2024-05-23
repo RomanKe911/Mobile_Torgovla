@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayoutTovar"
+    style="@style/MT_Layout_Background_Work">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerView_ListTovar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/back_image"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout13"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/back_group"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/RecyclerView_ListTovar">
+
+        <TextView
+            android:id="@+id/textView103"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="мои комментарии:" />
+
+        <TextView
+            android:id="@+id/textView_this_comit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="мои комментарии"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:textColor="@color/add_dialog_tovar_1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/back_group"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView_title_1"
+            style="@style/style_back_panel_rn"
+            android:text="Сумма:" />
+
+        <TextView
+            android:id="@+id/textView_this_summa"
+            style="@style/style_back_panel_rn_text"
+            android:layout_marginLeft="2dp"
+            android:hint="00,00"
+            android:inputType="textMultiLine"
+            android:maxEms="4"
+            android:maxLines="4" />
+
+        <TextView
+            android:id="@+id/textView_title_3"
+            style="@style/style_back_panel_rn"
+            android:text="кол-во:" />
+
+        <TextView
+            android:id="@+id/textView_this_count"
+            style="@style/style_back_panel_rn_text"
+            android:layout_marginLeft="2dp"
+            android:hint="100шт" />
+
+        <TextView
+            android:id="@+id/textView_title_2"
+            style="@style/style_back_panel_rn"
+            android:text="Итого:" />
+
+        <TextView
+            android:id="@+id/textView_this_itog"
+            style="@style/style_back_panel_rn_text"
+            android:layout_marginLeft="2dp"
+            android:hint="00,00"
+            android:inputType="textMultiLine"
+            android:maxEms="4"
+            android:maxLines="4" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import kg.roman.Mobile_Torgovla.MT_FTP.FTPWebhost;
+import kg.roman.Mobile_Torgovla.MT_MyClassSetting.FTPWebhost;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAction;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpAsyncTask_Users;
 import kg.roman.Mobile_Torgovla.FTP.Sunbell_FtpConnection;

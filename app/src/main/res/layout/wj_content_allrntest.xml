@@ -54,7 +54,7 @@
 
         <include
             android:id="@+id/include_Content"
-            layout="@layout/wj_content_rn032024"
+            layout="@layout/wj_swipe_include_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp" />
