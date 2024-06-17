@@ -76,12 +76,11 @@
             android:label="Авторизация"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FormaZakaza" />
-
-<!--      <activity
+        <activity
             android:name=".Work_Journal.WJ_Global_Activity"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FormaZakaza" />-->
+            android:theme="@style/AppTheme.FormaZakaza" />
 
 
       <activity
